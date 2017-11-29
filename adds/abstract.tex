@@ -23,29 +23,22 @@ provide a platform to analyze it in an efficient manner.
 The computing power of single computers is limited by both physical 
 as well as economic constraints,
 hence a multitude of machines can be connected to form \emph{computing clusters}
-that are capable o.
+that are capable of performing data analysis on Big Data scale.
 
-As the computing power of each computer is limited by both physical 
-as well as economic constraints, 
-the scale of nowadays' Big Data needs to be handled by
-a multitude of connected machines that therefore form \emph{computing clusters}.
-Such cluster environments can scale with the increasing amount of data managed by it. 
-The various nodes of each cluster have to be organized,
-e.g. by assigning tasks to a particular machine or sending data to places where it is needed. 
-This work is performed by so-called \emph{cluster managers}.
+In order to run such a cluster so-called \emph{cluster managers} are needed 
+to organize the execution of task and distribution of data among the cluster nodes.
 
 A popular cluster manager for Big Data clusters in the industry is the \emph{Hadoop} framework. 
 Hadoop offers distributed storage for arbitrary-sized collections of data 
 by combining the individual computing and storage resources of commodity hardware. 
-Furthermore, it provides programming interfaces for interacting with and analyzing the stored data.
+Furthermore, it provides programming interfaces for analyzing the stored data.
 
 This research project is embedded into a larger body of investigation 
-regarding the aptitude of Hadoop as \acs{BIA} information system 
-for use at the \acf{DHBW} in both research and administration. 
+regarding the use of Hadoop at the \acf{DHBW} in both research and training. 
 Thus, this work specifically deals with the following topics:
 
 \begin{itemize}
-    \item Examination of existing infrastructure
+    \item Examination of existing infrastructure and its capability to host a Hadoop cluster
     \item Deployment of an Hadoop cluster on-top of it. 
     This also includes the exploration of possibilities for automatic configuration 
     and installation of such a cluster.
