@@ -50,20 +50,22 @@
 %----------------------------------------
 
 \onehalfspacing
-
 \pagestyle{scrheadings}
-
 %   Sperrvermerk
 %\input{adds/nondisclosurenotice}
 
+\onehalfspacing
+\pagestyle{scrheadings}
 % Ehrenwörtliche Erklärung
 \input{adds/ewerkl}
 
 \singlespacing
+\pagestyle{scrheadings}
 %	Kurzfassung
 \input{adds/abstract}
 
 \onehalfspacing
+\pagestyle{scrheadings}
 % Vorangehende Notitzen
 \input{adds/pre_notes}
 
@@ -71,8 +73,10 @@
 
 %	Inhaltsverzeichnis
 \begingroup
-\renewcommand*{\chapterpagestyle}{empty}
-\pagestyle{empty}
+%\renewcommand*{\chapterpagestyle}{empty}
+%\pagestyle{empty}
+\renewcommand*{\chapterpagestyle}{scrheadings}
+\pagestyle{scrheadings}
 \tableofcontents
 \clearpage
 \endgroup
@@ -102,6 +106,7 @@
 \pagenumbering{arabic}  % Arabische Seitenzahlen
 
 \onehalfspacing
+\pagestyle{scrheadings}
 
 %Einzelne Kapitel können hier eingefügt werden.
 %Es ist vorgesehen alle Kapitel als eigene Dateien
