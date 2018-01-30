@@ -18,7 +18,7 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage{setspace}
-\onehalfspacing
+%\onehalfspacing
 %TODO use this spacing
 
 %---------------------------
@@ -154,9 +154,13 @@
 
 \clearscrheadfoot
 
-\ofoot[\rule{0pt}{\ht\strutbox+\dp\strutbox}\pagemark]{\rule{0pt}{\ht\strutbox+\dp\strutbox}\pagemark}
+% using cfoot centers the header 
+% use ofoot for outer side, especially with documentclass[twoside]
+\cfoot[\rule{0pt}{\ht\strutbox+\dp\strutbox}\pagemark]{\rule{0pt}{\ht\strutbox+\dp\strutbox}\pagemark}
 
 \ohead{\headmark}
+
+%TODO: fix footer
 
 %-----------------------------------
 %		Fix Headheight
