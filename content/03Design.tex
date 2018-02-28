@@ -12,11 +12,13 @@ After the requirements are settled,
 the possibilities of how Hadoop can actually be installed 
 on the given infrastructure will be researched.
 
+TODO
+
 There are four ways to install Hadoop that are considered here:
 
 \begin{itemize}
     \item A \emph{manual installation} of Hadoop 
-        and every additional piece of software frrm the ecosystem
+        and every additional piece of software from the ecosystem
     \item \emph{\ac{CDH}} --  An open source software distribution by Cloudera including Hadoop
         and additional software from the ecosystem
     \item \emph{Ambari} -- An open source project by Apache that provides
@@ -25,6 +27,8 @@ There are four ways to install Hadoop that are considered here:
         with Ambari and additional software
 \end{itemize}
 
+TODO References
+
 Since \ac{HDP} makes use of Ambari for installing the cluster and managing the installed software while it simply provides a pre-packaged version of the components, 
 it can be preferred over using Ambari directly which would create the need to compile it from source.
 
@@ -32,7 +36,7 @@ In the coming sections each of those three resulting possibilities will be looke
 For each of the options an evaluation will be made on whether it is 
 feasible to deploy an Hadoop installation with the methods that they provide.
 Therefore a simple test installation in an OpenStack environment is made.
-For this purpose the OpenStack environment \emph{BWCloud}\footnote{www.bw-cloud.org} is used, an environment that is available for students at the \ac{DHBW} and other universities in Baden-Württemberg for educational purposes. It is generally an equivalent software to the actual cluster environment, however it is accessible from the internet, which makes it more comfortable to work with while performing the tests.
+For this purpose the OpenStack environment \emph{BWCloud}\footnote{https://www.bw-cloud.org/de/projekt} is used, an environment that is available for students at the \ac{DHBW} and other universities in Baden-Württemberg for educational purposes. It is generally an equivalent software to the actual cluster environment, however it is accessible from the internet, which makes it more comfortable to work with while performing the tests.
 
 \subsection{Manual Installation of Hadoop}
 
@@ -41,12 +45,30 @@ Manually here means without the help of automated installers for a single machin
 Every aspect of the installation and configuration must be done \enquote{by hand}.
 White gives step by step instruction on the process.
 
+TODO describe where "distribution" comes from
+
 For the installation two \acs{VM} are used, utilizing two virtual \ac{CPU} Cores and eight \ac{GB} \ac{RAM} and a 20 \ac{GB} storage drive. 
 Ubuntu Server \footnote{https://www.ubuntu.com/server} 16.04.3 \ac{LTS} is used as the operating system. 
 The machines are connected to the public internet and to each other using two network interfaces each.
 
 The two machines are going to be connected together in an master-slave setup
-where the master runs \ac{YARN} and the \ac{HDFS} name node aswell as an
+where the master runs the \ac{YARN} resource manager and the \ac{HDFS} name node as well as an \ac{HDFS} data node and an \ac{YARN} client node.
+The slaves runs only an \ac{HDFS} data node and an \ac{YARN} client node.
+
+First the system of the master is configured. Therefore the following steps are taken.
+
+\begin{enumerate}
+    \item The system is updated and OpenJDK 1.8 is installed using\footnote{http://openjdk.java.net/} \texttt{apt}. 
+    \item A new user \emph{hadoop} is created which will be used to run every service on the machine concerning Hadoop.
+    \item For this user a new \ac{SSH} key is created which enables password-less access to the two machines for the user if its public key is later added to the \texttt{authorized_key} file of the user on the hosts.
+    \item TODO
+\end{enumerate}
+
+
+TODO hadoop config
+TODO errors
+
+TODO conclusion
 
 TODO
 
