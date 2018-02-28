@@ -6,7 +6,7 @@
 
 \section{Research on Possibilities}
 
-After the requirements are settled
+After the requirements are settled,
 the possibilities of how Hadoop can actually be installed 
 on the given infrastructure will be researched.
 
@@ -14,21 +14,32 @@ There are four ways to install Hadoop that are considered here:
 
 \begin{itemize}
     \item A \emph{manual installation} of Hadoop 
-        and every additional piece of software form the ecosystem
+        and every additional piece of software frrm the ecosystem
     \item \emph{\ac{CDH}} --  An open source software distribution by Cloudera including Hadoop
         and additional software from the ecosystem
     \item \emph{Ambari} -- An open source project by Apache that provides
         the capability to manage Hadoop Clusters and the software components running on it.
-    \item \emph{\ac{HDP}} -- Hortonsworks distribution of Ambari
+    \item \emph{\ac{HDP}} -- Hortonswork's ready-to-install distribution of Hadoop 
+        with Ambari and additional software
 \end{itemize}
 
-In the coming sections 
+Since \ac{HDP} makes use of Ambari for installing the cluster and managing the installed software while it simply provides a pre-packaged version of the software, 
+it can be preferred over using Ambari directly which would create the need to compile it from source.
+
+In the coming sections each of those three resulting possibilities will be looked at in more detail.
+For each of the options an evaluation will be made on whether it is 
+feasible to deploy an Hadoop installation with the methods that they provide.
+Therefore a simple test installation in an OpenStack environment is made.
+For this purpose the OpenStack environment \emph{BWCloud}\footnote{www.bw-cloud.org} is used, an environment that is available for students at the \ac{DHBW} and other 
+
 
 \subsection{Manual Installation of Hadoop}
 
 \subsection{\acl{CDH}}
 
-\subsection{Apache Ambari}
+\subsection{\acl{HDP} with Apache Ambari}
+
+\subsection{Decision on Distribution}
 
 \section{Architecture Design}
 
