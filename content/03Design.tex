@@ -62,7 +62,7 @@ First the system of the master is configured. Therefore the following steps are 
 \begin{enumerate}
     \item The system is updated and OpenJDK 1.8 is installed using\footnote{http://openjdk.java.net/} \texttt{apt}. 
     \item A new user \emph{hadoop} is created which will be used to run every service on the machine concerning Hadoop.
-    \item For this user a new \ac{SSH} key is created which enables password-less access to the two machines for the user \emph{hadoop} if its public key is later added to the \texttt{authorized_key} file of the user on the hosts.
+    \item For this user a new \ac{SSH} key is created which enables password-less access to the two machines for the user \emph{hadoop} if its public key is later added to the \texttt{authorized\_key} file of the user on the hosts.
     \item The \texttt{/etc/hosts} file is adjusted, such that both hosts know how to reach each other on the local network by using their \acs{FQDN} which is resolved to an \ac{IP} address.
     \item The network interface to the internal network that is connected is configured to use the \ac{IP} address assigned to it by OpenStack.
     \item \ac{IP}v6 is disabled.
@@ -70,7 +70,7 @@ First the system of the master is configured. Therefore the following steps are 
 
 The slave system uses mainly the same configuration but is altered slightly.
 No new \ac{SSH} key is generated, but the public key of the previously
-generated one is entered into the \texttt{authorized_key} file. 
+generated one is entered into the \texttt{authorized\_key} file. 
 Furthermore an additional 70 \ac{GB} hard drive is attached 
 and mounted to store working data.
 
@@ -86,8 +86,8 @@ can be followed.
     At the moment of performing this tests, 
     version 2.7.4 is the latest stable release.
     The downloaded packed file is unzipped in the home directory of the \emph{hadoop} user.
-    \item Inside the \texttt{.bashrc} file of the user the the variables \texttt{JAVA_HOME} is pointing to the OpenJDK installation,
-    \texttt{HADOOP_HOME} is set to the folder that has just been crated and the \texttt{PATH} variable is configured to include the \textt{bin} directory within \texttt{HADOOP_HOME}.
+    \item Inside the \texttt{bashrc} file of the user the the variables \texttt{JAVA\_HOME} is pointing to the OpenJDK installation,
+    \texttt{HADOOP\_HOME} is set to the folder that has just been crated and the \texttt{PATH} variable is configured to include the \textt{bin} directory within \texttt{HADOOP\_HOME}.
     Each variable is exported to be available in the user shell.
     This makes Hadoop usable from the login shell of the user.
 \end{itemize}
