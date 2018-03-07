@@ -81,7 +81,16 @@ Therefore the next steps describes in
 \autocite[][Appendix A]{white2015hadoop}
 can be followed.
 
-
+\begin{itemize}
+    \item First Hadoop is downloaded from the Apache website\footnote{https://hadoop.apache.org/releases.html}. 
+    At the moment of performing this tests, 
+    version 2.7.4 is the latest stable release.
+    The downloaded packed file is unzipped in the home directory of the \emph{hadoop} user.
+    \item Inside the \texttt{.bashrc} file of the user the the variables \texttt{JAVA_HOME} is pointing to the OpenJDK installation,
+    \texttt{HADOOP_HOME} is set to the folder that has just been crated and the \texttt{PATH} variable is configured to include the \textt{bin} directory within \texttt{HADOOP_HOME}.
+    Each variable is exported to be available in the user shell.
+    This makes Hadoop usable from the login shell of the user.
+\end{itemize}
 
 TODO hadoop config
 
