@@ -60,9 +60,14 @@ First the system of the master is configured. Therefore the following steps are 
 \begin{enumerate}
     \item The system is updated and OpenJDK 1.8 is installed using\footnote{http://openjdk.java.net/} \texttt{apt}. 
     \item A new user \emph{hadoop} is created which will be used to run every service on the machine concerning Hadoop.
-    \item For this user a new \ac{SSH} key is created which enables password-less access to the two machines for the user if its public key is later added to the \texttt{authorized_key} file of the user on the hosts.
-    \item TODO
+    \item For this user a new \ac{SSH} key is created which enables password-less access to the two machines for the user \emph{hadoop} if its public key is later added to the \texttt{authorized_key} file of the user on the hosts.
+    \item The \texttt{/etc/hosts} file is adjusted, such that both hosts know how to reach each other on the local network by using their \acs{FQDN} which is resolved to an \ac{IP} address.
+    \item The network interface to the internal network that is connected is configured to use the \ac{IP} address assigned to it by OpenStack.
+    \item \ac{IP}v6 is disabled.
 \end{enumerate}
+
+The slave system uses mainly the same configuration but is altered slightly.
+No new \ac{SSH} key is generated, but the public key of the previously generated is entered into the \texttt{authorized_key} file. 
 
 
 TODO hadoop config
