@@ -87,15 +87,22 @@ can be followed.
     version 2.7.4 is the latest stable release.
     The downloaded packed file is unzipped in the home directory of the \emph{hadoop} user.
     \item Inside the \texttt{bashrc} file of the user the the variables \texttt{JAVA\_HOME} is pointing to the OpenJDK installation,
-    \texttt{HADOOP\_HOME} is set to the folder that has just been crated and the \texttt{PATH} variable is configured to include the \textt{bin} directory within \texttt{HADOOP\_HOME}.
+    \texttt{HADOOP\_HOME} is set to the folder that has just been crated and the \texttt{PATH} variable is configured to include the \texttt{bin} directory within \texttt{HADOOP\_HOME}.
     Each variable is exported to be available in the user shell.
     This makes Hadoop usable from the login shell of the user.
+    \item Now the configuration files of Hadoop are adjusted to the cluster needs. Each of those resides in the \texttt{etc\\hadoop} directory within \texttt{HADOOP\_HOME}.
+    \begin{itemize}
+        \item \texttt{core-site.xml}
+        \item \texttt{hadoop-env.sh}
+    \end{itemize}
 \end{itemize}
 
 TODO hadoop config
 
 
 TODO errors
+
+TODO Tests
 
 TODO conclusion
 
