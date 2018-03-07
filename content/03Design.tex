@@ -40,6 +40,8 @@ For this purpose the OpenStack environment \emph{BWCloud}\footnote{https://www.b
 
 \subsection{Manual Installation of Hadoop}
 
+TODO: Why is this the first choice
+
 Tom White \autocite[][Appendix A]{white2015hadoop} describes how Hadoop can be manually installed on the machines in an cluster. 
 Manually here means without the help of automated installers for a single machine or the complete cluster. 
 Every aspect of the installation and configuration must be done \enquote{by hand}.
@@ -71,6 +73,13 @@ No new \ac{SSH} key is generated, but the public key of the previously
 generated one is entered into the \texttt{authorized_key} file. 
 Furthermore an additional 70 \ac{GB} hard drive is attached 
 and mounted to store working data.
+
+After the base system is configured, Hadoop can be installed on both machines
+and can be configured to form a cluster.
+Again, first the master host is configured.
+Therefore the next steps describes in 
+\autocite[][Appendix A]{white2015hadoop}
+can be followed.
 
 
 
