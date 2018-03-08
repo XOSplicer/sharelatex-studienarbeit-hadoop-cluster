@@ -48,7 +48,7 @@ Manually here means without the help of automated installers for a single machin
 Every aspect of the installation and configuration must be done \enquote{by hand}.
 White gives step by step instruction on the process.
 
-TODO describe where "distribution" comes from
+TODO describe where "distribution" comes from and that it only contians yarn + hdfs + mapred
 
 For the installation two \acs{VM} are used, utilizing two virtual \ac{CPU} cores and eight \ac{GB} \ac{RAM} and a 20 \ac{GB} storage drive. 
 Ubuntu Server \footnote{https://www.ubuntu.com/server} 16.04.3 \ac{LTS} is used as the operating system. 
@@ -105,12 +105,21 @@ can be followed.
         It is instructed to use \ac{YARN} as the underlying framework.
         \item \texttt{slaves} -- This file is used on the master host to identify all the hosts that run an nodemanager or an datanode.
         Therefore the \acs{FQDN} of the master and the salve host are entered here.
-        \item \texttt{yarn-site.xml} -- This file describes the settings for \ac{YARN}. Here the master's \ac{FQDN} is entered as the resourcemanager and \ac{YARN} is bound to 0.0.0.0. Furthermore the minmal allocation units for \ac{CPU} cores as well as \ac{RAM} and their res
+        \item \texttt{yarn-site.xml} -- This file describes the settings for \ac{YARN}. Here the master's \ac{FQDN} is entered as the resourcemanager and \ac{YARN} is bound to 0.0.0.0. 
+        Furthermore the minimal allocation units for \ac{CPU} cores as well as \ac{RAM} and their respective maximum allocation are defined. 
+        This dictates how \ac{YARN} uses the resources of this host.
     \end{itemize}
 \end{enumerate}
 
-TODO hadoop config
+After the configuration is done for the master host, the same procedure can be followed for the slave. 
+The only exceptions are that no entries are made in the \texttt{slaves} file 
+and the \texttt{hdfs-site.xml} is configured, so that \ac{HDFS} uses the attached data drive to store file contents.
 
+Finally the \ac{HDFS} file systems on each host can be formatted using the TODO WHICH COMMAND command.
+Then \ac{YARN} and \ac{HDFS}, aswell as the MapReduce history server is started on the master, 
+which in turn start the namenode and resoucemanager on the master 
+as well as the datanoode and nodemanager on both the master and the slave.
+Now the cluster can be used to store data in \ac{HDFS} and run MapReduce jobs.
 
 TODO errors
 
