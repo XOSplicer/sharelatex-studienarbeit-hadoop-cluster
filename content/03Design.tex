@@ -93,11 +93,19 @@ can be followed.
     This makes Hadoop usable from the login shell of the user.
     \item Now the configuration files of Hadoop are adjusted to the cluster needs. Each of those resides in the \texttt{etc\\hadoop} directory within \texttt{HADOOP\_HOME}.
     \begin{itemize}
-        \item \texttt{core-site.xml} -- This file describes the most basic settings for the instaled Hadoop instance. Here the settings for the file system is set to use the \ac{FQDN} of the master to connect to.
-        \item \texttt{hadoop-env.sh} -- This file describes all the environment variables used while running Hadoop. Here \texttt{JAVA\_HOME} is set to 
-        \item \texttt{hdfs-site.xml} TODO
-        \item \texttt{mapred-site.xml} TODO
-        \item \texttt{slaves}
+        \item \texttt{core-site.xml} -- This file describes the most basic settings for the instaled Hadoop instance. 
+        Here the settings for the file system is set to use the \ac{FQDN} of the master to connect to.
+        \item \texttt{hadoop-env.sh} -- This file describes all the environment variables used while running Hadoop. 
+        Here \texttt{JAVA\_HOME} is set to the same value used above.
+        \item \texttt{hdfs-site.xml} This file describes how \ac{HDFS} is configured. 
+        The storage directory is set to a persistent folder
+        and \ac{HDFS} is instructed to bind to the \ac{IP} address 0.0.0.0 
+        which means the file system is accessible from all network interfaces.
+        \item \texttt{mapred-site.xml} -- Here the settings for MapReduce are made. 
+        It is instructed to use \ac{YARN} as the underlying framework.
+        \item \texttt{slaves} -- This file is used on the master host to identify all the hosts that run an nodemanager or an datanode.
+        Therefore the \acs{FQDN} of the master and the salve host are entered here.
+        \item \texttt{yarn-site.xml} -- This file describes the settings for \ac{YARN}. Here the master's \ac{FQDN} is entered as the resourcemanager and \ac{YARN} is bound to 0.0.0.0. Furthermore the minmal allocation units for \ac{CPU} cores as well as \ac{RAM} and their res
     \end{itemize}
 \end{enumerate}
 
