@@ -50,6 +50,7 @@ White gives step by step instruction on the process.
 
 TODO describe where "distribution" comes from and that it only contians yarn + hdfs + mapred
 
+\subsubsection{System Setup}
 For the installation two \acs{VM} are used, utilizing two virtual \ac{CPU} cores and eight \ac{GB} \ac{RAM} and a 20 \ac{GB} storage drive. 
 Ubuntu Server \footnote{https://www.ubuntu.com/server} 16.04.3 \ac{LTS} is used as the operating system. 
 The machines are connected to the public internet and to each other using two network interfaces each.
@@ -91,7 +92,7 @@ can be followed.
     \texttt{HADOOP\_HOME} is set to the folder that has just been crated and the \texttt{PATH} variable is configured to include the \texttt{bin} directory within \texttt{HADOOP\_HOME}.
     Each variable is exported to be available in the user shell.
     This makes Hadoop usable from the login shell of the user.
-    \item Now the configuration files of Hadoop are adjusted to the cluster needs. Each of those resides in the \texttt{etc\\hadoop} directory within \texttt{HADOOP\_HOME}.
+    \item Now the configuration files of Hadoop are adjusted to the cluster needs. Each of those resides in the \texttt{etc/hadoop} directory within \texttt{HADOOP\_HOME}.
     \begin{itemize}
         \item \texttt{core-site.xml} -- This file describes the most basic settings for the instaled Hadoop instance. 
         Here the settings for the file system is set to use the \ac{FQDN} of the master to connect to.
@@ -121,11 +122,21 @@ which in turn start the namenode and resoucemanager on the master
 as well as the datanoode and nodemanager on both the master and the slave.
 Now the cluster can be used to store data in \ac{HDFS} and run MapReduce jobs.
 
-TODO errors
-
+\subsubsection{Tests}
 TODO Tests
 
-TODO conclusion
+\subsubsection{Errors}
+The whole described setup procedure is performed manually 
+and therefore rather error prone.
+Special attention to the usage of \acs{FQDN} must be given, 
+so that the names used in Hadoop and the hostnames match up.
+Those also need to be used in the \texttt{hosts} files on all hosts.
+
+Errors in the configuration lead to nodes that are not recognized by Hadoop or jobs that do not succeed.
+It is rather frustrating to find and fix those issues for the person installing the cluster.
+
+\subsubsection{Conclusions}
+
 
 TODO
 
