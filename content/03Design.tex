@@ -42,7 +42,8 @@ For this purpose the OpenStack environment \emph{BWCloud}\footnote{https://www.b
 
 TODO: Why is this the first choice
 
-The obvious and naive first possibility to install Hadoop onto a number of hosts is to 
+The obvious and naive first possibility to install Hadoop onto a number of hosts 
+is to use the installation package provided by Apache themself\footnote{https://hadoop.apache.org/releases.html}.
 
 Tom White \autocite[][Appendix A]{white2015hadoop} describes how Hadoop can be manually installed on the machines in an cluster. 
 Manually here means without the help of automated installers for a single machine or the complete cluster. 
@@ -62,7 +63,7 @@ The slaves runs only an \ac{HDFS} data node and an \ac{YARN} client node.
 First the system of the master is configured. Therefore the following steps are taken.
 
 \begin{enumerate}
-    \item The system is updated and OpenJDK 1.8 is installed using\footnote{http://openjdk.java.net/} \texttt{apt}. 
+    \item The system is updated and OpenJDK 1.8\footnote{http://openjdk.java.net/}  is installed using\texttt{apt}. 
     \item A new user \emph{hadoop} is created which will be used to run every service on the machine concerning Hadoop.
     \item For this user a new \ac{SSH} key is created which enables password-less access to the two machines for the user \emph{hadoop} if its public key is later added to the \texttt{authorized\_key} file of the user on the hosts.
     \item The \texttt{/etc/hosts} file is adjusted, such that both hosts know how to reach each other on the local network by using their \acs{FQDN} which is resolved to an \ac{IP} address.
