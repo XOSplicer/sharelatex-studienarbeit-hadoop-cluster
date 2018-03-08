@@ -40,11 +40,9 @@ For this purpose the OpenStack environment \emph{BWCloud}\footnote{https://www.b
 
 \subsection{Manual Installation of Hadoop}
 
-TODO: Why is this the first choice
-
 The obvious and naive first possibility to install Hadoop onto a number of hosts 
 is to use the installation package provided by Apache themself\footnote{https://hadoop.apache.org/releases.html}.
-
+This represents the most basic procedure of installation.
 Tom White \autocite[][Appendix A]{white2015hadoop} describes how Hadoop can be manually installed on the machines in an cluster. 
 Manually here means without the help of automated installers for a single machine or the complete cluster. 
 Every aspect of the installation and configuration must be done \enquote{by hand}.
@@ -52,7 +50,7 @@ White gives step by step instruction on the process.
 
 TODO describe where "distribution" comes from
 
-For the installation two \acs{VM} are used, utilizing two virtual \ac{CPU} Cores and eight \ac{GB} \ac{RAM} and a 20 \ac{GB} storage drive. 
+For the installation two \acs{VM} are used, utilizing two virtual \ac{CPU} cores and eight \ac{GB} \ac{RAM} and a 20 \ac{GB} storage drive. 
 Ubuntu Server \footnote{https://www.ubuntu.com/server} 16.04.3 \ac{LTS} is used as the operating system. 
 The machines are connected to the public internet and to each other using two network interfaces each.
 
@@ -95,8 +93,8 @@ can be followed.
     This makes Hadoop usable from the login shell of the user.
     \item Now the configuration files of Hadoop are adjusted to the cluster needs. Each of those resides in the \texttt{etc\\hadoop} directory within \texttt{HADOOP\_HOME}.
     \begin{itemize}
-        \item \texttt{core-site.xml} TODO
-        \item \texttt{hadoop-env.sh} TODO
+        \item \texttt{core-site.xml} -- This file describes the most basic settings for the instaled Hadoop instance. Here the settings for the file system is set to use the \ac{FQDN} of the master to connect to.
+        \item \texttt{hadoop-env.sh} -- This file describes all the environment variables used while running Hadoop. Here \texttt{JAVA\_HOME} is set to 
         \item \texttt{hdfs-site.xml} TODO
         \item \texttt{mapred-site.xml} TODO
         \item \texttt{slaves}
