@@ -133,6 +133,8 @@ Now the cluster can be used to store data in \ac{HDFS} and run MapReduce jobs.
 \autocite[][]{white2015hadoop} provides an online reference\footnote{http://hadoopbook.com/} 
 to test data and MapReduce programs 
 that can be used for demonstration purposes of the Hadoop cluster.
+The provided data includes weather data produced by the \ac{NCDC} and programs that can be run on Hadoop to analyze this data. 
+Storing this data in \ac{HDFS} and running the MapReduce jobs lead to the discovery of erronous configurations in the cluster.
 
 TODO test
 
@@ -160,11 +162,21 @@ TODO
 
 \subsection{\acl{HDP} with Apache Ambari}
 
-TODO\autocite[][p. 54]{wi2018managementsystems}
+TODO
+
+
 
 \subsection{Decision on Distribution}
 
 TODO
+
+At this point it is important to mention the project paper by Sicklinger et al., 
+who did research on the topic of the possible usage of Hadoop management systems for the \ac{DHBW}.
+Their findings suggest using Apache Ambari to deploy an Hadoop cluster at the \ac{DHBW}.
+According to them, installing Hadoop manually is ruled out due to the technical complexity.
+Apache Ambari and Cloudera are equally suitable for the usage at the \ac{DHBW}, 
+but Ambari should be favoured since it is free to use and crates no licensing costs.
+\autocite[][p. 53f]{wi2018managementsystems}
 
 \section{Architecture Design}
 
