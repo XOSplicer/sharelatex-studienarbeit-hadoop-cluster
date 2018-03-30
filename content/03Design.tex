@@ -14,6 +14,8 @@ on the given infrastructure will be researched.
 
 TODO
 
+TODO explain what an distribution / managemnt system is
+
 There are four ways to install Hadoop that are considered here:
 
 \begin{itemize}
@@ -53,7 +55,8 @@ Manually here means without the help of automated installers for a single machin
 Every aspect of the installation and configuration must be done \enquote{by hand}.
 White gives step by step instruction on the process.
 
-TODO describe where "distribution" comes from and that it only contians yarn + hdfs + mapred
+Since no step in this step is predetermined or automated, this method does not really intall an "Hadoop distribution" on the cluster, but rather only \ac{YARN}, \ac{HDFS} and MapReduce.
+It does not provide an \emph{management system} for hadoop.
 
 \subsubsection{System Setup}
 For the installation two \acs{VM} are used, utilizing two virtual \ac{CPU} cores and eight \ac{GB} \ac{RAM} and a 20 \ac{GB} storage drive. 
@@ -134,9 +137,10 @@ Now the cluster can be used to store data in \ac{HDFS} and run MapReduce jobs.
 to test data and MapReduce programs 
 that can be used for demonstration purposes of the Hadoop cluster.
 The provided data includes weather data produced by the \ac{NCDC} and programs that can be run on Hadoop to analyze this data. 
-Storing this data in \ac{HDFS} and running the MapReduce jobs lead to the discovery of erronous configurations in the cluster.
+Storing this data in \ac{HDFS} and running the MapReduce jobs lead to the discovery of erroneous configurations in the cluster.
 
-TODO test
+Further test included the execution \emph{teragen} and \emph{terasort}, also provided by White, which generate a variable amount of numbers and sorts them, in this case 5 \ac{GB} of data. 
+The generation  was successful, however the sorting failed due to an repeated connection timeout, which could not be resolved.
 
 \subsubsection{Errors and Lessons Learned}
 The whole described setup procedure is performed manually 
