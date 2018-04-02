@@ -149,6 +149,9 @@ Special attention to the usage of \acs{FQDN} must be given,
 so that the names used in Hadoop and the hostnames match up.
 Those also need to be used in the \texttt{hosts} files on all hosts.
 
+Furthermore it is important to configure the firewalls of OpenStack correctly, 
+so that the nodes can be reached internaly and externaly.
+
 Errors in the configuration lead to nodes that are not recognized by Hadoop or jobs that do not succeed.
 It is rather frustrating to find and fix those issues for the person installing the cluster.
 
@@ -161,6 +164,18 @@ Furthermore integrating tools such as Spark into the cluster
 will lead to even more complex installation and configuration processes which again might introduce new openings for errors.
 
 \subsection{\acl{CDH}}
+
+Cloudera distributes an Hadoop management system called \ac{CDH}.
+The company provides an docker image which can be used to easily evaluate the usability of \ac{CDH}.
+
+
+\autocite[][]{cloudera2018docker}
+
+\subsubsection{System Setup}
+
+\subsubsection{Tests}
+
+\subsubsection{Conclusions}
 
 TODO
 
