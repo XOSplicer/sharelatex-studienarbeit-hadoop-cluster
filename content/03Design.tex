@@ -180,7 +180,14 @@ Since the Docker image only runs on a single host, this host should be as powerf
 Therefore the largest available \ac{VM} preset is used, which consistes of 2 virtual \ac{CPU} cores, 
 4 \ac{GB} \ac{RAM}, and 20 \ac{GB} storage. The operating is again Ubuntu 16.04 \ac{LTS}, 
 and the host is accessible via the internet. 
-\autocite[][]{cloudera2018docker}
+Cloudera describes how Docker can be installed and the test image can be started, 
+these instructions are followed. \autocite[][]{cloudera2018docker}
+To do so, the Docker runtime is installed, a new  user \emph{docker} is created and added to the \emph{docker} group. To test the Docker installation, the \emph{hello-world} image can be started.
+Now all ports required by \ac{CDH} need to be accesible through the OpenStack firewall.
+Namely these are 8888, 7080, and 8080 (which is used to redirect to port 80 inside the container).
+After fetching the Docker image
+
+
 
 
 
