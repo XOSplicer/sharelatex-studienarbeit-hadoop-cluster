@@ -167,11 +167,22 @@ will lead to even more complex installation and configuration processes which ag
 
 Cloudera distributes an Hadoop management system called \ac{CDH}.
 The company provides an docker image which can be used to easily evaluate the usability of \ac{CDH}.
+It contains \enquote{a single-host deployment of the Cloudera open-source distribution, including CDH and Cloudera Manager.} \autocite[][]{cloudera2018docker}
+It does not provide a full cluster installation, but only a test environment to evaluate the plattform.
 
+TODO explain what Cloudera distribution does
 
-\autocite[][]{cloudera2018docker}
 
 \subsubsection{System Setup}
+
+As in the previous section, BW-Cloud will be used for installing a test setup.
+Since the Docker image only runs on a single host, this host should be as powerfull as possible.
+Therefore the largest available \ac{VM} preset is used, which consistes of 2 virtual \ac{CPU} cores, 
+4 \ac{GB} \ac{RAM}, and 20 \ac{GB} storage. The operating is again Ubuntu 16.04 \ac{LTS}, 
+and the host is accessible via the internet. 
+\autocite[][]{cloudera2018docker}
+
+
 
 \subsubsection{Tests}
 
