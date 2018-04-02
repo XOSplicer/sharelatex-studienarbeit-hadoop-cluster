@@ -185,15 +185,21 @@ these instructions are followed. \autocite[][]{cloudera2018docker}
 To do so, the Docker runtime is installed, a new  user \emph{docker} is created and added to the \emph{docker} group. To test the Docker installation, the \emph{hello-world} image can be started.
 Now all ports required by \ac{CDH} need to be accesible through the OpenStack firewall.
 Namely these are 8888, 7080, and 8080 (which is used to redirect to port 80 inside the container).
-After fetching the Docker image
-
-
-
+After fetching the Docker  image, it can be started in daemon mode with the necessary ports exposed using the command\\
+\texttt{\$ docker run --hostname=quickstart.cloudera --privileged=true -t -i -d -p 8888 -p 7080 -p 8080:80 cloudera/quickstart /usr/bin/docker-quickstart}\\
+All services that are needed inside the container are started automatically.
 
 
 \subsubsection{Tests}
+The Docker image includes an web based tutorial, 
+that can be accessed on port 8080 (remapped before) on the host.
+The tutorial highlights the features of \ac{CDH} which differ from other Hadoop distributions.
+The tutorial describes a story from the perspective of an data analyst and shows how the features provide value for typical use cases.
+
+
 
 \subsubsection{Conclusions}
+The tutorial provides a 
 
 TODO
 
