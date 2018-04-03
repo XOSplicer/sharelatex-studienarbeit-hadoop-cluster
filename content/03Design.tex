@@ -246,17 +246,30 @@ The configuration using Ansible  performs the following similar steps:
     \item The Hortonworks Ambari repositories are added, so that the provided     binaries can be used.
     \item On the master \ac{VM} the Ambari server 
         and the Ambari agent is installed.
-    \ietm On the slave nodes only the Ambari agent is installed.
-    \item on the master the initial Ambari server setup is performed which
+    \item On the slave nodes only the Ambari agent is installed.
+    \item On the slave node the Ambari agent configuration is set to use the
+        master node as its server.
+    \item On the master node the initial Ambari server setup is performed which
         installs an \ac{JDK} 
         and starts the Ambari server service as the root user.
 \end{enumerate}
 
-Now the Hadoop cluster c
+Now the Hadoop cluster can be deployed using the Ambari Cluster Manager 
+via an web interface on port 8080 on the master node, 
+which needs to be accessible through the firewall of OpenStack.
+Ambari provides an install wizard for the cluster installation. 
+Here a new cluster deployment counting all three hosts is started.
+The node need to be registered manually, as no shared \ac{SSH} key is present, that allows root access to the machines. 
+(The web interface would require the used to upload the private key for root access, which is generally unsafe.)
+The master node is configured to act as an Hadoop master and salve an as the master for all recommended services running alongside of Hadoop.
+The slaves are salves for \ac{HDFS} and \ac{YARN}.
+The wizards now installs the cluster.
 
-TODO
 
-\subsubsection{Tests}
+\subsection{Errors and Lessons Learned}
+Since a lot of services such as Spark are recommended to be installed, 
+the 20 \ac{GB} disk of the master is filled completely and the installation of the cluster fails. At least 50 \ac{GB} are recommended.
+Therefore thee installatio
 TODO
 
 \subsubsection{Conclusions}
