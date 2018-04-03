@@ -223,7 +223,22 @@ As in the sections before the OpenStack BW-Cloud is used for a test deployment.
 Three \acs{VM} are started, each with 20 \ac{GB} disk space, Ubuntu 16.04 \ac{LTS}, an public \ac{IP} address. 
 The hosts are connected with an internal \ac{IP} network.
 One \ac{VM} are used as the Ambari and Hadoop master node, having 2 virtual \ac{CPU} cores and 4 \ac{GB} \ac{RAM}.
-Two \acs{VM} are used as slave nodes with 4 \acs{CPU} and 8 \ac{GB} \ac{RAM} as well as 2 \acs{CPU} and 8 \ac{GB} \ac{RAM}
+Two \acs{VM} are used as slave nodes with 4 \acs{CPU} and 8 \ac{GB} \ac{RAM} as well as 2 \acs{CPU} and 4 \ac{GB} \ac{RAM} respectively.
+
+Ansible is used to perform all system configuration. 
+However before Ansible can be used, Python 2.7 needs to be installed on the hosts.
+Now every deployed configuration is reproducible by running the Ansible configuration management again.
+The configuration performs the following steps:
+\begin{enumerate}
+    \item The internal network interfaces are configured 
+        and the \textt{/etc/hosts} file is filled with the hostnames 
+        of all nodes and their integral \acs{IP}. 
+        This prevents issues with the \ac{FQDN} resolution.
+    \item The \ac{NTP} service is installed and started. 
+        This is a requirement for Ambari.
+    \item The 
+    
+\end{enumerate}
 
 TODO
 
