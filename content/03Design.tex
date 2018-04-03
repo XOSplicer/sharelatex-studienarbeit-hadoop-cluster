@@ -163,6 +163,79 @@ This way a lot of manual configuration can be avoided.
 Furthermore integrating tools such as Spark into the cluster 
 will lead to even more complex installation and configuration processes which again might introduce new openings for errors.
 
+\subsection{\acl{HDP} with Ambari deployed with Ansible}
+TODO describe HDP, Ambari, Ansible
+
+\subsubsection{System Setup}
+
+As in the sections before the OpenStack BW-Cloud is used for a test deployment.
+Three \acs{VM} are started, each with 20 \ac{GB} disk space, Ubuntu 16.04 \ac{LTS}, an public \ac{IP} address. 
+The hosts are connected with an internal \ac{IP} network.
+One \ac{VM} are used as the Ambari and Hadoop master node, having 2 virtual \ac{CPU} cores and 4 \ac{GB} \ac{RAM}.
+Two \acs{VM} are used as slave nodes with 4 \acs{CPU} and 8 \ac{GB} \ac{RAM} as well as 2 \acs{CPU} and 4 \ac{GB} \ac{RAM} respectively.
+
+Ansible is used to perform all system configuration. 
+However before Ansible can be used, Python 2.7 needs to be installed on the hosts.
+Now every deployed configuration is reproducible by running the Ansible configuration management again.
+Hortonworks describes which steps of system setup are necessary 
+to run Ambari when the installation is performed on a shell \autocite[][]{hortonworks2018install}.
+The configuration using Ansible  performs the following similar steps:
+\begin{enumerate}
+    \item The internal network interfaces are configured 
+        and the \texttt{\/etc\/hosts} file is filled with the hostnames 
+        of all nodes and their integral \acs{IP}. 
+        This prevents issues with the \ac{FQDN} resolution.
+    \item The \ac{NTP} service is installed and started. 
+        This is a requirement for Ambari.
+    \item The \ac{THP}, a Linux kernel feature to improve memory look-ups, 
+        is disabled using a service script. 
+        This is a requirement for Ambari, 
+        as it would reduce database performance.
+        The script is based on \autocite{braun2017hugepages}.
+    \item The Hortonworks Ambari repositories are added, so that the provided     binaries can be used.
+    \item On the master \ac{VM} the Ambari server 
+        and the Ambari agent is installed.
+    \item On the slave nodes only the Ambari agent is installed.
+    \item On the slave node the Ambari agent configuration is set to use the
+        master node as its server.
+    \item On the master node the initial Ambari server setup is performed which
+        installs an \ac{JDK} 
+        and starts the Ambari server service as the root user.
+\end{enumerate}
+
+Now the Hadoop cluster can be deployed using the Ambari Cluster Manager 
+via an web interface on port 8080 on the master node, 
+which needs to be accessible through the firewall of OpenStack.
+Ambari provides an install wizard for the cluster installation. 
+Here a new cluster deployment counting all three hosts is started.
+The node need to be registered manually, as no shared \ac{SSH} key is present, that allows root access to the machines. 
+(The web interface would require the used to upload the private key for root access, which is generally unsafe.)
+The master node is configured to act as an Hadoop master and salve an as the master for all recommended services running alongside of Hadoop.
+The slaves are salves for \ac{HDFS} and \ac{YARN}.
+The wizards now installs the cluster.
+
+
+\subsection{Errors and Lessons Learned}
+Since a lot of services such as Spark are recommended to be installed, 
+the 20 \ac{GB} disk of the master is filled completely and the installation of the cluster fails. At least 50 \ac{GB} are recommended for an correct installation.
+Therefore thee installation fails and the Hadoop deployment can not be functionally tested for now.
+
+Ambari needs to be provided with the \ac{FQDN} of an host 
+in all forms and configuration files. 
+Otherwise it can not detect the agents or server.
+
+The Ambari clients need to be configured 
+to use the correct Ambari server host.
+Otherwise they will not be detected in the manual registration.
+
+
+\subsubsection{Conclusions}
+Ansible provides an reproducible way of system configuration 
+and can therefore be used to install Ambari, 
+which otherwise would require error-prone manual configuration on each host.
+The Ambari Cluster Manager can then be used to install Hadoop and other services on the cluster with an user friendly web interface.
+
+
 \subsection{\acl{CDH}}
 
 Cloudera distributes an Hadoop management system called \ac{CDH}.
@@ -204,8 +277,6 @@ since possible obstacles are not foreseeable.
 
 \subsection{Decision on Distribution}
 
-TODO
-
 At this point it is important to mention the project paper by Sicklinger et al., 
 who did research on the topic of the possible usage of Hadoop management systems for the \ac{DHBW}.
 Their findings suggest using Apache Ambari to deploy an Hadoop cluster at the \ac{DHBW}.
@@ -214,22 +285,12 @@ Apache Ambari and Cloudera are equally suitable for the usage at the \ac{DHBW},
 but Ambari should be favoured since it is free to use and crates no licensing costs.
 \autocite[][p. 53f]{wi2018managementsystems}
 
-\subsection{\acl{HDP} with Ambari deployed with Ansible}
-TODO
-
-\subsubsection{System Setup}
-TODO
-
-\subsubsection{Tests}
-TODO
-
-\subsubsection{Conclusions}
-TODO
+In combination with Ansible, Ambari ensures an reproducible cluster installation. 
+Therefore Ambari is the solution that will be used for this project and Ansible will be used to install the \ac{HDP} including Ambari.
 
 \section{Architecture Design}
 TODO
 
-TODO
 
 \section{Execution Plan}
 
