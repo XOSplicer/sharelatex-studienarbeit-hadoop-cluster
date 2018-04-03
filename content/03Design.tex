@@ -228,17 +228,31 @@ Two \acs{VM} are used as slave nodes with 4 \acs{CPU} and 8 \ac{GB} \ac{RAM} as 
 Ansible is used to perform all system configuration. 
 However before Ansible can be used, Python 2.7 needs to be installed on the hosts.
 Now every deployed configuration is reproducible by running the Ansible configuration management again.
-The configuration performs the following steps:
+Hortonworks describes which steps of system setup are necessary 
+to run Ambari when the installation is performed on a shell \autocite[][]{hortonworks2018install}.
+The configuration using Ansible  performs the following similar steps:
 \begin{enumerate}
     \item The internal network interfaces are configured 
-        and the \textt{/etc/hosts} file is filled with the hostnames 
+        and the \texttt{\/etc\/hosts} file is filled with the hostnames 
         of all nodes and their integral \acs{IP}. 
         This prevents issues with the \ac{FQDN} resolution.
     \item The \ac{NTP} service is installed and started. 
         This is a requirement for Ambari.
-    \item The 
-    
+    \item The \ac{THP}, a Linux kernel feature to improve memory look-ups, 
+        is disabled using a service script. 
+        This is a requirement for Ambari, 
+        as it would reduce database performance.
+        The script is based on \autocite{braun2017hugepages}.
+    \item The Hortonworks Ambari repositories are added, so that the provided     binaries can be used.
+    \item On the master \ac{VM} the Ambari server 
+        and the Ambari agent is installed.
+    \ietm On the slave nodes only the Ambari agent is installed.
+    \item on the master the initial Ambari server setup is performed which
+        installs an \ac{JDK} 
+        and starts the Ambari server service as the root user.
 \end{enumerate}
+
+Now the Hadoop cluster c
 
 TODO
 
