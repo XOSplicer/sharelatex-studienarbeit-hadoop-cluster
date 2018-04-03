@@ -291,6 +291,15 @@ Therefore Ambari is the solution that will be used for this project and Ansible 
 \section{Architecture Design}
 TODO
 
+Should use maximum size of vms, using internal network to connect, all have internet access, opened ports: 22, 8080
+master / salve design as in before
+master: ambari server and agent, hadoop master
+slave: ambari agent, hadoop slave
+
+each 50 GB main disk, 100 GB data drive, configure  hdfs to use this
+
+
+
 
 \section{Execution Plan}
 
