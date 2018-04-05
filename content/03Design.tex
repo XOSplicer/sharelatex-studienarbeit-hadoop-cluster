@@ -216,6 +216,7 @@ The wizards now installs the cluster.
 
 
 \subsection{Errors and Lessons Learned}
+\label{sec:ambari:errors}
 Since a lot of services such as Spark are recommended to be installed, 
 the 20 \ac{GB} disk of the master is filled completely and the installation of the cluster fails. At least 50 \ac{GB} are recommended for an correct installation.
 Therefore thee installation fails and the Hadoop deployment can not be functionally tested for now.
@@ -305,8 +306,15 @@ Hadoop uses an cluster setup in which one server distributes and manages \ac{YAR
 and keeps track of where data is stored data \ac{HDFS} (the \ac{HDFS} namenode).
 This can be considered a master.
 To increase availability it is possible to choose a secondary master which replicates the \ac{HDFS} namenode.
-Figure \vref{fig:architecture} depicts the 
+Figure \vref{fig:architecture} depicts the architecture that follows from these prerequisites.
 
+As discovered in \vref{sec:ambari:errors} there should be at least 50 \ac{GB} of disk space on each node, 
+just for Ambari and Hadoop to be installed.
+For \ac{HDFS} data storage an additional volume should be attached to each of the \ac{HDFS} datanodes.
+
+The size of the used \acs{VM} should be the one with the most memory, 
+as this is the resource where the overhead of having multiple \acs{VM} has the most impact.
+All nodes need access to the internet to download packages
 
 TODO
 
@@ -317,12 +325,13 @@ slave: ambari agent, hadoop slave
 
 each 50 GB main disk, 100 GB data drive, configure  hdfs to use this
 
+TODO official recommendations
+
 
 \begin{figure}
 	\fbox{
 	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{resources/architecture.pdf}
     }
-	\captionsetup{format=hang}
 	\caption[]{\label{fig:architecture}Proposed Architecture}
 \end{figure}
 
