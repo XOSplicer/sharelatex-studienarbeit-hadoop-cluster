@@ -289,6 +289,25 @@ In combination with Ansible, Ambari ensures an reproducible cluster installation
 Therefore Ambari is the solution that will be used for this project and Ansible will be used to install the \ac{HDP} including Ambari.
 
 \section{Architecture Design}
+
+For the deployment of the Hadoop cluster, OpenStack will be used.
+It provides the possibilities to create computational resources, which are \acs{VM}, 
+storage resources, which are virtual disk volumes, 
+and network resources, which are either project internal \ac{IP} networks or networks that are accessible from the outside of OpenStack.
+With these resources it is possible to create an cluster that consists of interconnected nodes, 
+that can store and process data and be accessed from the outside.
+
+For this project a master-slave architecture is chosen.
+Ambari promotes a sever-agent architecture, 
+where the user can interact with Ambari on the server host 
+and deploy the Hadoop cluster to all agent hosts.
+Hadoop uses an cluster setup in which one server distributes and manages \ac{YARN} jobs (the \ac{YARN} resourcemanager), 
+and keeps track of where data is stored data \ac{HDFS} (the \ac{HDFS} namenode).
+This can be considered a master.
+To increase availability it is possible to choose a secondary master which replicates the \ac{HDFS} namenode.
+Figure \vref{fig:architecture} depicts the 
+
+
 TODO
 
 Should use maximum size of vms, using internal network to connect, all have internet access, opened ports: 22, 8080
