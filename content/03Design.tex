@@ -314,16 +314,13 @@ For \ac{HDFS} data storage an additional volume should be attached to each of th
 
 The size of the used \acs{VM} should be the one with the most memory, 
 as this is the resource where the overhead of having multiple \acs{VM} has the most impact.
-All nodes need access to the internet to download packages
+All nodes need access to the internet to download software packages and should be accessible via \ac{SSH} through the OpenStack firewall.
+Furthermore the master node needs to be accessible via typical ports for the web interface of the deployed services.
+Internally all nodes need to be connected via an private network with fixed \acs{IP}, where the mapping between hostnames and \acs{IP} is known for each host. Typically this can be done with \ac{DNS}, however it is out of scope for this project to setup an \ac{DNS} server. Filling the \texttt{\/etc\/hosts} file is sufficient.
+The internal network should not be restricted by any firewall.
 
 TODO
 
-Should use maximum size of vms, using internal network to connect, all have internet access, opened ports: 22, 8080
-master / salve design as in before
-master: ambari server and agent, hadoop master
-slave: ambari agent, hadoop slave
-
-each 50 GB main disk, 100 GB data drive, configure  hdfs to use this
 
 TODO official recommendations
 
