@@ -216,6 +216,7 @@ The wizards now installs the cluster.
 
 
 \subsection{Errors and Lessons Learned}
+\label{sec:ambari:errors}
 Since a lot of services such as Spark are recommended to be installed, 
 the 20 \ac{GB} disk of the master is filled completely and the installation of the cluster fails. At least 50 \ac{GB} are recommended for an correct installation.
 Therefore thee installation fails and the Hadoop deployment can not be functionally tested for now.
@@ -289,7 +290,48 @@ In combination with Ansible, Ambari ensures an reproducible cluster installation
 Therefore Ambari is the solution that will be used for this project and Ansible will be used to install the \ac{HDP} including Ambari.
 
 \section{Architecture Design}
+
+For the deployment of the Hadoop cluster, OpenStack will be used.
+It provides the possibilities to create computational resources, which are \acs{VM}, 
+storage resources, which are virtual disk volumes, 
+and network resources, which are either project internal \ac{IP} networks or networks that are accessible from the outside of OpenStack.
+With these resources it is possible to create an cluster that consists of interconnected nodes, 
+that can store and process data and be accessed from the outside.
+
+For this project a master-slave architecture is chosen.
+Ambari promotes a sever-agent architecture, 
+where the user can interact with Ambari on the server host 
+and deploy the Hadoop cluster to all agent hosts.
+Hadoop uses an cluster setup in which one server distributes and manages \ac{YARN} jobs (the \ac{YARN} resourcemanager), 
+and keeps track of where data is stored data \ac{HDFS} (the \ac{HDFS} namenode).
+This can be considered a master.
+To increase availability it is possible to choose a secondary master which replicates the \ac{HDFS} namenode.
+Figure \vref{fig:architecture} depicts the architecture that follows from these prerequisites.
+
+As discovered in \vref{sec:ambari:errors} there should be at least 50 \ac{GB} of disk space on each node, 
+just for Ambari and Hadoop to be installed.
+For \ac{HDFS} data storage an additional volume should be attached to each of the \ac{HDFS} datanodes.
+
+The size of the used \acs{VM} should be the one with the most memory, 
+as this is the resource where the overhead of having multiple \acs{VM} has the most impact.
+All nodes need access to the internet to download software packages and should be accessible via \ac{SSH} through the OpenStack firewall.
+Furthermore the master node needs to be accessible via typical ports for the web interface of the deployed services.
+Internally all nodes need to be connected via an private network with fixed \acs{IP}, where the mapping between hostnames and \acs{IP} is known for each host. Typically this can be done with \ac{DNS}, however it is out of scope for this project to setup an \ac{DNS} server. Filling the \texttt{\/etc\/hosts} file is sufficient.
+The internal network should not be restricted by any firewall.
+
 TODO
+
+
+TODO official recommendations
+
+
+\begin{figure}
+	\fbox{
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{resources/architecture.pdf}
+    }
+	\caption[]{\label{fig:architecture}Proposed Architecture}
+\end{figure}
+
 
 
 \section{Execution Plan}
