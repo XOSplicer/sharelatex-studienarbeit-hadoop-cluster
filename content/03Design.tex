@@ -315,7 +315,7 @@ Figure \vref{fig:architecture} depicts the architecture that follows from these 
 	\caption[]{\label{fig:architecture}Proposed Architecture}
 \end{figure}
 
-As discovered in \vref{sec:ambari:errors} there should be at least 50 \ac{GB} of disk space on each node, 
+As discovered in section \vref{sec:ambari:errors} there should be at least 50 \ac{GB} of disk space on each node, 
 just for Ambari and Hadoop to be installed.
 For \ac{HDFS} data storage an additional volume should be attached to each of the \ac{HDFS} datanodes.
 
@@ -329,21 +329,18 @@ The internal network should not be restricted by any firewall.
 TODO
 
 
-Tom White recommends the following specification for a cluster, based on the needs to a full \ac{BDA} system in 2014:\\
+
+Tom White recommends the following specification for a single node in a cluster, based on the needs of a full \ac{BDA} system in 2014:\\
 Each node should run on dedicated, commodity hardware.
-
-\quote{
-
 \begin{itemize}
-    \item Processor - Two hex/octo-core 3 GHz CPUs
-    \item Memory 64-512 GB ECC RAM
-    \item Storage - 12−24 × 1−4 TB SATA disks
+    \item Processor - Two hex/octo-core 3 GHz \acs{CPU}
+    \item Memory 64-512 \ac{GB} \ac{ECC} \ac{RAM}
+    \item Storage - 12 to 24 times 1 to 4 \ac{TB} disks
     \item Network - Gigabit Ethernet with link aggregation
 \end{itemize}
-
-}
-
 \autocite{white2015hadoop}
+
+Howerver the given OpenStack environment does not allow the allocation of these amounts of resources
 
 
 
