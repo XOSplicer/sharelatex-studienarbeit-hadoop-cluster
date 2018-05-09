@@ -312,7 +312,7 @@ Figure \vref{fig:architecture} depicts the architecture that follows from these 
 	\fbox{
 	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{resources/architecture.pdf}
     }
-	\caption[]{\label{fig:architecture}Proposed Architecture}
+	\caption{\label{fig:architecture}Proposed Architecture}
 \end{figure}
 
 As discovered in section \vref{sec:ambari:errors} there should be at least 50 \ac{GB} of disk space on each node, 
@@ -326,10 +326,6 @@ Furthermore the master node needs to be accessible via typical ports for the web
 Internally all nodes need to be connected via an private network with fixed \acs{IP}, where the mapping between hostnames and \acs{IP} is known for each host. Typically this can be done with \ac{DNS}, however it is out of scope for this project to setup an \ac{DNS} server. Filling the \texttt{\/etc\/hosts} file is sufficient.
 The internal network should not be restricted by any firewall.
 
-TODO
-
-
-
 Tom White recommends the following specification for a single node in a cluster, based on the needs of a full \ac{BDA} system in 2014:\\
 Each node should run on dedicated, commodity hardware.
 \begin{itemize}
@@ -340,12 +336,7 @@ Each node should run on dedicated, commodity hardware.
 \end{itemize}
 \autocite{white2015hadoop}
 
-Howerver the given OpenStack environment does not allow the allocation of these amounts of resources
-
-
-
-
-
+However the given OpenStack environment does not allow the allocation of these amounts of resources. Therefore the maximum sized \acs{VM} should be used, and each be given an equal share of the available storage.
 
 \section{Execution Plan}
 
