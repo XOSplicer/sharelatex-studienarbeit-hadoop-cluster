@@ -6,7 +6,53 @@ TODO
 
 \section{Big Data}
 
-TODO
+Chen et.~al characterize \ac{BIA} as \blockcquote[p.~1166]{chen2012business}{the techniques, technologies, systems, practices, methodologies, and applications that analyze critical business data to help an enterprise better understand its business and market and make timely business decisions}. Its goals and methodology closely resembles that of the emerging field of \ac{BDA} \autocite[][p.~1166]{chen2012business}. 
+According to Chen et.~al and their involvement in the \ac{BIA} space from the end of the last century to the 2010s three major evolutionary phases of the sector may be differentiated, with \ac{BDA} characterizing the evolution in the last stage \autocite[][p.~1168 \psqq]{chen2012business}. In order to provide an overview regarding the development of the context area, the different stages will be looked at and briefly characterized hereafter.
+
+In the first evolutionary phase, identified as \textbf{\ac{BIA} 1.0}, the desire for the storage and analysis of business data emerged. Companies started to utilize already existing \acp{RDBMS} to store mostly structured data collected from various legacy systems such as mainframes. This phase includes the usage of statistical methods to generate and validate new hypotheses regarding stored information, widely known as \ac{DM}. In this regard the main emphasis of \ac{BIA} departments was to design, deploy and maintain data warehouses with optimized \ac{ETL} cycles in order to regularly feed new data into the system using batch processing. The stored information may then be analyzed using \ac{OLAP} systems and are usually visualized with dashboards and graphs to allow a better insight for the end-users.
+Most of the currently deployed analytic platforms, including standard software by common software vendors such as Microsoft or Oracle, are based on the technologies developed in the \ac{BIA} 1.0 phase. Although these developments already started in the 1970s and accelerated in the 1980, there is still ongoing research and active feature implementation until today. \autocite[Cmp.][p.~1166 \psq]{chen2012business}
+
+As the Web 2.0 became popular in the early 2000s, an unknown variety of data sources emerged as well. The goal of the \textbf{\ac{BIA} 2.0} ignited by these events is to harvest the new opportunities for analytical processing created by this additional data. The collection of statistics on an individual customer basis allowed to generate a better understanding of customer's needs and thus offer tailored goods and services to a company's clients.
+Moreover, the invention of social media platforms led to a massive influx of publicly available user-generated content. The analysis of such unstructured data posed the main challenge to traditional applications, focused on structured data with well-defined schemes. Although some techniques and opportunities addressed by \ac{BIA} 2.0 have been incorporated into commercial offerings, there still exists a large room for future growth. Especially the techniques of text mining, social network and spatial-temporal analysis are still under active academic investigation. \autocite[Cmp.][p.~1167 \psq]{chen2012business}
+
+Finally, the most interesting phase in the context of \ac{BDA} is that of \textbf{\ac{BIA} 3.0}. Sparked by an exponentially increasing volume of data due to mobile and \ac{IoT} devices, that \enquote{traditional} systems are not capable of dealing with, this term represents a new research area currently in development. The enormous desire of enterprises to gain meaningful insight from the \blockcquote[p.~1168]{chen2012business}{massive, location-aware, person-centered and context-relevant data} in a so-called Web 3.0 environment is leading both IT vendors and academia to develop tailor-fit solutions. However, as of today,  no comprehensive standard software is commercially available yet, and neither are academic courses that educate the workforce of tomorrow. \autocite[Cmp.][p.~1168]{chen2012business}
+
+Rajasekar et. al. establishes a understanding on the definitions and tools of \ac{BDA}, enriched by offering a comparison with traditional \acp{DBMS} regarding size and type of the underlying input data \autocite[Cmp.][p.~80]{rajasekar2015survey}. Accordingly, \ac{BDA} is concerned with the analysis of the \enquote{massive amount of un-, semi- and structured data too large to be handled by traditional DBMS}. The property of being too large is therefore strongly dependent on the precise \ac{DBMS} in use \autocite[Cmp.][p.~80]{rajasekar2015survey}, and the threshold level might change in the future as technological advancements enable legacy software to process larger data quicker. However, additional processing power created by technological advancements is unlikely to keep up with the exponential growth of incoming data. \autocite[Cmp.][p.~80\psq]{rajasekar2015survey}
+
+\begin{table}[hbt]
+	\begin{tabular}{lll}
+	  Characteristic & Traditional \acp{RDBMS} & \acf{BDA} \\
+	  \hline
+	  Data Size & Gigabytes & Petabytes \\
+	  Access Type & Interactive and Batch & Batch only \\
+	  Update Frequency & Continuously Read and Write & Write once, Read continuously \\
+	  Schema Type & Static & Dynamic \\
+	  Data Integrity & High & Low \\
+	  Scaling Behavior & Nonlinear & Linear \\
+	\end{tabular}
+	\caption{Comparison of typical \acl{RDBMS} and \acl{BDA} properties. Reprinted with adaptions from \cite[p.~80]{rajasekar2015survey}}
+	\label{fig-dbms-vs-bda}
+\end{table}
+
+
+In order to compare the most important properties of traditional \acp{RDBMS} with those of
+\ac{BDA} methods, i.e. \emph{MapReduce}, the authors propose a table similar to
+\autoref{fig-dbms-vs-bda}. The table highlights the flexibility that is connected with \ac{BDA},
+achieved by breaking up the structure of traditional system and limiting the interactive
+possibilities for the prospective end users, which are traded against a much higher maximum
+throughput. \autocite[Cmp.][p.~80]{rajasekar2015survey}
+Furthermore, it is industrially accepted that the differences between the two data analysis
+paradigms can be grouped into five dimensions, the so-called \emph{5V's}, as displayed in
+\autoref{fig-5vs} \autocite[Cmp.][p.~80]{rajasekar2015survey},\autocite[Cmp.][p.~3\psq]{bhosale2014review}.
+
+\begin{figure}[hbt]
+  {\centering\includegraphics[width=0.75\textwidth]{{resources/big-data-parameters}.png}\par}
+  \caption{The \emph{5V's} of \acl{BDA}. Reprinted from \autocite[][p.~81]{rajasekar2015survey}}
+  \label{fig-5vs}
+\end{figure}
+
+As soon as data increases complexity in at least some of these dimensions, it qualifies for special treatment through \ac{BDA} systems. Although this is a common use case, as outlined in the next section, only few software solutions are available in the open market to combat these challenges. \autocite[Cmp.][p.~1182 \psqq]{chen2012business},\autocite[Cmp.][p.~80]{rajasekar2015survey}
+
 
 \section{Development of Hadoop}
 
