@@ -20,8 +20,8 @@ Finally, the most interesting phase in the context of \ac{BDA} is that of \textb
 Rajasekar et. al. establishes a understanding on the definitions and tools of \ac{BDA}, enriched by offering a comparison with traditional \acp{DBMS} regarding size and type of the underlying input data \autocite[Cmp.][p.~80]{rajasekar2015survey}. Accordingly, \ac{BDA} is concerned with the analysis of the \enquote{massive amount of un-, semi- and structured data too large to be handled by traditional DBMS}. The property of being too large is therefore strongly dependent on the precise \ac{DBMS} in use \autocite[Cmp.][p.~80]{rajasekar2015survey}, and the threshold level might change in the future as technological advancements enable legacy software to process larger data quicker. However, additional processing power created by technological advancements is unlikely to keep up with the exponential growth of incoming data. \autocite[Cmp.][p.~80\psq]{rajasekar2015survey}
 
 \begin{table}[hbt]
-	\begin{tabular}{lll}
-	  Characteristic & Traditional \acp{RDBMS} & \acf{BDA} \\
+	\begin{tabular}{l|ll}
+	  \textbf{Characteristic} & \textbf{Traditional \acp{RDBMS}} & \textbf{\acf{BDA}} \\[0.5em]
 	  \hline
 	  Data Size & Gigabytes & Petabytes \\
 	  Access Type & Interactive and Batch & Batch only \\
@@ -72,6 +72,13 @@ TODO
 
 \section{Legal Boundaries}
 
+% TODO intro to topic
+
+When a \ac{BDA} system is set up, it handles data in diverse forms from many sources. Depending on the kind of data there are different legal restriction to the conditions of collection, storage and porcessing thereof. 
+%TODO introduce GDPR and other.
+
+Table \ref{fig-legal-data-kinds}
+% TODO describe table
 
 \begin{table}[hbt]
 \resizebox{\textwidth}{!}{%
