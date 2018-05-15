@@ -72,20 +72,22 @@ TODO
 
 \section{Legal Boundaries}
 
-TODO welche arten von daten
-internal / open source / closed source
-personal / anonymized person related / non personal
-
 \begin{table}[hbt]
-	\begin{tabular}{l|lll}
-	  & Internal & Open Source &  Closed Source \\
+	\begin{tabular}{l|l|l|l}
+	  & \textbf{Internal} & \textbf{Open Source} &  \textbf{Closed Source} \\
 	  \hline
-	  Personal &  &  &  \\
-	  Anonymized  &  &  & \\
-	  Non-Personal &  &  & \\
+	  \textbf{Personal} &  &  &  \\
+	  & & & \\
+	  \hline
+	  \textbf{Anonymized}  & possibly restricted by law & possibly restricted by law & possibly restricted by law\\
+	  & & & \\
+	  \hline
+	  \textbf{Non-Personal} & unrestricted & unrestricted & restricted by license \\
+	  & e.g. \ac{DHBW} server monitoring & e.g. academic datasets & e.g. bought datasets\\
+	  \hline
 	\end{tabular}
-	\caption{Comparison of typical \acl{RDBMS} and \acl{BDA} properties. Reprinted with adaptions from \cite[p.~80]{rajasekar2015survey}}
-	\label{fig-dbms-vs-bda}
+	\caption{Kinds of data and their protective legislations}
+	\label{fig-legal-data-kinds}
 \end{table}
 
 
