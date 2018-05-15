@@ -72,22 +72,26 @@ TODO
 
 \section{Legal Boundaries}
 
+
 \begin{table}[hbt]
-	\begin{tabular}{l|l|l|l}
+\resizebox{\textwidth}{!}{%
+	\begin{tabular}{l|lll}
 	  & \textbf{Internal} & \textbf{Open Source} &  \textbf{Closed Source} \\
 	  \hline
-	  \textbf{Personal} &  &  &  \\
-	  & & & \\
+	  \textbf{Personal} & \acs{GDPR} \& \acs{HSchulDSV} & N/A & \acs{GDPR} \& license \\
+	  & e.g. student data & N/A & \\
 	  \hline
-	  \textbf{Anonymized} & possibly \acs{GDPR} \& HSchulDSV & possibly \acs{GDPR} & possibly \acs{GDPR} \& license\\
-	  & & & \\
+	  \textbf{Anonymized} & possibly \acs{GDPR} \& \acs{HSchulDSV} & possibly \acs{GDPR} & possibly \acs{GDPR} \& license\\
+	  & e.g. lecture statistics & e.g. social media graphs & e.g. \\
 	  \hline
 	  \textbf{Non-Personal} & unrestricted & unrestricted & restricted by license \\
-	  & e.g. \ac{DHBW} server monitoring & e.g. academic datasets & e.g. bought datasets\\
-	\end{tabular}
-	\caption{Kinds of data and their protective legislations}
+	  & e.g. \ac{DHBW} server monitoring & e.g. weather data & e.g. bought datasets\\
+	\end{tabular}%
+	}
+	\caption{Kinds of data and how their use might be restricted by legislation or licenses.}
 	\label{fig-legal-data-kinds}
 \end{table}
+
 
 
 TODO beide regelungen erklären
