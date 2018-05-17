@@ -51,7 +51,11 @@ paradigms can be grouped into five dimensions, the so-called \emph{5V's}, as dis
   \label{fig-5vs}
 \end{figure}
 
-As soon as data increases complexity in at least some of these dimensions, it qualifies for special treatment through \ac{BDA} systems. Although this is a common use case, as outlined in the next section, only few software solutions are available in the open market to combat these challenges. \autocite[Cmp.][p.~1182 \psqq]{chen2012business},\autocite[Cmp.][p.~80]{rajasekar2015survey}
+As soon as data increases complexity in at least some of these dimensions, 
+it qualifies for special treatment through \ac{BDA} systems. 
+Although this is a common use case, as outlined in the next section, 
+only few software solutions are available in the open market 
+to combat these challenges. \autocite[Cmp.][p.~1182 \psqq]{chen2012business},\autocite[Cmp.][p.~80]{rajasekar2015survey}
 
 
 \section{Hadoop}
@@ -72,7 +76,53 @@ TODO
 
 \subsection{Hadoop Ecosystem}
 
+One of the major advantages of Hadoop is its rich ecosystem. 
+Hadoop clusters can be extended to serve a very wide range of purposes 
+that are not covered by the traditional combination of \ac{HDFS}, MapReduce and \ac{YARN}.
+As Benjelloun et. al. establishes, many components in the Hadoop ecosystem 
+can be grouped into the following categories.\autocite{7105553}
 
+\paragraph{Data Integration}
+Data integration tools such as \emph{Apache Flume} or \emph{Apache Sqoop} manage the transfer 
+and import of large amounts of data from relational databases\autocite{apache2018sqoop}, 
+event streams and other data sources\autocite{apache2017flume} into a Hadoop cluster.
+
+\paragraph{Resource and Cluster Management}
+Management tools like \emph{Apache Ambari} and \emph{Apache ZooKeeper} simplify the deployment, 
+monitoring and general management of Hadoop clusters. 
+Together with tools like \emph{\ac{YARN}} for low level resource management, 
+and \emph{Apache Oozie} for workflow management, these tools partially define how Hadoop is used 
+and are important to keep a cluster efficient.
+
+\paragraph{Metadata Services}
+This smaller category contains tools like \emph{Apache HCatalog}, 
+that offer a common interface between other Hadoop data processing tools. 
+Since most tools have a specific format that is used to read and write data, 
+\emph{HCatalog} simplifies their integration by eliminating 
+the need for manual data conversion.\autocite{bmc2017hcatalog}
+
+\paragraph{Data Analytics}
+Data analytics tools like \emph{R} work well together with Hadoop to give data scientists 
+a familiar interface for analysis of the data aggregated in Hadoop. 
+Additionally, machine learning frameworks like \emph{Apache Mahout} can use Hadoop 
+to perform computationally expensive mathematical calculations 
+on a cluster to gain deeper insights into the gathered data. 
+
+\paragraph{Search and Indexing}
+Search and indexing tools simplify and speed up the process of querying data stored on the \ac{HDFS}. 
+Instead of using syntax similar to \ac{SQL} with response times of potentially many minutes, 
+these tools offer a real-time search in various data structures. 
+Commonly used in this context are \emph{Elasticsearch-Hadoop} or \emph{Sphinx} 
+for full-text search, and \emph{Facebook Unicorn} for graph search.
+
+\paragraph{Data Visualization}
+While data analytics tools can be used for detailed analysis, 
+their usage is preceeded by data visualization tools such as \emph{Centrifuge}, 
+that offer a high level overview over the available data. 
+These tools can be used to discover insightful connections and visualize sections of the data.
+
+The paper by \emph{Jonas Ballsfulland} focueses on the useage of the tools mentioned above,
+as well as other common applications like \emph{Apache Hive}, \emph{Apache Spark} and \emph{Apache Pig}.
 
 TODO
 
