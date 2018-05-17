@@ -121,12 +121,17 @@ their usage is preceeded by data visualization tools such as \emph{Centrifuge},
 that offer a high level overview over the available data. 
 These tools can be used to discover insightful connections and visualize sections of the data.
 
-The paper by \emph{Jonas Ballsfulland} focuses on the useage of the tools mentioned above,
+\paragraph{}
+The paper by \emph{Jonas Ballsfulland} focuses on the usage of the tools mentioned above,
 as well as other common applications like \emph{Apache Hive}, \emph{Apache Spark} and \emph{Apache Pig}.
 
-TODO
+\subsection{Non Map Reduce Tools}
 
-\subsection{Map reduce shortcomings}
+The growing number of Hadoop based frameworks and applications demonstrates, that using simple MapReduce based algorithms is not sufficient and flexible enough, given the amount and diversity of data gathered today. The most common issues faced by Hadoop, are caused by the limitations of the two stage MapReduce algorithm.\autocite[Cmp.]{6903263} 
+
+MapReduce was originally developed to batch process data and is therefore not the optimal solution to perform different kinds of workloads.\autocite{computers3040117}
+Therefore tools have been crated, that follow different approaches, while still utilizing \ac{HDFS} and \ac{YARN}.
+
 
 TODO
 
