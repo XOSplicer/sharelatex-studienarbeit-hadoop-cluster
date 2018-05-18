@@ -22,28 +22,28 @@ To deploy Hadoop on an cluster there are two general approaches. Either the Hado
 Since the manual installation process is error prone (as we will see later) and needs some know-how,
 it is  more easy for the user to utilize an management system for the cluster.
 
-The management system can provide, install, manage and monitor every software component that is needed for the Hadoop cluster.
-Usually it also provides an graphical user interface
+The management system can provide, install, manage and monitor software components on the cluster nodes.
+Not only \ac{HDFS} and \ac{YARN} can be deployed,
+but also additional tools can be integrated into the cluster this way.
+Usually the management system also provides an graphical user interface to perform those tasks.
 
-TODO
+To provide the components the management system downloads them from a given binary distribution repository. The installation can be performed via remote access from the management server to the nodes. Monitoring gives valuable information to the cluster user, such as capacity an utilization of computational power and storage.
 
 Some vendors choose to bundle a management system 
-together with an specific version of Hadoop and additional Tools. They offer this \emph{}
-
-
-
-TODO explain what an distribution / 
+together with an specific version of Hadoop and additional Tools. They offer this bundle mostly as binary packages which are considered \emph{distributions} of Hadoop.
+For system maintainers this holds the benefit that no compilation from source is necessary and the versions of the tools are adjusted to work with each other. 
+Notable distributions are \emph{\acf{CDH}} and \emph{\acf{HDP}}. 
 
 There are four ways to install Hadoop that are considered here:
 
 \begin{itemize}
     \item A \emph{manual installation} of Hadoop 
         and every additional piece of software from the ecosystem
-    \item \emph{\ac{CDH}} --  An open source software distribution by Cloudera including Hadoop
+    \item \emph{\acf{CDH}} --  An open source software distribution by Cloudera including Hadoop
         and additional software from the ecosystem
     \item \emph{Ambari} -- An open source project by Apache that provides
         the capability to manage Hadoop Clusters and the software components running on it.
-    \item \emph{\ac{HDP}} -- Hortonswork's ready-to-install distribution of Hadoop 
+    \item \emph{\acf{HDP}} -- Hortonswork's ready-to-install distribution of Hadoop 
         with Ambari and additional software
 \end{itemize}
 
@@ -76,7 +76,7 @@ White gives step by step instruction on the process.
 Since no step in this step is predetermined or automated, this method does not really intall an "Hadoop distribution" on the cluster, but rather only \ac{YARN}, \ac{HDFS} and MapReduce.
 It does not provide an \emph{management system} for Hadoop.
 
-\subsubsection{System Setup}
+\paragraph{System Setup}
 For the installation two \acs{VM} are used, utilizing two virtual \ac{CPU} cores and eight \ac{GB} \ac{RAM} and a 20 \ac{GB} storage drive. 
 Ubuntu Server (\url{https://www.ubuntu.com/server}) 16.04.3 \ac{LTS} is used as the operating system. 
 The machines are connected to the public Internet and to each other using two network interfaces each.
@@ -150,7 +150,7 @@ which in turn start the namenode and resoucemanager on the master
 as well as the datanoode and nodemanager on both the master and the slave.
 Now the cluster can be used to store data in \ac{HDFS} and run MapReduce jobs.
 
-\subsubsection{Tests}
+\paragraph{Tests}
 \autocite[][]{white2015hadoop} provides an online reference (http://hadoopbook.com/)
 to test data and MapReduce programs 
 that can be used for demonstration purposes of the Hadoop cluster.
@@ -160,7 +160,7 @@ Storing this data in \ac{HDFS} and running the MapReduce jobs lead to the discov
 Further test included the execution \emph{teragen} and \emph{terasort}, also provided by White, which generate a variable amount of numbers and sorts them, in this case 5 \ac{GB} of data. 
 The generation  was successful, however the sorting failed due to an repeated connection timeout, which could not be resolved.
 
-\subsubsection{Errors and Lessons Learned}
+\paragraph{Errors and Lessons Learned}
 The whole described setup procedure is performed manually 
 and therefore rather error prone.
 Special attention to the usage of \acs{FQDN} must be given, 
@@ -173,7 +173,7 @@ so that the nodes can be reached internally and externally.
 Errors in the configuration lead to nodes that are not recognized by Hadoop or jobs that do not succeed.
 It is rather frustrating to find and fix those issues for the person installing the cluster.
 
-\subsubsection{Conclusions}
+\paragraph{Conclusions}
 
 Due to the difficulties that the method of manually installing Hadoop on each host holds it is favorable to use a more streamlined 
 and automated installation method as described in the next two sections.
@@ -184,7 +184,7 @@ will lead to even more complex installation and configuration processes which ag
 \subsection{\acl{HDP} with Ambari deployed with Ansible}
 TODO describe HDP, Ambari, Ansible
 
-\subsubsection{System Setup}
+\paragraph{System Setup}
 
 As in the sections before the OpenStack BW-Cloud is used for a test deployment.
 Three \acs{VM} are started, each with 20 \ac{GB} disk space, Ubuntu 16.04 \ac{LTS}, an public \ac{IP} address. 
@@ -248,7 +248,7 @@ to use the correct Ambari server host.
 Otherwise they will not be detected in the manual registration.
 
 
-\subsubsection{Conclusions}
+\paragraph{Conclusions}
 Ansible provides an reproducible way of system configuration 
 and can therefore be used to install Ambari, 
 which otherwise would require error-prone manual configuration on each host.
@@ -265,7 +265,7 @@ It does not provide a full cluster installation, but only a test environment to 
 TODO explain what Cloudera distribution does
 
 
-\subsubsection{System Setup}
+\paragraph{System Setup}
 
 As in the previous section, BW-Cloud will be used for installing a test setup.
 Since the Docker image only runs on a single host, this host should be as powerfull as possible.
@@ -282,13 +282,13 @@ After fetching the Docker  image, it can be started in daemon mode with the nece
 All services that are needed inside the container are started automatically.
 
 
-\subsubsection{Tests}
+\paragraph{Tests}
 The Docker image includes an web based tutorial, 
 that can be accessed on port 8080 (remapped before) on the host.
 The tutorial highlights the features of \ac{CDH} which differ from other Hadoop distributions.
 The tutorial describes a story from the perspective of an data analyst and shows how the features provide value for typical use cases.
 
-\subsubsection{Conclusions}
+\paragraph{Conclusions}
 The tutorial provides a zero-configuration hands-on experience which focuses on the features specific to Cloudera's Hadoop distribution.
 The installation inside the docker container seems stable.
 However it is not possible to assume that this implies an error free installation on an cluster, 
