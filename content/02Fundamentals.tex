@@ -122,8 +122,8 @@ These tools can be used to discover insightful connections and visualize section
 Since MapReduce is not the optimal choice for many kinds of workloads (cmp. \ref{sec:fund:mapred_shortcomings}), frameworks like \emph{Apache Pig} and \emph{Apache Spark} that offer a richer set of features can be used for more complicated data processing and transformation workloads. Instead of using general purpose tools, more specialized processing engines such as \emph{Apache GraphX} or \emph{Apache Giraph} can significantly improve the processing speed.
 
 \paragraph{}
-he section above mentions the most common and interesting categories of BigData tools compatible with Hadoop. It is important to note that many tools do not fit perfectly into these categories and can often be used for multiple purposes.
-The paper by \emph{Jonas Ballsfulland} focuses on the usage of these tools.
+The section above mentions the most common and interesting categories of BigData tools compatible with Hadoop. It is important to note that many tools do not fit perfectly into these categories and can often be used for multiple purposes.
+The paper by \emph{Jonas Balsfulland} focuses on the usage of these tools.
 
 \subsection{Map Reduce Shortcomings}
 \label{sec:fund:mapred_shortcomings}
@@ -134,11 +134,31 @@ MapReduce was originally developed to batch process data and is
 therefore not the optimal solution to perform different kinds of
 workloads that cannot be easily expressed in this
 way.\autocite{computers3040117}
-To apprea tools have been crated, that follow different approaches, while still utilizing \ac{HDFS} and \ac{YARN}.
+To approach this problem tools have been crated that follow different methods, while still utilizing \ac{HDFS} and \ac{YARN}.
 
 
-TODO
+\paragraph{Real-time Processing}
+Real-time Processing aims to reduce the response time of MapReduce jobs to allow them to be used for real-time queries and analysis. As \autocite{computers3040117} stated, one of the reasons for slow MapReduce response times is the \ac{HDFS}, which is \enquote{designed for high throughput data I/O rather than high performance I/O}.
+Therefore, while MapReduce may be a powerful tool to perform batch processing, its overhead is too high to be used in any kind of real-time setting.\autocite{computers3040117}
 
+\paragraph{Stream Processing}
+While real-time processing is something MapReduce can, albeit poorly, still do, its set of features does not allow for native stream processing. MapReduce is build to run on batches of data with a very fixed cycle of:
+\begin{enumerate}
+    \item Gathering all the input data
+    \item Running MapReduce to compute the output
+    \item Returning all the output data
+\end{enumerate}
+This limits Hadoop to use cases where all the data is known before.
+
+\subsection{Graph Processing}
+Graph processing is becoming increasingly relevant for
+applications in industry and academia. 
+As a general purpose computation framework Hadoop 
+can be used together with MapReduce to run calculations 
+on large graph datasets, 
+but it generally is not optimized for such workloads.\autocite[Cmp.]{Capota:2015:GBD:2764947.2764954} 
+Tools optimized for graph-like data structures can utilize algorithms that are especially optimized for graphs, instead of the general purpose MapReduce.
+Examples for such tools are \emph{Apache GraphX} and \emph{Apache Giraph}.
 
 \section{Legal Boundaries}
 
