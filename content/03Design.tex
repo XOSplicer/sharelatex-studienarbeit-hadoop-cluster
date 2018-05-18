@@ -6,9 +6,9 @@
 
 TODO
 
-OpenStack in Mannheim RZ
-what is openstack, how does it do clustering, what are possibilities, limitations of compute, store and network
-(openstack general and dhbw)
+OpenStack in Mannheim data center
+what is OpenStack, how does it do clustering, what are possibilities, limitations of compute, store and network
+(OpenStack general and dhbw)
 limited resources!!!!
 
 \section{Analysis of Requirements}
@@ -21,15 +21,16 @@ Students
 
 Use cases:
 e.g. TODO
-Philipps paper focues on those use cases.
+Philipps paper focuses on those use cases.
 Main Focus: Usability for lecture use
-Easily and reproducable to deploy
+Easily and reproducible to deploy which implies automation
 
-requirements are also covered by the WI paper with extensive results and pomparisons
- > runs on mannhei openstack
+requirements are also covered by the WI paper with
+extensive results and comparisons \autocite{wi2018managementsystems}
+ > runs on Mannheim OpenStack
  > low or no costs
  > fast deployment
- > student use either for learning the deployment or learning usage of hadoop for analysis
+ > student use either for learning the deployment or learning usage of Hadoop for analysis
  > support for recent additional tools
  > scaling on cluster
 
@@ -63,13 +64,17 @@ There are four ways to install Hadoop that are considered here:
 
 \begin{itemize}
     \item A \emph{manual installation} of Hadoop 
-        and every additional piece of software from the ecosystem
+        and every additional piece of software from the ecosystem 
     \item \emph{\acf{CDH}} --  An open source software distribution by Cloudera including Hadoop
         and additional software from the ecosystem
+        (\url{https://www.cloudera.com/products/open-source/apache-hadoop/key-cdh-components.html})
     \item \emph{Ambari} -- An open source project by Apache that provides
         the capability to manage Hadoop Clusters and the software components running on it.
+        (\url{https://ambari.apache.org/})
     \item \emph{\acf{HDP}} -- Hortonswork's ready-to-install distribution of Hadoop 
         with Ambari and additional software
+        \urlinline{https://de.hortonworks.com/products/data-platforms/hdp/}
+        
 \end{itemize}
 
 TODO References
