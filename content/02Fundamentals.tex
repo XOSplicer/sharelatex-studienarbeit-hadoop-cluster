@@ -107,13 +107,10 @@ a familiar interface for analysis of the data aggregated in Hadoop.
 Additionally, machine learning frameworks like \emph{Apache Mahout} can use Hadoop 
 to perform computationally expensive mathematical calculations 
 on a cluster to gain deeper insights into the gathered data. 
+For more simple operations, \emph{Apache Hive} can be used.
 
-\paragraph{Search and Indexing}
-Search and indexing tools simplify and speed up the process of querying data stored on the \ac{HDFS}. 
-Instead of using syntax similar to \ac{SQL} with response times of potentially many minutes, 
-these tools offer a real-time search in various data structures. 
-Commonly used in this context are \emph{Elasticsearch-Hadoop} or \emph{Sphinx} 
-for full-text search, and \emph{Facebook Unicorn} for graph search.
+\paragraph{Search and Querying}
+Search and indexing tools simplify and speed up the process of querying data stored on the \ac{HDFS}. Different tools are often optimized for a specific set of data structures and use cases. Commonly used in this context are \emph{Elasticsearch-Hadoop} or \emph{Sphinx} for full-text search, \emph{Facebook Unicorn} for graph search and \emph{Apache Hive} for \ac{SQL} like queries.
 
 \paragraph{Data Visualization}
 While data analytics tools can be used for detailed analysis, 
@@ -121,16 +118,23 @@ their usage is preceeded by data visualization tools such as \emph{Centrifuge},
 that offer a high level overview over the available data. 
 These tools can be used to discover insightful connections and visualize sections of the data.
 
-\paragraph{}
-The paper by \emph{Jonas Ballsfulland} focuses on the usage of the tools mentioned above,
-as well as other common applications like \emph{Apache Hive}, \emph{Apache Spark} and \emph{Apache Pig}.
+\paragraph{Data Processing}
+Since MapReduce is not the optimal choice for many kinds of workloads (cmp. \ref{sec:fund:mapred_shortcomings}), frameworks like \emph{Apache Pig} and \emph{Apache Spark} that offer a richer set of features can be used for more complicated data processing and transformation workloads. Instead of using general purpose tools, more specialized processing engines such as \emph{Apache GraphX} or \emph{Apache Giraph} can significantly improve the processing speed.
 
-\subsection{Data Processing Tools}
+\paragraph{}
+he section above mentions the most common and interesting categories of BigData tools compatible with Hadoop. It is important to note that many tools do not fit perfectly into these categories and can often be used for multiple purposes.
+The paper by \emph{Jonas Ballsfulland} focuses on the usage of these tools.
+
+\subsection{Map Reduce Shortcomings}
+\label{sec:fund:mapred_shortcomings}
 
 The growing number of Hadoop based frameworks and applications demonstrates, that using simple MapReduce based algorithms is not sufficient and flexible enough, given the amount and diversity of data gathered today. The most common issues faced by Hadoop, are caused by the limitations of the two stage MapReduce algorithm.\autocite[Cmp.]{6903263} 
 
-MapReduce was originally developed to batch process data and is therefore not the optimal solution to perform different kinds of workloads.\autocite{computers3040117}
-Therefore tools have been crated, that follow different approaches, while still utilizing \ac{HDFS} and \ac{YARN}.
+MapReduce was originally developed to batch process data and is
+therefore not the optimal solution to perform different kinds of
+workloads that cannot be easily expressed in this
+way.\autocite{computers3040117}
+To apprea tools have been crated, that follow different approaches, while still utilizing \ac{HDFS} and \ac{YARN}.
 
 
 TODO
