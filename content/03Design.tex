@@ -404,7 +404,7 @@ In section \vref{sec:decision} the decision to use Apache Ambari in combination 
 This scenario leads to the following steps regarding the deployment of the cluster into the OpenStack environment:
 
 \begin{enumerate}
-    \item \textbf{\ac{VM} Creation in OpenStack} TODO
+    \item \textbf{\ac{VM} Creation in OpenStack} TODO Fist create inner network and security groups, then appropriate number of VMs according to \label{fig:architecture}, at least 3, names accordingly. ATTENTION: Network connection: due to a bug in openstack first only outer network connection then attach inner connection and reboot. note down the internal and external ips displayed by openstack, note down the eth port that is newly created for internal connection. (maybe use enumeration here)
     \item \textbf{System Set-Up with Ansible} TODO
     \item \textbf{Hadoop Set-Up with Ambari} TODO
     \item \textbf{Test Usage} TODO
