@@ -5,28 +5,30 @@
 \section{Analysis of Cluster Environment}
 
 The Hadoop cluster will be installed on the cluster computer at the \ac{DHBW} Mannheim.
-This cluster utilizes OpenStack \urlinline{https://www.openstack.org/} to provide resources to its users. 
+This cluster utilizes \emph{OpenStack} \urlinline{https://www.openstack.org/} to provide resources to its users. 
+OpenStack is an open source project to manage cloud computing architectures.
 It enables the compositions of compute elements (virtual machines), network elements (sub-nets and routers), 
 and storage elements (virtual disks) to form a virtual computing environment.
+
 
 The OpenStack environment is shared between multiple user groups, 
 which each is given a certain amount of resources. 
 For this project the student group is given a limited amount of resources.
-TODO insert how many of each unit(20 cpu, 50 gb ram, 1TB storage)
+TODO insert how many of each unit(20 vcpu, 50 gb ram, 1TB storage)
 This resources can be used to allocate instances of \acp{VM} in pre-defined units and assign virtual disks to them.
 The \acp{VM} can be connected to the network of the \ac{DHBW} and can be interconnected using internal, virtual networks.
 Firewall restrictions can be set through group policies, which can be assigned to the \acp{VM}. 
+When creating a new \ac{VM} most of these parameters must be
 
 
 
 
 
 TODO
-OpenStack in Mannheim data center
-what is OpenStack, how does it do clustering, what are possibilities, limitations of compute, store and network
-(OpenStack general and dhbw)
-limited resources!!!!
+what is OpenStack, how does it do clustering, what are possibilities, 
 multiple OSs to choose from
+can be accessed from dhbw network in the Cloud Computing Competence Center (C4) under controller.c4.dhbw-mannheim.de ???
+restriction: not easily accessibly from the internet
 
 \section{Analysis of Requirements}
 TODO
