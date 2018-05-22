@@ -407,8 +407,8 @@ This scenario leads to the following steps regarding the deployment of the clust
     \item \textbf{\ac{VM} Creation in OpenStack} TODO Fist create inner network and security groups, then appropriate number of VMs according to \label{fig:architecture}, at least 3, names accordingly. ATTENTION: Network connection: due to a bug in openstack first only outer network connection then attach inner connection and reboot. note down the internal and external ips displayed by openstack, note down the eth port that is newly created for internal connection. (maybe use enumeration here and in other items)
     \item \textbf{System Set-Up with Ansible} ("must still be implemened")TODO  see \urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible},
     therefore install dependency roles, configure ssh\_config and ansible.cfg (UPDATE README) use the ips and hostnames from the before. (in implementation explain how the ansible part works). finally role out the configuration by running ansible command
-    \item \textbf{Hadoop Set-Up with Ambari} TODO
-    \item \textbf{Test Usage} TODO
+    \item \textbf{Hadoop Set-Up with Ambari} TODO with gui installer sinply follow instructions, select minimal amout of components possible or the ones recommended by jonas. when promted to select nodes use manual registaration: reason dont upload ssh private key for root access (maybe in chpt 4). also configure each service close to default with a common password (how to document the password?)
+    \item \textbf{Test Usage} TODO test HDFS in general by storing some data. test map reduce by running teragen / terasort from Hadoop Book (Tom White)
 \end{enumerate}
 
 TODO
