@@ -432,12 +432,12 @@ This scenario leads to the following steps regarding the deployment of the clust
 \begin{enumerate}
     \item \textbf{\ac{VM} Creation in OpenStack}
     \begin{enumerate}
-        \item Create internal network and security groups.
-        \item Create an appropriate number of maximum resource sized \acp{VM} that are connected to both the internal and external network. 
+        \item Create internal network and security groups which allow access for port 22 (\ac{SSH}) and 8080 for web access to Ambari.
+        \item Create an appropriate number of maximum sized \acp{VM} that are connected to both the internal and external network. Name them according to the names in \ref{fig:architecture}. Assign the security group to them.
         \item 
         
     \end{enumerate}
-    TODO Fist create inner network and security groups, then appropriate number of VMs according to \label{fig:architecture}, at least 3, names accordingly. ATTENTION: Network connection: due to a bug in openstack first only outer network connection then attach inner connection and reboot. note down the internal and external ips displayed by openstack, note down the eth port that is newly created for internal connection. (maybe use enumeration here and in other items)
+    TODO Fist create inner network and security groups, then appropriate number of VMs according to \ref{fig:architecture}, at least 3, names accordingly. ATTENTION: Network connection: due to a bug in openstack first only outer network connection then attach inner connection and reboot. note down the internal and external ips displayed by openstack, note down the eth port that is newly created for internal connection. (maybe use enumeration here and in other items)
     \item \textbf{System Set-Up with Ansible} ("must still be implemened")TODO  see \urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible},
     therefore install dependency roles, configure ssh\_config and ansible.cfg (UPDATE README) use the ips and hostnames from the before. (in implementation explain how the ansible part works). finally role out the configuration by running ansible command
     \item \textbf{Hadoop Set-Up with Ambari} TODO with gui installer sinply follow instructions, select minimal amout of components possible or the ones recommended by jonas. when promted to select nodes use manual registaration: reason dont upload ssh private key for root access (maybe in chpt 4). also configure each service close to default with a common password (how to document the password?)
