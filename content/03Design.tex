@@ -443,7 +443,9 @@ This scenario leads to the following steps regarding the deployment of the clust
         \item Note down the assigned internal and external \ac{IP} addresses dispayed by OpenStack.
         \item Create virtual disks and assign them to the nodes. They will be used to store \ac{HDFS} data on them.
     \end{enumerate}
-    TODO ATTENTION: Network connection: due to a bug in openstack first only outer network connection then attach inner connection and reboot. , note down the eth port that is newly created for internal connection. (maybe use enumeration here and in other items)
+    TODO 
+    ATTENTION: Network connection: due to a bug in openstack first only outer network connection then attach inner connection and reboot. 
+    , note down the eth port that is newly created for internal connection.
     
     \item \textbf{System Set-Up with Ansible} ("must still be implemened")TODO  see \urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible},
     therefore install dependency roles, configure ssh\_config and ansible.cfg (UPDATE README) use the ips and hostnames from the before. (in implementation explain how the ansible part works). finally role out the configuration by running ansible command
