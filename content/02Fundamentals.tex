@@ -60,20 +60,15 @@ to combat these challenges. \autocite[][p.~1182 \psqq]{chen2012business},\autoci
 
 \section{Hadoop}
 
+The \emph{Apache Hadoop Project} is a collection of tools that serves as a widespread platform for \ac{BDA} use cases nowadays. Contrary to common belief, Hadoop itself aims not to replace traditional \ac{OLTP} and \ac{OLAP} systems but rather complement them by offering a common platform for \ac{BDA} use cases that rely on such a massive data scale such old systems are not capable of processing anymore. Therefore, \autoref{hadoop-components} will provide a brief overview of the foundational components among a short outline of the history of Hadoop. Moreover, an overview over the Hadoop ecosystem and its most prominent applications is given in \autoref{hadoop-ecosystem}.
+Subsequently, these insights will be set into context in \autoref{hadoop-assessment}, creating a value assessment of Hadoop in the scope of \ac{BDA} and \ac{BIA}.
+
 TODO copy paste from jonas and philipp
 TODO if want more info: read Tom White Hadoop book
 
 \subsection{Core Components}
 
 TODO
-
-\subsection{Value Assessment}
-
-TODO
-
-\subsection{Hadoop at the DHBW}
-
-TODO welche beziehung hat die DH aktuell zu Hadoop, gibt es bereits verwendung? themen überschneidung in Vorlesungen?
 
 \subsection{Hadoop Ecosystem}
 
@@ -161,6 +156,30 @@ on large graph datasets,
 but it generally is not optimized for such workloads.\autocite[][]{Capota:2015:GBD:2764947.2764954} 
 Tools optimized for graph-like data structures can utilize algorithms that are especially optimized for graphs, instead of the general purpose MapReduce.
 Examples for such tools are \emph{Apache GraphX} and \emph{Apache Giraph}.
+
+\subsection{Value Assessment}
+
+TODO
+
+\begin{table}[hbt]
+    \centering
+	\begin{tabular}{p{7cm} p{7cm}}
+	  Advantages & Disadvantages \\
+	  \hline
+	  Supports thousands of nodes for data storage and processing. Scales almost linearly with the cluster size & No support for storage- or network-level encryption might raise privacy and security concerns \\
+	  Resilient to the failure of nodes, both in software and hardware (excluding the name node) & The name node serves as a single point of failure, however a secondary name node can be configured to mitigate the data loss\\
+	  High block size enables the efficient, distibuted storage of vast amounts of data & Only suitable for real Big Data applications, not for general purpose data storage (e.g. small files) \\
+	  Huge ecosystem of applications based on \ac{HDFS} and \ac{YARN}, covering nearly all common use cases & Parts of the ecosystem are non-mature and still under development
+	\end{tabular}
+	\caption{Advantages and Disadvantages of the Apache Hadoop Platform. Partly adapted from \autocite[][p.~82]{rajasekar2015survey}}
+	\label{fig-hadoop-assessment}
+\end{table}
+
+TODO
+
+\subsection{Hadoop at the DHBW}
+
+TODO welche beziehung hat die DH aktuell zu Hadoop, gibt es bereits verwendung? themen überschneidung in Vorlesungen?
 
 \section{Legal Boundaries}
 
