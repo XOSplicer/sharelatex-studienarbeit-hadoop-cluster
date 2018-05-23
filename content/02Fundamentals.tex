@@ -68,7 +68,28 @@ TODO if want more info: read Tom White Hadoop book
 
 \subsection{Core Components}
 
-TODO
+Hadoop is mainly made up of two flexible and scalable core layers: \textbf{storage} and \textbf{processing}. This subsection iterates over these layers by showing the inspiration, supporting principles and derived advantages of their application.
+
+\subsubsection{File System} The storage layer is formed by the so-called \acf{HDFS}, which serves as a distributed file system that may run on clusters of arbitrary sizes and is heavily inspired by Google's \ac{BFS} paper \autocite{ghemawat2003gfs}.
+
+The first advancement of \ac{BFS} in comparison to earlier distributed file systems is to expect failure of cluster nodes to be the norm rather than an exception: This becomes especially important when running the cluster on top of so-called \enquote{commodity hardware} \autocite[p.~1]{ghemawat2003gfs}, that means comparatively cheap consumer hardware rather than expensive enterprise server equipment. This drives down the costs of the cluster, as no premiums for high-availability features and expensive support contracts have to be paid, however to the expense of reduced availability of single nodes \autocite[p.~1]{ghemawat2003gfs}. As the file system is expecting such failure, data blocks are replicated across multiple nodes, leading to an availability guarantee approaching 100 per cent as the cluster grows \autocite[p.~2]{ghemawat2003gfs}. Secondly, rather than storing hundreds of thousands of small files as with traditional file systems, \ac{BFS} is designed to work with far fewer, yet larger files, often with sizes ranging from gigabytes to terabytes \autocite[p.~2]{ghemawat2003gfs}. Furthermore, rather than using random access, the file pointer is usually moved only linearly, resulting in an append-only mode for writing data as well as batch processing for reading data \autocite[p.~2]{ghemawat2003gfs}. Finally, the file system is custom-tailored for the applications running on top of it, rather than serving as general purpose implementation \autocite[p.~2]{ghemawat2003gfs}.
+
+Adapting these principles \ac{HDFS} was created as a seamlessly integrated, integral part of the Hadoop system. Building upon this storage layer is the processing layer, which serves as the interaction point for developers, data scientists and other users of the system. The processing layer of Hadoop did undergo some major changes before the release of its second version \autocite[p.~5]{vavilapalli2013apache}; for the sake of completeness and contextual understanding both versions are subsequently outlined.
+
+\subsubsection{Processing Framework}
+
+
+The first version of Hadoop was heavily influenced by a second important Google paper, \textcite[p.~82]{rajasekar2015survey}, introducing the batch processing algorithm MapReduce in 2004 \autocite{dean2004mapreduce}. Each MapReduce job $J: (M, R)$ with the map function $M: (k_1, v_1) \rightarrow list(k_2, v_2)$ and the reduce funcion $R: (k_2, list(v_2)) \rightarrow list(v_2)$ \autocite[p.~6]{dean2004mapreduce}. The job runner now calls $M$ for each data chunk in parallel on possibly many different nodes, resulting in the intermediate result. In a second step, upon completion of all map functions, the $v_2$ values are joined as a list by the value of their respective $k_2$, and subsequently passed to $R$, again running parallelized on multiple cluster nodes \autocite[p.~6]{dean2004mapreduce}. As outlined in the paper, a variety of data processing operations can be expressed very briefly and without concerning the programmer with the difficulties of writing a distributed, well-scaling algorithm \autocite[p.~6]{dean2004mapreduce}. The simplicity of the MapReduce pattern thus lead to a widespread adoption for various use cases across many industries as their primary batch processing framework, running on-top of Hadoop \autocite[p.~82]{rajasekar2015survey}.
+
+Although the MapReduce approach is largely suitable for its intended use case of web crawling, among others, it is however not generally the best programming model to solve arbitrary data analysis and processing tasks.
+As becomes obvious by the function definitions before, MapReduce jobs are limited to the analysis of isolated \enquote{data snippets}; finding or even investigating the relations and interdependence of larger data agglomeration quickly becomes a sophisticated, cumbersome task.
+
+Due to the tight coupling of Hadoop 1's storage and processing layer, the design of Hadoop was inherently limiting its merit and the extent of applicable use cases. Thus, \ac{YARN} was developed as an abstraction layer between the tradiional \ac{HDFS} storage layer and applications performing the data processing itself, creating a more flexible, powerful and even performant platform rendering the unintended use of MapReduce obsolete and limiting the scope of the MapReduce programming model to merely be one of the possible processing frameworks running on top of \ac{YARN} \autocite[p.~6]{vavilapalli2013apache}.
+
+In 2013, \ac{YARN} was incorporated into the second major release of Hadoop \autocite{hadoopreleasenotes}, completing the transformation of Hadoop from being a limited, MapReduce-focused data processing platform to become a single, extensively applicable \ac{BDA} platform. Due to this change, creating processing frameworks as well as applications on top of Hadoop became easier to implement and maintain; furthermore, it stopped the abuse of MapReduce in earlier implementations, where massive data duplication and transient storage was required to mitigate the shortcomings of MapReduce for the holistic inspection and analysis of stored data.
+
+If the reader is interested in a deeper and more complete explanation about the development and architecture of Hadoop, Tom White gives a broad overview in his Book \autocite[][]{white2015hadoop}.
+
 
 \subsection{Hadoop Ecosystem}
 
@@ -118,7 +139,7 @@ These tools can be used to discover insightful connections and visualize section
 Since MapReduce is not the optimal choice for many kinds of workloads (cmp. \ref{sec:fund:mapred_shortcomings}), frameworks like \emph{Apache Pig} and \emph{Apache Spark} that offer a richer set of features can be used for more complicated data processing and transformation workloads. Instead of using general purpose tools, more specialized processing engines such as \emph{Apache GraphX} or \emph{Apache Giraph} can significantly improve the processing speed.
 
 \paragraph{}
-The section above mentions the most common and interesting categories of BigData tools compatible with Hadoop. It is important to note that many tools do not fit perfectly into these categories and can often be used for multiple purposes.
+The section above mentions the most common and interesting categories of Big Data tools compatible with Hadoop. It is important to note that many tools do not fit perfectly into these categories and can often be used for multiple purposes.
 The paper by \emph{Jonas Balsfulland} focuses on the usage of these tools.
 
 \subsection{Map Reduce Shortcomings}
@@ -132,6 +153,7 @@ workloads that cannot be easily expressed in this
 way.\autocite{computers3040117}
 To approach this problem tools have been crated that follow different methods, while still utilizing \ac{HDFS} and \ac{YARN}.
 
+In order to find an optimal solution for approaching different kinds of problems, various processing tasks usually found to be processed on Hadoop clusters may be grouped in the following ways \autocite{computers3040117}:
 
 \paragraph{Real-time Processing}
 Real-time Processing aims to reduce the response time of MapReduce jobs to allow them to be used for real-time queries and analysis. As \autocite{computers3040117} stated, one of the reasons for slow MapReduce response times is the \ac{HDFS}, which is \enquote{designed for high throughput data I/O rather than high performance I/O}.
