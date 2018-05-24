@@ -450,11 +450,11 @@ This scenario leads to the following steps regarding the deployment of the clust
     
     \item \textbf{System Set-Up with Ansible} 
     In section \vref{sec:design:hdp_ambari_ansible} it has been shown that Ansible can be used to deploy \ac{HDP}. The Ansible playbook developed for this purpose can be adapted and in the next steps.
-    TODO can be reused
     \begin{enumerate}
-        \item TODO configure \texttt{ssh\_config}
-        \item TODO check SSH connection and note down secondary ethernet port
-        \item TODO configure \texttt{inventory.ini}
+        \item Configure the \texttt{ssh\_config} config file by supplying the \acp{FQDN} and the public \ac{IP} addresses of the nodes. 
+        \item Check that all nodes can actually be accessed via \ac{SSH}
+        \item Note down the name of the secondary ethernet adapter of each node.
+        \item Configure the \texttt{inventory.ini} file which describes the Ansible inventory. Supply the \ac{FQDN}
         \item TODO prepare hosts by running \texttt{run\_host\_setup.sh <host>}
         \item TODO roll outroll the configuration by running \texttt{ansible-playbook all.yml}
     \end{enumerate}
