@@ -244,6 +244,7 @@ will lead to even more complex installation and configuration processes which ag
 \subsection{\acl{HDP} with Ambari deployed with Ansible}
 \label{sec:design:hdp_ambari_ansible}
 TODO describe HDP, Ambari, Ansible
+TODO: describe that a ansible playbook is written for that
 
 \subsubsection{System Setup}
 
@@ -291,7 +292,7 @@ The node need to be registered manually, as no shared \ac{SSH} key is present, t
 (The web interface would require the used to upload the private key for root access, which is generally unsafe.)
 The master node is configured to act as an Hadoop master and salve an as the master for all recommended services running alongside of Hadoop.
 The slaves are salves for \ac{HDFS} and \ac{YARN}.
-The wizards now installs the cluster.
+The wizards now installs the cluster automagically.
 
 
 \subsection{Errors and Lessons Learned}
@@ -460,7 +461,7 @@ This scenario leads to the following steps regarding the deployment of the clust
         \item Apply the Ansible playbook to the host by running \texttt{\$ ansible-playbook all.yml}. This configures the host systems in such a way that Ambari Server and Client resp. are installed on them.
     \end{enumerate}
     
-    ("must still be implemened, has been made ofr example")TODO,
+    TODO ("must still be implemened, has been made ofr example"),
      (in implementation explain how the ansible part works). 
     
     \item \textbf{Hadoop Set-Up with Ambari} 
