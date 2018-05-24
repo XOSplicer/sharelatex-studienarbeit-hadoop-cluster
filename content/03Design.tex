@@ -458,7 +458,9 @@ This scenario leads to the following steps regarding the deployment of the clust
         \item Configure the \texttt{inventory.ini} file which describes the Ansible inventory. Supply the internal \ac{IP} address as well as the previously noted Ethernet adapter of the node. The \emph{hadoop-master-0} node should be listed in the \emph{master} section, all others in the \emph{slave} section.
         \item Prepare the nodes for the usage with Ansible by running\\
         \texttt{\$ run\_host\_setup.sh <host>} for each of them.
-        \item Apply the Ansible playbook to the host by running \texttt{\$ ansible-playbook all.yml}. This configures the host systems in such a way that Ambari Server and Client resp. are installed on them.
+        \item Apply the Ansible playbook to the host by running\\
+        \texttt{\$ ansible-playbook all.yml}\\
+        This configures the host systems in such a way that Ambari Server and Client resp. are installed on them.
     \end{enumerate}
     
     TODO ("must still be implemened, has been made ofr example"),
