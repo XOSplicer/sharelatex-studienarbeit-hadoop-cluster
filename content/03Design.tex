@@ -435,6 +435,7 @@ This scenario leads to the following steps regarding the deployment of the clust
 
 \begin{enumerate}
     \item \textbf{\ac{VM} Creation in OpenStack}
+    TODO
     \begin{enumerate}
         \item Create an internal network.
         \item Create security groups which allow access for port 22 (\ac{SSH}) and 8080 for web access to Ambari.
@@ -447,20 +448,36 @@ This scenario leads to the following steps regarding the deployment of the clust
 
     
     \item \textbf{System Set-Up with Ansible} 
+    TODO
     \begin{enumerate}
-        \item TODO configure \texttt{ssh_config}
+        \item TODO configure \texttt{ssh\_config}
         \item TODO check SSH connection and note down secondary ethernet port
         \item TODO configure \texttt{inventory.ini}
-        \item TODO prepare hosts by running \texttt{run_host_setup.sh}
-        \item TODO roll outroll the configuration
+        \item TODO prepare hosts by running \texttt{run\_host\_setup.sh <host>}
+        \item TODO roll outroll the configuration by running \texttt{ansible-playbook all.yml}
     \end{enumerate}
     
     ("must still be implemened")TODO,
     therefore install dependency roles, configure ssh\_config and ansible.cfg (UPDATE README) use the ips and hostnames from the before. (in implementation explain how the ansible part works). finally role out the configuration by running ansible command
     
-    \item \textbf{Hadoop Set-Up with Ambari} TODO with gui installer sinply follow instructions, select minimal amout of components possible or the ones recommended by jonas. when promted to select nodes use manual registaration: reason dont upload ssh private key for root access (maybe in chpt 4). also configure each service close to default with a common password (how to document the password?)
+    \item \textbf{Hadoop Set-Up with Ambari} 
+    TODO
+    \begin{enumerate}
+        \item TODO open the web gui of Ambari and login as admin/admin
+        \item TODO follow instructions to create a new cluster, with gui installer sinply follow instructions
+        \item TODO enter the fqdns when asked which nodes to use of ALL hosts created before
+        \item Select "manual registration"
+        \item TODO select minimal amount of components possible or the ones recommended by jonas.
+        \item TODO assign master node to all service masters, sec services to secondarys
+        \item TODO select all client things to all nodes (datanode, nodemanager etc)
+        \item configure all the services to the needs
+    \end{enumerate}
+    TODO ,  when promted to select nodes use manual registaration: reason dont upload ssh private key for root access (maybe in chpt 4). also configure each service close to default with a common password (how to document the password?)
     
-    \item \textbf{Test Usage} TODO test HDFS in general by storing some data. test map reduce by running teragen / terasort from Hadoop Book (Tom White)
+    \item \textbf{Test Usage} 
+    TODO
+    
+    TODO test HDFS in general by storing some data. test map reduce by running teragen / terasort from Hadoop Book (Tom White)
 \end{enumerate}
 
 TODO should be describes in more details in 4
