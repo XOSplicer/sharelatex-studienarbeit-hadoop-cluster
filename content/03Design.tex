@@ -252,21 +252,27 @@ will lead to even more complex installation and configuration processes which ag
 
 \subsection{\acl{HDP} with Ambari deployed with Ansible}
 \label{sec:design:hdp_ambari_ansible}
-TODO describe HDP, Ambari, Ansible
-TODO: describe that a ansible playbook is written for that
+TODO describe HDP, Ambari
 
 \paragraph{Ansible}
-\emph{Ansible} is an configuration management tool.
+\emph{Ansible} is an agent-less configuration management tool.
 It ensures that the state of a computer system matches a desired and described state.
 This includes operating system setting, service availability and configuration, 
 as well as file contents and many more.
 \enquote{Ansible uses \ac{YAML} files as its main source of information at run time. 
 \ac{YAML} is a data representation language that is commonly used for configuration.
 [...]
-[It] is written entirely in Python [and it] works by running commands via SSH, so there’s no need to install any server software.}
+[It] is written entirely in Python [and it] works by running commands via \ac{SSH}, so there’s no need to install any server software.}
 \autocite[][Chap. 1]{heap2016ansible}
+The desired system configuration is descibed in a \emph{playbook}, 
+which guides Ansible in the steps to apply this configuration.
+A playbook can be split up into \emph{roles} to separate the configurations of different concerns.
+Roles can be assigned to multiple hosts and can be combined if a hosts has multiple duties.
+For the following test such a playbook is created.
 
-Alternatives are \emph{Puppet} and \emph{Chef}, which both use a central server to distribute the 
+Alternatives are \emph{Puppet} \urlinline{https://puppet.com/} and \emph{Chef} \urlinline{https://www.chef.sh/} , which both use a central server to distribute the system configurations \autocite[][Chap. 1]{heap2016ansible}. 
+This increases the complexity of the deployment setup.
+Ansible avoids this and is therefore favourable for this test.
 
 \subsubsection{System Setup}
 
