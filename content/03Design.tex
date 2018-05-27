@@ -226,7 +226,7 @@ that can be used for demonstration purposes of the Hadoop cluster.
 The provided data includes weather data produced by the \ac{NCDC} and programs that can be run on Hadoop to analyze this data. 
 Storing this data in \ac{HDFS} and running the MapReduce jobs lead to the discovery of erroneous configurations in the cluster.
 
-Further test included the execution \emph{teragen} and \emph{terasort},, which generate a variable amount of numbers and sorts them, in this case 5 \ac{GB} of data. 
+Further test included the execution \emph{teragen} and \emph{terasort} \autocite[][]{omally2008terasort}, which generate a variable amount of numbers and sorts them, in this case 5 \ac{GB} of data. 
 The generation  was successful, however the sorting failed due to an repeated connection timeout, which could not be resolved.
 
 \subsubsection{Errors and Lessons Learned}
@@ -254,6 +254,14 @@ will lead to even more complex installation and configuration processes which ag
 \label{sec:design:hdp_ambari_ansible}
 TODO describe HDP, Ambari, Ansible
 TODO: describe that a ansible playbook is written for that
+
+\paragraph{Ansible}
+\emph{Ansible} is an configuration management tool.
+It ensures that a system 
+
+
+\autocite[][]{}
+
 
 \subsubsection{System Setup}
 
