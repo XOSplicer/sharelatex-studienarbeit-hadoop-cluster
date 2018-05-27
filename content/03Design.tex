@@ -73,7 +73,7 @@ This will lead to an decision on the method that should be used for the cluster 
 \subsubsection{Cluster Management Systems}
 
 To deploy Hadoop on an cluster there are two general approaches. Either the Hadoop distribution package is installed and configured manually on each node or an management tool is used to perform automatic deployment and configuration. 
-Since the manual installation process is error prone (as we will see later) and needs some know-how,
+Since the manual installation process is error prone (as visible in section \ref{sec:design:manualinstall}) and needs some know-how,
 it is  more easy for the user to utilize an management system for the cluster.
 
 The management system can provide, install, manage and monitor software components on the cluster nodes.
@@ -131,6 +131,7 @@ however it is accessible from the Internet,
 which makes it more comfortable to work with while performing the tests.
 
 \subsection{Manual Installation of Hadoop}
+\label{sec:design:manualinstall}
 
 The first possibility to install Hadoop onto a number of hosts 
 is to use the installation package provided by Apache them self \urlinline{https://hadoop.apache.org/releases.html}.
