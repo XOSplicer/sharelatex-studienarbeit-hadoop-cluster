@@ -178,20 +178,21 @@ Examples for such tools are \emph{Apache GraphX} and \emph{Apache Giraph}.
 \subsection{Value Assessment}
 \label{hadoop-assessment}
 
-TODO
 
-\begin{table}[hbt]
+
+\begin{table}[h]
     \centering
-	\begin{tabular}{p{7cm} p{7cm}}
-	  \textbf{Advantages} & \textbf{Disadvantages} \\[0.5em]
+    \resizebox{\textwidth}{!}{%
+	\begin{tabular}{p{3cm} p{7cm} p{7cm}}
+	  \textbf{Characteristic} & \textbf{Advantages} & \textbf{Disadvantages} \\[0.5em]
 	  \hline
-	  Supports thousands of nodes for data storage and processing. Scales almost linearly with the cluster size & No support for storage- or network-level encryption might raise privacy and security concerns \\
-	  Resilient to the failure of nodes, both in software and hardware (excluding the name node) & The name node serves as a single point of failure, however a secondary name node can be configured to mitigate the data loss\\
-	  High block size enables the efficient, distibuted storage of vast amounts of data & Only suitable for real Big Data applications, not for general purpose data storage (e.g. small files) \\
-	  Huge ecosystem of applications based on \ac{HDFS} and \ac{YARN}, covering nearly all common use cases & Parts of the ecosystem are non-mature and still under development
-	\end{tabular}
-	\caption{Advantages and Disadvantages of the Apache Hadoop Platform. Partly adapted from \autocite[][p.~82]{rajasekar2015survey}}
-	\label{fig-hadoop-assessment}
+	  \textbf{Scalability} & Supports thousands of nodes for data storage and processing. Scales almost linearly with the cluster size. High block size enables the efficient, distributed storage of vast amounts of data & Only suitable for \enquote{real} Big Data applications, not for general purpose data storage (e.g. small files)  \\
+	  \textbf{Fault Tolerance} & Resilient to the failure of nodes, both in software and hardware (excluding the name node) & The name node serves as a single point of failure, however a secondary name node can be configured to mitigate the data loss\\
+	  \textbf{Quality of Data} & The original data is persistently stored, and through its append-only approach, Hadoop clusters may reconstruct the data available at any point in time in order to retrospectively perform analyses & High effort for the analytics engineers to harmonize the unstructured data on-read. Mitigated in part by frameworks supporting these efforts. However, the accuracy and precision of stored data cannot be guaranteed and relies on the using organizations' policies and e.g. process steps before data is uploaded to the cluster \\
+	  \textbf{Heterogeneity of data} & Large ecosystem of applications based on \ac{HDFS} and \ac{YARN}, covering nearly all common use cases & Parts of the ecosystem are non-mature and still under development
+	\end{tabular}}
+	\caption{Technical Advantages and Disadvantages of the Apache Hadoop Platform. Partly adapted from \autocite[p.~82]{rajasekar2015survey}}
+	\label{fig-hadoop-technical-challenges}
 \end{table}
 
 TODO
