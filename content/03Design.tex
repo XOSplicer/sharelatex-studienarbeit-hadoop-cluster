@@ -21,12 +21,14 @@ The \acp{VM} can be connected to the network of the \ac{DHBW} and can be interco
 Firewall restrictions can be set through group policies, which can be assigned to the \acp{VM}. 
 When creating a new \ac{VM} most of these settings must be supplied. 
 Furthermore the operating system flavour can be chosen and a \ac{SSH} login key can be provided.
-Among others \emph{Ubuntu 16.04 LTS} can be used.
+Among others \emph{Ubuntu 16.04 LTS} \urlinline{https://www.ubuntu.com/server} can be used which is compatible with Hadoop in general.
 
 The Hadoop cluster be deployed on multiple interconnected \acp{VM} in the OpenStack environment that can be accessed from the university network.
 
 The connection to the \ac{DHBW} network gives some restrictions: \acp{VM} can only be accessed from the university network and not from the Internet.
-From a security point of view this can be considered good. However for development access it is quite unfortunate. 
+From a security point of view this decreases potential attac vectors.
+However for development access it is restricting, 
+since the developer needs to be on premise. 
 
 
 \section{Analysis of Requirements}
@@ -48,7 +50,7 @@ Sicklinger et al. also did a requirements analysis for an Hadoop cluster at the 
 \begin{itemize}
     \item The cluster utilizes the OpenStack Environment in Mannheim.
     \item There should be only a low cost, at best no cost, associated with deploying and running the cluster.
-    \item It should be fast and easy for students and lecturers to deploy the cluster.
+    \item It should be possible for students and lecturers to deploy the cluster.
     \item The cluster should provide the ability to be used to learn about the Hadoop deployment and learn about data analysis.
     \item The it should support recent tools to be used alongside with Hadoop.
     \item The cluster should scale to the needs of the users.
@@ -56,8 +58,9 @@ Sicklinger et al. also did a requirements analysis for an Hadoop cluster at the 
 \autocite[][p. 40ff]{wi2018managementsystems}
 
 
-All of the listed requirements imply that the cluster needs to be easy to deploy. 
+All of the listed requirements imply that the cluster needs to be deployable without extended or expert knowledge about Hadoop itself.
 Automated deployment is therefore favourable to make the procedure reproducible. 
+Still it can be required for the person performing the installation to have general knowledge about system administration on Linux based machines.
 
 
 \section{Research on Possibilities}
@@ -111,7 +114,10 @@ it can be preferred over using Ambari directly which would create the need to co
 \emph{MapR} will not be discussed, since its free-of-charge community edition is only permitted to be used for \enquote{[internal] trial, evaluation, testing or similar non-production purposes} \autocite[][para.~1.5]{mapr2018EULA}. 
 It therefore does not qualify to be used permanently at the \ac{DHBW} for educational purposes.
 
-In the next sections the remaining three options, \emph{manual installation, \ac{CDH} and }
+In the next sections the remaining three options, 
+\emph{manual installation, \ac{CDH} and \ac{HDP}}
+are tested and compared by performing a exemplary installation.
+Each of the evaluations considers the complexity and susceptibility to error of the installation process.
 
 
 \subsubsection{Evaluation Environment}
@@ -129,19 +135,19 @@ which makes it more comfortable to work with while performing the tests.
 \subsection{Manual Installation of Hadoop}
 
 The obvious first possibility to install Hadoop onto a number of hosts 
-is to use the installation package provided by Apache themself \urlinline{https://hadoop.apache.org/releases.html}.
+is to use the installation package provided by Apache them self \urlinline{https://hadoop.apache.org/releases.html}.
 This represents the most basic procedure of installation.
 Tom White \autocite[][Appendix A]{white2015hadoop} describes how Hadoop can be manually installed on the machines in an cluster. 
 Manually here means without the help of automated installers for a single machine or the complete cluster. 
 Every aspect of the installation and configuration must be done \enquote{by hand}.
 White gives step by step instruction on the process.
 
-Since no step in this step is predetermined or automated, this method does not really intall an "Hadoop distribution" on the cluster, but rather only \ac{YARN}, \ac{HDFS} and MapReduce.
-It does not provide an \emph{management system} for Hadoop.
+Since no step in this step is predetermined or automated, this method does not really install an "Hadoop distribution" on the cluster, but rather only \ac{YARN}, \ac{HDFS} and MapReduce.
+It does not provide a \emph{management system} for Hadoop.
 
 \subsubsection{System Setup}
 For the installation two \acs{VM} are used, utilizing two virtual \ac{CPU} cores and eight \ac{GB} \ac{RAM} and a 20 \ac{GB} storage drive. 
-Ubuntu Server \urlinline{https://www.ubuntu.com/server} 16.04.3 \ac{LTS} is used as the operating system. 
+Ubuntu Serve 16.04.3 \ac{LTS} is used as the operating system. 
 The machines are connected to the public Internet and to each other using two network interfaces each.
 
 The two machines are going to be connected together in an master-slave setup
@@ -220,7 +226,7 @@ that can be used for demonstration purposes of the Hadoop cluster.
 The provided data includes weather data produced by the \ac{NCDC} and programs that can be run on Hadoop to analyze this data. 
 Storing this data in \ac{HDFS} and running the MapReduce jobs lead to the discovery of erroneous configurations in the cluster.
 
-Further test included the execution \emph{teragen} and \emph{terasort}, also provided by White, which generate a variable amount of numbers and sorts them, in this case 5 \ac{GB} of data. 
+Further test included the execution \emph{teragen} and \emph{terasort},, which generate a variable amount of numbers and sorts them, in this case 5 \ac{GB} of data. 
 The generation  was successful, however the sorting failed due to an repeated connection timeout, which could not be resolved.
 
 \subsubsection{Errors and Lessons Learned}
