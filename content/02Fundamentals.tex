@@ -207,9 +207,14 @@ Examples for such tools are \emph{Apache GraphX} and \emph{Apache Giraph}.
 
 \subsection{Value Assessment}
 \label{hadoop-assessment}
-The general problems and challenges seen in \vref{sota-bda-challenges}
-can also be 
+The general problems and challenges with \ac{BDA} systems seen in section  \vref{sota-bda-challenges}
+can also be evaluated in the context of the Hadoop platform.
 
+\paragraph{Privacy and Security}
+Hadoop has been designed as an append-only storage environment. This entails some serious consequences in the context of privacy, as the business desire is that individual data items should not be deleted at any time to allow for further analysis and transparency. In the light of recent regulations, especially relating to the \ac{GDPR} in the \ac{EU}, this is not legally compliant. Because of its major importance, this topic will be covered in-depth in \autoref{sota-pol-legal}. The ethical questions concerned with whether to implement a certain project or not are not limited to its analytics platform and project specific and will therefore need individual judgement. Looking at security, it can be said that Hadoop currently does not enforce a high level of security per se, as neither storage nor transport level encryption are supported so far on a software level \autocite[p.~82]{rajasekar2015survey}, due to complexity and performance issues. However, it is possible to implement storage level encryption on a hardware level. The lack of transport level encryption however has to be noted and leads to the consequence that Hadoop clusters should be operated in a separated, at least virtually distinct network protected from intruders on a higher level. On a logical level, data can be protected in \ac{HDFS} with \acp{ACL}, allowing for a granular access allocation of available data to its users \autocite{hdfspermissions}.
+
+
+TODO
 
 \begin{table}[h]
     \centering
@@ -264,6 +269,11 @@ The \ac{GDPR} Portal \autocite{trunomi2018gdpr} summarizes the key changes that 
     \item \emph{Right to be Forgotten}, i.e. the right to have personal data deleted permanently upon request.
     \item \emph{Privacy by Design} for new data processing systems.
 \end{itemize}
+
+Especially the \emph{right to be forgotten} is problematic in \ac{BDA} systems
+since data can be stored in an unstructured, immutable way. 
+This restricts the possibility to keep track of which data entries are actually stored in the system. Deletion is therefore practically impossibly. 
+To circumvent this restriction, extra caution is necessary to decide which data should be used on the platform. 
 
 The listed laws focus on personal data, but might also be applicable to anonymized data that is derived from personal data.
 Table \ref{fig-legal-data-kinds} describes which restrictions regulations apply to which type of data from which source. 
