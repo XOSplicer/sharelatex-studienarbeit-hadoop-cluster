@@ -106,9 +106,7 @@ There are four ways to install Hadoop that are considered here:
         
 \end{itemize}
 
-TODO References
-
-Since \ac{HDP} makes use of Ambari for installing the cluster and managing the installed software while it simply provides a pre-packaged version of the components, 
+Since \ac{HDP} makes use of Ambari for installing the cluster and managing the installed software \autocite[][]{hortonworks2018ambari} while it simply provides a pre-packaged version of the components, 
 it can be preferred over using Ambari directly which would create the need to compile it from source.
 
 \emph{MapR} will not be discussed, since its free-of-charge community edition is only permitted to be used for \enquote{[internal] trial, evaluation, testing or similar non-production purposes} \autocite[][para.~1.5]{mapr2018EULA}. 
@@ -440,8 +438,9 @@ Internally all nodes need to be connected via an private network with fixed \acs
 The internal network should not be restricted by any firewall.
 
 Tom White recommends the following specification for a single node in a cluster, based on the needs of a full \ac{BDA} system in 2014:\\
-Each node should run on dedicated, commodity hardware.
+
 \begin{itemize}
+    \item Each node should run on dedicated, commodity hardware.
     \item Processor - Two hex/octo-core 3 GHz \acs{CPU}
     \item Memory 64 to 512 \ac{GB} \ac{ECC} \ac{RAM}
     \item Storage - 12 to 24 times 1 to 4 \ac{TB} disks
@@ -449,9 +448,11 @@ Each node should run on dedicated, commodity hardware.
 \end{itemize}
 \autocite{white2015hadoop}
 
-However the given OpenStack environment does not allow the allocation of such amounts of resources. Therefore the maximum sized \acs{VM} should be used, and each be given an equal share of the available storage.
+However the given OpenStack environment does not allow the allocation of such amounts of resources, and has no possibility to use dedicated hardware. 
+Therefore the maximum sized \acs{VM} should be used, and each be given an equal share of the available storage.
 
 TODO should use \ac{FQDN}s and master also datanode and nodemanaher maybe if useful
+TODO which ports
 
 \section{Execution Plan}
 
