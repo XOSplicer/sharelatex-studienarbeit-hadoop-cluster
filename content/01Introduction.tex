@@ -2,6 +2,9 @@
 \chapter{Introduction}
 \label{chap:intro}
 
+\section{Big Data and Cluster Computing}
+\label{sec:intro:cluster}
+
 Big Data is a phenomena in \ac{IT} that has emerged in the recent years.
 The digitization across industries leads to rapidly growing amount of data generated
 within each company.
@@ -15,10 +18,12 @@ holds the opportunity for diverse analysis to gain insights on company-level sca
 from initial gathering of data from various sources 
 up to final decision making based on analysis results.    
 
-\section{Big Data and Cluster Computing}
-\label{sec:intro:cluster}
-
-TODO
+To store and process the growing amount of data, 
+the limitations in resources of a single computer system are to narrow.
+The workload needs to be divided among several machines that form a cluster 
+which provides interconnection between the computers 
+and manages the distribution of resources and processing tasks.
+As the analyzed data scales out, the cluster needs to follow.
 
 \section{Context}
 \label{sec:intro:context}
@@ -32,9 +37,10 @@ This research project is embedded into a larger body of investigation regarding 
 \end{enumerate}
 
 All focal points are investigated in the context of possible use at \acf{DHBW} in both research and administration. Each of the various focal points is concluded in a separate project work, whereas this particular work focuses on the first point.
+See \ref{sec:intro:structure} for further information on how the topics are split within the group of authors.
 
-
-TODO
+Additionally, there is another student research project carried out by students from the \ac{DHBW} Stuttgart in the study of business information systems, 
+which focuses on the possibilities of cluster management for Hadoop. \autocite{wi2018managementsystems} 
 
 \section{Motivation}
 \label{sec:intro:motivation}
@@ -53,7 +59,24 @@ Therefore the possibility to include hands-on experiences of Hadoop in lectures 
 \section{Boundaries}
 \label{sec:intro:boundaries}
 
-TODO
+This group project deals with the topic of Big Data, but limits the perspective to the usage of Hadoop at the \ac{DHBW} Stuttgart.
+It does not aim to give a comparison to other fields, such as data sciences in general and does not try to compare Hadoop to other tools and solutions used for Big Data Analysis.
+
+As mentioned in section \ref{sec:intro:context} this paper focuses in the set up of an Hadoop cluster.
+Mainly the methods and procedures of the set-up
+are of interest.
+This process must meet the requirements and restrictions set by the \ac{DHBW} environment. 
+The paper does not try to find the \enquote{best general} method for the setup for any other institution, not any other university nor cooperation, even though the findings might be transferred to them.
+The artifact of this paper is a functional installation of Hadoop on the cluster computer.
+It should only be a basic installation that fits the given needs. 
+This installation should be reproducible by some mechanism of automatic deployment.
+
+Once the cluster is set up the concerns of operation and maintenance is only partially covered.
+Also, no performance or capacity improvements of the cluster in the future will be considered.
+Some recommendation regarding operation, maintenance and scaling of resources might be given.
+Furthermore the integration of existing data is not 
+in the scope, since the cluster does not replace any previous data storage and analysis solution.
+
 
 \section{Structure and Contribution}
 \label{sec:intro:structure}
