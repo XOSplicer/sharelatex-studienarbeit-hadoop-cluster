@@ -214,9 +214,23 @@ can also be evaluated in the context of the Hadoop platform.
 Hadoop has been designed as an append-only storage environment. This entails some serious consequences in the context of privacy, as the business desire is that individual data items should not be deleted at any time to allow for further analysis and transparency. In the light of recent regulations, especially relating to the \ac{GDPR} in the \ac{EU}, this is not legally compliant. Because of its major importance, this topic will be covered in-depth in \autoref{sota-pol-legal}. The ethical questions concerned with whether to implement a certain project or not are not limited to its analytics platform and project specific and will therefore need individual judgement. Looking at security, it can be said that Hadoop currently does not enforce a high level of security per se, as neither storage nor transport level encryption are supported so far on a software level \autocite[p.~82]{rajasekar2015survey}, due to complexity and performance issues. However, it is possible to implement storage level encryption on a hardware level. The lack of transport level encryption however has to be noted and leads to the consequence that Hadoop clusters should be operated in a separated, at least virtually distinct network protected from intruders on a higher level. On a logical level, data can be protected in \ac{HDFS} with \acp{ACL}, allowing for a granular access allocation of available data to its users \autocite{hdfspermissions}.
 
 
-TODO
+\paragraph{Data Access and Sharing of Information}
+The ability of an organization to source external data is obviously out of scope of the analytics platform in use. However, it becomes important that Hadoop may store any data in arbitrary form, making the integration of new data sets as easy as uploading files. On an internal level, Hadoop promotes the sharing of information by offering a central data storage that should be available to any employee concerned with business development, data analytics and even more areas. Through regulatory requirements, unlimited access will be rare, however users should be made aware of the data available in order to request access if needed and legally compliant. The \emph{DataOps Manifesto} emphasizes the need of organizations to focus on viewing analytics as a processual, value-adding functional area that should always be reproducible in order to share not only the resulting knowledge but also the means of how to achieve it \autocite[][§11, §14, §17]{dataopsmanifesto}. Hadoop fits nicely into this concept, as it promotes the reuse of data and eliminates organizational boundaries that would otherwise serve as a source of operational friction.
 
-\begin{table}[h]
+\paragraph{Storage and Processing Issues}
+This challenge area has arguably been the focus in the design and architecture of Hadoop. Therefore, Hadoop solves the capacity limits of traditional environments by offering capabilities to linearly scale the cluster's size by simply adding new nodes of commodity hardware. This positively impacts both the storage as well as the processing power. Through its sophisticated processing frameworks, including applications running on top of Hadoop for specialized use cases, a very extensive ecosystem exists to solve a wide varying array of business cases. A caveat worth noting is the maturity of this ecosystem; although some frameworks are widely used in the enterprise world and are undergoing active development, they do not have professional organization backing e.g. \acp{SLA} or other contracts that guarantee the implementation of new functionality as well as bug and security patches.
+
+\paragraph{Analytical Challenges}
+The analytical challenges can be mitigated by Hadoop only in a limited manner, as it mainly is a problem area to be addressed by business decisions (e.g. which data to upload or process). However, by offering data visualization and exploration capabilities through applications in its ecosystem as outlined in \vref{hadoop-ecosystem}, this task can be supported by Hadoop to some extent as well.
+
+\paragraph{Skill Requirements}
+Hadoop offers extensive documentation guiding users through the use of a cluster. Yet, the operation and setup of Hadoop clusters is a complex task. Later in this paper, an automated approach to this problem will be created, which can lead to a reduction of the required skill to perform the installation.
+Furthermore, a substantive set of professional services firms exist on the market that may support an organization to execute the setup and maintenance of projects \autocite{hadoopconsulting}. 
+
+\paragraph{Technical Challenges}
+The four categories of technical challenges are wrapped up in \autoref{fig-hadoop-technical-challenges}. It should be noted that Hadoop addresses most of the technical challenges in a fair way, especially offering great scalability and fault tolerance. The more \enquote{soft} characteristics of quality and heterogeneity mainly rely on the best effort of the organization as well as its employees to collect the right data and use the appropriate tools offered by the Hadoop ecosystem to solve their problems.
+
+\begin{table}[htb]
     \centering
     \resizebox{\textwidth}{!}{%
 	\begin{tabular}{p{3cm}|p{7cm} p{7cm}}
@@ -231,7 +245,8 @@ TODO
 	\label{fig-hadoop-technical-challenges}
 \end{table}
 
-TODO
+\paragraph{Conclusion}
+The points above discussed in-depth both the advantages and disadvantages of Hadoop in order to assess the aptitude of Hadoop as an analytics platform in the context of \ac{BDA}. In general, it can be said that Hadoop currently offers the most extensive and powerful solution for organizations that seek to satisfy their desire for an integrated, powerful, scalable and fault-tolerant analytics platform. The biggest problems with Hadoop itself exist in the area of \textbf{Privacy and Security}, where the current approach of an append-only environment clashes with individuals' interests for privacy, anonymity and non-interference with their personal life. Although being very mature in a technical sense, these governance and compliance problems will be of major interest in the future when organizations decide whether and how to realize their analytics efforts.
 
 \subsection{Hadoop at the DHBW}
 
