@@ -314,14 +314,14 @@ The configuration using Ansible  performs the following similar steps:
 Now the Hadoop cluster can be deployed using the Ambari Cluster Manager 
 via an web interface on port 8080 on the master node, 
 which needs to be accessible through the firewall of OpenStack.
-Ambari provides an install wizard for the cluster installation. 
+Ambari provides an assisted install dialogue for the cluster installation. 
 Here a new cluster deployment counting all three hosts is started.
 The node need to be registered manually, as no shared \ac{SSH} key is present, that allows root access to the machines. 
 (The web interface would require the used to upload the private key for root access, which is generally unsafe.)
 The master node is configured to act as an Hadoop master and Hadoop salve. 
 It is also the master for all recommended services running alongside of Hadoop.
 The \emph{slaves} are salve machines for \ac{HDFS} and \ac{YARN}.
-The cluster set-up dialogue then continues  to install the cluster.
+The cluster set-up dialogue then continues to install the cluster.
 
 
 \subsection{Errors and Lessons Learned}
@@ -493,7 +493,8 @@ This scenario leads to the following steps regarding the deployment of the clust
     \end{enumerate}
     
     \item \textbf{Hadoop Set-Up with Ambari} 
-    TODO
+    Next Hadoop itself, together with additional tools, can be deployed to the cluster using the Ambari cluster installation dialogue.
+    
     \begin{enumerate}
         \item TODO open the web gui of Ambari and login as admin/admin
         \item TODO follow instructions to create a new cluster, with gui installer sinply follow instructions
@@ -505,7 +506,9 @@ This scenario leads to the following steps regarding the deployment of the clust
         \item TODO configure all the services to the needs. when in doubt use defualt config. set passwords and resolve possible warnings
         \item TODO let the installation run
     \end{enumerate}
-    TODO ,  when promted to select nodes use manual registaration: reason dont upload ssh private key for root access (maybe in chpt 4). also configure each service close to default with a common password (how to document the password?)
+    TODO ,  when promted to select nodes use manual registaration: reason dont upload ssh private key for root access (maybe in chpt 4). also configure each service close to default with a common password 
+    
+    The passwords that have been set for each individual service should be documented.
     
     \item \textbf{Test Usage} 
         \begin{enumerate}
