@@ -135,14 +135,20 @@ Due to the tight coupling of Hadoop 1's storage and processing layer, the design
 In 2013, \ac{YARN} was incorporated into the second major release of Hadoop \autocite{hadoopreleasenotes}, completing the transformation of Hadoop from being a limited, MapReduce-focused data processing platform to become a single, extensively applicable \ac{BDA} platform. Due to this change, creating processing frameworks as well as applications on top of Hadoop became easier to implement and maintain; furthermore, it stopped the abuse of MapReduce in earlier implementations, where massive data duplication and transient storage was required to mitigate the shortcomings of MapReduce for the holistic inspection and analysis of stored data.
 Now higher level application frameworks can leverage \ac{YARN} to schedule arbitrary jobs on Hadoop and process the data stored in \ac{HDFS} with more diverse algorithms.
 
-TODO describe yarn architecture resource manager and nodemanager
+To implement the \ac{YARN} infrastructure, Hadoop introduces two services that can be deployed on the cluster nodes.
+The \emph{ResourceManager} accepts application requests from clients and handles the management of computation resources in the cluster.
+It can allocate new \emph{containers} on the cluster nodes, which encapsulate resources and execte the application .
+There is only one \emph{ResourceManager} in the cluster.
+Each node that performs data processing is running the \emph{NodeManager} service which receives jobs and executes them inside a \emph{container}.
+If more resources are needed dynamically, the application running on the \emph{NodeManager} can request more resources from the \emph{ResourceManager}.
+Figure \ref{fig:yarn} illustrates this behavior in a typical application execution.
 
-To implement the \ac{YARN} infrastructure, Hadoop introcudes two services that can be deployed on the cluste
 
 \begin{figure}[th]
      {\centering\includegraphics[width=0.75\textwidth]{img/hddg_0402.png}\par}
 	\caption{\label{fig:yarn}How YARN runs an application. Reprinted from \autocite[][Chap.~4]{white2015hadoop}}
 \end{figure}
+
 
 \subsection{Hadoop Ecosystem}
 \label{hadoop-ecosystem}
