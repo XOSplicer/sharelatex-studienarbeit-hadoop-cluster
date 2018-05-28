@@ -212,8 +212,8 @@ After the configuration is done for the master host, the same procedure can be f
 The only exceptions are that no entries are made in the \texttt{slaves} file 
 and the \texttt{hdfs-site.xml} is configured, so that \ac{HDFS} uses the attached data drive to store file contents.
 
-Finally the \ac{HDFS} file systems on each host can be formatted using the TODO WHICH COMMAND command.
-Then \ac{YARN} and \ac{HDFS}, aswell as the MapReduce history server is started on the master, 
+Finally the \ac{HDFS} file systems on each host can be formatted to initialize the \ac{HDFS} storage.
+Then \ac{YARN} and \ac{HDFS}, as well as the MapReduce history server is started on the master, 
 which in turn start the namenode and resoucemanager on the master 
 as well as the datanoode and nodemanager on both the master and the slave.
 Now the cluster can be used to store data in \ac{HDFS} and run MapReduce jobs.
@@ -225,7 +225,7 @@ that can be used for demonstration purposes of the Hadoop cluster.
 The provided data includes weather data produced by the \ac{NCDC} and programs that can be run on Hadoop to analyze this data. 
 Storing this data in \ac{HDFS} and running the MapReduce jobs lead to the discovery of erroneous configurations in the cluster.
 
-Further test included the execution \emph{teragen} and \emph{terasort} \autocite[][]{omally2008terasort}, which generate a variable amount of numbers and sorts them, in this case 5 \ac{GB} of data. 
+Further test included the execution \emph{teragen} and \emph{terasort} \autocite[][]{omally2008terasort}, which generates a variable amount of numbers and sorts them, in this case 5 \ac{GB} of data. 
 The generation  was successful, however the sorting failed due to an repeated connection timeout, which could not be resolved.
 
 \subsubsection{Errors and Lessons Learned}
