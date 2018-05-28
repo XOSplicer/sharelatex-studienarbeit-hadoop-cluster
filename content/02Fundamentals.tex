@@ -104,10 +104,24 @@ The storage layer is formed by the so-called \acf{HDFS}, which serves as a distr
 The first advancement of \ac{BFS} in comparison to earlier distributed file systems is to expect failure of cluster nodes to be the norm rather than an exception: This becomes especially important when running the cluster on top of so-called \enquote{commodity hardware} \autocite[p.~1]{ghemawat2003gfs}, that means comparatively cheap consumer hardware rather than expensive enterprise server equipment. This drives down the costs of the cluster, as no premiums for high-availability features and expensive support contracts have to be paid, however to the expense of reduced availability of single nodes \autocite[p.~1]{ghemawat2003gfs}. As the file system is expecting such failure, data blocks are replicated across multiple nodes, leading to an availability guarantee approaching 100 per cent as the cluster grows \autocite[p.~2]{ghemawat2003gfs}. Secondly, rather than storing hundreds of thousands of small files as with traditional file systems, \ac{BFS} is designed to work with far fewer, yet larger files, often with sizes ranging from gigabytes to terabytes \autocite[p.~2]{ghemawat2003gfs}. Furthermore, rather than using random access, the file pointer is usually moved only linearly, resulting in an append-only mode for writing data as well as batch processing for reading data \autocite[p.~2]{ghemawat2003gfs}. Finally, the file system is custom-tailored for the applications running on top of it, rather than serving as general purpose implementation \autocite[p.~2]{ghemawat2003gfs}.
 
 Adapting these principles \ac{HDFS} was created as a seamlessly integrated, integral part of the Hadoop system. 
+To implement the storage system, 
+Hadoop defines two services that form the infrastructure for \ac{HDFS} which runs on the nodes.
+Data in the file system is distributed among multiple \emph{datanodes} which store blocks of files.
+In the cluster there is exactly on \emph{namenode} service node which keeps track of where the blocks of each file are located and how they can be retrieved.
+Utilizing the principles of \emph{sharding} and \emph{replication}
+the files stored in \ac{HDFS} are split into blocks and saved on multiple \emph{datanodes}. 
+There can be a \emph{secondary namenode} which  mirrors the primary and can be act as a fail-over instance.
+Figure \ref{fig:hdfs_read} visualized this architecture 
+and illustrates how a client reads data from \ac{DHFS} 
+by first contacting the \emph{namenode} and requesting the block locations 
+and subsequently contacting the \emph{datanodes} directly to read the actual data.
 
-To implement the storage system, Hadoop defines two services that form the infrastructure for \ac{HDFS} which runs on the nodes.
-Data in the file system is distributed among multiple \emph{datanodes} which store blocks of files
-In the cluster there is exactly on \emph{namenode} service node which keeps track of whe
+\begin{figure}
+	\fbox{
+	    \includegraphics[width=\textwidth,keepaspectratio]{img/hddg_0302.png}
+    }
+	\caption{\label{fig:hdfs_read}A client reading data from HDFS. Reprinted from \autocite[][Chap.~3]{white2015hadoop}}
+\end{figure}
 
 \subsubsection{Processing Framework}
 
