@@ -133,8 +133,11 @@ As becomes obvious by the function definitions before, MapReduce jobs are limite
 Due to the tight coupling of Hadoop 1's storage and processing layer, the design of Hadoop was inherently limiting its merit and the extent of applicable use cases. Thus, \ac{YARN} was developed as an abstraction layer between the traditional \ac{HDFS} storage layer and applications performing the data processing itself, creating a more flexible, powerful and even performant platform rendering the unintended use of MapReduce obsolete and limiting the scope of the MapReduce programming model to merely be one of the possible processing frameworks running on top of \ac{YARN} \autocite[p.~6]{vavilapalli2013apache}.
 
 In 2013, \ac{YARN} was incorporated into the second major release of Hadoop \autocite{hadoopreleasenotes}, completing the transformation of Hadoop from being a limited, MapReduce-focused data processing platform to become a single, extensively applicable \ac{BDA} platform. Due to this change, creating processing frameworks as well as applications on top of Hadoop became easier to implement and maintain; furthermore, it stopped the abuse of MapReduce in earlier implementations, where massive data duplication and transient storage was required to mitigate the shortcomings of MapReduce for the holistic inspection and analysis of stored data.
+Now higher level application frameworks can leverage \ac{YARN} to schedule arbitrary jobs on Hadoop and process the data stored in \ac{HDFS} with more diverse algorithms.
 
 TODO describe yarn architecture resource manager and nodemanager
+
+To implement the \ac{YARN} infrastructure, Hadoop introcudes two services that can be deployed on the cluste
 
 \begin{figure}[th]
      {\centering\includegraphics[width=0.75\textwidth]{img/hddg_0402.png}\par}
