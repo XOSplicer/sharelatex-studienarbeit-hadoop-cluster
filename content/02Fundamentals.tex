@@ -112,14 +112,12 @@ Utilizing the principles of \emph{sharding} and \emph{replication}
 the files stored in \ac{HDFS} are split into blocks and saved on multiple \emph{datanodes}. 
 There can be a \emph{secondary namenode} which  mirrors the primary and can be act as a fail-over instance.
 Figure \ref{fig:hdfs_read} visualized this architecture 
-and illustrates how a client reads data from \ac{DHFS} 
+and illustrates how a client reads data from \ac{HDFS} 
 by first contacting the \emph{namenode} and requesting the block locations 
 and subsequently contacting the \emph{datanodes} directly to read the actual data.
 
-\begin{figure}
-	\fbox{
-	    \includegraphics[width=\textwidth,keepaspectratio]{img/hddg_0302.png}
-    }
+\begin{figure}[th]
+     {\centering\includegraphics[width=0.75\textwidth]{img/hddg_0302.png}\par}
 	\caption{\label{fig:hdfs_read}A client reading data from HDFS. Reprinted from \autocite[][Chap.~3]{white2015hadoop}}
 \end{figure}
 
@@ -132,9 +130,16 @@ The first version of Hadoop was heavily influenced by a second important Google 
 Although the MapReduce approach is largely suitable for its intended use case of web crawling, among others, it is however not generally the best programming model to solve arbitrary data analysis and processing tasks.
 As becomes obvious by the function definitions before, MapReduce jobs are limited to the analysis of isolated \enquote{data snippets}; finding or even investigating the relations and interdependence of larger data agglomeration quickly becomes a sophisticated, cumbersome task.
 
-Due to the tight coupling of Hadoop 1's storage and processing layer, the design of Hadoop was inherently limiting its merit and the extent of applicable use cases. Thus, \ac{YARN} was developed as an abstraction layer between the tradiional \ac{HDFS} storage layer and applications performing the data processing itself, creating a more flexible, powerful and even performant platform rendering the unintended use of MapReduce obsolete and limiting the scope of the MapReduce programming model to merely be one of the possible processing frameworks running on top of \ac{YARN} \autocite[p.~6]{vavilapalli2013apache}.
+Due to the tight coupling of Hadoop 1's storage and processing layer, the design of Hadoop was inherently limiting its merit and the extent of applicable use cases. Thus, \ac{YARN} was developed as an abstraction layer between the traditional \ac{HDFS} storage layer and applications performing the data processing itself, creating a more flexible, powerful and even performant platform rendering the unintended use of MapReduce obsolete and limiting the scope of the MapReduce programming model to merely be one of the possible processing frameworks running on top of \ac{YARN} \autocite[p.~6]{vavilapalli2013apache}.
 
 In 2013, \ac{YARN} was incorporated into the second major release of Hadoop \autocite{hadoopreleasenotes}, completing the transformation of Hadoop from being a limited, MapReduce-focused data processing platform to become a single, extensively applicable \ac{BDA} platform. Due to this change, creating processing frameworks as well as applications on top of Hadoop became easier to implement and maintain; furthermore, it stopped the abuse of MapReduce in earlier implementations, where massive data duplication and transient storage was required to mitigate the shortcomings of MapReduce for the holistic inspection and analysis of stored data.
+
+TODO describe yarn architecture resource manager and nodemanager
+
+\begin{figure}[th]
+     {\centering\includegraphics[width=0.75\textwidth]{img/hddg_0402.png}\par}
+	\caption{\label{fig:yarn}How YARN runs an application. Reprinted from \autocite[][Chap.~4]{white2015hadoop}}
+\end{figure}
 
 \subsection{Hadoop Ecosystem}
 \label{hadoop-ecosystem}
