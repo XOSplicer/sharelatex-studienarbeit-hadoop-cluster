@@ -435,7 +435,7 @@ For \ac{HDFS} data storage an additional volume should be attached to each of th
 The size of the used \acs{VM} should be the one with the most memory, 
 as this is the resource where the overhead of having multiple \acs{VM} has the most impact.
 All nodes need access to the Internet to download software packages and should be accessible via \ac{SSH} through the OpenStack firewall.
-Furthermore the master node needs to be accessible via typical ports for the web interface of the deployed services.
+Furthermore the master node needs to be accessible via typical ports for the web interface of the deployed services and other ports which clients use to connect to the Hadoop cluster and issue jobs to it.
 Internally all nodes need to be connected via an private network with fixed \acs{IP}, where the mapping between hostnames and \acs{IP} is known for each host. Typically this can be done with \ac{DNS}, however it is out of scope for this project to setup an \ac{DNS} server. Filling the \texttt{\/etc\/hosts} file is sufficient.
 The internal network should not be restricted by any firewall.
 
@@ -453,8 +453,7 @@ Tom White recommends the following specification for a single node in a cluster,
 However the given OpenStack environment does not allow the allocation of such amounts of resources, and has no possibility to use dedicated hardware. 
 Therefore the maximum sized \acs{VM} should be used, and each be given an equal share of the available storage.
 
-TODO should use \ac{FQDN}s and master also datanode and nodemanaher maybe if useful
-TODO which ports
+In case that it is only possible to allocate a small number of \acp{VM}, it can be useful to also assign the role of a datanode and nodemanager to the master node. This allows the available resources on the master node not only to be used for management purposes but also for processing.
 
 \section{Execution Plan}
 
