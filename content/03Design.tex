@@ -507,20 +507,17 @@ This scenario leads to the following steps regarding the deployment of the clust
     \end{enumerate}
     
     \item \textbf{Test Usage} 
-        TODO
+        To verify that the previous steps were successful, it is necessary to tests that the Hadoop cluster can be used
         \begin{enumerate}
             %\item Test that the master node can be reached from within the \ac{DHBW} network by connecting to it with a \ac{}
             
             %TODO test connection to Hadoop master with hadoop client installed on workstation
             \item Test that \ac{HDFS} works by storing multiple, different sized files on the cluster file system.
-            \item Test that MapReduce can be used to process data by running \emph{teragen} and \emph{terasort} on the cluster to create different amount of numbers and sort them.
+            \item Test that MapReduce can be used to process data by running \emph{teragen} and \emph{terasort} on the cluster to create different amount of numbers and sort them. For example datasets with 100~\ac{MB}, 1~\ac{GB} and 5~\ac{GB} can be used for the tests.
         \end{enumerate}
 
 \end{enumerate}
 
-In the next chapter this execution plan will be implemented. More detail about the technical solution and the Ansible playbook will be given as well.
+In the next chapter this execution plan will be implemented. More details about the technical solution and the exact execution, as well as the Ansible playbook will be given.
 
-TODO should be describes in more details in 4
-
-TODO write longer sentences maybe, describe the uberpoint
 
