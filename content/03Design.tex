@@ -71,7 +71,7 @@ on the given infrastructure will be researched.
 This will lead to an decision on the method that should be used for the cluster at the \ac{DHBW}.
 
 \subsubsection{Cluster Management Systems}
-
+\label{sec:design:clustermanagement}
 To deploy Hadoop on an cluster there are two general approaches. Either the Hadoop distribution package is installed and configured manually on each node or an management tool is used to perform automatic deployment and configuration. 
 Since the manual installation process is error prone (as visible in section \ref{sec:design:manualinstall}) and needs some know-how,
 it is  more easy for the user to utilize an management system for the cluster.
@@ -83,6 +83,7 @@ Usually the management system also provides an graphical user interface to perfo
 
 To provide the components the management system downloads them from a given binary distribution repository. The installation can be performed via remote access from the management server to the nodes. Monitoring gives valuable information to the cluster user, such as capacity an utilization of computational power and storage.
 
+\subsubsection{Hadoop Distributions}
 Some vendors choose to bundle a management system 
 together with an specific version of Hadoop and additional Tools. They offer this bundle mostly as binary packages which are considered \emph{distributions} of Hadoop.
 For system maintainers this holds the benefit that no compilation from source is necessary and the versions of the tools are adjusted to work with each other. 
@@ -199,9 +200,9 @@ can be followed.
         \item \texttt{mapred-site.xml} -- Here the settings for MapReduce are made. 
         It is instructed to use \ac{YARN} as the underlying framework.
         \item \texttt{slaves} -- This file is used on the master host to identify all the hosts 
-        that run an nodemanager or an datanode.
+        that run an NodeManager or an DataNode.
         Therefore the \acs{FQDN} of the master and the salve host are entered here.
-        \item \texttt{yarn-site.xml} -- This file describes the settings for \ac{YARN}. Here the master's \ac{FQDN} is entered as the resourcemanager and \ac{YARN} is bound to 0.0.0.0. 
+        \item \texttt{yarn-site.xml} -- This file describes the settings for \ac{YARN}. Here the master's \ac{FQDN} is entered as the ResourceManager and \ac{YARN} is bound to 0.0.0.0. 
         Furthermore the minimal allocation units for \ac{CPU} cores 
         as well as \ac{RAM} and their respective maximum allocation are defined. 
         This dictates how \ac{YARN} uses the resources of this host.
@@ -212,10 +213,10 @@ After the configuration is done for the master host, the same procedure can be f
 The only exceptions are that no entries are made in the \texttt{slaves} file 
 and the \texttt{hdfs-site.xml} is configured, so that \ac{HDFS} uses the attached data drive to store file contents.
 
-Finally the \ac{HDFS} file systems on each host can be formatted using the TODO WHICH COMMAND command.
-Then \ac{YARN} and \ac{HDFS}, aswell as the MapReduce history server is started on the master, 
-which in turn start the namenode and resoucemanager on the master 
-as well as the datanoode and nodemanager on both the master and the slave.
+Finally the \ac{HDFS} file systems on each host can be formatted to initialize the \ac{HDFS} storage.
+Then \ac{YARN} and \ac{HDFS}, as well as the MapReduce history server is started on the master, 
+which in turn start the NameNode and resoucemanager on the master 
+as well as the DataNode and NodeManager on both the master and the slave.
 Now the cluster can be used to store data in \ac{HDFS} and run MapReduce jobs.
 
 \subsubsection{Tests}
@@ -225,7 +226,7 @@ that can be used for demonstration purposes of the Hadoop cluster.
 The provided data includes weather data produced by the \ac{NCDC} and programs that can be run on Hadoop to analyze this data. 
 Storing this data in \ac{HDFS} and running the MapReduce jobs lead to the discovery of erroneous configurations in the cluster.
 
-Further test included the execution \emph{teragen} and \emph{terasort} \autocite[][]{omally2008terasort}, which generate a variable amount of numbers and sorts them, in this case 5 \ac{GB} of data. 
+Further test included the execution \emph{teragen} and \emph{terasort} \autocite[][]{omally2008terasort}, which generates a variable amount of numbers and sorts them, in this case 5 \ac{GB} of data. 
 The generation  was successful, however the sorting failed due to an repeated connection timeout, which could not be resolved.
 
 \subsubsection{Errors and Lessons Learned}
@@ -251,8 +252,10 @@ will lead to even more complex installation and configuration processes which ag
 
 \subsection{\acl{HDP} with Ambari deployed with Ansible}
 \label{sec:design:hdp_ambari_ansible}
-TODO describe HDP, Ambari
+TODO describe HDP, Ambari, list version matrix
 eg \autocite[][]{hortonworks2018ambari}
+
+The tested version of \ac{HDP} is 2.6.3.0 includes Ambari version 2.6.0 and Hadoop (TODO which Hadoop version).
 
 \paragraph{Ansible}
 \emph{Ansible} is an agent-less configuration management tool.
@@ -314,14 +317,14 @@ The configuration using Ansible  performs the following similar steps:
 Now the Hadoop cluster can be deployed using the Ambari Cluster Manager 
 via an web interface on port 8080 on the master node, 
 which needs to be accessible through the firewall of OpenStack.
-Ambari provides an install wizard for the cluster installation. 
+Ambari provides an assisted install dialogue for the cluster installation. 
 Here a new cluster deployment counting all three hosts is started.
 The node need to be registered manually, as no shared \ac{SSH} key is present, that allows root access to the machines. 
 (The web interface would require the used to upload the private key for root access, which is generally unsafe.)
 The master node is configured to act as an Hadoop master and Hadoop salve. 
 It is also the master for all recommended services running alongside of Hadoop.
 The \emph{slaves} are salve machines for \ac{HDFS} and \ac{YARN}.
-The cluster set-up dialogue then continues  to install the cluster.
+The cluster set-up dialogue then continues to install the cluster.
 
 
 \subsection{Errors and Lessons Learned}
@@ -352,12 +355,14 @@ The Ambari Cluster Manager can then be used to install Hadoop and other services
 
 \subsection{\acl{CDH}}
 
-Cloudera distributes an Hadoop management system called \ac{CDH}.
+Cloudera distributes an Hadoop management system called \ac{CDH} which makes use of \emph{Cloudera Manager} to deploy clusters.
 \enquote{CDH is Cloudera’s 100\% open source platform distribution, including Apache Hadoop and built specifically to meet enterprise demands.}\autocite[][]{cloudera2018cdh}
 It includes Hadoop and tools such as \emph{Apache HBase, Apache Hive, Apache Impala, Apache Kafka and Apache Spark}.
 Cloudera provides an docker image which can be used to easily evaluate the usability of \ac{CDH}.
 It contains \enquote{a single-host deployment of the Cloudera open-source distribution, including CDH and Cloudera Manager.} \autocite[][]{cloudera2018docker}
 It does not provide a full cluster installation, but only a test environment to evaluate the platform.
+Tested version is \ac{CDH} 5.7.0.
+It is important to note that using all features \emph{Cloudera Manager} requires a paid license, a 60 day trail version can also be obtained. \autocite[][p.~30]{wi2018managementsystems}
 
 \subsubsection{System Setup}
 
@@ -415,10 +420,10 @@ For this project a master-slave architecture is chosen.
 Ambari promotes a sever-agent architecture, 
 where the user can interact with Ambari on the server host 
 and deploy the Hadoop cluster to all agent hosts.
-Hadoop uses an cluster setup in which one server distributes and manages \ac{YARN} jobs (the \ac{YARN} resourcemanager), 
-and keeps track of where data is stored data \ac{HDFS} (the \ac{HDFS} namenode).
+Hadoop uses an cluster setup in which one server distributes and manages \ac{YARN} jobs (the \ac{YARN} ResourceManager), 
+and keeps track of where data is stored data \ac{HDFS} (the \ac{HDFS} NameNode).
 This can be considered a master.
-To increase availability it is possible to choose a secondary master which replicates the \ac{HDFS} namenode.
+To increase availability it is possible to choose a secondary master which replicates the \ac{HDFS} NameNode.
 Figure \vref{fig:architecture} depicts the architecture that follows from these prerequisites.
 
 \begin{figure}
@@ -430,12 +435,12 @@ Figure \vref{fig:architecture} depicts the architecture that follows from these 
 
 As discovered in section \vref{sec:ambari:errors} there should be at least 50 \ac{GB} of disk space on each node, 
 just for Ambari and Hadoop to be installed.
-For \ac{HDFS} data storage an additional volume should be attached to each of the \ac{HDFS} datanodes.
+For \ac{HDFS} data storage an additional volume should be attached to each of the \ac{HDFS} DataNodes.
 
 The size of the used \acs{VM} should be the one with the most memory, 
 as this is the resource where the overhead of having multiple \acs{VM} has the most impact.
 All nodes need access to the Internet to download software packages and should be accessible via \ac{SSH} through the OpenStack firewall.
-Furthermore the master node needs to be accessible via typical ports for the web interface of the deployed services.
+Furthermore the master node needs to be accessible via typical ports for the web interface of the deployed services and other ports which clients use to connect to the Hadoop cluster and issue jobs to it.
 Internally all nodes need to be connected via an private network with fixed \acs{IP}, where the mapping between hostnames and \acs{IP} is known for each host. Typically this can be done with \ac{DNS}, however it is out of scope for this project to setup an \ac{DNS} server. Filling the \texttt{\/etc\/hosts} file is sufficient.
 The internal network should not be restricted by any firewall.
 
@@ -453,8 +458,7 @@ Tom White recommends the following specification for a single node in a cluster,
 However the given OpenStack environment does not allow the allocation of such amounts of resources, and has no possibility to use dedicated hardware. 
 Therefore the maximum sized \acs{VM} should be used, and each be given an equal share of the available storage.
 
-TODO should use \ac{FQDN}s and master also datanode and nodemanaher maybe if useful
-TODO which ports
+In case that it is only possible to allocate a small number of \acp{VM}, it can be useful to also assign the role of a DataNode and NodeManager to the master node. This allows the available resources on the master node not only to be used for management purposes but also for processing.
 
 \section{Execution Plan}
 
@@ -468,66 +472,57 @@ This scenario leads to the following steps regarding the deployment of the clust
 
 \begin{enumerate}
     \item \textbf{\ac{VM} Creation in OpenStack}
-    TODO
+    As the first step, the host \acp{VM} need to be created in the OpenStack environment which will form the cluster.
     \begin{enumerate}
         \item Create an internal network.
-        \item Create security groups which allow access for port 22 (\ac{SSH}) and 8080 for web access to Ambari.
+        \item Create security groups which allow access with \ac{SSH}) to the hosts and via the web management portal to Ambari.
         \item Create an appropriate number of maximum sized \acp{VM} that are connected to both the internal and external network. Name them according to the names in \ref{fig:architecture}. Use a common domain, even if it is not officially registered. Provide some SSH credentials to log in.
         Assign the previously created security group to them.
+        Ubuntu 14.04 or 16.04 should be used as the operating system.
         \item Note down the assigned internal and external \ac{IP} addresses displayed by OpenStack.
         \item Create virtual disks and assign them to the nodes. They will be used to store \ac{HDFS} data on them.
     \end{enumerate}
-    TODO 
-
     
     \item \textbf{System Set-Up with Ansible} 
-    In section \vref{sec:design:hdp_ambari_ansible} it has been shown that Ansible can be used to deploy \ac{HDP}. The Ansible playbook developed for this purpose can be adapted and in the next steps.
+    In section \vref{sec:design:hdp_ambari_ansible} it has been shown that Ansible can be used to deploy \ac{HDP}. The Ansible playbook developed for this purpose can be adapted and used in the next steps.
     \begin{enumerate}
-        \item Configure the \texttt{ssh\_config} configuration file by supplying the \acp{FQDN} and the public \ac{IP} addresses of the nodes. 
+        %\item Configure the \texttt{ssh\_config} configuration file by supplying the \acp{FQDN} and the public \ac{IP} addresses of the nodes. 
+        \item Configure the local \ac{SSH} client to use the \acp{FQDN} and the public \ac{IP} addresses of the nodes. 
         \item Check that all nodes can actually be accessed via \ac{SSH}
         \item Note down the name of the secondary (internal) Ethernet adapter of each node.
-        \item Configure the \texttt{inventory.ini} file which describes the Ansible inventory. Supply the internal \ac{IP} address as well as the previously noted Ethernet adapter of the node. The \emph{hadoop-master-0} node should be listed in the \emph{master} section, all others in the \emph{slave} section.
-        \item Prepare the nodes for the usage with Ansible by running\\
-        \texttt{\$ run\_host\_setup.sh <host>} for each of them.
-        \item Apply the Ansible playbook to the host by running\\
-        \texttt{\$ ansible-playbook all.yml}\\
-        This configures the host systems in such a way that Ambari Server and Client resp. are installed on them.
+        \item Configure the Ansible inventory. Supply the internal \ac{IP} address as well as the previously noted Ethernet adapter of the node. he \emph{hadoop-master-0} node should be listed in the \emph{master} section, all others in the \emph{slave} section.
+        \item Prepare the nodes for the usage with Ansible by installing Python on them and upgrading all system packages.
+        \item Apply the Ansible playbook to the hosts.
+        This configures the host systems in such a way that Ambari Server and Client respectively are installed on them.
     \end{enumerate}
-    
-    TODO ("must still be implemened, has been made ofr example"),
-     (in implementation explain how the ansible part works). 
     
     \item \textbf{Hadoop Set-Up with Ambari} 
-    TODO
+    Next Hadoop itself, together with additional tools, can be deployed to the cluster using the Ambari cluster installation dialogue. This follows the instructions from \autocite[][Chap.~6]{hortonworks2018install}
+    
     \begin{enumerate}
-        \item TODO open the web gui of Ambari and login as admin/admin
-        \item TODO follow instructions to create a new cluster, with gui installer sinply follow instructions
-        \item TODO enter the fqdns when asked which nodes to use of ALL hosts created before
-        \item Select "manual registration"
-        \item TODO select minimal amount of components possible or the ones recommended by jonas.
-        \item TODO assign master node to all service masters, sec services to secondarys
-        \item TODO select all client things to all nodes (datanode, nodemanager etc)
-        \item TODO configure all the services to the needs. when in doubt use defualt config. set passwords and resolve possible warnings
-        \item TODO let the installation run
+        \item Connect to Ambari via the web interface on the master node. The complete installation can be done from there.
+        \item Ambari offers an cluster installation dialogue that firsts asks for all necessary configuration and checks it for consistency. The dialogue's instructions can be followed to deploy a cluster. 
+        \item To select the hosts that should be included in the cluster, the \acp{FQDN} including a domain extension of all the \acp{VM} that have been created in the previous step should be provided.
+        \item The \enquote{manual registration} option should be chosen, since otherwise an non-encrypted \ac{SSH} private key must be uploaded, which is unsafe.
+        \item Next select the services and tools that should be included in the cluster installation. Hadoop is clearly mandatory, other tools that should be included are listed in \emph{Jonas Balsfullands' paper}. If Ambari detects unmet inter-dependencies, those should be corrected. 
+        \item Assign the \emph{master} host to inhabit the master role in each service. If the service offers the possibility to register a secondary, fallback master this should be assigned to the \emph{secondary master} host.
+        \item Assign slave nodes and clients to all of the nodes. This includes \emph{DataNodes} and \emph{NodeManager} and the Hadoop client tools.
+        \item Configure all the services to the needs for the cluster. Most default settings can be kept. No service should depend on external resources such as existing databases. Set passwords to the services where needed. The passwords that have been set for each individual service should be documented. Ambari checks the settings for soundness and possibly warnings can be resolved manually.
+        \item The installation then is being performed on the cluster. All selected components are installed with the selected configuration.
     \end{enumerate}
-    TODO ,  when promted to select nodes use manual registaration: reason dont upload ssh private key for root access (maybe in chpt 4). also configure each service close to default with a common password (how to document the password?)
     
     \item \textbf{Test Usage} 
+        To verify that the previous steps were successful, it is necessary to tests that the Hadoop cluster can be used
         \begin{enumerate}
-            \item TODO test connection to Hadoop master with hadoop client installed on workstation
-            \item TODO test HDFS by storing some files
-            \item TODO test with teragen and terasort \urlinline{https://hadoop.apache.org/docs/r1.0.4/api/org/apache/hadoop/examples/terasort/TeraGen.html}\\urlinline{https://www.systutorials.com/3235/hadoop-terasort-benchmark/} (also mentioned in \autocite[][]{white2015hadoop})
+            %\item Test that the master node can be reached from within the \ac{DHBW} network by connecting to it with a \ac{} and 
             
+            % test connection to Hadoop master with hadoop client installed on workstation
+            \item Test that \ac{HDFS} works by storing multiple, different sized files on the cluster file system.
+            \item Test that MapReduce can be used to process data by running \emph{teragen} and \emph{terasort} on the cluster to create different amount of numbers and sort them. For example datasets with 100~\ac{MB}, 1~\ac{GB} and 5~\ac{GB} can be used for the tests.
         \end{enumerate}
-        
-    TODO
 
 \end{enumerate}
 
-In the next chapter this execution plan will be implemented.
+In the next chapter this execution plan will be implemented. More details about the technical solution and the exact execution, as well as the Ansible playbook will be given.
 
-TODO should be describes in more details in 4
 
-TODO write longer sentences maybe, describe the uberpoint
-
-TODO describe that the ansible script has been developed for the evaluation and can stii be used (maybe adaped)

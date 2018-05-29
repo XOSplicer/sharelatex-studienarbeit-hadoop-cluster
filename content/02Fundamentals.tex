@@ -103,18 +103,51 @@ The storage layer is formed by the so-called \acf{HDFS}, which serves as a distr
 
 The first advancement of \ac{BFS} in comparison to earlier distributed file systems is to expect failure of cluster nodes to be the norm rather than an exception: This becomes especially important when running the cluster on top of so-called \enquote{commodity hardware} \autocite[p.~1]{ghemawat2003gfs}, that means comparatively cheap consumer hardware rather than expensive enterprise server equipment. This drives down the costs of the cluster, as no premiums for high-availability features and expensive support contracts have to be paid, however to the expense of reduced availability of single nodes \autocite[p.~1]{ghemawat2003gfs}. As the file system is expecting such failure, data blocks are replicated across multiple nodes, leading to an availability guarantee approaching 100 per cent as the cluster grows \autocite[p.~2]{ghemawat2003gfs}. Secondly, rather than storing hundreds of thousands of small files as with traditional file systems, \ac{BFS} is designed to work with far fewer, yet larger files, often with sizes ranging from gigabytes to terabytes \autocite[p.~2]{ghemawat2003gfs}. Furthermore, rather than using random access, the file pointer is usually moved only linearly, resulting in an append-only mode for writing data as well as batch processing for reading data \autocite[p.~2]{ghemawat2003gfs}. Finally, the file system is custom-tailored for the applications running on top of it, rather than serving as general purpose implementation \autocite[p.~2]{ghemawat2003gfs}.
 
-Adapting these principles \ac{HDFS} was created as a seamlessly integrated, integral part of the Hadoop system. Building upon this storage layer is the processing layer, which serves as the interaction point for developers, data scientists and other users of the system. The processing layer of Hadoop did undergo some major changes before the release of its second version \autocite[p.~5]{vavilapalli2013apache}; for the sake of completeness and contextual understanding both versions are subsequently outlined.
+Adapting these principles \ac{HDFS} was created as a seamlessly integrated, integral part of the Hadoop system. 
+To implement the storage system, 
+Hadoop defines two services that form the infrastructure for \ac{HDFS} which runs on the nodes.
+Data in the file system is distributed among multiple \emph{datanodes} which store blocks of files.
+In the cluster there is exactly on \emph{namenode} service node which keeps track of where the blocks of each file are located and how they can be retrieved.
+Utilizing the principles of \emph{sharding} and \emph{replication}
+the files stored in \ac{HDFS} are split into blocks and saved on multiple \emph{datanodes}. 
+There can be a \emph{secondary namenode} which  mirrors the primary and can be act as a fail-over instance.
+Figure \ref{fig:hdfs_read} visualized this architecture 
+and illustrates how a client reads data from \ac{HDFS} 
+by first contacting the \emph{namenode} and requesting the block locations 
+and subsequently contacting the \emph{datanodes} directly to read the actual data.
+
+\begin{figure}[th]
+     {\centering\includegraphics[width=0.75\textwidth]{img/hddg_0302.png}\par}
+	\caption{\label{fig:hdfs_read}A client reading data from HDFS. Reprinted from \autocite[][Chap.~3]{white2015hadoop}}
+\end{figure}
 
 \subsubsection{Processing Framework}
 
-The first version of Hadoop was heavily influenced by a second important Google paper, \textcite[p.~82]{rajasekar2015survey}, introducing the batch processing algorithm MapReduce in 2004 \autocite{dean2004mapreduce}. Each MapReduce job $J: (M, R)$ with the map function $M: (k_1, v_1) \rightarrow list(k_2, v_2)$ and the reduce function $R: (k_2, list(v_2)) \rightarrow list(v_2)$ \autocite[p.~6]{dean2004mapreduce}. The job runner now calls $M$ for each data chunk in parallel on possibly many different nodes, resulting in the intermediate result. In a second step, upon completion of all map functions, the $v_2$ values are joined as a list by the value of their respective $k_2$, and subsequently passed to $R$, again running parallelized on multiple cluster nodes \autocite[p.~6]{dean2004mapreduce}. As outlined in the paper, a variety of data processing operations can be expressed very briefly and without concerning the programmer with the difficulties of writing a distributed, well-scaling algorithm \autocite[p.~6]{dean2004mapreduce}. The simplicity of the MapReduce pattern thus lead to a widespread adoption for various use cases across many industries as their primary batch processing framework, running on-top of Hadoop \autocite[p.~82]{rajasekar2015survey}.
+Building upon this storage layer is the processing layer, which serves as the interaction point for developers, data scientists and other users of the system. The processing layer of Hadoop did undergo some major changes before the release of its second version \autocite[p.~5]{vavilapalli2013apache}; for the sake of completeness and contextual understanding both versions are subsequently outlined.
+
+The first version of Hadoop was heavily influenced by a second important Google paper, \textcite[p.~82]{rajasekar2015survey}, introducing the batch processing algorithm MapReduce in 2004 \autocite{dean2004mapreduce}. Each MapReduce job $J: (M, R)$ with the map function $M: (k_1, v_1) \rightarrow list(k_2, v_2)$ and the reduce function $R: (k_2, list(v_2)) \rightarrow list(v_2)$ \autocite[p.~6]{dean2004mapreduce}. The job runner now calls $M$ for each data chunk in parallel on possibly many different nodes, resulting in the intermediate result. In a second step, upon completion of all map functions, the $v_2$ values are joined as a list by the value of their respective $k_2$, and subsequently passed to $R$, again running in parallel on multiple cluster nodes \autocite[p.~6]{dean2004mapreduce}. As outlined in the paper, a variety of data processing operations can be expressed very briefly and without concerning the programmer with the difficulties of writing a distributed, well-scaling algorithm \autocite[p.~6]{dean2004mapreduce}. The simplicity of the MapReduce pattern thus lead to a widespread adoption for various use cases across many industries as their primary batch processing framework, running on-top of Hadoop \autocite[p.~82]{rajasekar2015survey}.
 
 Although the MapReduce approach is largely suitable for its intended use case of web crawling, among others, it is however not generally the best programming model to solve arbitrary data analysis and processing tasks.
 As becomes obvious by the function definitions before, MapReduce jobs are limited to the analysis of isolated \enquote{data snippets}; finding or even investigating the relations and interdependence of larger data agglomeration quickly becomes a sophisticated, cumbersome task.
 
-Due to the tight coupling of Hadoop 1's storage and processing layer, the design of Hadoop was inherently limiting its merit and the extent of applicable use cases. Thus, \ac{YARN} was developed as an abstraction layer between the tradiional \ac{HDFS} storage layer and applications performing the data processing itself, creating a more flexible, powerful and even performant platform rendering the unintended use of MapReduce obsolete and limiting the scope of the MapReduce programming model to merely be one of the possible processing frameworks running on top of \ac{YARN} \autocite[p.~6]{vavilapalli2013apache}.
+Due to the tight coupling of Hadoop 1's storage and processing layer, the design of Hadoop was inherently limiting its merit and the extent of applicable use cases. Thus, \ac{YARN} was developed as an abstraction layer between the traditional \ac{HDFS} storage layer and applications performing the data processing itself, creating a more flexible, powerful and even performant platform rendering the unintended use of MapReduce obsolete and limiting the scope of the MapReduce programming model to merely be one of the possible processing frameworks running on top of \ac{YARN} \autocite[p.~6]{vavilapalli2013apache}.
 
 In 2013, \ac{YARN} was incorporated into the second major release of Hadoop \autocite{hadoopreleasenotes}, completing the transformation of Hadoop from being a limited, MapReduce-focused data processing platform to become a single, extensively applicable \ac{BDA} platform. Due to this change, creating processing frameworks as well as applications on top of Hadoop became easier to implement and maintain; furthermore, it stopped the abuse of MapReduce in earlier implementations, where massive data duplication and transient storage was required to mitigate the shortcomings of MapReduce for the holistic inspection and analysis of stored data.
+Now higher level application frameworks can leverage \ac{YARN} to schedule arbitrary jobs on Hadoop and process the data stored in \ac{HDFS} with more diverse algorithms.
+
+To implement the \ac{YARN} infrastructure, Hadoop introduces two services that can be deployed on the cluster nodes.
+The \emph{ResourceManager} accepts application requests from clients and handles the management of computation resources in the cluster.
+It can allocate new \emph{containers} on the cluster nodes, which encapsulate resources and execte the application .
+There is only one \emph{ResourceManager} in the cluster.
+Each node that performs data processing is running the \emph{NodeManager} service which receives jobs and executes them inside a \emph{container}.
+If more resources are needed dynamically, the application running on the \emph{NodeManager} can request more resources from the \emph{ResourceManager}.
+Figure \ref{fig:yarn} illustrates this behavior in a typical application execution.
+
+\begin{figure}[th]
+     {\centering\includegraphics[width=0.75\textwidth]{img/hddg_0402.png}\par}
+	\caption{\label{fig:yarn}How YARN runs an application. Reprinted from \autocite[][Chap.~4]{white2015hadoop}}
+\end{figure}
+
 
 \subsection{Hadoop Ecosystem}
 \label{hadoop-ecosystem}
@@ -127,12 +160,12 @@ can be grouped into the following categories.\autocite{7105553}
 
 \paragraph{Data Integration}
 Data integration tools such as \emph{Apache Flume} or \emph{Apache Sqoop} manage the transfer 
-and import of large amounts of data from relational databases\autocite{apache2018sqoop}, 
-event streams and other data sources\autocite{apache2017flume} into a Hadoop cluster.
+and import of large amounts of data from relational databases \autocite{apache2018sqoop}, 
+event streams and other data sources \autocite{apache2017flume} into a Hadoop cluster.
 
 \paragraph{Resource and Cluster Management}
 Management tools like \emph{Apache Ambari} and \emph{Apache ZooKeeper} simplify the deployment, 
-monitoring and general management of Hadoop clusters. 
+monitoring and general management of Hadoop clusters. A detailed description of management systems for Hadoop can be found in section \vref{sec:design:clustermanagement}.
 Together with tools like \emph{\ac{YARN}} for low level resource management, 
 and \emph{Apache Oozie} for workflow management, these tools partially define how Hadoop is used 
 and are important to keep a cluster efficient.
@@ -258,7 +291,23 @@ The points above discussed in-depth both the advantages and disadvantages of Had
 
 \subsection{Hadoop at the DHBW}
 
-TODO welche beziehung hat die DH aktuell zu Hadoop, gibt es bereits verwendung? themen überschneidung in Vorlesungen?
+Being a academic institution with direct contact to 
+business partners in the technology industry the \ac{DHBW} has an interest to cover recent developments in a variety of fields in their lectures and studies.
+Since Big Data is a currently emerging topic,
+the \ac{DHBW} Stuttgart currently offers multiple that lectures incorporate this topic.
+In the course of study in applied computer science within the faculty of engineering there are three courses that are integrated into the studies for the Bachelor of Science.
+The lecture \emph{Databases II} deals with concrete database implementations and current developments in databases as well as with Data Warehouse architectures and implementations.
+\autocite[][]{DHBW2017aidbii}
+The optional lecture \emph{Cloud-Applications, DevOps and Big Data} also covers the ecosystem for Big Data in cloud environments. \autocite[][]{DHBW2017aiwf}
+Furthermore there is another optional course on \emph{Data Science} introduced in 2018 which covers the basics in algorithms, metrics and tools needed to perform data analysis and machine learning.
+These courses already include Hadoop in their lecture content.
+
+Starting with the winter semester 2018 the \ac{DHBW} Mannheim will offer a new course of study in \emph{Data Science} for the Bachelor of Science at the faculty of business.
+It will focus on a datacentric view and addresses current developments in businesses that make Big data the foundation for decision making and income generation.
+\autocite[][]{DHBW2018mannheimdatascience}
+
+Each of the mentioned courses holds the possibility to come in contact with Hadoop in some way and explore current topics in its development, functionality and usability - be it from a business point of view, from a technical system view or with a concrete example case that can be explored hands-on by the students.
+By having a possibility to use Hadoop within the \ac{DHBW} students and teachers alike can profit in the way Hadoop can be taught.
 
 \section{Legal Boundaries}
 \label{sec:fund:legal}
@@ -266,7 +315,7 @@ TODO welche beziehung hat die DH aktuell zu Hadoop, gibt es bereits verwendung? 
 When a \ac{BDA} system is actively used, it handles data in diverse forms from many sources.
 Depending on the kind of data, there are different legal restriction 
 to the conditions of collection, storage and processing thereof.
-The main restrictive laws that are applicable for the \ac{DHBW} are the Euroean \ac{GDPR}, the German \ac{BDSG} and the \ac{HSchulDSV} Baden-Würtemberg.
+The main restrictive laws that are applicable for the \ac{DHBW} are the European \ac{GDPR}, the German \ac{BDSG} and the \ac{HSchulDSV} in Baden-Würtemberg.
 
 The \emph{\ac{HSchulDSV} in Baden-Würtemberg}  regulates which personal data the \ac{DHBW} may collect from students and how this data may be used.
 It permits the usage of personal data for \enquote{organizational or other purposes} and allows the creation of anonymized reports with it.
