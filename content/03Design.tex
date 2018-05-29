@@ -133,8 +133,6 @@ which makes it more comfortable to work with while performing the tests.
 \subsection{Manual Installation of Hadoop}
 \label{sec:design:manualinstall}
 
-TODO tested version
-
 The first possibility to install Hadoop onto a number of hosts 
 is to use the installation package provided by Apache them self \urlinline{https://hadoop.apache.org/releases.html}.
 This represents the most basic procedure of installation.
@@ -275,6 +273,8 @@ For the following test such a playbook is created.
 Alternatives are \emph{Puppet} \urlinline{https://puppet.com/} and \emph{Chef} \urlinline{https://www.chef.sh/} , which both use a central server to distribute the system configurations \autocite[][Chap. 1]{heap2016ansible}. 
 This increases the complexity of the deployment setup.
 Ansible avoids this and is therefore favourable for this test.
+
+The tested version of \ac{HDP} is 2.6.0.0 including Hadoop 
 
 \subsubsection{System Setup}
 
