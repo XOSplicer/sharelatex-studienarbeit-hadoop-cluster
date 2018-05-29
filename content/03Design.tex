@@ -354,14 +354,14 @@ The Ambari Cluster Manager can then be used to install Hadoop and other services
 
 \subsection{\acl{CDH}}
 
-Cloudera distributes an Hadoop management system called \ac{CDH}.
+Cloudera distributes an Hadoop management system called \ac{CDH} which makes use of \emph{Cloudera Manager} to deploy clusters.
 \enquote{CDH is Cloudera’s 100\% open source platform distribution, including Apache Hadoop and built specifically to meet enterprise demands.}\autocite[][]{cloudera2018cdh}
 It includes Hadoop and tools such as \emph{Apache HBase, Apache Hive, Apache Impala, Apache Kafka and Apache Spark}.
 Cloudera provides an docker image which can be used to easily evaluate the usability of \ac{CDH}.
 It contains \enquote{a single-host deployment of the Cloudera open-source distribution, including CDH and Cloudera Manager.} \autocite[][]{cloudera2018docker}
 It does not provide a full cluster installation, but only a test environment to evaluate the platform.
-
-Tested version is 
+Tested version is \ac{CDH} 5.7.0.
+It is important to note that using all features \emph{Cloudera Manager} requires a paid license, a 60 day trail version can also be obtained. \autocite[][p.~30]{wi2018managementsystems}
 
 \subsubsection{System Setup}
 
@@ -513,9 +513,9 @@ This scenario leads to the following steps regarding the deployment of the clust
     \item \textbf{Test Usage} 
         To verify that the previous steps were successful, it is necessary to tests that the Hadoop cluster can be used
         \begin{enumerate}
-            %\item Test that the master node can be reached from within the \ac{DHBW} network by connecting to it with a \ac{}
+            %\item Test that the master node can be reached from within the \ac{DHBW} network by connecting to it with a \ac{} and 
             
-            %TODO test connection to Hadoop master with hadoop client installed on workstation
+            % test connection to Hadoop master with hadoop client installed on workstation
             \item Test that \ac{HDFS} works by storing multiple, different sized files on the cluster file system.
             \item Test that MapReduce can be used to process data by running \emph{teragen} and \emph{terasort} on the cluster to create different amount of numbers and sort them. For example datasets with 100~\ac{MB}, 1~\ac{GB} and 5~\ac{GB} can be used for the tests.
         \end{enumerate}
