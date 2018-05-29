@@ -502,14 +502,13 @@ This scenario leads to the following steps regarding the deployment of the clust
         \item To select the hosts that should be included in the cluster, the \acp{FQDN} including a domain extension of all the \acp{VM} that have been created in the previous step should be provided.
         \item The \enquote{manual registration} option should be chosen, since otherwise an non-encrypted \ac{SSH} private key must be uploaded, which is unsafe.
         \item Next select the services and tools that should be included in the cluster installation. Hadoop is clearly mandatory, other tools that should be included are listed in \emph{Jonas Balsfullands' paper}. If Ambari detects unmet inter-dependencies, those should be corrected. 
-        \item TODO assign master node to all service masters, sec services to secondarys
+        \item 
+        TODO assign master node to all service masters, sec services to secondarys
         \item TODO select all client things to all nodes (datanode, nodemanager etc)
-        \item TODO configure all the services to the needs. when in doubt use defualt config. set passwords and resolve possible warnings
-        \item TODO let the installation run
+        \item TODO configure all the services to the needs. when in doubt use defualt config. set passwords (maybe common) and resolve possible warnings
+        The passwords that have been set for each individual service should be documented.
+        \item The installation then is being performed on the cluster.
     \end{enumerate}
-    TODO ,  when promted to select nodes use manual registaration: reason dont upload ssh private key for root access (maybe in chpt 4). also configure each service close to default with a common password 
-    
-    The passwords that have been set for each individual service should be documented.
     
     \item \textbf{Test Usage} 
         \begin{enumerate}
