@@ -199,9 +199,9 @@ can be followed.
         \item \texttt{mapred-site.xml} -- Here the settings for MapReduce are made. 
         It is instructed to use \ac{YARN} as the underlying framework.
         \item \texttt{slaves} -- This file is used on the master host to identify all the hosts 
-        that run an nodemanager or an datanode.
+        that run an NodeManager or an DataNode.
         Therefore the \acs{FQDN} of the master and the salve host are entered here.
-        \item \texttt{yarn-site.xml} -- This file describes the settings for \ac{YARN}. Here the master's \ac{FQDN} is entered as the resourcemanager and \ac{YARN} is bound to 0.0.0.0. 
+        \item \texttt{yarn-site.xml} -- This file describes the settings for \ac{YARN}. Here the master's \ac{FQDN} is entered as the ResourceManager and \ac{YARN} is bound to 0.0.0.0. 
         Furthermore the minimal allocation units for \ac{CPU} cores 
         as well as \ac{RAM} and their respective maximum allocation are defined. 
         This dictates how \ac{YARN} uses the resources of this host.
@@ -214,8 +214,8 @@ and the \texttt{hdfs-site.xml} is configured, so that \ac{HDFS} uses the attache
 
 Finally the \ac{HDFS} file systems on each host can be formatted to initialize the \ac{HDFS} storage.
 Then \ac{YARN} and \ac{HDFS}, as well as the MapReduce history server is started on the master, 
-which in turn start the namenode and resoucemanager on the master 
-as well as the datanoode and nodemanager on both the master and the slave.
+which in turn start the NameNode and resoucemanager on the master 
+as well as the DataNode and NodeManager on both the master and the slave.
 Now the cluster can be used to store data in \ac{HDFS} and run MapReduce jobs.
 
 \subsubsection{Tests}
@@ -415,10 +415,10 @@ For this project a master-slave architecture is chosen.
 Ambari promotes a sever-agent architecture, 
 where the user can interact with Ambari on the server host 
 and deploy the Hadoop cluster to all agent hosts.
-Hadoop uses an cluster setup in which one server distributes and manages \ac{YARN} jobs (the \ac{YARN} resourcemanager), 
-and keeps track of where data is stored data \ac{HDFS} (the \ac{HDFS} namenode).
+Hadoop uses an cluster setup in which one server distributes and manages \ac{YARN} jobs (the \ac{YARN} ResourceManager), 
+and keeps track of where data is stored data \ac{HDFS} (the \ac{HDFS} NameNode).
 This can be considered a master.
-To increase availability it is possible to choose a secondary master which replicates the \ac{HDFS} namenode.
+To increase availability it is possible to choose a secondary master which replicates the \ac{HDFS} NameNode.
 Figure \vref{fig:architecture} depicts the architecture that follows from these prerequisites.
 
 \begin{figure}
@@ -430,7 +430,7 @@ Figure \vref{fig:architecture} depicts the architecture that follows from these 
 
 As discovered in section \vref{sec:ambari:errors} there should be at least 50 \ac{GB} of disk space on each node, 
 just for Ambari and Hadoop to be installed.
-For \ac{HDFS} data storage an additional volume should be attached to each of the \ac{HDFS} datanodes.
+For \ac{HDFS} data storage an additional volume should be attached to each of the \ac{HDFS} DataNodes.
 
 The size of the used \acs{VM} should be the one with the most memory, 
 as this is the resource where the overhead of having multiple \acs{VM} has the most impact.
@@ -453,7 +453,7 @@ Tom White recommends the following specification for a single node in a cluster,
 However the given OpenStack environment does not allow the allocation of such amounts of resources, and has no possibility to use dedicated hardware. 
 Therefore the maximum sized \acs{VM} should be used, and each be given an equal share of the available storage.
 
-In case that it is only possible to allocate a small number of \acp{VM}, it can be useful to also assign the role of a datanode and nodemanager to the master node. This allows the available resources on the master node not only to be used for management purposes but also for processing.
+In case that it is only possible to allocate a small number of \acp{VM}, it can be useful to also assign the role of a DataNode and NodeManager to the master node. This allows the available resources on the master node not only to be used for management purposes but also for processing.
 
 \section{Execution Plan}
 
@@ -503,11 +503,8 @@ This scenario leads to the following steps regarding the deployment of the clust
         \item The \enquote{manual registration} option should be chosen, since otherwise an non-encrypted \ac{SSH} private key must be uploaded, which is unsafe.
         \item Next select the services and tools that should be included in the cluster installation. Hadoop is clearly mandatory, other tools that should be included are listed in \emph{Jonas Balsfullands' paper}. If Ambari detects unmet inter-dependencies, those should be corrected. 
         \item Assign the \emph{master} host to inhabit the master role in each service. If the service offers the possibility to register a secondary, fallback master this should be assigned to the \emph{secondary master} host.
-        \item Assing slave nodes and clients to all of the nodes. This includes \emph{DataNodes} and \emph{NodeManager} and the Hadoop client tools.
-        \item Configure all the services to the needs for the clsuet
-        
-        TODO configure all the services to the needs. when in doubt use default configuration. set passwords (maybe common) and resolve possible warnings
-        The passwords that have been set for each individual service should be documented.
+        \item Assign slave nodes and clients to all of the nodes. This includes \emph{DataNodes} and \emph{NodeManager} and the Hadoop client tools.
+        \item Configure all the services to the needs for the cluster. Most default settings can be kept. No service should depend on external resources such as existing databases. Set passwords to the services where needed. The passwords that have been set for each individual service should be documented. Ambari checks the settings for soundness and possibly warnings can be resolved manually.
         \item The installation then is being performed on the cluster. All selected components are installed with the selected configuration.
     \end{enumerate}
     
