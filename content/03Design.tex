@@ -473,6 +473,7 @@ This scenario leads to the following steps regarding the deployment of the clust
         \item Create security groups which allow access with \ac{SSH}) to the hosts and via the web management portal to Ambari.
         \item Create an appropriate number of maximum sized \acp{VM} that are connected to both the internal and external network. Name them according to the names in \ref{fig:architecture}. Use a common domain, even if it is not officially registered. Provide some SSH credentials to log in.
         Assign the previously created security group to them.
+        Ubuntu 14.04 or 16.04 should be used as the operating system.
         \item Note down the assigned internal and external \ac{IP} addresses displayed by OpenStack.
         \item Create virtual disks and assign them to the nodes. They will be used to store \ac{HDFS} data on them.
     \end{enumerate}
@@ -498,10 +499,8 @@ This scenario leads to the following steps regarding the deployment of the clust
     \begin{enumerate}
         \item Connect to Ambari via the web interface on the master node. The complete installation can be done from there.
         \item Ambari offers an cluster installation dialogue that firsts asks for all necessary configuration and checks it for consistency. The dialogue's instructions can be followed to deploy a cluster. 
-        \item To select the hosts that should be inncluded in the cluster, the \acp{FQDN} including a domain extension 
-        
-        TODO enter the fqdns when asked which nodes to use of ALL hosts created before
-        \item Select "manual registration"
+        \item To select the hosts that should be included in the cluster, the \acp{FQDN} including a domain extension of all the \acp{VM} that have been created in the previous step should be provided.
+        \item The \enquote{manual registration} option should be chosen, since otherwise an non-encrypted \ac{SSH} private key must be uploaded, which is unsafe.
         \item TODO select minimal amount of components possible or the ones recommended by jonas.
         \item TODO assign master node to all service masters, sec services to secondarys
         \item TODO select all client things to all nodes (datanode, nodemanager etc)
