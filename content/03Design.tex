@@ -496,9 +496,11 @@ This scenario leads to the following steps regarding the deployment of the clust
     Next Hadoop itself, together with additional tools, can be deployed to the cluster using the Ambari cluster installation dialogue.
     
     \begin{enumerate}
-        \item TODO open the web gui of Ambari and login as admin/admin
-        \item TODO follow instructions to create a new cluster, with gui installer sinply follow instructions
-        \item TODO enter the fqdns when asked which nodes to use of ALL hosts created before
+        \item Connect to Ambari via the web interface on the master node. The complete installation can be done from there.
+        \item Ambari offers an cluster installation dialogue that firsts asks for all necessary configuration and checks it for consistency. The dialogue's instructions can be followed to deploy a cluster. 
+        \item To select the hosts that should be inncluded in the cluster, the \acp{FQDN} including a domain extension 
+        
+        TODO enter the fqdns when asked which nodes to use of ALL hosts created before
         \item Select "manual registration"
         \item TODO select minimal amount of components possible or the ones recommended by jonas.
         \item TODO assign master node to all service masters, sec services to secondarys
