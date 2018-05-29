@@ -467,7 +467,7 @@ This scenario leads to the following steps regarding the deployment of the clust
 
 \begin{enumerate}
     \item \textbf{\ac{VM} Creation in OpenStack}
-    As the first step, the cluster hosts need to be created in the OpenStack environment which
+    As the first step, the host \acp{VM} need to be created in the OpenStack environment which will form the cluster.
     \begin{enumerate}
         \item Create an internal network.
         \item Create security groups which allow access with \ac{SSH}) to the hosts and via the web management portal to Ambari.
@@ -477,8 +477,6 @@ This scenario leads to the following steps regarding the deployment of the clust
         \item Note down the assigned internal and external \ac{IP} addresses displayed by OpenStack.
         \item Create virtual disks and assign them to the nodes. They will be used to store \ac{HDFS} data on them.
     \end{enumerate}
-    TODO 
-
     
     \item \textbf{System Set-Up with Ansible} 
     In section \vref{sec:design:hdp_ambari_ansible} it has been shown that Ansible can be used to deploy \ac{HDP}. The Ansible playbook developed for this purpose can be adapted and used in the next steps.
@@ -509,6 +507,7 @@ This scenario leads to the following steps regarding the deployment of the clust
     \end{enumerate}
     
     \item \textbf{Test Usage} 
+        TODO
         \begin{enumerate}
             %\item Test that the master node can be reached from within the \ac{DHBW} network by connecting to it with a \ac{}
             
@@ -516,8 +515,6 @@ This scenario leads to the following steps regarding the deployment of the clust
             \item Test that \ac{HDFS} works by storing multiple, different sized files on the cluster file system.
             \item Test that MapReduce can be used to process data by running \emph{teragen} and \emph{terasort} on the cluster to create different amount of numbers and sort them.
         \end{enumerate}
-        
-    TODO
 
 \end{enumerate}
 
