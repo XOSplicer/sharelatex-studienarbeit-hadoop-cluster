@@ -71,7 +71,7 @@ on the given infrastructure will be researched.
 This will lead to an decision on the method that should be used for the cluster at the \ac{DHBW}.
 
 \subsubsection{Cluster Management Systems}
-
+\label{sec:design:clustermanagement}
 To deploy Hadoop on an cluster there are two general approaches. Either the Hadoop distribution package is installed and configured manually on each node or an management tool is used to perform automatic deployment and configuration. 
 Since the manual installation process is error prone (as visible in section \ref{sec:design:manualinstall}) and needs some know-how,
 it is  more easy for the user to utilize an management system for the cluster.
@@ -83,6 +83,7 @@ Usually the management system also provides an graphical user interface to perfo
 
 To provide the components the management system downloads them from a given binary distribution repository. The installation can be performed via remote access from the management server to the nodes. Monitoring gives valuable information to the cluster user, such as capacity an utilization of computational power and storage.
 
+\subsubsection{Hadoop Distributions}
 Some vendors choose to bundle a management system 
 together with an specific version of Hadoop and additional Tools. They offer this bundle mostly as binary packages which are considered \emph{distributions} of Hadoop.
 For system maintainers this holds the benefit that no compilation from source is necessary and the versions of the tools are adjusted to work with each other. 
