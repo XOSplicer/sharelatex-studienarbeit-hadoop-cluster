@@ -254,6 +254,8 @@ will lead to even more complex installation and configuration processes which ag
 TODO describe HDP, Ambari, list version matrix
 eg \autocite[][]{hortonworks2018ambari}
 
+The tested version of \ac{HDP} is 2.6.3.0 includes Ambari version 2.6.0 and Hadoop (TODO which Hadoop version).
+
 \paragraph{Ansible}
 \emph{Ansible} is an agent-less configuration management tool.
 It ensures that the state of a computer system matches a desired and described state.
@@ -273,8 +275,6 @@ For the following test such a playbook is created.
 Alternatives are \emph{Puppet} \urlinline{https://puppet.com/} and \emph{Chef} \urlinline{https://www.chef.sh/} , which both use a central server to distribute the system configurations \autocite[][Chap. 1]{heap2016ansible}. 
 This increases the complexity of the deployment setup.
 Ansible avoids this and is therefore favourable for this test.
-
-The tested version of \ac{HDP} is 2.6.0.0 including Hadoop 
 
 \subsubsection{System Setup}
 
@@ -361,7 +361,7 @@ Cloudera provides an docker image which can be used to easily evaluate the usabi
 It contains \enquote{a single-host deployment of the Cloudera open-source distribution, including CDH and Cloudera Manager.} \autocite[][]{cloudera2018docker}
 It does not provide a full cluster installation, but only a test environment to evaluate the platform.
 
-TODO list version matrix
+Tested version is 
 
 \subsubsection{System Setup}
 
