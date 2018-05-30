@@ -30,14 +30,14 @@ In order to compare the most important properties of traditional \acp{RDBMS} wit
 
 \begin{table}[hbt]
 	\begin{tabular}{lll}
-	  Characteristic & Traditional \ac{RDBMS} & \acl{BDA} \\[0.5em]
-	  \hline\\[-0.5em]
-	  Data Size & Gigabytes & Petabytes \\[0.5em]
-	  Access Type & Interactive and Batch & Batch only \\[0.5em]
-	  Update Frequency & Continuously Read and Write & Write once, Read continuously \\[0.5em]
-	  Schema Type & Static & Dynamic \\[0.5em]
-	  Data Integrity & High & Low \\[0.5em]
-	  Scaling Behavior & Nonlinear & Linear \\[0.5em]
+	  Characteristic & Traditional \ac{RDBMS} & \acl{BDA} \\
+	  \hline
+	  Data Size & Gigabytes & Petabytes \\
+	  Access Type & Interactive and Batch & Batch only \\
+	  Update Frequency & Continuously Read and Write & Write once, Read continuously \\
+	  Schema Type & Static & Dynamic \\
+	  Data Integrity & High & Low \\
+	  Scaling Behavior & Nonlinear & Linear \\
 	\end{tabular}
 	\caption{Comparison of typical properties of \acl{RDBMS}s and \acl{BDA}. Reprinted with adaptions from \textcite[p.~80]{rajasekar2015survey}}
 	\label{fig-dbms-vs-bda}
@@ -215,12 +215,8 @@ Since MapReduce is not the optimal choice for every type of workload as discusse
 This wraps up the most common and interesting categories of \ac{BDA} tools compatible with Hadoop. It is important to note that many tools do not fit perfectly into these categories and can often be used for multiple purposes. \emph{Jonas Balsfulland}'s report investigates the characteristics and usage of these tools in more detail.
 
 \subsection{Value Assessment}
-\label{hadoop-assessment}
-The general problems and challenges with \ac{BDA} systems seen in section  \vref{sota-bda-challenges}
-can also be evaluated in the context of the Hadoop platform.
-
-\subsection{Value Assessment}
 \label{sota-hadoop-assessment}
+\label{hadoop-assessment}
 
 This subsection focuses on setting the previously acquired knowledge relating \ac{BIA} and \ac{BDA} into the context of Hadoop, especially with regards to the feasibility of Hadoop to support various kinds of workloads and cover a high percentage of desired use cases. Therefore, the general problems and challenges of \ac{BDA} (cmp. \autoref{sota-bda-challenges}) are related to Hadoop's specific properties and components in the following.
 
@@ -248,9 +244,9 @@ The four categories of technical challenges are wrapped up in \autoref{fig-hadoo
 	\begin{tabular}{p{3cm} p{7cm} p{7cm}}
 	  Characteristic & Advantages & Disadvantages \\
 	  \hline
-	  Scalability & Supports thousands of nodes for data storage and processing. Scales almost linearly with the cluster size. High block size enables the efficient, distibuted storage of vast amounts of data & Only suitable for \enquote{real} Big Data applications, not for general purpose data storage (e.g. small files)  \\
+	  Scalability & Supports thousands of nodes for data storage and processing. Scales almost linearly with the cluster size. High block size enables the efficient, distibuted storage of vast amounts of data & Only suitable for \enquote{real} Big Data applications, not for general purpose data storage (e.g. small files)\\
 	  Fault Tolerance & Resilient to the failure of nodes, both in software and hardware (excluding the name node) & The name node serves as a single point of failure, however a secondary name node can be configured to mitigate the data loss\\
-	  Quality of Data & The original data is persistently stored, and through its append-only approach, Hadoop clusters may reconstruct the data available at any point in time in order to retrospectively perform analyses & High effort for the analytics engineers to harmonize the unstructured data on-read. Mitigated in part by frameworks supporting these efforts. However, the accuracy and precision of stored data cannot be guaranteed and relies on the using organizations' policies and e.g. process steps before data is uploaded to the cluster \\
+	  Quality of Data & The original data is persistently stored, and through its append-only approach, Hadoop clusters may reconstruct the data available at any point in time in order to retrospectively perform analyses & High effort for the analytics engineers to harmonize the unstructured data on-read. Mitigated in part by frameworks supporting these efforts. However, the accuracy and precision of stored data cannot be guaranteed and relies on the using organizations' policies and e.g. process steps before data is uploaded to the cluster\\
 	  Heterogeniety of data & Large ecosystem of applications based on \ac{HDFS} and \ac{YARN}, covering nearly all common use cases & Parts of the ecosystem are non-mature and still under development
 	\end{tabular}}
 	\caption{Technical Advantages and Disadvantages of the Apache Hadoop Platform. Partly adapted from \textcite[p.~82]{rajasekar2015survey}}
@@ -280,30 +276,17 @@ It will focus on a datacentric view and addresses current developments in busine
 Each of the mentioned courses holds the possibility to come in contact with Hadoop in some way and explore current topics in its development, functionality and usability - be it from a business point of view, from a technical system view or with a concrete example case that can be explored hands-on by the students.
 By having a possibility to use Hadoop within the \ac{DHBW} students and teachers alike can profit in the way Hadoop can be taught.
 
-\section{Legal Boundaries}
+\section{Political and Legal Framework}
 \label{sec:fund:legal}
 \label{sota-pol-legal}
 
-When a \ac{BDA} system is actively used, it handles data in diverse forms from many sources.
-Depending on the kind of data, there are different legal restriction 
-to the conditions of collection, storage and processing thereof.
-The main restrictive laws that are applicable for the \ac{DHBW} are the European \ac{GDPR}, the German \ac{BDSG} and the \ac{HSchulDSV} in Baden-Würtemberg.
+When a \ac{BDA} system is actively used, it handles data in diverse forms from many sources. Depending on the kind of data, there are different legal restriction to the conditions of collection, storage and processing thereof. The major restrictive laws that are applicable for the \ac{DHBW} are the European \ac{GDPR}, the German \ac{BDSG}\,--\,the Federal Data Protection Act\,--\,and the \ac{HSchulDSV} Baden-Würtemberg\,--\,the data protection regulations for institutions of higher education.
 
-The \emph{\ac{HSchulDSV} in Baden-Würtemberg}  regulates which personal data the \ac{DHBW} may collect from students and how this data may be used.
-It permits the usage of personal data for \enquote{organizational or other purposes} and allows the creation of anonymized reports with it.
-Personal information about students must be deleted 40 years the the student was exmatriculated. 
-\autocite[][§1, §11, §12]{bw2012hcchuldsv}
+The \emph{\ac{HSchulDSV} in Baden-Würtemberg} regulates which personal data the \ac{DHBW} may collect from students and how this data may be used. It permits the usage of personal data for \enquote{organizational or other purposes} and allows the creation of anonymized reports with it \autocite[§1, §11, §12]{bw2012hcchuldsv}. Personal information about students must be deleted 40 years the the student was exmatriculated \autocite[§1, §11, §12]{bw2012hcchuldsv}.
 
-The \emph{German \ac{BDSG}} regulates the general principles in data protection in Germany 
-and restricts the collection, usage and storage of personal data.
-In general no more data than necessary may be collected and the usage requires consent. 
-The user can demand the deletion of their data.
-\autocite[][§1ff., §12ff.]{bmjv2009bdsg}
+The \emph{German \ac{BDSG}} regulates the general principles of data protection in Germany and restricts the collection, usage and storage of personal data. In general, no more data than necessary may be collected and the processing of data requires the explicit user's consent \autocite[§1ff.]{bmjv2009bdsg}. The user may also demand the deletion of their data at any time \autocite[§12ff.]{bmjv2009bdsg}.
 
-The \emph{European \ac{GDPR}} is largely based
-on the German regulation and introduces more control for users about their personal data.
-\autocite{eu2016gdpr}
-The \ac{GDPR} Portal \autocite{trunomi2018gdpr} summarizes the key changes that were introduced:
+The \emph{European \ac{GDPR}} is largely based on the German regulation and introduces more control for users about their personal data \autocite{eu2016gdpr}. The \ac{GDPR} Portal \autocite{trunomi2018gdpr} summarizes the key changes introduced by the new regulations:
 \begin{itemize}
     \item \emph{Penalties} may be imposed for organizations that breach the \ac{GDPR}.
     \item \emph{Consent} from users must be requested to collection, storage and usage of personal data. The consent may be revoked.
@@ -315,21 +298,14 @@ The \ac{GDPR} Portal \autocite{trunomi2018gdpr} summarizes the key changes that 
 \end{itemize}
 
 Especially the \emph{right to be forgotten} is problematic in \ac{BDA} systems
-since data can be stored in an unstructured, immutable way. 
-This restricts the possibility to keep track of which data entries are actually stored in the system. Deletion is therefore practically impossibly. 
-To circumvent this restriction, extra caution is necessary to decide which data should be used on the platform. 
+since data can be stored in an unstructured, immutable way. This restricts the possibility to keep track of which data entries are actually stored in the system. Deletion is therefore practically impossibly. To circumvent this restriction, extra caution is necessary to decide which data should be used on the platform. 
 
-The listed laws focus on personal data, but might also be applicable to anonymized data that is derived from personal data.
-Table \ref{fig-legal-data-kinds} describes which restrictions regulations apply to which type of data from which source. 
-An example for the kind of data is given.
-Note that open source personal data sets are fundamentally not available 
-since public, unrestricted distribution of personal data contradicts with the \ac{GDPR}
-and no public initiative to collect such data is known to the author.
+The listed laws focus on personal data, but might also be applicable to anonymized data that is derived from personal data. Table \ref{fig-legal-data-kinds} describes which restrictions and/or regulations apply to which type of data from which source. An example for the kind of data is given. Note that open source personal data sets are fundamentally not available since public, unrestricted distribution of personal data contradicts with the \ac{GDPR} and no public initiative to collect such data is known to the author.
 
 \begin{table}[hbt]
 \resizebox{\textwidth}{!}{%
 	\begin{tabular}{l|lll}
-	  & \textbf{Internal} & \textbf{Open Source} &  \textbf{Closed Source} \\[0.5em]
+	  & \textbf{Internal} & \textbf{Open Source} & \textbf{Closed Source} \\[0.5em]
 	  \hline
 	  \textbf{Personal} & \acs{GDPR} \& \acs{HSchulDSV} & N/A & \acs{GDPR} \& license \\
 	  & e.g. student data & N/A & e.g. advertising contacts\\[0.5em]
@@ -339,13 +315,8 @@ and no public initiative to collect such data is known to the author.
 	  & e.g. server monitoring & e.g. weather data & e.g. bought datasets \\
 	\end{tabular}%
 	}
-	\caption{Kinds of data and how their use might be restricted by legislation or licenses.}
+	\caption{Different combinations of data sources and types with their respectively applicable laws, regulations and licenses in the context of the \acs{DHBW}}
 	\label{fig-legal-data-kinds}
 \end{table}
 
-
-When the Hadoop cluster is used at the \ac{DHBW} it might by accessed by administrative staff, lecturers and students.
-However as Hadoop had not been designed with advanced user access 
-and the ability to delete single records in mind,  
-care must be taken to which data is stored on the Hadoop cluster.
-The least restrictive solution is to use a public, open source, non-personal dataset, such as academic research data, and to avoid the storage of personal student data on the cluster. 
+When the Hadoop cluster is used at the \ac{DHBW}, it might by accessed by administrative staff, lecturers and students. However, as Hadoop had not been designed with advanced user access and the ability to delete single records in mind, care must be taken regarding the question which types of data from which data sources should be stored on the cluster. The least restrictive solution is to use a public, open source, non-personal data set, such as academic research data, while avoiding the storage of personal student data on the cluster.
