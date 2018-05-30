@@ -9,7 +9,7 @@ This cluster utilizes \emph{OpenStack} \urlinline{https://www.openstack.org/} to
 OpenStack is an open source project to manage cloud computing architectures.
 It enables the compositions of compute elements (virtual machines), network elements (sub-nets and routers), 
 and storage elements (virtual disks) to form a virtual computing environment.
-The OpenStack management web interface can be accesses at \urlinline{https://controller.c4.dhbw-mannheim.de/} from within the \ac{DHBW} network. 
+The OpenStack management web interface can be accesses from within the \ac{DHBW} network. 
 The \emph{Cloud Computing Competence Center} at the \ac{DHBW} Mannheim  manages the cluster computer.
 
 The OpenStack environment is shared between multiple user groups, 
@@ -194,7 +194,7 @@ can be followed.
         Here the settings for the file system is set to use the \ac{FQDN} of the master to connect to.
         \item \texttt{hadoop-env.sh} -- This file describes all the environment variables used while running Hadoop. 
         Here \texttt{JAVA\_HOME} is set to the same value used above.
-        \item \texttt{hdfs-site.xml} This file describes how \ac{HDFS} is configured. 
+        \item \texttt{hdfs-site.xml} -- This file describes how \ac{HDFS} is configured. 
         The storage directory is set to a persistent folder
         and \ac{HDFS} is instructed to bind to the \ac{IP} address 0.0.0.0 
         which means the file system is accessible from all network interfaces.
@@ -361,9 +361,11 @@ Cloudera distributes an Hadoop management system called \ac{CDH} which makes use
 It includes Hadoop and tools such as \emph{Apache HBase, Apache Hive, Apache Impala, Apache Kafka and Apache Spark}.
 Cloudera provides an docker image which can be used to easily evaluate the usability of \ac{CDH}.
 It contains \enquote{a single-host deployment of the Cloudera open-source distribution, including CDH and Cloudera Manager.} \autocite[][]{cloudera2018docker}
-It does not provide a full cluster installation, but only a test environment to evaluate the platform.
-Tested version is \ac{CDH} 5.7.0.
-It is important to note that using all features \emph{Cloudera Manager} requires a paid license, a 60 day trail version can also be obtained. \autocite[][p.~30]{wi2018managementsystems}
+It does not provide a full cluster installation, but only a test environment to evaluate the platform that is contained inside the docker container.
+
+It is important to note that using all features of \emph{Cloudera Manager} requires a paid license when installed on a cluster system. A 60 day trail version can also be obtained, which  \textcite[][p.~39]{wi2018managementsystems} point out, might be sufficient for usage at the \ac{DHBW}.
+
+The tested version is \ac{CDH} 5.7.0 which can be obtained from \emph{DockerHub}, a repository for Docker container images.
 
 \subsubsection{System Setup}
 
