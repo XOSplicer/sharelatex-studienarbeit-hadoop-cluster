@@ -302,21 +302,27 @@ since data can be stored in an unstructured, immutable way. This restricts the p
 
 The listed laws focus on personal data, but might also be applicable to anonymized data that is derived from personal data. Table \ref{fig-legal-data-kinds} describes which restrictions and/or regulations apply to which type of data from which source. An example for the kind of data is given. Note that open source personal data sets are fundamentally not available since public, unrestricted distribution of personal data contradicts with the \ac{GDPR} and no public initiative to collect such data is known to the author.
 
+
+\newcommand{\myoldarraystretch}{\arraystretch}
+\renewcommand{\arraystretch}{1}
+
 \begin{table}[hbt]
 \resizebox{\textwidth}{!}{%
-	\begin{tabular}{l|lll}
-	  & \textbf{Internal} & \textbf{Open Source} & \textbf{Closed Source} \\[0.5em]
-	  \hline
-	  \textbf{Personal} & \acs{GDPR} \& \acs{HSchulDSV} & N/A & \acs{GDPR} \& license \\
-	  & e.g. student data & N/A & e.g. advertising contacts\\[0.5em]
-	  \textbf{Anonymized} & possibly \acs{GDPR} \& \acs{HSchulDSV} & possibly \acs{GDPR} & possibly \acs{GDPR} \& license\\
-	  & e.g. lecture statistics & e.g. social media graphs & e.g. advertising statistics\\[0.5em]
-	  \textbf{Non-Personal} & unrestricted & unrestricted & restricted by license \\
+	\begin{tabular}{llll}
+	  Kind of Data & Internal & Open Source & Closed Source \\[0.5em]
+	  \hline\\[-0.5em]
+	  Personal & \acs{GDPR} \& \acs{HSchulDSV} & N/A & \acs{GDPR} \& license \\
+	  & e.g. student data & N/A & e.g. advertising contacts\\[1em]
+	  Anonymized & possibly \acs{GDPR} \& \acs{HSchulDSV} & possibly \acs{GDPR} & possibly \acs{GDPR} \& license\\
+	  & e.g. lecture statistics & e.g. social media graphs & e.g. advertising statistics\\[1em]
+	  Non-Personal & unrestricted & unrestricted & restricted by license \\
 	  & e.g. server monitoring & e.g. weather data & e.g. bought datasets \\
 	\end{tabular}%
 	}
 	\caption{Different combinations of data sources and types with their respectively applicable laws, regulations and licenses in the context of the \acs{DHBW}}
 	\label{fig-legal-data-kinds}
 \end{table}
+
+\renewcommand{\arraystretch}{\myoldarraystretch}
 
 When the Hadoop cluster is used at the \ac{DHBW}, it might by accessed by administrative staff, lecturers and students. However, as Hadoop had not been designed with advanced user access and the ability to delete single records in mind, care must be taken regarding the question which types of data from which data sources should be stored on the cluster. The least restrictive solution is to use a public, open source, non-personal data set, such as academic research data, while avoiding the storage of personal student data on the cluster.
