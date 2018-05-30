@@ -30,14 +30,14 @@ In order to compare the most important properties of traditional \acp{RDBMS} wit
 
 \begin{table}[hbt]
 	\begin{tabular}{lll}
-	  Characteristic & Traditional \ac{RDBMS} & \acl{BDA} \\
-	  \hline
-	  Data Size & Gigabytes & Petabytes \\
-	  Access Type & Interactive and Batch & Batch only \\
-	  Update Frequency & Continuously Read and Write & Write once, Read continuously \\
-	  Schema Type & Static & Dynamic \\
-	  Data Integrity & High & Low \\
-	  Scaling Behavior & Nonlinear & Linear \\
+	  Characteristic & Traditional \ac{RDBMS} & \acl{BDA} \\[0.5em]
+	  \hline\\[-0.5em]
+	  Data Size & Gigabytes & Petabytes \\[0.5em]
+	  Access Type & Interactive and Batch & Batch only \\[0.5em]
+	  Update Frequency & Continuously Read and Write & Write once, Read continuously \\[0.5em]
+	  Schema Type & Static & Dynamic \\[0.5em]
+	  Data Integrity & High & Low \\[0.5em]
+	  Scaling Behavior & Nonlinear & Linear \\[0.5em]
 	\end{tabular}
 	\caption{Comparison of typical properties of \acl{RDBMS}s and \acl{BDA}. Reprinted with adaptions from \textcite[p.~80]{rajasekar2015survey}}
 	\label{fig-dbms-vs-bda}
@@ -85,15 +85,17 @@ The following four major categories of technical challenges have been identified
 \subsection{Exemplary Case Studies}
 \label{sota-bda-use-cases}
 
-Before investigating specific use cases for Hadoop in detail in \autoref{exec-ucr}, a short introduction into possible applications of \ac{BDA} in general should be given. Therefore, some exemplary case studies found in literature are summarized in this subsection.
+to give a brief overview of how the concept of \ac{BDA} is employed in business, some exemplary case studies found in literature are summarized in this subsection.
 
-In \textcite{he2013social}, the authors describe the very prominent use case of social media analysis. The virtually unlimited data source of social media websites poses as the prime example of how mainly unstructured data may be aggregated in order to derive insights from it. In this case study, a competitive analysis of the three major american Pizza chains is performed, harvesting the \ac{BIA} 2.0 technique of text mining. This case study is particularly interesting as almost every company will need to address its customers in the public. Moreover, with social media the data source is not only nearly unlimited and updated in real-time but also publicly available, easing the cumbersome task of data acquisition. The real-time property of social media data allows businesses to react to sentiment changes of their customer base, e.g. following a new product announcement, in real-time.
+In \textcite{he2013social}, the authors describe the very prominent use case of social media analysis. The virtually unlimited data source of social media websites poses as the prime example of how mainly unstructured data may be aggregated in order to derive insights from it. In this case study, a competitive analysis of the three major American Pizza chains is performed, harvesting the \ac{BIA} 2.0 technique of text mining. This case study is particularly interesting as almost every company will need to address its customers in the public. Moreover, with social media the data source is not only nearly unlimited and updated in real-time but also publicly available, easing the cumbersome task of data acquisition. The real-time property of social media data allows businesses to react to sentiment changes of their customer base, e.g. following a new product announcement, in real-time.
 
 Furthermore, a case study regarding the prediction of near-term trends is described by \textcite[p.~64]{mcafeebig}. Specifically, the researchers therein aimed to model the future movements of housing prices in the urban centers of the United States; as a sophisticated model of the \emph{National Association of Realtors} existed to serve as a benchmark, this case study allows to draw real conclusions regarding the possibility of \ac{BDA} to simplify businesses' research capabilities. In this case, the publicly available search data allowed to state more precise assumptions about future price movements than the results of the \enquote{professional} benchmark relying on extensive historical data and a quite complex model.
 
 
+
 \section{Hadoop}
 \label{sota-hadoop}
+The \emph{Apache Hadoop Project} is a collection of tools that serves as a widespread platform for \ac{BDA} use cases nowadays. Contrary to common belief, Hadoop itself aims not to replace traditional \ac{OLTP} and \ac{OLAP} systems but rather complement them by offering a common platform for \ac{BDA} use cases that rely on such a massive data scale such old systems are not capable of processing anymore. Therefore, \autoref{sota-hadoop-components} will provide a brief overview of the foundational components among a short outline of the history of Hadoop. Moreover, an overview over the Hadoop ecosystem and its most prominent applications is given in \autoref{sota-hadoop-ecosystem}. Subsequently, these insights will be set into context in , creating a value assessment of Hadoop in the scope of \ac{BDA} and \ac{BIA}.
 
 The \emph{Apache Hadoop Project} is a collection of tools that serves as a widespread platform for \ac{BDA} use cases nowadays. Contrary to common belief, Hadoop itself aims not to replace traditional \ac{OLTP} and \ac{OLAP} systems but rather complement them by offering a common platform for \ac{BDA} use cases that rely on such a massive data scale such old systems are not capable of processing anymore. Therefore, \autoref{hadoop-components} will provide a brief overview of the foundational components among a short outline of the history of Hadoop. Moreover, an overview over the Hadoop ecosystem and its most prominent applications is given in \autoref{hadoop-ecosystem}.
 Subsequently, these insights will be set into context in \autoref{hadoop-assessment}, creating a value assessment of Hadoop in the scope of \ac{BDA} and \ac{BIA}.
@@ -316,6 +318,7 @@ By having a possibility to use Hadoop within the \ac{DHBW} students and teachers
 
 \section{Legal Boundaries}
 \label{sec:fund:legal}
+\label{sota-pol-legal}
 
 When a \ac{BDA} system is actively used, it handles data in diverse forms from many sources.
 Depending on the kind of data, there are different legal restriction 
