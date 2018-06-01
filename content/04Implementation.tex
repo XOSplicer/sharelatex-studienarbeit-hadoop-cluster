@@ -26,23 +26,19 @@ TODO sec group considerations, which ports in out? \autocite[][]{hortonworks2017
 
 \begin{table}[hbt]
 \resizebox{\textwidth}{!}{%
-	\begin{tabular}{lrl}
-	  Network Name &  & Unit\\
+	\begin{tabular}{lll}
+	  Network Name & Sub-networks & Descirption\\
 	  \hline
-	  Instances & 10 & \\
-	  \acp{VCPU} & 20 & \\
-	  \acs{RAM} & 51200 & \ac{MB} \\
-	  Floating \ac{IP} Addresses & 10 & \\
-	  Security Groups & 10 & \\
-	  Volumes & 10 & \\
-	  Volume Storage & 1000 & \ac{GB}
+	  ext-net-201 & 141.72.191.0/24 & Pre-existing connection to \ac{DHBW} internal network\\
+	  ext-net-112 & 192.168.112.0/20 & Pre-existing connection with unknown destination\\
+	  int-net-10 & 10.100.10.0/24 &  New internal network used by Hadoop\\
 	\end{tabular}%
 	}
-	\caption{Available resources for the project in the \ac{DHBW} OpenStack environment}
-	\label{fig:networks_ranges}
+	\caption{Sub-Networks with in the projekt in OpenStack}
+	\label{fig:networks_subnets}
 \end{table}
 
-TODO
+TODO new internal network chosen from private address space
 
 \subsubsection{Virtual Machines}
 
