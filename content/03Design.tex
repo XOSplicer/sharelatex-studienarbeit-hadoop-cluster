@@ -5,31 +5,30 @@
 \section{Analysis of Cluster Environment}
 
 The Hadoop cluster will be installed on the cluster computer at the \ac{DHBW} Mannheim.
-This cluster utilizes \emph{OpenStack} \urlinline{https://www.openstack.org/} to provide resources to its users. 
-OpenStack is an open source project to manage cloud computing architectures.
+This cluster utilizes \emph{OpenStack} to provide resources to its users. 
+OpenStack is an open source project to manage public and private cloud computing architectures \autocite[][]{openstack}. 
 It enables the compositions of compute elements (virtual machines), network elements (sub-nets and routers), 
 and storage elements (virtual disks) to form a virtual computing environment.
-The OpenStack management web interface can be accesses at \urlinline{https://controller.c4.dhbw-mannheim.de/} from within the \ac{DHBW} network. 
-The \emph{Cloud Computing Competence Center} at the \ac{DHBW} Mannheim  manages the cluster computer.
+The OpenStack management web interface can be accesses from within the \ac{DHBW} network. 
+The \emph{Cloud Computing Competence Center} at the \ac{DHBW} Mannheim  manages the cluster computer \autocite[][]{dhbwmannheim20184c}.
 
 The OpenStack environment is shared between multiple user groups, 
 which each is given a certain amount of resources. 
 For this project the student group is given a limited amount of resources.
-Only 20 virtual \ac{CPU} cores, 50 \ac{GB} \ac{RAM} and 1 \ac{TB} of storage are dedicated to the project.
+Only 20 virtual \ac{CPU} cores, 50~\ac{GB} \ac{RAM} and 1 \ac{TB} of storage are dedicated to the project.
 This resources can be used to allocate instances of \acp{VM} in pre-defined units and assign virtual disks to them.
 The \acp{VM} can be connected to the network of the \ac{DHBW} and can be interconnected using internal, virtual networks.
 Firewall restrictions can be set through group policies, which can be assigned to the \acp{VM}. 
 When creating a new \ac{VM} most of these settings must be supplied. 
 Furthermore the operating system flavour can be chosen and a \ac{SSH} login key can be provided.
-Among others \emph{Ubuntu 16.04 LTS} \urlinline{https://www.ubuntu.com/server} can be used which is compatible with Hadoop in general.
+Among others \emph{Ubuntu Server 16.04 LTS} can be used which is compatible with Hadoop in general.
 
 The Hadoop cluster be deployed on multiple interconnected \acp{VM} in the OpenStack environment that can be accessed from the university network.
 
 The connection to the \ac{DHBW} network gives some restrictions: \acp{VM} can only be accessed from the university network and not from the Internet.
-From a security point of view this decreases potential attac vectors.
+From a security point of view this decreases potential attack vectors.
 However for development access it is restricting, 
 since the developer needs to be on premise. 
-
 
 \section{Analysis of Requirements}
 
@@ -43,7 +42,6 @@ There are three main user groups that can be determined for the Hadoop cluster:
 \end{itemize}
 
 In his paper, \emph{Philipp Winter} discusses more possible use cases for the cluster. It focuses on the educational usability in lectures.
-(TODO write about this paper, what is it really)
 Main users are lecturers and students to perform analytics of various data on the cluster.
 
 Sicklinger et al. also did a requirements analysis for an Hadoop cluster at the \ac{DHBW}. 
@@ -67,7 +65,8 @@ Still it can be required for the person performing the installation to have gene
 
 After the requirements are settled,
 the possibilities of how Hadoop can be installed 
-on the given infrastructure will be researched.
+on the given infrastructure will be researched. Therefore first a understanding how Hadoop clusters can be deployed and maintained more efficiently using \emph{Cluster Management Systems} is established.
+Then possible ways to install Hadoop are evaluated experimentally and features and drawbacks of each approach are laid out.
 This will lead to an decision on the method that should be used for the cluster at the \ac{DHBW}.
 
 \subsubsection{Cluster Management Systems}
@@ -146,7 +145,7 @@ Since no step in this step is predetermined or automated, this method does not r
 It does not provide a \emph{management system} for Hadoop.
 
 \subsubsection{System Setup}
-For the installation two \acs{VM} are used, utilizing two virtual \ac{CPU} cores and eight \ac{GB} \ac{RAM} and a 20 \ac{GB} storage drive. 
+For the installation two \acs{VM} are used, utilizing two virtual \ac{CPU} cores and eight \ac{GB} \ac{RAM} and a 20~\ac{GB} storage drive. 
 Ubuntu Serve 16.04.3 \ac{LTS} is used as the operating system. 
 The machines are connected to the public Internet and to each other using two network interfaces each.
 
@@ -168,7 +167,7 @@ First the system of the master is configured. Therefore the following steps are 
 The slave system uses mainly the same configuration but is altered slightly.
 No new \ac{SSH} key is generated, but the public key of the previously
 generated one is entered into the \texttt{authorized\_key} file. 
-Furthermore an additional 70 \ac{GB} hard drive is attached 
+Furthermore an additional 70~\ac{GB} hard drive is attached 
 and mounted to store working data.
 
 After the base system is configured, Hadoop can be installed on both machines
@@ -193,7 +192,7 @@ can be followed.
         Here the settings for the file system is set to use the \ac{FQDN} of the master to connect to.
         \item \texttt{hadoop-env.sh} -- This file describes all the environment variables used while running Hadoop. 
         Here \texttt{JAVA\_HOME} is set to the same value used above.
-        \item \texttt{hdfs-site.xml} This file describes how \ac{HDFS} is configured. 
+        \item \texttt{hdfs-site.xml} -- This file describes how \ac{HDFS} is configured. 
         The storage directory is set to a persistent folder
         and \ac{HDFS} is instructed to bind to the \ac{IP} address 0.0.0.0 
         which means the file system is accessible from all network interfaces.
@@ -226,7 +225,7 @@ that can be used for demonstration purposes of the Hadoop cluster.
 The provided data includes weather data produced by the \ac{NCDC} and programs that can be run on Hadoop to analyze this data. 
 Storing this data in \ac{HDFS} and running the MapReduce jobs lead to the discovery of erroneous configurations in the cluster.
 
-Further test included the execution \emph{teragen} and \emph{terasort} \autocite[][]{omally2008terasort}, which generates a variable amount of numbers and sorts them, in this case 5 \ac{GB} of data. 
+Further test included the execution \emph{teragen} and \emph{terasort} \autocite[][]{omally2008terasort}, which generates a variable amount of numbers and sorts them, in this case 5~\ac{GB} of data. 
 The generation  was successful, however the sorting failed due to an repeated connection timeout, which could not be resolved.
 
 \subsubsection{Errors and Lessons Learned}
@@ -252,12 +251,12 @@ will lead to even more complex installation and configuration processes which ag
 
 \subsection{\acl{HDP} with Ambari deployed with Ansible}
 \label{sec:design:hdp_ambari_ansible}
-TODO describe HDP, Ambari, list version matrix
+TODO describe HDP, Ambari,
 eg \autocite[][]{hortonworks2018ambari}
 
-The tested version of \ac{HDP} is 2.6.3.0 includes Ambari version 2.6.0 and Hadoop (TODO which Hadoop version).
-
-\paragraph{Ansible}
+The tested version of \ac{HDP} is 2.6.3.0 includes Ambari version 2.6.0.
+  
+\subsubsection{Ansible}
 \emph{Ansible} is an agent-less configuration management tool.
 It ensures that the state of a computer system matches a desired and described state.
 This includes operating system setting, service availability and configuration, 
@@ -273,17 +272,17 @@ A playbook can be split up into \emph{roles} to separate the configurations of d
 Roles can be assigned to multiple hosts and can be combined if a hosts has multiple duties.
 For the following test such a playbook is created.
 
-Alternatives are \emph{Puppet} \urlinline{https://puppet.com/} and \emph{Chef} \urlinline{https://www.chef.sh/} , which both use a central server to distribute the system configurations \autocite[][Chap. 1]{heap2016ansible}. 
+Alternatives are \emph{Puppet} \autocite[][]{puppet} and \emph{Chef} \autocite[][]{chef} , which both use a central server to distribute the system configurations \autocite[][Chap. 1]{heap2016ansible}. 
 This increases the complexity of the deployment setup.
 Ansible avoids this and is therefore favourable for this test.
 
 \subsubsection{System Setup}
 
 As in the sections before the OpenStack BW-Cloud is used for a test deployment.
-Three \acs{VM} are started, each with 20 \ac{GB} disk space, Ubuntu 16.04 \ac{LTS}, an public \ac{IP} address. 
+Three \acs{VM} are started, each with 20~\ac{GB} disk space, Ubuntu 16.04 \ac{LTS}, an public \ac{IP} address. 
 The hosts are connected with an internal \ac{IP} network.
-One \ac{VM} are used as the Ambari and Hadoop master node, having 2 virtual \ac{CPU} cores and 4 \ac{GB} \ac{RAM}.
-Two \acs{VM} are used as slave nodes with 4 \acs{CPU} and 8 \ac{GB} \ac{RAM} as well as 2 \acs{CPU} and 4 \ac{GB} \ac{RAM} respectively.
+One \ac{VM} are used as the Ambari and Hadoop master node, having 2 virtual \ac{CPU} cores and 4~\ac{GB} \ac{RAM}.
+Two \acs{VM} are used as slave nodes with 4 \acs{CPU} and 8~\ac{GB} \ac{RAM} as well as 2 \acs{CPU} and 4~\ac{GB} \ac{RAM} respectively.
 
 Ansible is used to perform all system configuration. 
 However before Ansible can be used, Python 2.7 needs to be installed on the hosts.
@@ -330,7 +329,7 @@ The cluster set-up dialogue then continues to install the cluster.
 \subsection{Errors and Lessons Learned}
 \label{sec:ambari:errors}
 Since a lot of services such as Spark are recommended to be installed, 
-the 20 \ac{GB} disk of the master is filled completely and the installation of the cluster fails. At least 50 \ac{GB} are recommended for an correct installation.
+the 20~\ac{GB} disk of the master is filled completely and the installation of the cluster fails. At least 50~\ac{GB} are recommended for an correct installation.
 Therefore thee installation fails and the Hadoop deployment can not be functionally tested for now.
 
 Ambari needs to be provided with the \ac{FQDN} of an host 
@@ -360,16 +359,18 @@ Cloudera distributes an Hadoop management system called \ac{CDH} which makes use
 It includes Hadoop and tools such as \emph{Apache HBase, Apache Hive, Apache Impala, Apache Kafka and Apache Spark}.
 Cloudera provides an docker image which can be used to easily evaluate the usability of \ac{CDH}.
 It contains \enquote{a single-host deployment of the Cloudera open-source distribution, including CDH and Cloudera Manager.} \autocite[][]{cloudera2018docker}
-It does not provide a full cluster installation, but only a test environment to evaluate the platform.
-Tested version is \ac{CDH} 5.7.0.
-It is important to note that using all features \emph{Cloudera Manager} requires a paid license, a 60 day trail version can also be obtained. \autocite[][p.~30]{wi2018managementsystems}
+It does not provide a full cluster installation, but only a test environment to evaluate the platform that is contained inside the docker container.
+
+It is important to note that using all features of \emph{Cloudera Manager} requires a paid license when installed on a cluster system. A 60 day trail version can also be obtained, which  \textcite[][p.~39]{wi2018managementsystems} point out, might be sufficient for usage at the \ac{DHBW}.
+
+The tested version is \ac{CDH} 5.7.0 which can be obtained from \emph{DockerHub}, a repository for Docker container images.
 
 \subsubsection{System Setup}
 
 As in the previous section, BW-Cloud will be used for installing a test setup.
 Since the Docker image only runs on a single host, this host should have as many resources as available in the testing environment.
 Therefore the largest available \ac{VM} preset is used, which consists of 2 virtual \ac{CPU} cores, 
-4 \ac{GB} \ac{RAM}, and 20 \ac{GB} storage. The operating is again Ubuntu 16.04 \ac{LTS}, 
+4~\ac{GB} \ac{RAM}, and 20~\ac{GB} storage. The operating is again Ubuntu 16.04 \ac{LTS}, 
 and the host is accessible via the Internet. 
 Cloudera describes how Docker can be installed and the test image can be started, 
 these instructions are followed. \autocite[][]{cloudera2018docker}
@@ -433,7 +434,7 @@ Figure \vref{fig:architecture} depicts the architecture that follows from these 
 	\caption{\label{fig:architecture}Proposed Architecture}
 \end{figure}
 
-As discovered in section \vref{sec:ambari:errors} there should be at least 50 \ac{GB} of disk space on each node, 
+As discovered in section \vref{sec:ambari:errors} there should be at least 50~\ac{GB} of disk space on each node, 
 just for Ambari and Hadoop to be installed.
 For \ac{HDFS} data storage an additional volume should be attached to each of the \ac{HDFS} DataNodes.
 
@@ -475,7 +476,7 @@ This scenario leads to the following steps regarding the deployment of the clust
     As the first step, the host \acp{VM} need to be created in the OpenStack environment which will form the cluster.
     \begin{enumerate}
         \item Create an internal network.
-        \item Create security groups which allow access with \ac{SSH}) to the hosts and via the web management portal to Ambari.
+        \item Create security groups which allow access with \ac{SSH} to the hosts and via the web management portal to Ambari.
         \item Create an appropriate number of maximum sized \acp{VM} that are connected to both the internal and external network. Name them according to the names in \ref{fig:architecture}. Use a common domain, even if it is not officially registered. Provide some SSH credentials to log in.
         Assign the previously created security group to them.
         Ubuntu 14.04 or 16.04 should be used as the operating system.

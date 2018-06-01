@@ -7,7 +7,7 @@
 \PassOptionsToPackage{hyphens}{url}\usepackage[hidelinks=true]{hyperref}
  % hidelinks=true verhindert rote Ränder bei Links im Dokument.
  
- \newcommand{\urlinline}[1]{(\textsf{\footnotesize{\url{{#1}}}})}
+ \newcommand{\urlinline}[1]{\textsf{\footnotesize{\url{{#1}}}}}
 
 % Zwei eigene Befehle zum Setzen von Autor und Titel. Ausserdem werden die PDF-Informationen richtig gesetzt.
 \newcommand{\titel}[1]{\def\dertitel{#1}\hypersetup{pdftitle={#1}}}
@@ -111,6 +111,8 @@
 \usepackage{booktabs}			% bessere Tabs
 \usepackage{array}
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlength{\tabcolsep}{10pt}
+\renewcommand{\arraystretch}{1.5}
 
 %--------------------------
 %		Tikz diagram library
