@@ -15,12 +15,28 @@ TODO
 
 TODO do the math on resources
 
-TODO sec group considerations, which ports in out?
+\begin{table}[hbt]
+\resizebox{\textwidth}{!}{%
+	\begin{tabular}{lrl}
+	  Resource Type & Amount & Unit\\
+	  \hline
+	  Instances & 10 & \\
+	  \acps{VCPU} & 20 & \\
+	  \acs{RAM} & 51200 & \ac{MB} \\
+	  Floating \ac{IP} Addresses & 10 & \\
+	  Security Groups & 10 & \\
+	  Volumes & 10 & \\
+	  Volume Storage & 1000 & \ac{GB}
+	\end{tabular}%
+	}
+	\caption{Available resources for the project in the \ac{DHBW} OpenStack environment}
+	\label{fig:resources_openstack}
+\end{table}
 
 \begin{table}[hbt]
 \resizebox{\textwidth}{!}{%
-	\begin{tabular}{llll}
-	  Instance Flavor Name & VCPUs & \ac{RAM} & Root Disk Size \\
+	\begin{tabular}{lrrr}
+	  Instance Flavor Name & \acps{VCPU} & \ac{RAM} & Root Disk Size \\
 	  \hline
 	  m1.nano & 1 & 64~\ac{MB} & 1~\ac{GB} \\
 	  m1.tiny & 1 & 512~\ac{MB} & 5~\ac{GB} \\
@@ -33,6 +49,12 @@ TODO sec group considerations, which ports in out?
 	\caption{Available instance sizes in the \ac{DHBW} OpenStack environment}
 	\label{fig:instance_sizes}
 \end{table}
+
+TODO sec group considerations, which ports in out? \autocite[][]{hortonworks2017reference}
+
+
+
+
 
 
 \subsection{Execution}
