@@ -6,11 +6,17 @@ TODO short intro to sections to come
 
 \section{Infrastructure Set-Up in OpenStack}
 
-\subsection{Preparation}
-
-TODO
-
+TODO short intro
     The OpenStack management web interface can be accesses at \urlinline{https://controller.c4.dhbw-mannheim.de/} from within the \ac{DHBW} network. 
+
+\subsection{Execution}
+
+\subsubsection{Firewall Rules}
+
+TODO sec group considerations, which ports in out? \autocite[][]{hortonworks2017reference}
+
+\subsubsection{Network}
+
 
 \begin{figure}[hbt]
   {\centering\includegraphics[width=0.8\textwidth]{{img/network_topology}.png}\par}
@@ -18,6 +24,27 @@ TODO
   \label{fig:network_topology}
 \end{figure}
 
+\begin{table}[hbt]
+\resizebox{\textwidth}{!}{%
+	\begin{tabular}{lrl}
+	  Network Name &  & Unit\\
+	  \hline
+	  Instances & 10 & \\
+	  \acp{VCPU} & 20 & \\
+	  \acs{RAM} & 51200 & \ac{MB} \\
+	  Floating \ac{IP} Addresses & 10 & \\
+	  Security Groups & 10 & \\
+	  Volumes & 10 & \\
+	  Volume Storage & 1000 & \ac{GB}
+	\end{tabular}%
+	}
+	\caption{Available resources for the project in the \ac{DHBW} OpenStack environment}
+	\label{fig:networks_ranges}
+\end{table}
+
+TODO
+
+\subsubsection{Virtual Machines}
 
 TODO do the math on resources
 
@@ -56,15 +83,13 @@ TODO do the math on resources
 	\label{fig:instance_sizes}
 \end{table}
 
-TODO sec group considerations, which ports in out? \autocite[][]{hortonworks2017reference}
-
-
-
-
-
-\subsection{Execution}
+\subsubsection{Storage}
 
 TODO
+create disks
+assing them
+format them
+ansible will be used to mount them
 
 \subsection{Encountered Issues and Lessons Learned}
 
@@ -74,9 +99,6 @@ TODO Network connection unstable leading to more difficult environment with regu
 
 TODO Internal errors within openstack (temporary) where not enough resources could be allocated to get the requested VMs, later resolved
 
-TODO as expected the larger root partition of 80 GB was enough for the selected services
-
-TODO memory on master node was exceeded even with not all services runnig (only)
 
 \section{System Set-Up with Ansible}
 
@@ -85,6 +107,10 @@ TODO memory on master node was exceeded even with not all services runnig (only)
 \subsection{Execution}
 
 \subsection{Encountered Issues and Lessons Learned}
+
+TODO as expected the larger root partition of 80 GB was enough for the selected services
+
+TODO memory on master node was exceeded even with not all services runnig (only)
 
 
 \section{Hadoop Set-Up with Ambari}
