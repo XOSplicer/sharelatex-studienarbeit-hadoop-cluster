@@ -12,16 +12,23 @@ Suggestions for future projects how better results might be achieved is given in
 
 \section{Infrastructure Set-Up in OpenStack}
 
-The foundation for the cluster architecture that has been ilustrated in figure \vref{fig:architecture}
+The foundation for the cluster architecture that has been illustrated in figure \vref{fig:architecture} are the host \acp{VM}, their storage and the network that connects them.
+In the course of this process some minor adaptions are made to the proposed architecture.
+Especially the \texttt{hadoop-master-0} node now also runs the \ac{HDFS} Datanode and YARN Nodemanager service and therefore has a storage volume attached to it.
+
+
 To set up the cluster the web interface of OpenStack can be used, which is accessible at
 \urlinline{https://controller.c4.dhbw-mannheim.de/} from within the \ac{DHBW} network.
-
+Each operation on the infrastructure can be performed within this interface.
 
 \subsection{Execution}
 
 \subsubsection{Firewall Rules}
 
-TODO sec group considerations, which ports in out? \autocite[][]{hortonworks2017reference}
+TODO sec group considerations, which ports in out? 
+default: out is open, in is only ping and ssh on 22
+hadoop: detailed view \autocite[][]{hortonworks2017reference}, but for easier development temporary all ports incoming open. most important: 8080 for ambari
+
 
 \subsubsection{Network}
 
@@ -136,6 +143,8 @@ TODO explain and maybe print this particular playbook yes yes print it with expl
 TODO dhbw cloud is unreliable af
 
 TODO process is way too hard for and too long for students to do in a lecture without depper understanding of sysadmin  
+
+Abweichen von architecture war dumm, da memory knapp durch zu viele prozesse
 
 
 
