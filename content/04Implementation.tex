@@ -3,16 +3,19 @@
 \label{chap:impl}
 
 The previous chapter yielded a general execution plan that shall implemented in the coming 
-section while utilizing the cluster computer at the \ac{DHBW}. For each implementation detail the specifically chosen values are given during the process. Each of the steps holds 
+section while utilizing the cluster computer at the \ac{DHBW}. 
+For each implementation detail the specifically chosen values are given during the process. Each of the steps holds 
 the possibilities for errors which will also be evaluated.
 The outcome of the taken steps is only a partially functional Hadoop cluster.
-The reasons for this 
-
+The reasons and implications for this restricted outcome are given.
+Suggestions for future projects how better results might be achieved is given in the end.
 
 \section{Infrastructure Set-Up in OpenStack}
 
-TODO short intro
-    The OpenStack management web interface can be accesses at \urlinline{https://controller.c4.dhbw-mannheim.de/} from within the \ac{DHBW} network. 
+The foundation for the cluster architecture that has been ilustrated in figure \vref{fig:architecture}
+To set up the cluster the web interface of OpenStack can be used, which is accessible at
+\urlinline{https://controller.c4.dhbw-mannheim.de/} from within the \ac{DHBW} network.
+
 
 \subsection{Execution}
 
@@ -50,7 +53,8 @@ TODO new internal network chosen from private address space (defined in RFC~1918
 TODO do the math on resources
 
 \begin{table}[hbt]
-\resizebox{\textwidth}{!}{%
+\centering
+\resizebox{0.8\textwidth}{!}{%
 	\begin{tabular}{lrl}
 	  Resource Type & Amount & Unit\\
 	  \hline
@@ -68,7 +72,8 @@ TODO do the math on resources
 \end{table}
 
 \begin{table}[hbt]
-\resizebox{\textwidth}{!}{%
+\centering
+\resizebox{0.8\textwidth}{!}{%
 	\begin{tabular}{lrrr}
 	  Instance Flavor Name & \acp{VCPU} & \ac{RAM} & Root Disk Size \\
 	  \hline
