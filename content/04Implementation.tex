@@ -32,20 +32,19 @@ hadoop: detailed view \autocite[][]{hortonworks2017reference}, but for easier de
 
 \subsubsection{Network}
 
+TODO new internal network chosen from private address space (defined in RFC~1918 by the the Internet Engineering Task Force \autocite[][]{ietf1996rfc1918})
 
-\begin{figure}[hbt]
-  {\centering\includegraphics[width=0.8\textwidth]{{img/network_topology}.png}\par}
-  \caption{Network topology created in OpenStack}
-  \label{fig:network_topology}
-\end{figure}
+TODO connetio to outside network nedded for general access, (only DH)
+
+TODO describe each of the networks
 
 \begin{table}[hbt]
 \resizebox{\textwidth}{!}{%
 	\begin{tabular}{lll}
 	  Network Name & Sub-networks & Descirption\\
 	  \hline
-	  ext-net-201 & 141.72.191.0/24 & Pre-existing connection to \ac{DHBW} internal network\\
-	  ext-net-112 & 192.168.112.0/20 & Pre-existing connection with unknown destination\\
+	  ext-net-201 & 141.72.191.0/24 & Pre-configured connection to \ac{DHBW} internal network\\
+	  ext-net-112 & 192.168.112.0/20 & Pre-configured connection with unknown destination\\
 	  int-net-10 & 10.100.10.0/24 &  New internal network used by Hadoop\\
 	\end{tabular}%
 	}
@@ -53,15 +52,39 @@ hadoop: detailed view \autocite[][]{hortonworks2017reference}, but for easier de
 	\label{fig:networks_subnets}
 \end{table}
 
-TODO new internal network chosen from private address space (defined in RFC~1918 by the the Internet Engineering Task Force \autocite[][]{ietf1996rfc1918})
+\begin{figure}[hbt]
+  {\centering\includegraphics[width=0.8\textwidth]{{img/network_topology}.png}\par}
+  \caption{Network topology created in OpenStack}
+  \label{fig:network_topology}
+\end{figure}
+
+
+TODO fqdns respective to proposed architecture but with .dhbw ending which is necessary later on
 
 \subsubsection{Virtual Machines}
 
-TODO do the math on resources
+TODO describe flavors
+\ac{VCPU}
 
 \begin{table}[hbt]
 \centering
-\resizebox{0.8\textwidth}{!}{%
+	\begin{tabular}{lrrr}
+	  Instance Flavor Name & \acp{VCPU} & \ac{RAM} & Root Disk Size \\
+	  \hline
+	  m1.nano & 1 & 64~\ac{MB} & 1~\ac{GB} \\
+	  m1.tiny & 1 & 512~\ac{MB} & 5~\ac{GB} \\
+	  m1.small & 1 & 1~\ac{GB} & 10~\ac{GB} \\
+	  m1.medium & 2 & 2~\ac{GB} & 20~\ac{GB} \\
+	  m1.large & 4 & 4~\ac{GB} & 40~\ac{GB} \\
+	  m1.xlarge & 8 & 8~\ac{GB} & 80~\ac{GB} \\
+	\end{tabular}%
+	\caption{Available instance sizes in the \ac{DHBW} OpenStack environment}
+	\label{fig:instance_sizes}
+\end{table}
+
+
+\begin{table}[hbt]
+\centering
 	\begin{tabular}{lrl}
 	  Resource Type & Amount & Unit\\
 	  \hline
@@ -73,28 +96,17 @@ TODO do the math on resources
 	  Volumes & 10 & \\
 	  Volume Storage & 1000 & \ac{GB}
 	\end{tabular}%
-	}
 	\caption{Available resources for the project in the \ac{DHBW} OpenStack environment}
 	\label{fig:resources_openstack}
 \end{table}
 
-\begin{table}[hbt]
-\centering
-\resizebox{0.8\textwidth}{!}{%
-	\begin{tabular}{lrrr}
-	  Instance Flavor Name & \acp{VCPU} & \ac{RAM} & Root Disk Size \\
-	  \hline
-	  m1.nano & 1 & 64~\ac{MB} & 1~\ac{GB} \\
-	  m1.tiny & 1 & 512~\ac{MB} & 5~\ac{GB} \\
-	  m1.small & 1 & 1~\ac{GB} & 10~\ac{GB} \\
-	  m1.medium & 2 & 2~\ac{GB} & 20~\ac{GB} \\
-	  m1.large & 4 & 4~\ac{GB} & 40~\ac{GB} \\
-	  m1.xlarge & 8 & 8~\ac{GB} & 80~\ac{GB} \\
-	\end{tabular}%
-	}
-	\caption{Available instance sizes in the \ac{DHBW} OpenStack environment}
-	\label{fig:instance_sizes}
-\end{table}
+
+TODO do the math on resources, ratio of cores to ram of 1core:1GB with all flavors above incl small , 
+which means with 20 available cores a maximum of 20 GB can be used.
+Best solution which maximizes use of resources and created the biggest hosts is as follows
+master: xlarge
+sec: xlarge
+slave:  large
 
 \subsubsection{Storage}
 
