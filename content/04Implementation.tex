@@ -17,7 +17,22 @@ TODO do the math on resources
 
 TODO sec group considerations, which ports in out?
 
-
+\begin{table}[hbt]
+\resizebox{\textwidth}{!}{%
+	\begin{tabular}{llll}
+	  Instance Flavor Name & VCPUs & \ac{RAM} & Root Disk Size \\
+	  \hline
+	  m1.nano & 1 & 64~\ac{MB} & 1~\ac{GB} \\
+	  m1.tiny & 1 & 512~\ac{MB} & 5~\ac{GB} \\
+	  m1.small & 1 & 1~\ac{GB} & 10~\ac{GB} \\
+	  m1.medium & 2 & 2~\ac{GB} & 20~\ac{GB} \\
+	  m1.large & 4 & 4~\ac{GB} & 40~\ac{GB} \\
+	  m1.xlarge & 8 & 8~\ac{GB} & 80~\ac{GB} \\
+	\end{tabular}%
+	}
+	\caption{Available instance sizes in the \ac{DHBW} OpenStack environment}
+	\label{fig:instance_sizes}
+\end{table}
 
 
 \subsection{Execution}
