@@ -176,15 +176,23 @@ literary none?
 \subsection{Preparation}
 
 After the Ambari software is installed on each host by Ansible, it can be utilized to set-up the Hadoop cluster and install additional tools as well.
-To do so the Ambari web interface is used that can be accessed on the master node on port 8080. The complete Hadoop setup is performed using the cluster deployment dialogue that Ambari offers.
+To do so the Ambari web interface is used that can be accessed on the master node on port 8080. The complete Hadoop setup is performed using the cluster deployment dialogue that Ambari offers. This process follows the execution plan closesly.
 
 \emph{Jonas Balsfulland} proposes in his paper which additional tools should be running on the cluster. Especially \emph{Spark 2, Storm, Hive and Pig} should be deployed.
 Ambari offers the possibility to set up all of these services automatically if they are selected during the cluster setup.
 
 \subsection{Execution}
-TODO
 
-TODO ,  when promted to select nodes use manual registaration: reason dont upload ssh private key for root access 
+The deployment dialogue in Ambari guides the user through the cluster installation.
+For this project a cluster named \emph{hadoopdhbw0} is created which installs \ac{HDP} Version 2.6.3.0. All binary packages are downloaded from Hortonworks repositories.
+The list of the \acp{FQDN} including the \emph{dhbw} domain of the three \acp{VM} are entered as cluster nodes. They are registered using \emph{manual registration} since the Ambari agent installed on all nodes is configured to contact the master node as the Ambari server. Furthermore this elides the necessity to upload an unencrypted \ac{SSH} key with root access to the servers.
+Ambari then checks the connectivity to each host and performs preliminary checks about the host that ensure the cluster can be deployed successfully.
+
+Next the services and additional tools are chosen which are installed on the cluster.
+For this setup \ac{HDFS}, \ac{YARN}, MapReduce2, Tez, Hive, Pig, ZooKeeper, Storm, SmartSense, Spark2, Slider and Ambari Metrics are selected. SmartSense, Slider, ZooKeeper and Ambari Metrics are enforced to be installed by Ambari.
+
+
+TODO
 
 TODO In the end Ambari monitoring web interface used to inspect the cluster and the services
 
@@ -230,7 +238,7 @@ All test finish successfully, which means that MapReduce jobs can be successfull
 Ambari offers the possibility to run \emph{service checks}, which run a small workload on one service and makes sure the cluster behaves correctly.
 These checks are run in this project for all services that are active.
 The services that are inactive due to memory shortage can not be tested.
-The checks are therefore performed for \ac{HDFS}, \ac{YARN}, MapReduce2, ZooKeeper, Storm, and Ambari Metrics. All of the checks are giving successful results, which only means the service works as expected. It does not show that all nodes are participating in the cluster for this service. 
+The checks are therefore performed  only for \ac{HDFS}, \ac{YARN}, MapReduce2, ZooKeeper, Storm, and Ambari Metrics. All of the checks are giving successful results, which only means the service works as expected. It does not show that all nodes are participating in the cluster for this service. 
 
 \section{Conclusion}
 
