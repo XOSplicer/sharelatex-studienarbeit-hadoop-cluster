@@ -192,21 +192,28 @@ Next the services and additional tools are chosen which are installed on the clu
 For this setup \ac{HDFS}, \ac{YARN}, MapReduce2, Tez, Hive, Pig, ZooKeeper, Storm, SmartSense, Spark2, Slider and Ambari Metrics are selected. SmartSense, Slider, ZooKeeper and Ambari Metrics are enforced to be installed by Ambari.
 
 
-TODO
+TODO firther installation
+
 
 TODO In the end Ambari monitoring web interface used to inspect the cluster and the services
 
 \subsection{Encountered Issues and Lessons Learned}
 TODO
 
-During the initial evalauation of Ambari in Chapter 3 it was figured that 
-TODO as expected the larger root partition of 80 GB was enough for the selected services
+During the initial evaluation of Ambari in section \vref{sec:design:hdp_ambari_ansible} it was figured that 20~\ac{GB} of root storage for the installation of the cluster is not enough. This approach uses a reduced set of services that are installed which leads to less disk space needed. Therefore the 80~\ac{GB} root volume is sufficient on all nodes as expected previously.
+
+During the installation process several issues regarding domain name resolution appeared.
+This is caused by the fact that no proper \ac{DNS} server is used to distribute the \acp{FQDN} 
+but rather the \texttt{hosts} file is altered in a way that the resolution works locally between all nodes. 
+This holds the possibility for configuration errors which lead which lead to the failure of the installation at first.
+The issues are fixed by adapting the \texttt{hosts} file to only perform name resolution for the selected \acp{FQDN} for the local, internal network. 
 
 TODO memory on master node was exceeded even with not all services runnig (only)
+TODO services crash due to memory shortage, generel unstable
+
 
 TODO network DNS issues lead to failing installation, ha been re-done
 
-TODO services crash due to memory shortage, generel unstable
 
 TODO struggkes to get a stable cluster, but mostly works
 HDFS WORKS
