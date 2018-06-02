@@ -167,15 +167,26 @@ TODO describe all roles and task within those roles
 
 \subsection{Execution}
 
+TODO enter ssh config
+
 Before a host can be used with Ansible, it needs to have \emph{Python 2} installed.
 Therefore a short script cat be run on each host, which updates the system, installs Python and reboots the system. This ensures all packages are up to date. The following bash script performs these tasks and also installs the \emph{python-apt} library which is necessary for Ansible to install more packages.
 
 \texttt{sudo apt-get update \&\& sudo apt-get -y upgrade\\
 sudo apt-get -y install python2.7 python-apt\\
-sudo reboot now\\}
+sudo reboot now}
+
+After this initial preparation of the hosts is done, 
+the Ansible inventory can is configured, so that all the specific variables of the host are set. These variables are the \ac{FQDN}, the internal \ac{IP} address, the network interface that is connected to the internal network and finally the \ac{UUID} of the partition that is used to store the \ac{HDFS} data.
 
 
-TODO prepare hosts by running setup script
+The \ac{FQDN} is again taken from the \texttt{ssh_config} file. 
+The internal \ac{IP} address is taken from the OpenStack web interface.
+To find the values for the other variables each host is accessed.
+
+
+
+
 find and configure host specific variables
 TODO apply ansible playbook
 reboot for safty
