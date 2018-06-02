@@ -180,10 +180,12 @@ After this initial preparation of the hosts is done,
 the Ansible inventory can is configured, so that all the specific variables of the host are set. These variables are the \ac{FQDN}, the internal \ac{IP} address, the network interface that is connected to the internal network and finally the \ac{UUID} of the partition that is used to store the \ac{HDFS} data.
 
 
-The \ac{FQDN} is again taken from the \texttt{ssh_config} file. 
+The \ac{FQDN} is again taken from the \texttt{ssh\_config} file. 
 The internal \ac{IP} address is taken from the OpenStack web interface.
 To find the values for the other variables each host is accessed.
-
+The internal network interface is the second Ethernet interface listed with the command \texttt{\$ ifconfig -a}. Typically it is called \texttt{ens4}, \texttt{ens6} or \texttt{ens7}.
+The \ac{UUID} of the storage volume is found by running \texttt{\$ sudo blkid}. 
+It reports the \ac{UUID} of all volumes. The one corresponding to the device that has been created in OpenStack can be found in the output. These variables are then entered into the \texttt{inventory.ini}
 
 
 
