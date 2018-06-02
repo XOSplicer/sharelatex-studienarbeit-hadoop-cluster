@@ -156,14 +156,21 @@ TODO also install Ansible locally
 TODO explain and maybe print this particular playbook yes yes print it with explanations
 TODO maybe appendix
 
-TODO describe all roles and task within those roles
+TODO describe all roles and task within those roles´
+
+TODO \vref{lst:ansibleall}
 
 \subsubsection{Common Set-Up Tasks}
 TODO
 
+TODO \vref{lst:ansiblecommon}
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
 
 \subsubsection{Specific Tasks for Ambari Server}
-TODO
+TODO \ver
 
 \subsubsection{Specific Tasks for Ambari Client}
 TODO 
@@ -293,7 +300,7 @@ To test this step a new file is uploaded to the directory and its content is the
 As suggested in the execution plan the \emph{terasort} program implemented by \textcite{omally2008terasort}, which is included in the Hadoop installtion on each cluster node, is used to check the sanity of the \ac{YARN}, \ac{HDFS} and MapReduce2 Services.
 First \emph{teragen} generates a variable amount of random numbers and stores them on \ac{HDFS}. Then \emph{terasort} sorts the numbers using MapReduce and stores the result.
 Finally \emph{teravalidate} checks that the numbers are indeed sorted correctly.
-To run the test the follig commands are used to create 5~\ac{GB} fo data:\\
+To run the test the follig commands are used to create 5~\ac{GB} fo data:
 
 \lstset{language=sh}
 \begin{lstlisting}[caption={Running Terasort as a test for YARN and HDFS}, label={lst:terasort}]
