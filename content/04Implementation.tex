@@ -37,11 +37,9 @@ allow all incoming requests.
 
 \subsubsection{Network}
 
-TODO new internal network chosen from private address space (defined in RFC~1918 by the the Internet Engineering Task Force \autocite[][]{ietf1996rfc1918})
-
-TODO connetio to outside network nedded for general access, (only DH)
-
-TODO describe each of the networks
+To enable an interconnection between the nodes in the cluster it is useful to create a private network between them.
+The network uses the address space of 10.100.10.0/24 which is a subnet of the private address space defined in RFC~1918 by the the Internet Engineering Task Force \autocite[][]{ietf1996rfc1918}.
+Figure \ref{fig:networks_subnets} lists all the networks that are available after the internal network is created. The \emph{int-net-10} si the internal network which all nodes connect to. Furthermore all nodes need to connect to the \emph{ext-net-201} network which allows them to connect to the Internet and makes them accessible from within the \ac{DHBW} network.
 
 \begin{table}[hbt]
 \resizebox{\textwidth}{!}{%
@@ -49,7 +47,7 @@ TODO describe each of the networks
 	  Network Name & Sub-networks & Description\\
 	  \hline
 	  ext-net-201 & 141.72.191.0/24 & Pre-configured connection to \ac{DHBW} internal network\\
-	  ext-net-112 & 192.168.112.0/20 & Pre-configured connection with unknown destination\\
+	  ext-net-112 & 192.168.112.0/20 & Pre-configured connection with unknown connectivity\\
 	  int-net-10 & 10.100.10.0/24 &  New internal network used by Hadoop\\
 	\end{tabular}%
 	}
@@ -62,6 +60,8 @@ TODO describe each of the networks
   \caption{Network topology created in OpenStack}
   \label{fig:network_topology}
 \end{figure}
+
+Once the nodes are created, the network topology looks like figure \ref{fig:network_topology}. The highlighted denotes the network connections that exists purely in OpenStack and have no physical connection to any outside network.
 
 
 TODO fqdns respective to proposed architecture but with .dhbw ending which is necessary later on
