@@ -208,11 +208,10 @@ but rather the \texttt{hosts} file is altered in a way that the resolution works
 This holds the possibility for configuration errors which lead which lead to the failure of the installation at first.
 The issues are fixed by adapting the \texttt{hosts} file to only perform name resolution for the selected \acp{FQDN} for the local, internal network. 
 
+
+One major issue is encountered when Ambari tries to start all services: 
 TODO memory on master node was exceeded even with not all services runnig (only)
 TODO services crash due to memory shortage, generel unstable
-
-
-TODO network DNS issues lead to failing installation, ha been re-done
 
 
 TODO struggkes to get a stable cluster, but mostly works
