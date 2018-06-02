@@ -12,6 +12,8 @@ Suggestions for future projects how better results might be achieved is given in
 
 \section{Infrastructure Set-Up in OpenStack}
 
+\subsection{Preparation}
+
 The foundation for the cluster architecture that has been illustrated in figure \vref{fig:architecture} are the host \acp{VM}, their storage and the network that connects them.
 In the course of this process some minor adaptions are made to the proposed architecture.
 Especially the \texttt{hadoop-master-0} node now also runs the \ac{HDFS} Datanode and YARN Nodemanager service and therefore has a storage volume attached to it.
@@ -148,8 +150,11 @@ TODO
 TODO explain and maybe print this particular playbook yes yes print it with explainations
 TODO maybe appendix
 TODO Ansible
-see \urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible}
-     (in implementation explain how the ansible part works). 
+
+
+The full Ansible playbook including all roles and templates is stored on the authors \emph{GitHub repository} and can be accessed at 
+\urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible}.
+
      
 
 
@@ -168,17 +173,28 @@ literary none?
 
 \section{Hadoop Set-Up with Ambari}
 
-TODO
-
-TODO Tools will be Apache Spark, Storm, Hive und Pig
-
 \subsection{Preparation}
-TODO
+
+After the Ambari software is installed on each host by Ansible, it can be utilized to set-up the Hadoop cluster and install additional tools as well.
+To do so the Ambari web interface is used that can be accessed on the master node on port 8080. The complete Hadoop setup is performed using the cluster deployment dialogue that Ambari offers. This process follows the execution plan closesly.
+
+\emph{Jonas Balsfulland} proposes in his paper which additional tools should be running on the cluster. Especially \emph{Spark 2, Storm, Hive and Pig} should be deployed.
+Ambari offers the possibility to set up all of these services automatically if they are selected during the cluster setup.
 
 \subsection{Execution}
+
+The deployment dialogue in Ambari guides the user through the cluster installation.
+For this project a cluster named \emph{hadoopdhbw0} is created which installs \ac{HDP} Version 2.6.3.0. All binary packages are downloaded from Hortonworks repositories.
+The list of the \acp{FQDN} including the \emph{dhbw} domain of the three \acp{VM} are entered as cluster nodes. They are registered using \emph{manual registration} since the Ambari agent installed on all nodes is configured to contact the master node as the Ambari server. Furthermore this elides the necessity to upload an unencrypted \ac{SSH} key with root access to the servers.
+Ambari then checks the connectivity to each host and performs preliminary checks about the host that ensure the cluster can be deployed successfully.
+
+Next the services and additional tools are chosen which are installed on the cluster.
+For this setup \ac{HDFS}, \ac{YARN}, MapReduce2, Tez, Hive, Pig, ZooKeeper, Storm, SmartSense, Spark2, Slider and Ambari Metrics are selected. SmartSense, Slider, ZooKeeper and Ambari Metrics are enforced to be installed by Ambari.
+
+
 TODO
 
-TODO ,  when promted to select nodes use manual registaration: reason dont upload ssh private key for root access 
+TODO In the end Ambari monitoring web interface used to inspect the cluster and the services
 
 \subsection{Encountered Issues and Lessons Learned}
 TODO
@@ -199,37 +215,47 @@ mapred is broken (sometimes)
 
 \section{System Tests}
 
+Before the processing system can be tested a new directory to store the test data in \ac{HDFS}
+is created. 
+This folder is \texttt{/user/ubuntu} and is accessible by the user \texttt{ubuntu}.
+To test this step a new file is uploaded to the directory and its content is then downloaded again which tests successful. The directory is used in the next step.
+
 \subsubsection{Terasort}
 
-As suggested in the execution plan the \emph{terasort} program implemented by \text{omally2008terasort}, which is included in the Hadoop installtion on each cluster node, is used to check the sanity of the \ac{}
+As suggested in the execution plan the \emph{terasort} program implemented by \textcite{omally2008terasort}, which is included in the Hadoop installtion on each cluster node, is used to check the sanity of the \ac{YARN}, \ac{HDFS} and MapReduce2 Services.
+First \emph{teragen} generates a variable amount of random numbers and stores them on \ac{HDFS}. Then \emph{terasort} sorts the numbers using MapReduce and stores the result.
+Finally \emph{teravalidate} checks that the numbers are indeed sorted correctly.
+To run the test the follig commands are used to create 5~\ac{GB} fo data:\\
+\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teragen 5000000\\  /user/ubuntu/test/5gsort/input}\\ 
+\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar terasort\\ /user/ubuntu/test/5gsort/input\\ /user/ubuntu/test/5gsort/ouput}\\ 
+\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teravalidate\\  /user/ubuntu/test/5gsort/ouput}
 
-
-TODO and 
-TODO \urlinline{https://hadoop.apache.org/docs/r1.0.4/api/org/apache/hadoop/examples/terasort/TeraGen.html}\\urlinline{https://www.systutorials.com/3235/hadoop-terasort-benchmark/} (also mentioned in \autocite[][]{white2015hadoop})
+The test are done for 1~\ac{MB}, 1~\ac{GB} and 5~\ac{GB}.
+All test finish successfully, which means that MapReduce jobs can be successfully scheduled on the cluster and can interact with \ac{HDFS}.
 
 \subsubsection{Ambari Service Checks}
 
 Ambari offers the possibility to run \emph{service checks}, which run a small workload on one service and makes sure the cluster behaves correctly.
 These checks are run in this project for all services that are active.
 The services that are inactive due to memory shortage can not be tested.
-The checks are therefore performed for \ac{HDFS}, \ac{YARN}, MapReduce2, ZooKeeper, Storm, and Ambari Metrics. All of the checks are giving successful results, which only means the service works as expected. It does not show that all nodes are participating in the cluster for this service. 
+The checks are therefore performed  only for \ac{HDFS}, \ac{YARN}, MapReduce2, ZooKeeper, Storm, and Ambari Metrics. All of the checks are giving successful results, which only means the service works as expected. It does not show that all nodes are participating in the cluster for this service. 
 
 \section{Conclusion}
 
+In general the cluster installation is only partially successful since the services are not running reliably and some even are not active at all due to memory limitations.
+The produced cluster is therefore not ready for \emph{production use}.
+However the general concept of using OpenStack to host the cluster and Ansible and Ambari to deploy the cluster software and manage Hadoop is possible and has clearly advantages above a manual cluster management.
+
+During the project the \ac{DHBW} Cloud environment showed unreliabilities that influenced the progress of the implementation phase.
+The general process was errorsome and would be hard to reproduce for students or lecturers with little knowledge about system administration. It is therefore not recommended to pursue a installation of Hadoop within the context of a lecture. 
 
 
-During the implementation of the prject the \ac{DHBW} Cloud environment showed unreliablities that influenced
-TODO dhbw cloud is unreliable af
 
-NOT STABLE for production
 
-TODO process is way too hard for and too long for students to do in a lecture without depper understanding of sysadmin  
 
-TODO NOT scuccessfull because of ??????????
 
-TODO Abweichen von architecture war dumm, da memory knapp durch zu viele prozesse
 
-TODO maintainability is fucked, just let professsionals do it
+
 
 
 
