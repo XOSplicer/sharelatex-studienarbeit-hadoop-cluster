@@ -127,7 +127,7 @@ The successful creation of each host is tested by accessing it via \ac{SSH} usin
 \subsubsection{Storage}
 
 In order for the Hadoop cluster to store \ac{HDFS} data it is necessary to split up the available 1000~\ac{GB} for storage into three volumes, one for each host.
-The disks are attached to the hosts and OpenStack reports the device that can be 
+The disks are attached to the hosts and OpenStack reports the device handle that can be 
 used within the hosts to access the volume.
 Before data can be stored on the volumes they each need to be partitioned into one partition using the program \texttt{fdisk}. The partitions are then formatted into ext4 file system format using the \texttt{mkfs.ext4} command.
 
@@ -155,6 +155,13 @@ TODO Ansible
 The full Ansible playbook including all roles and templates is stored on the authors \emph{GitHub repository} and can be accessed at 
 \urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible}.
 
+TODO describe all roles and task within those roles
+
+\subsubsection{Common Set-up tasks}
+
+\subsubsection{Specific Tasks for Ambari Server}
+
+\subsubsection{Specific Tasks for Ambari Client}
      
 
 
@@ -170,6 +177,7 @@ reboot for safty
 
 TODO
 literary none?
+Ansible is very capable to perform system administration tasks in a reproducable fashion
 
 \section{Hadoop Set-Up with Ambari}
 
