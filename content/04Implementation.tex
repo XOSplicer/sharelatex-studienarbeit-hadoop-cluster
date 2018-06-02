@@ -232,23 +232,23 @@ The list of the \acp{FQDN} including the \emph{dhbw} domain of the three \acp{VM
 Ambari then checks the connectivity to each host and performs preliminary checks about the host that ensure the cluster can be deployed successfully.
 
 Next the services and additional tools are chosen which are installed on the cluster.
-For this setup \ac{HDFS}, \ac{YARN}, MapReduce2, Tez, Hive, Pig, ZooKeeper, Storm, SmartSense, Spark2, Slider and Ambari Metrics are selected. SmartSense, Slider, ZooKeeper and Ambari Metrics are enforced to be installed by Ambari.
+For this setup \ac{HDFS}, \ac{YARN}, MapReduce2, Tez, Hive, Pig, ZooKeeper, Storm, SmartSense, Spark2, Slider and Ambari Metrics are selected. SmartSense, Slider, ZooKeeper and Ambari Metrics are enforced to be installed by Ambari. 
+After this Ambari lets the user configure which master, slave and client components of each service are placed on each host.
+Obviously all master components are placed on the master host, while the slave components are installed on all all hosts.
+Finally each service is configured specifically. 
+Ambari provides preset for each service.
+Those presets provide a basic configuration that is sufficient for the purpose of this project. 
+The only preferences which are made are the passwords.
 
-
-TODO firther installation
-
-
-
-
+TODO then ambari performs install.
 TODO In the end Ambari monitoring web interface used to inspect the cluster and the services
 
-TODO some are failing, needs often restart etc
 
 \subsection{Encountered Issues and Lessons Learned}
 
 During the initial evaluation of Ambari in section \vref{sec:design:hdp_ambari_ansible} it was figured that 20~\ac{GB} of root storage for the installation of the cluster is not enough. This approach uses a reduced set of services that are installed which leads to less disk space needed. Therefore the 80~\ac{GB} root volume is sufficient on all nodes as expected previously.
 
-During the installation process several issues regarding domain name resolution appeared.
+During the installation process in Ambari several issues regarding domain name resolution appeared.
 This is caused by the fact that no proper \ac{DNS} server is used to distribute the \acp{FQDN} 
 but rather the \texttt{hosts} file is altered in a way that the resolution works locally between all nodes. 
 This holds the possibility for configuration errors which lead which lead to the failure of the installation at first.
@@ -256,8 +256,9 @@ The issues are fixed by adapting the \texttt{hosts} file to only perform name re
 
 One major issue is encountered when Ambari tries to start all services: The main memory on the master node, which is limited to 8~\ac{GB} is not sufficient and the system is instable.
 When the master node runs out of memory the operating system can kill arbitrary services that are running
-Since this is happening on the master node, this leads to the service not being available at all.
-Therefore some services are turned of explicitly. In particular Hive, SmartSense and Spark2 are deactivated for the entire cluster. 
+Since this is happening on the master node, this leads to the service not being available at all and introduces the need for manual restarting of the service.
+In conclusion some services are turned of explicitly to improve stability. 
+In particular Hive, SmartSense and Spark2 are deactivated for the entire cluster. 
 This way the master node has enough memory to run the other services.
 
 \section{System Tests}
