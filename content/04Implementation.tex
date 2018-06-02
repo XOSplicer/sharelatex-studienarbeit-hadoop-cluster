@@ -170,8 +170,8 @@ TODO \vref{lst:ansiblecommon}
     \item TODO install common necessary packages (which? and why, see install manual aswell)
     \item TODO install and activate ntp
     \item TODO configure internal network, apply if necessary
-    \item TODO register the ambari repository list inluding keys
-    
+    \item TODO register the ambari repository list inluding keys and load their contents
+    \item TODO disblae the thp feature using a service
     
 \end{enumerate}
 
@@ -179,14 +179,19 @@ TODO \vref{lst:ansiblecommon}
 TODO \vref{lst:ansiblemaster}
 
 \begin{enumerate}
-    \item TODO
+    \item TODO install the ambari server package
+    \item TODO setup the ambari server
+    \item TODO activate the server service if not yet running
 \end{enumerate}
 
 \subsubsection{Specific Tasks for Ambari Client}
 TODO \vref{lst:ansibleslave}
 
 \begin{enumerate}
-    \item TODO
+    \item TODO mount the storage volume
+    \item TODO install ambari agent
+    \item TODO configure ambari agent to use masternode as master hostname
+    \item TODO restart or start the service if necessary
 \end{enumerate}
 
 \subsection{Execution}
