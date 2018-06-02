@@ -195,7 +195,7 @@ The \ac{UUID} of the storage volume is found by running \texttt{\$ sudo blkid}.
 It reports the \ac{UUID} of all volumes. The one corresponding to the device that has been created in OpenStack can be found in the output. These variables are then entered into the \texttt{inventory.ini} file for Ansible. The master node is entered in the \texttt{master} section, the slave nodes in the \texttt{slave section respectively}.
 
 \lstset{language=sh}
-\begin{lstlisting}[caption={Inventory description in Ansible}, label={lst:inventory}]
+\begin{lstlisting}[caption={Exemplary inventory description in Ansible}, label={lst:inventory}]
 [master]
 hadoop-master-0.dhbw internal_ip=10.100.10.24 iface_internal=ens4 hadoop_vol_uuid=47103a5e-5c3f-40f3-a710-fcd86e23fc61
 
@@ -204,20 +204,15 @@ hadoop-sec-master-0.dhbw internal_ip=10.100.10.25 iface_internal=ens4 hadoop_vol
 hadoop-slave-0.dhbw internal_ip=10.100.10.26 iface_internal=ens4 hadoop_vol_uuid=046a2bc2-df33-4640-becd-2c401076285f
 \end{lstlisting}
 
-
 Now all necessary variables are set and the Ansible playbook is be applied to the hosts.
 This is done using the command \texttt{\$ ansible-playbook all}.
-Ansible connects to each of the hosts and performs the neccessary stept to get the 
-
-
-TODO apply ansible playbook
-reboot for safty
+Ansible connects to each of the hosts and performs the neccessary stept to get the system into the desired state.
 
 \subsection{Encountered Issues and Lessons Learned}
 
-TODO
-literary none?
-Ansible is very capable to perform system administration tasks in a reproducable fashion
+Ansible proved very capable to perform system administration tasks in a reproducible fashion. 
+It has extensive documentation that describe how a given configuration can be expressed in an Ansible playbook. 
+Therefore it is suited to describe \enquote{system configuration as code} in an complexity that can be handled with reasonable effort.
 
 \section{Hadoop Set-Up with Ambari}
 
@@ -302,6 +297,13 @@ However the general concept of using OpenStack to host the cluster and Ansible a
 
 During the project the \ac{DHBW} Cloud environment showed unreliabilities that influenced the progress of the implementation phase.
 The general process was errorsome and would be hard to reproduce for students or lecturers with little knowledge about system administration. It is therefore not recommended to pursue a installation of Hadoop within the context of a lecture. 
+
+In future projects a master node with significantly more resources should be used 
+if the project uses the OpenStack environment at the \ac{DHBW}.
+This however requires new flavors for instance sizes which have more memory in respect to the processing cores.
+An alternative would be to use dedicated servers within the \ac{DHBW} or to 
+get a contract with a \emph{managed platform} vendor who provides Hadoop as a service.
+
 
 
 
