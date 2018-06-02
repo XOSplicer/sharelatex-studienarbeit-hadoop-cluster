@@ -31,7 +31,7 @@ THe first group deals with default settings. It allows all outgoing connections
 and allows incoming connections on port 22, which is the port used for \ac{SSH} access, 
 as well as incoming ping packages in the Internet Control Message Protocol.
 The second group deals with hadoop specific ports.
-A detailed over all necessary ports is given by \textcite{hortonworks2017reference}.
+A detailed over all necessary ports is given by \textcite{hortonworks2017reference} in their port reference.
 However to make development and access more flexible, this group does temporarily 
 allow all incoming requests.
 
@@ -39,7 +39,8 @@ allow all incoming requests.
 
 To enable an interconnection between the nodes in the cluster it is useful to create a private network between them.
 The network uses the address space of 10.100.10.0/24 which is a subnet of the private address space defined in RFC~1918 by the the Internet Engineering Task Force \autocite[][]{ietf1996rfc1918}.
-Figure \ref{fig:networks_subnets} lists all the networks that are available after the internal network is created. The \emph{int-net-10} si the internal network which all nodes connect to. Furthermore all nodes need to connect to the \emph{ext-net-201} network which allows them to connect to the Internet and makes them accessible from within the \ac{DHBW} network.
+Figure \ref{fig:networks_subnets} lists all the networks that are available after the internal network is created. 
+The network named \emph{int-net-10} is the internal network which all nodes connect to. Furthermore all nodes need to connect to the \emph{ext-net-201} network which allows them to connect to the Internet and makes them accessible from within the \ac{DHBW} network.
 
 \begin{table}[hbt]
 \resizebox{\textwidth}{!}{%
@@ -62,11 +63,11 @@ Figure \ref{fig:networks_subnets} lists all the networks that are available afte
 \end{figure}
 
 Once the nodes are created, the network topology looks like figure \ref{fig:network_topology}. The highlighted denotes the network connections that exists purely in OpenStack and have no physical connection to any outside network.
-
-
-TODO fqdns respective to proposed architecture but with .dhbw ending which is necessary later on
+The figure also shows the names of the hosts and the network names.
 
 \subsubsection{Virtual Machines}
+
+TODO fqdns respective to proposed architecture but with .dhbw ending which is necessary later on
 
 TODO describe flavors
 \ac{VCPU}
@@ -109,6 +110,8 @@ TODO describe flavors
 	\label{fig:resources_openstack}
 \end{table}
 
+As visible in table \ref{fig:instance_sizes} all instance of m1.small and larger have a core to memory ration of \emph{1 core : 1 GB RAM}, which means that, if all 20 available cores are used, only 20 out of 51,2 GB RAM can be used. It is favourable to have maximum sized \acp{VM} with respect to memory to give Hadoop the possibility make better use of it.
+Therefore the best 
 
 TODO do the math on resources, ratio of cores to ram of 1core:1GB with all flavors above incl small , 
 which means with 20 available cores a maximum of 20 GB can be used.
@@ -133,6 +136,8 @@ format them
 ansible will be used to mount them
 
 \subsection{Encountered Issues and Lessons Learned}
+
+Access to the 
 
 TODO Access only from dhbw on site net leads to difficult development conditions where author needs to be on site and is restricted by the locality
 
