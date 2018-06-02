@@ -125,21 +125,16 @@ The successful creation of each host is tested by accessing it via \ac{SSH} usin
 \subsubsection{Storage}
 
 In order for the Hadoop cluster to store \ac{HDFS} data it is necessary to split up the available 1000~\ac{GB} for storage into three volumes, one for each host.
-
-
-TODO
-create disks
-assing them
-format them
-ansible will be used to mount them
+The disks are attached to the hosts and OpenStack reports the device that can be 
+used within the hosts to access the volume.
+Before data can be stored on the volumes they each need to be partitioned into one partition using the program \texttt{fdisk}. The partitions are then formatted into ext4 file system format using the \texttt{mkfs.ext4} command.
 
 \subsection{Encountered Issues and Lessons Learned}
 
-Access to the 
+Access to the OpenStack environment and the cluster nodes is only possible from within the \ac{DHBW} network that connects the \ac{DHBW} Mannheim and Stuttgart.
+This network is not accessible via an virtual private network and the developer needs to be on premise of the \ac{DHBW}. This restriction in locality makes the development process harder.
 
-TODO Access only from dhbw on site net leads to difficult development conditions where author needs to be on site and is restricted by the locality
-
-TODO Network connection unstable leading to more difficult environment with regular loss of connectivity to server
+During the implementation the OpenStack 
 
 TODO Internal errors within openstack (temporary) where not enough resources could be allocated to get the requested VMs, later resolved
 
@@ -163,7 +158,9 @@ see \urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible
 
 \subsection{Execution}
 
+
 TODO prepare hosts by running setup script
+find and configure host specific variables
 TODO apply ansible playbook
 reboot for safty
 
