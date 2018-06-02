@@ -67,11 +67,14 @@ The figure also shows the names of the hosts and the network names.
 
 \subsubsection{Virtual Machines}
 
-In the next step the virtual machines are created which 
-TODO fqdns respective to proposed architecture but with .dhbw ending which is necessary later on
+In the next step the virtual machines are created.
+The OpenStack environment offers different \emph{flavors} of instance sized for the \acp{VM} which is a pre-configured combination of resources associated to it.
+To create a node the developer can chose from the presets listed in table \ref{fig:instance_sizes}. The flavors differ in amount of \acp{VCPU}, \ac{RAM} and root storage.
+The set-up of the hosts is done for each node individually, 
+since the names and flavor configurations differ between them.
+The names are respective to proposed architecture but have a \emph{dhbw} domain ending 
+added to them, which is not officially registered but is necessary for Ambari to identify the hosts correctly.
 
-TODO describe flavors
-\ac{VCPU}
 
 \begin{table}[hbt]
 \centering
