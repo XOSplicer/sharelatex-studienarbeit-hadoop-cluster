@@ -173,9 +173,10 @@ literary none?
 
 \section{Hadoop Set-Up with Ambari}
 
-TODO
-
 \subsection{Preparation}
+
+After the Ambari software is installed on each host by Ansible, it can be utilized to set-up the Hadoop cluster and install additional tools as well.
+To do so the Ambari web interface is used that can be accessed on the master node on port 8080. The complete Hadoop setup is performed using the cluster deployment dialogue that Ambari offers.
 
 \emph{Jonas Balsfulland} proposes in his paper which additional tools should be running on the cluster. Especially \emph{Spark 2, Storm, Hive and Pig} should be deployed.
 Ambari offers the possibility to set up all of these services automatically if they are selected during the cluster setup.
@@ -184,6 +185,8 @@ Ambari offers the possibility to set up all of these services automatically if t
 TODO
 
 TODO ,  when promted to select nodes use manual registaration: reason dont upload ssh private key for root access 
+
+TODO In the end Ambari monitoring web interface used to inspect the cluster and the services
 
 \subsection{Encountered Issues and Lessons Learned}
 TODO
@@ -231,10 +234,9 @@ The checks are therefore performed for \ac{HDFS}, \ac{YARN}, MapReduce2, ZooKeep
 
 \section{Conclusion}
 
-TODO NOT scuccessfull because of ??????????
+In general the cluster installation is only partially successful since the services are not running reliably and some even are not active at all due to memory limitations.
 The produced cluster is therefore not ready for \emph{production use}.
-TODO Abweichen von architecture war dumm, da memory knapp durch zu viele prozesse
-TODO maintainability is fucked, just let professsionals do it
+However the general concept of using OpenStack to host the cluster and Ansible and Ambari to deploy the cluster software and manage Hadoop is possible and has clearly advantages above a manual cluster management.
 
 During the project the \ac{DHBW} Cloud environment showed unreliabilities that influenced the progress of the implementation phase.
 The general process was errorsome and would be hard to reproduce for students or lecturers with little knowledge about system administration. It is therefore not recommended to pursue a installation of Hadoop within the context of a lecture. 
