@@ -25,9 +25,12 @@ Each operation on the infrastructure can be performed within this interface.
 
 \subsubsection{Firewall Rules}
 
+The firewall in OpenStack can be configured by creating 
+
 TODO sec group considerations, which ports in out? 
 default: out is open, in is only ping and ssh on 22
-hadoop: detailed view \autocite[][]{hortonworks2017reference}, but for easier development temporary all ports incoming open. most important: 8080 for ambari
+hadoop: detailed view %\autocite[][]{hortonworks2017reference}, 
+but for easier development temporary all ports incoming open. most important: 8080 for ambari
 
 
 \subsubsection{Network}
@@ -48,7 +51,7 @@ TODO describe each of the networks
 	  int-net-10 & 10.100.10.0/24 &  New internal network used by Hadoop\\
 	\end{tabular}%
 	}
-	\caption{Sub-networks within the projekt in OpenStack}
+	\caption{Sub-networks within the project in OpenStack}
 	\label{fig:networks_subnets}
 \end{table}
 
@@ -207,6 +210,9 @@ check successfull where service is up, not all services up. TODO which ones
 
 \section{Conclusion}
 
+
+
+During the implementation of the prject the \ac{DHBW} Cloud environment showed unreliablities that influenced
 TODO dhbw cloud is unreliable af
 
 TODO process is way too hard for and too long for students to do in a lecture without depper understanding of sysadmin  
@@ -218,17 +224,11 @@ TODO Abweichen von architecture war dumm, da memory knapp durch zu viele prozess
 TODO maintainability is fucked, just let professsionals do it
 
 
-%%%%%%%%%%%%%%%%%%%%
-TODO HELP ME IM STREGGELING WITH EXISTENCE
 
 
 
 
 
-\urlinline{https://gist.github.com/ace-subido/0a9b219b2348921f6a87/3141000d2cbb0f78b967b75304908f4289aa8f01}
-
-\urlinline{https://www.ripublication.com/ijaer18/ijaerv13n6_166.pdf}
-\urlinline{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.178.1187&rep=rep1&type=pdf}
 
 
 
