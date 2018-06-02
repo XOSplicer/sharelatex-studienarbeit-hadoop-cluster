@@ -134,12 +134,9 @@ Before data can be stored on the volumes they each need to be partitioned into o
 Access to the OpenStack environment and the cluster nodes is only possible from within the \ac{DHBW} network that connects the \ac{DHBW} Mannheim and Stuttgart.
 This network is not accessible via an virtual private network and the developer needs to be on premise of the \ac{DHBW}. This restriction in locality makes the development process harder.
 
-During the implementation the OpenStack 
-
-TODO Internal errors within openstack (temporary) where not enough resources could be allocated to get the requested VMs, later resolved
-
-TODO when encountering resource issues, tried on BW cloud again to train
-
+During the implementation, the OpenStack environment showed significant instabilities.
+\emph{Internal errors} lead in some cases to the failure of allocation of resources for the requested \acp{VM}.
+This might indicate an general shortage of resources in the \ac{DHBW} OpenStack environment. Later in the project these internal errors have been resolved.
 
 \section{System Set-Up with Ansible}
 
@@ -206,6 +203,8 @@ TODO \urlinline{https://hadoop.apache.org/docs/r1.0.4/api/org/apache/hadoop/exam
 
 \subsubsection{Ambari Service Checks}
 
+Ambari offers the possibility to run \emph{service checks}, which run a small workload on one service and makes sure the 
+
 TODO
 
 HDFS WORKS
@@ -220,6 +219,8 @@ check successfull where service is up, not all services up. TODO which ones
 
 During the implementation of the prject the \ac{DHBW} Cloud environment showed unreliablities that influenced
 TODO dhbw cloud is unreliable af
+
+NOT STABLE for production
 
 TODO process is way too hard for and too long for students to do in a lecture without depper understanding of sysadmin  
 
