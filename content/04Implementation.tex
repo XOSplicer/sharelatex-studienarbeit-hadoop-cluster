@@ -156,25 +156,38 @@ TODO also install Ansible locally
 TODO explain and maybe print this particular playbook yes yes print it with explanations
 TODO maybe appendix
 
-TODO describe all roles and task within those roles´
+TODO describe all roles and task within those roles
 
 TODO \vref{lst:ansibleall}
 
 \subsubsection{Common Set-Up Tasks}
-TODO
-
 TODO \vref{lst:ansiblecommon}
 
 \begin{enumerate}
-    \item 
+    \item TODO set the hostname
+    \item TODO configure the host file for local resulution
+    \item TODO make sure the correct ssh keys can be used for access
+    \item TODO install common necessary packages (which? and why, see install manual aswell)
+    \item TODO install and activate ntp
+    \item TODO configure internal network, apply if necessary
+    \item TODO register the ambari repository list inluding keys
+    
+    
 \end{enumerate}
 
 \subsubsection{Specific Tasks for Ambari Server}
-TODO \ver
+TODO \vref{lst:ansiblemaster}
+
+\begin{enumerate}
+    \item TODO
+\end{enumerate}
 
 \subsubsection{Specific Tasks for Ambari Client}
-TODO 
+TODO \vref{lst:ansibleslave}
 
+\begin{enumerate}
+    \item TODO
+\end{enumerate}
 
 \subsection{Execution}
 
