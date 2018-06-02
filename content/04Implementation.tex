@@ -150,6 +150,7 @@ TODO
 TODO explain and maybe print this particular playbook yes yes print it with explainations
 TODO maybe appendix
 TODO Ansible
+also install ansible localy
 
 
 The full Ansible playbook including all roles and templates is stored on the authors \emph{GitHub repository} and can be accessed at 
@@ -172,24 +173,43 @@ TODO enter ssh config
 Before a host can be used with Ansible, it needs to have \emph{Python 2} installed.
 Therefore a short script cat be run on each host, which updates the system, installs Python and reboots the system. This ensures all packages are up to date. The following bash script performs these tasks and also installs the \emph{python-apt} library which is necessary for Ansible to install more packages.
 
-\texttt{sudo apt-get update \&\& sudo apt-get -y upgrade\\
-sudo apt-get -y install python2.7 python-apt\\
-sudo reboot now}
+\lstset{language=sh}
+\begin{lstlisting}[caption={Bash script for initial host preparation}, label={lst:hostsetup}]
+sudo apt-get update \&\& sudo apt-get -y upgrade
+sudo apt-get -y install python2.7 python-apt
+sudo reboot now
+\end{lstlisting}
 
 After this initial preparation of the hosts is done, 
-the Ansible inventory can is configured, so that all the specific variables of the host are set. These variables are the \ac{FQDN}, the internal \ac{IP} address, the network interface that is connected to the internal network and finally the \ac{UUID} of the partition that is used to store the \ac{HDFS} data.
-
+the Ansible inventory can is configured, 
+so that all the specific variables of the host are set. 
+These variables are the \ac{FQDN}, the internal \ac{IP} address, 
+the network interface that is connected to the internal network 
+and finally the \ac{UUID} of the partition that is used to store the \ac{HDFS} data.
 
 The \ac{FQDN} is again taken from the \texttt{ssh\_config} file. 
 The internal \ac{IP} address is taken from the OpenStack web interface.
 To find the values for the other variables each host is accessed.
 The internal network interface is the second Ethernet interface listed with the command \texttt{\$ ifconfig -a}. Typically it is called \texttt{ens4}, \texttt{ens6} or \texttt{ens7}.
 The \ac{UUID} of the storage volume is found by running \texttt{\$ sudo blkid}. 
-It reports the \ac{UUID} of all volumes. The one corresponding to the device that has been created in OpenStack can be found in the output. These variables are then entered into the \texttt{inventory.ini}
+It reports the \ac{UUID} of all volumes. The one corresponding to the device that has been created in OpenStack can be found in the output. These variables are then entered into the \texttt{inventory.ini} file for Ansible. The master node is entered in the \texttt{master} section, the slave nodes in the \texttt{slave section respectively}.
+
+\lstset{language=sh}
+\begin{lstlisting}[caption={Inventory description in Ansible}, label={lst:inventory}]
+[master]
+hadoop-master-0.dhbw internal_ip=10.100.10.24 iface_internal=ens4 hadoop_vol_uuid=47103a5e-5c3f-40f3-a710-fcd86e23fc61
+
+[slave]
+hadoop-sec-master-0.dhbw internal_ip=10.100.10.25 iface_internal=ens4 hadoop_vol_uuid=54b1d167-9b88-45c1-b27f-6e441b765c66
+hadoop-slave-0.dhbw internal_ip=10.100.10.26 iface_internal=ens4 hadoop_vol_uuid=046a2bc2-df33-4640-becd-2c401076285f
+\end{lstlisting}
 
 
+Now all necessary variables are set and the Ansible playbook is be applied to the hosts.
+This is done using the command \texttt{\$ ansible-playbook all}.
+Ansible connects to each of the hosts and performs the neccessary stept to get the 
 
-find and configure host specific variables
+
 TODO apply ansible playbook
 reboot for safty
 
@@ -204,7 +224,7 @@ Ansible is very capable to perform system administration tasks in a reproducable
 \subsection{Preparation}
 
 After the Ambari software is installed on each host by Ansible, it can be utilized to set-up the Hadoop cluster and install additional tools as well.
-To do so the Ambari web interface is used that can be accessed on the master node on port 8080. The complete Hadoop setup is performed using the cluster deployment dialogue that Ambari offers. This process follows the execution plan closesly.
+To do so the Ambari web interface is used that can be accessed on the master node on port 8080. The complete Hadoop setup is performed using the cluster deployment dialogue that Ambari offers. This process follows the execution plan closely.
 
 \emph{Jonas Balsfulland} proposes in his paper which additional tools should be running on the cluster. Especially \emph{Spark 2, Storm, Hive and Pig} should be deployed.
 Ambari offers the possibility to set up all of these services automatically if they are selected during the cluster setup.
@@ -256,9 +276,13 @@ As suggested in the execution plan the \emph{terasort} program implemented by \t
 First \emph{teragen} generates a variable amount of random numbers and stores them on \ac{HDFS}. Then \emph{terasort} sorts the numbers using MapReduce and stores the result.
 Finally \emph{teravalidate} checks that the numbers are indeed sorted correctly.
 To run the test the follig commands are used to create 5~\ac{GB} fo data:\\
-\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teragen 5000000\\  /user/ubuntu/test/5gsort/input}\\ 
-\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar terasort\\ /user/ubuntu/test/5gsort/input\\ /user/ubuntu/test/5gsort/ouput}\\ 
-\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teravalidate\\  /user/ubuntu/test/5gsort/ouput}
+
+\lstset{language=sh}
+\begin{lstlisting}[caption={Running Terasort as a test for YARN and HDFS}, label={lst:terasort}]
+hadoop jar hadoop-mapreduce-examples.jar teragen 5000000 /user/ubuntu/test/5gsort/input
+hadoop jar hadoop-mapreduce-examples.jar terasort /user/ubuntu/test/5gsort/input /user/ubuntu/test/5gsort/output
+hadoop jar hadoop-mapreduce-examples.jar teravalidate /user/ubuntu/test/5gsort/output
+\end{lstlisting}
 
 The test are done for 1~\ac{MB}, 1~\ac{GB} and 5~\ac{GB}.
 All test finish successfully, which means that MapReduce jobs can be successfully scheduled on the cluster and can interact with \ac{HDFS}.
