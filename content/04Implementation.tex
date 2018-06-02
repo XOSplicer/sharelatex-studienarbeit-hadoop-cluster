@@ -44,19 +44,19 @@ The network uses the address space of 10.100.10.0/24 which is a subnet of the pr
 Figure \ref{fig:networks_subnets} lists all the networks that are available after the internal network is created. 
 The network named \emph{int-net-10} is the internal network which all nodes connect to. Furthermore all nodes need to connect to the \emph{ext-net-201} network which allows them to connect to the Internet and makes them accessible from within the \ac{DHBW} network.
 
-\begin{table}[hbt]
-\resizebox{\textwidth}{!}{%
-	\begin{tabular}{lll}
-	  Network Name & Sub-networks & Description\\
-	  \hline
-	  ext-net-201 & 141.72.191.0/24 & Pre-configured connection to \ac{DHBW} internal network\\
-	  ext-net-112 & 192.168.112.0/20 & Pre-configured connection with unknown connectivity\\
-	  int-net-10 & 10.100.10.0/24 &  New internal network used by Hadoop\\
-	\end{tabular}%
-	}
-	\caption{Sub-networks within the project in OpenStack}
-	\label{fig:networks_subnets}
-\end{table}
+%\begin{table}[hbt]
+%\resizebox{\textwidth}{!}{%
+%	\begin{tabular}{lll}
+%	  Network Name & Sub-networks & Description\\
+%	  \hline
+%	  ext-net-201 & 141.72.191.0/24 & Pre-configured connection to \ac{DHBW} internal network\\
+%	  ext-net-112 & 192.168.112.0/20 & Pre-configured connection with unknown connectivity\\
+%	  int-net-10 & 10.100.10.0/24 &  New internal network used by Hadoop\\
+%	\end{tabular}%
+%	}
+%	\caption{Sub-networks within the project in OpenStack}
+%	\label{fig:networks_subnets}
+%\end{table}
 
 \begin{figure}[hbt]
   {\centering\includegraphics[width=0.8\textwidth]{{img/network_topology}.png}\par}
@@ -78,44 +78,44 @@ The names are respective to proposed architecture but have a \emph{dhbw} domain 
 added to them, which is not officially registered but is necessary for Ambari to identify the hosts correctly.
 
 
-\begin{table}[hbt]
-\centering
-\resizebox{0.8\textwidth}{!}{%
-	\begin{tabular}{lrrr}
-	  Instance Flavor Name & \acp{VCPU} & \acs{RAM} & Root Disk Size \\
-	  \hline
-	  m1.nano & 1 & 64~\acs{MB} & 1~\acs{GB} \\
-	  m1.tiny & 1 & 512~\acs{MB} & 5~\acs{GB} \\
-	  m1.small & 1 & 1~\acs{GB} & 10~\acs{GB} \\
-	  m1.medium & 2 & 2~\acs{GB} & 20~\acs{GB} \\
-	  m1.large & 4 & 4~\acs{GB} & 40~\acs{GB} \\
-	  m1.xlarge & 8 & 8~\acs{GB} & 80~\acs{GB} \\
-	\end{tabular}%
-	}
-	\caption{Available instance sizes in the \ac{DHBW} OpenStack environment}
-	\label{fig:instance_sizes}
-\end{table}
+%\begin{table}[hbt]
+%\centering
+%\resizebox{0.8\textwidth}{!}{%
+%	\begin{tabular}{lrrr}
+%	  Instance Flavor Name & \acp{VCPU} & \acs{RAM} & Root Disk Size \\
+%	  \hline
+%	  m1.nano & 1 & 64~\acs{MB} & 1~\acs{GB} \\
+%	  m1.tiny & 1 & 512~\acs{MB} & 5~\acs{GB} \\
+%	  m1.small & 1 & 1~\acs{GB} & 10~\acs{GB} \\
+%	  m1.medium & 2 & 2~\acs{GB} & 20~\acs{GB} \\
+%	  m1.large & 4 & 4~\acs{GB} & 40~\acs{GB} \\
+%	  m1.xlarge & 8 & 8~\acs{GB} & 80~\acs{GB} \\
+%	\end{tabular}%
+%	}
+%	\caption{Available instance sizes in the \ac{DHBW} OpenStack environment}
+%	\label{fig:instance_sizes}
+%\end{table}
 
 
-\begin{table}[hbt]
-\centering
-	\begin{tabular}{lrl}
-	  Resource Type & Amount & Unit\\
-	  \hline
-	  Instances & 10 & \\
-	  \acp{VCPU} & 20 & \\
-	  \acs{RAM} & 51200 & \acs{MB} \\
-	  Floating \acs{IP} Addresses & 10 & \\
-	  Security Groups & 10 & \\
-	  Volumes & 10 & \\
-	  Volume Storage & 1000 & \acs{GB}
-	\end{tabular}
-	\caption{Available resources for the project in the \ac{DHBW} OpenStack environment}
-	\label{fig:resources_openstack}
-\end{table}
+%\begin{table}[hbt]
+%\centering
+%	\begin{tabular}{lrl}
+%	  Resource Type & Amount & Unit\\
+%	  \hline
+%	  Instances & 10 & \\
+%	  \acp{VCPU} & 20 & \\
+%	  \acs{RAM} & 51200 & \acs{MB} \\
+%	  Floating \acs{IP} Addresses & 10 & \\
+%	  Security Groups & 10 & \\
+%	  Volumes & 10 & \\
+%	  Volume Storage & 1000 & \acs{GB}
+%	\end{tabular}
+%	\caption{Available resources for the project in the \ac{DHBW} OpenStack environment}
+%	\label{fig:resources_openstack}
+%\end{table}
 
 Table \ref{fig:resources_openstack} describes how many resources are available at maximum for the project in the \ac{DHBW} OpenStack environment. The chosen configurations may in sum not exceed this limit.
-As visible in table \ref{fig:instance_sizes} all instance of m1.small and larger have a core to memory ration of \emph{1~core~:~1~GB~RAM}, which means that, if all 20 available cores are used, only 20 out of 51,2 GB RAM  can be used. It is favourable to have maximum sized \acp{VM} with respect to memory to give Hadoop the possibility make better use of it.
+As visible in table \ref{fig:instance_sizes} all instance of m1.small and larger have a core to memory ration of \emph{1~core~:~1~GB~RAM}, which means that, if all 20 available cores are used, only 20 out of 51.2 GB RAM  can be used. It is favourable to have maximum sized \acp{VM} with respect to memory to give Hadoop the possibility make better use of it.
 Therefore the best allocation for the nodes is to use a m1.xlarge instance for the master node, a m1.xlarge for the secondary and a large instance for the slave node.
 This in sum gives 20 \acp{VCPU} and 20~\ac{GB} \ac{RAM} and no further cores are available to allocate more nodes.
 
