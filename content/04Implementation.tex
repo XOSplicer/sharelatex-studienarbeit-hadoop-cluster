@@ -159,11 +159,15 @@ The full Ansible playbook including all roles and templates is stored on the aut
 TODO describe all roles and task within those roles
 
 \subsubsection{Common Set-Up Tasks}
+TODO
+
+
 
 \subsubsection{Specific Tasks for Ambari Server}
+TODO
 
 \subsubsection{Specific Tasks for Ambari Client}
-     
+TODO 
 
 
 \subsection{Execution}
@@ -206,7 +210,7 @@ hadoop-slave-0.dhbw internal_ip=10.100.10.26 iface_internal=ens4 hadoop_vol_uuid
 
 Now all necessary variables are set and the Ansible playbook is be applied to the hosts.
 This is done using the command \texttt{\$ ansible-playbook all}.
-Ansible connects to each of the hosts and performs the neccessary stept to get the system into the desired state.
+Ansible connects to each of the hosts and performs the necessary steps to get the system into the desired state.
 
 \subsection{Encountered Issues and Lessons Learned}
 
@@ -240,9 +244,9 @@ Ambari provides preset for each service.
 Those presets provide a basic configuration that is sufficient for the purpose of this project. 
 The only preferences which are made are the passwords.
 
-TODO then ambari performs install.
-TODO In the end Ambari monitoring web interface used to inspect the cluster and the services
-
+In the end Ambari deploys the Hadoop cluster by installing the components in the requested 
+configuration. 
+This process is automatic and when it is finished Ambari tries to start up the cluster components. The user then is redirected to the Ambari service overview in the web interface where the status of each service is monitored and the services can be managed while the cluster is running. This includes starting and stopping the service, as well as reconfiguring it.
 
 \subsection{Encountered Issues and Lessons Learned}
 
