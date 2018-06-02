@@ -162,7 +162,6 @@ TODO describe all roles and task within those roles
 TODO
 
 
-
 \subsubsection{Specific Tasks for Ambari Server}
 TODO
 
@@ -172,7 +171,24 @@ TODO
 
 \subsection{Execution}
 
-TODO enter ssh config
+In order to configure the hosts with Ansible they must be accessible via \ac{SSH} by their \ac{FQDN}. 
+Since no \ac{DNS} system is employed, the \texttt{ssh\_config} file is used to provide a local resolution for \ac{SSH}. 
+Listing \ref{lst:sshconfig} describes how this configuration looks like.
+
+\lstset{language=sh}
+\begin{lstlisting}[caption={Local SSH configuration file used by Ansible}, label={lst:sshconfig}]
+Host hadoop-master-0.dhbw
+    Hostname 141.72.191.54
+    user ubuntu
+
+Host hadoop-sec-master-0.dhbw
+    Hostname 141.72.191.55
+    user ubuntu
+
+Host hadoop-slave-0.dhbw
+    Hostname 141.72.191.56
+    user ubuntu
+\end{lstlisting}
 
 Before a host can be used with Ansible, it needs to have \emph{Python 2} installed.
 Therefore a short script cat be run on each host, which updates the system, installs Python and reboots the system. This ensures all packages are up to date. The following bash script performs these tasks and also installs the \emph{python-apt} library which is necessary for Ansible to install more packages.

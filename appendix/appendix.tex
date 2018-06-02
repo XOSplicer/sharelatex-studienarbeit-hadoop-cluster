@@ -1,10 +1,11 @@
 % !TEX root = ../master.tex
 
-\chapter{Appendix A - Ansible Playbook Descriptions}
+\chapter{Appendix -- Ansible Playbook Descriptions}
 
 \lstset{language=sh}
-\begin{lstlisting}[caption={Ansible playbook that gets run to install the cluster system}, label={lst:allplaybook}]
+\begin{lstlisting}[caption={Ansible playbook that gets run to install the cluster system}, label={lst:ansibleall}]
 ---
+# main playbook
 - hosts: master
   roles:
     - role: master
@@ -19,7 +20,9 @@ become: true
 \end{lstlisting}
 
 \lstset{language=sh}
-\begin{lstlisting}[caption={Common tasks in Ansible}, label={lst:commontasks}]
+\begin{lstlisting}[caption={Common tasks in Ansible}, label={lst:ansiblecommon}]
+---
+# tasks file for common
 - name: Set hostname
   hostname: name="{{ inventory_hostname }}"
 
@@ -113,17 +116,58 @@ enabled: yes
 
 
 \lstset{language=sh}
-\begin{lstlisting}[caption={Ansible playbook that gets run to install the cluster system}, label={lst:allplaybook}]
+\begin{lstlisting}[caption={Tasks for the master role in Ansible}, label={lst:ansiblemaster}]
 ---
-- hosts: master
-  roles:
-    - role: master
-      become: true
-    - role: slave
-      become: true
+# tasks file for master
+- name: Install ambari-server
+  apt: pkg=ambari-server state=installed update_cache=true
+  register: ambari_server_setup
 
-- hosts: slave
-  roles:
-    - role: slave
-become: true
+- name: Set up ambari-server
+  shell: "ambari-server setup --silent"
+  when: ambari_server_setup | changed
+
+- name: Activate ambari-server service
+  service:
+    name: ambari-server
+    enabled: yes
+    state: started
+ignore_errors: yes
+\end{lstlisting}
+
+\lstset{language=sh}
+\begin{lstlisting}[caption={Tasks for the slave role in Ansible}, label={lst:ansibleslave}]
+---
+# tasks file for slave
+- name: Mount Hadoop Data Volume
+  mount:
+    name: /hadoop
+    src: "UUID={{ hadoop_vol_uuid }}"
+    fstype: ext4
+    state: mounted
+    opts: rw,user,auto
+
+
+- name: Install ambari-agent
+  apt: pkg=ambari-agent state=installed update_cache=true
+
+- name: Set ambari-agent.ini
+  template:
+    src: "{{ role_path }}/templates/ambari-agent.ini.j2"
+    dest: /etc/ambari-agent/conf/ambari-agent.ini
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  vars:
+    master_hostname: "{{ hostvars[groups['master'][0]].inventory_hostname }}"
+  register: ambari_agent_restart
+
+- name: Restart ambari-agent service
+  shell: "ambari-agent restart"
+  when: ambari_agent_restart | changed
+
+- name: Start ambari-agent service
+  shell: "ambari-agent start"
+ignore_errors: yes
 \end{lstlisting}
