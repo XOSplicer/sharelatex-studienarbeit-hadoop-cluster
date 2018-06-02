@@ -27,10 +27,10 @@ Each operation on the infrastructure can be performed within this interface.
 The firewall in OpenStack can be configured by creating \emph{security groups}.
 These security groups describe rules for allowing and prohibit outgoing and incoming connections.
 For this project two security groups are created and assigned to each of the \acp{VM}.
-THe first group deals with default settings. It allows all outgoing connections 
+THe first group deals with \emph{default} settings. It allows all outgoing connections 
 and allows incoming connections on port 22, which is the port used for \ac{SSH} access, 
 as well as incoming ping packages in the Internet Control Message Protocol.
-The second group deals with hadoop specific ports.
+The second group deals with Hadoop specific ports.
 A detailed over all necessary ports is given by \textcite{hortonworks2017reference} in their port reference.
 However to make development and access more flexible, this group does temporarily 
 allow all incoming requests.
@@ -112,19 +112,20 @@ added to them, which is not officially registered but is necessary for Ambari to
 	\label{fig:resources_openstack}
 \end{table}
 
-As visible in table \ref{fig:instance_sizes} all instance of m1.small and larger have a core to memory ration of \emph{1~core~:~1~GB~RAM}, which means that, if all 20 available cores are used, only 20 out of 51,2 GB RAM (cf. table \ref{fig:resources_openstack}) can be used. It is favourable to have maximum sized \acp{VM} with respect to memory to give Hadoop the possibility make better use of it.
+Table \ref{fig:resources_openstack} describes how many resources are available at maximum for the project in the \ac{DHBW} OpenStack environment. The chosen configurations may in sum not exceed this limit.
+As visible in table \ref{fig:instance_sizes} all instance of m1.small and larger have a core to memory ration of \emph{1~core~:~1~GB~RAM}, which means that, if all 20 available cores are used, only 20 out of 51,2 GB RAM  can be used. It is favourable to have maximum sized \acp{VM} with respect to memory to give Hadoop the possibility make better use of it.
 Therefore the best allocation for the nodes is to use a m1.xlarge instance for the master node, a m1.xlarge for the secondary and a large instance for the slave node.
 This in sum gives 20 \acp{VCPU} and 20~\ac{GB} \ac{RAM} and no further cores are available to allocate more nodes.
 
 
-TODO OS: ubuntu 16.04
-TODO network attatchment to ext201 and int10+
-TODO security group: defualt and hadoop
-TODO using ssh key for authentication
-
+Each instance is using the Ubuntu 16.04 operating system which is compatible with \ac{HDP}, Ambari and Hadoop. As discussed before the security groups for default access and hadoop specific access are assigned to the hosts, and they are connected to the internal and external network. An \ac{SSH} key is used for authentication.
+The successful creation of each host is tested by accessing it via \ac{SSH} using the specified key and the user \emph{ubuntu}.
 
 
 \subsubsection{Storage}
+
+In order for the Hadoop cluster to store \ac{HDFS} data it is necessary to split up the available 1000~\ac{GB} for storage into three volumes, one for each host.
+
 
 TODO
 create disks
