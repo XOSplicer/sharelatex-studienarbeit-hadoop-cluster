@@ -12,6 +12,8 @@ Suggestions for future projects how better results might be achieved is given in
 
 \section{Infrastructure Set-Up in OpenStack}
 
+\subsection{Preparation}
+
 The foundation for the cluster architecture that has been illustrated in figure \vref{fig:architecture} are the host \acp{VM}, their storage and the network that connects them.
 In the course of this process some minor adaptions are made to the proposed architecture.
 Especially the \texttt{hadoop-master-0} node now also runs the \ac{HDFS} Datanode and YARN Nodemanager service and therefore has a storage volume attached to it.
@@ -148,8 +150,11 @@ TODO
 TODO explain and maybe print this particular playbook yes yes print it with explainations
 TODO maybe appendix
 TODO Ansible
-see \urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible}
-     (in implementation explain how the ansible part works). 
+
+
+The full Ansible playbook including all roles and templates is stored on the authors \emph{GitHub repository} and can be accessed at 
+\urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible}.
+
      
 
 
@@ -170,10 +175,10 @@ literary none?
 
 TODO
 
-TODO Tools will be Apache Spark, Storm, Hive und Pig
-
 \subsection{Preparation}
-TODO
+
+\emph{Jonas Balsfulland} proposes in his paper which additional tools should be running on the cluster. Especially \emph{Spark 2, Storm, Hive and Pig} should be deployed.
+Ambari offers the possibility to set up all of these services automatically if they are selected during the cluster setup.
 
 \subsection{Execution}
 TODO
@@ -212,7 +217,7 @@ Finally \emph{teravalidate} checks that the numbers are indeed sorted correctly.
 To run the test the follig commands are used to create 5~\ac{GB} fo data:\\
 \texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teragen 5000000\\  /user/ubuntu/test/5gsort/input}\\ 
 \texttt{\$ hadoop jar hadoop-mapreduce-examples.jar terasort\\ /user/ubuntu/test/5gsort/input\\ /user/ubuntu/test/5gsort/ouput}\\ 
-\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teravalidate\\  /user/ubuntu/test/5gsort/ouput}\\
+\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teravalidate\\  /user/ubuntu/test/5gsort/ouput}
 
 The test are done for 1~\ac{MB}, 1~\ac{GB} and 5~\ac{GB}.
 All test finish successfully, which means that MapReduce jobs can be successfully scheduled on the cluster and can interact with \ac{HDFS}.
