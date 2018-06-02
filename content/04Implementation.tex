@@ -199,13 +199,23 @@ mapred is broken (sometimes)
 
 \section{System Tests}
 
+Before the processing system can be tested a new directory to store the test data in \ac{HDFS}
+is created. 
+This folder is \texttt{/user/ubuntu} and is accessible by the user \texttt{ubuntu}.
+To test this step a new file is uploaded to the directory and its content is then downloaded again which tests successful. The directory is used in the next step.
+
 \subsubsection{Terasort}
 
-As suggested in the execution plan the \emph{terasort} program implemented by \text{omally2008terasort}, which is included in the Hadoop installtion on each cluster node, is used to check the sanity of the \ac{}
+As suggested in the execution plan the \emph{terasort} program implemented by \textcite{omally2008terasort}, which is included in the Hadoop installtion on each cluster node, is used to check the sanity of the \ac{YARN}, \ac{HDFS} and MapReduce2 Services.
+First \emph{teragen} generates a variable amount of random numbers and stores them on \ac{HDFS}. Then \emph{terasort} sorts the numbers using MapReduce and stores the result.
+Finally \emph{teravalidate} checks that the numbers are indeed sorted correctly.
+To run the test the follig commands are used to create 5~\ac{GB} fo data:\\
+\footnotesize{\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teragen 5000000 /user/ubuntu/test/5gsort/input}\\
+\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar terasort /user/ubuntu/test/5gsort/input\\ /user/ubuntu/test/5gsort/ouput}\\
+\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teravalidate /user/ubuntu/test/5gsort/ouput}}\\
 
-
-TODO and 
-TODO \urlinline{https://hadoop.apache.org/docs/r1.0.4/api/org/apache/hadoop/examples/terasort/TeraGen.html}\\urlinline{https://www.systutorials.com/3235/hadoop-terasort-benchmark/} (also mentioned in \autocite[][]{white2015hadoop})
+The test are done for 1~\ac{MB}, 1~\ac{GB} and 5~\ac{GB}.
+All test finish successfully, which means that MapReduce jobs can be successfully scheduled on the cluster and can interact with \ac{HDFS}.
 
 \subsubsection{Ambari Service Checks}
 
