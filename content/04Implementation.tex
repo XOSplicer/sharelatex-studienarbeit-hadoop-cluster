@@ -16,7 +16,6 @@ The foundation for the cluster architecture that has been illustrated in figure 
 In the course of this process some minor adaptions are made to the proposed architecture.
 Especially the \texttt{hadoop-master-0} node now also runs the \ac{HDFS} Datanode and YARN Nodemanager service and therefore has a storage volume attached to it.
 
-
 To set up the cluster the web interface of OpenStack can be used, which is accessible at
 \urlinline{https://controller.c4.dhbw-mannheim.de/} from within the \ac{DHBW} network.
 Each operation on the infrastructure can be performed within this interface.
@@ -25,7 +24,11 @@ Each operation on the infrastructure can be performed within this interface.
 
 \subsubsection{Firewall Rules}
 
-The firewall in OpenStack can be configured by creating 
+The firewall in OpenStack can be configured by creating \emph{security groups}.
+These security groups describe rules for allowing and prohibit outgoing and incoming connections.
+For this project two security groups are created and assigned to each of the \acp{VM}.
+THe first group deals with default settings. It allows all outgoing connections 
+and allows incoming connections on port 22, which is the port used for \ac{SSH} access and 
 
 TODO sec group considerations, which ports in out? 
 default: out is open, in is only ping and ssh on 22
@@ -71,6 +74,7 @@ TODO describe flavors
 
 \begin{table}[hbt]
 \centering
+\resizebox{0.8\textwidth}{!}{%
 	\begin{tabular}{lrrr}
 	  Instance Flavor Name & \acp{VCPU} & \ac{RAM} & Root Disk Size \\
 	  \hline
@@ -81,12 +85,14 @@ TODO describe flavors
 	  m1.large & 4 & 4~\ac{GB} & 40~\ac{GB} \\
 	  m1.xlarge & 8 & 8~\ac{GB} & 80~\ac{GB} \\
 	\end{tabular}%
+	}
 	\caption{Available instance sizes in the \ac{DHBW} OpenStack environment}
 	\label{fig:instance_sizes}
 \end{table}
 
 
 \begin{table}[hbt]
+\resizebox{0.8\textwidth}{!}{%
 \centering
 	\begin{tabular}{lrl}
 	  Resource Type & Amount & Unit\\
@@ -99,6 +105,7 @@ TODO describe flavors
 	  Volumes & 10 & \\
 	  Volume Storage & 1000 & \ac{GB}
 	\end{tabular}%
+	}
 	\caption{Available resources for the project in the \ac{DHBW} OpenStack environment}
 	\label{fig:resources_openstack}
 \end{table}
