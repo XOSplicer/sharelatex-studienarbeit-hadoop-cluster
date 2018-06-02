@@ -28,13 +28,12 @@ The firewall in OpenStack can be configured by creating \emph{security groups}.
 These security groups describe rules for allowing and prohibit outgoing and incoming connections.
 For this project two security groups are created and assigned to each of the \acp{VM}.
 THe first group deals with default settings. It allows all outgoing connections 
-and allows incoming connections on port 22, which is the port used for \ac{SSH} access and 
-
-TODO sec group considerations, which ports in out? 
-default: out is open, in is only ping and ssh on 22
-hadoop: detailed view %\autocite[][]{hortonworks2017reference}, 
-but for easier development temporary all ports incoming open. most important: 8080 for ambari
-
+and allows incoming connections on port 22, which is the port used for \ac{SSH} access, 
+as well as incoming ping packages in the Internet Control Message Protocol.
+The second group deals with hadoop specific ports.
+A detailed over all necessary ports is given by \textcite{hortonworks2017reference}.
+However to make development and access more flexible, this group does temporarily 
+allow all incoming requests.
 
 \subsubsection{Network}
 
@@ -47,7 +46,7 @@ TODO describe each of the networks
 \begin{table}[hbt]
 \resizebox{\textwidth}{!}{%
 	\begin{tabular}{lll}
-	  Network Name & Sub-networks & Descirption\\
+	  Network Name & Sub-networks & Description\\
 	  \hline
 	  ext-net-201 & 141.72.191.0/24 & Pre-configured connection to \ac{DHBW} internal network\\
 	  ext-net-112 & 192.168.112.0/20 & Pre-configured connection with unknown destination\\
@@ -92,8 +91,8 @@ TODO describe flavors
 
 
 \begin{table}[hbt]
-\resizebox{0.8\textwidth}{!}{%
 \centering
+\resizebox{0.8\textwidth}{!}{%
 	\begin{tabular}{lrl}
 	  Resource Type & Amount & Unit\\
 	  \hline
