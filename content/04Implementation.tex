@@ -44,19 +44,19 @@ The network uses the address space of 10.100.10.0/24 which is a subnet of the pr
 Figure \ref{fig:networks_subnets} lists all the networks that are available after the internal network is created. 
 The network named \emph{int-net-10} is the internal network which all nodes connect to. Furthermore all nodes need to connect to the \emph{ext-net-201} network which allows them to connect to the Internet and makes them accessible from within the \ac{DHBW} network.
 
-\begin{table}[hbt]
-\resizebox{\textwidth}{!}{%
-	\begin{tabular}{lll}
-	  Network Name & Sub-networks & Description\\
-	  \hline
-	  ext-net-201 & 141.72.191.0/24 & Pre-configured connection to \ac{DHBW} internal network\\
-	  ext-net-112 & 192.168.112.0/20 & Pre-configured connection with unknown connectivity\\
-	  int-net-10 & 10.100.10.0/24 &  New internal network used by Hadoop\\
-	\end{tabular}%
-	}
-	\caption{Sub-networks within the project in OpenStack}
-	\label{fig:networks_subnets}
-\end{table}
+%\begin{table}[hbt]
+%\resizebox{\textwidth}{!}{%
+%	\begin{tabular}{lll}
+%	  Network Name & Sub-networks & Description\\
+%	  \hline
+%	  ext-net-201 & 141.72.191.0/24 & Pre-configured connection to \ac{DHBW} internal network\\
+%	  ext-net-112 & 192.168.112.0/20 & Pre-configured connection with unknown connectivity\\
+%	  int-net-10 & 10.100.10.0/24 &  New internal network used by Hadoop\\
+%	\end{tabular}%
+%	}
+%	\caption{Sub-networks within the project in OpenStack}
+%	\label{fig:networks_subnets}
+%\end{table}
 
 \begin{figure}[hbt]
   {\centering\includegraphics[width=0.8\textwidth]{{img/network_topology}.png}\par}
@@ -78,44 +78,44 @@ The names are respective to proposed architecture but have a \emph{dhbw} domain 
 added to them, which is not officially registered but is necessary for Ambari to identify the hosts correctly.
 
 
-\begin{table}[hbt]
-\centering
-\resizebox{0.8\textwidth}{!}{%
-	\begin{tabular}{lrrr}
-	  Instance Flavor Name & \acp{VCPU} & \acs{RAM} & Root Disk Size \\
-	  \hline
-	  m1.nano & 1 & 64~\acs{MB} & 1~\acs{GB} \\
-	  m1.tiny & 1 & 512~\acs{MB} & 5~\acs{GB} \\
-	  m1.small & 1 & 1~\acs{GB} & 10~\acs{GB} \\
-	  m1.medium & 2 & 2~\acs{GB} & 20~\acs{GB} \\
-	  m1.large & 4 & 4~\acs{GB} & 40~\acs{GB} \\
-	  m1.xlarge & 8 & 8~\acs{GB} & 80~\acs{GB} \\
-	\end{tabular}%
-	}
-	\caption{Available instance sizes in the \ac{DHBW} OpenStack environment}
-	\label{fig:instance_sizes}
-\end{table}
+%\begin{table}[hbt]
+%\centering
+%\resizebox{0.8\textwidth}{!}{%
+%	\begin{tabular}{lrrr}
+%	  Instance Flavor Name & \acp{VCPU} & \acs{RAM} & Root Disk Size \\
+%	  \hline
+%	  m1.nano & 1 & 64~\acs{MB} & 1~\acs{GB} \\
+%	  m1.tiny & 1 & 512~\acs{MB} & 5~\acs{GB} \\
+%	  m1.small & 1 & 1~\acs{GB} & 10~\acs{GB} \\
+%	  m1.medium & 2 & 2~\acs{GB} & 20~\acs{GB} \\
+%	  m1.large & 4 & 4~\acs{GB} & 40~\acs{GB} \\
+%	  m1.xlarge & 8 & 8~\acs{GB} & 80~\acs{GB} \\
+%	\end{tabular}%
+%	}
+%	\caption{Available instance sizes in the \ac{DHBW} OpenStack environment}
+%	\label{fig:instance_sizes}
+%\end{table}
 
 
-\begin{table}[hbt]
-\centering
-	\begin{tabular}{lrl}
-	  Resource Type & Amount & Unit\\
-	  \hline
-	  Instances & 10 & \\
-	  \acp{VCPU} & 20 & \\
-	  \acs{RAM} & 51200 & \acs{MB} \\
-	  Floating \acs{IP} Addresses & 10 & \\
-	  Security Groups & 10 & \\
-	  Volumes & 10 & \\
-	  Volume Storage & 1000 & \acs{GB}
-	\end{tabular}
-	\caption{Available resources for the project in the \ac{DHBW} OpenStack environment}
-	\label{fig:resources_openstack}
-\end{table}
+%\begin{table}[hbt]
+%\centering
+%	\begin{tabular}{lrl}
+%	  Resource Type & Amount & Unit\\
+%	  \hline
+%	  Instances & 10 & \\
+%	  \acp{VCPU} & 20 & \\
+%	  \acs{RAM} & 51200 & \acs{MB} \\
+%	  Floating \acs{IP} Addresses & 10 & \\
+%	  Security Groups & 10 & \\
+%	  Volumes & 10 & \\
+%	  Volume Storage & 1000 & \acs{GB}
+%	\end{tabular}
+%	\caption{Available resources for the project in the \ac{DHBW} OpenStack environment}
+%	\label{fig:resources_openstack}
+%\end{table}
 
 Table \ref{fig:resources_openstack} describes how many resources are available at maximum for the project in the \ac{DHBW} OpenStack environment. The chosen configurations may in sum not exceed this limit.
-As visible in table \ref{fig:instance_sizes} all instance of m1.small and larger have a core to memory ration of \emph{1~core~:~1~GB~RAM}, which means that, if all 20 available cores are used, only 20 out of 51,2 GB RAM  can be used. It is favourable to have maximum sized \acp{VM} with respect to memory to give Hadoop the possibility make better use of it.
+As visible in table \ref{fig:instance_sizes} all instance of m1.small and larger have a core to memory ration of \emph{1~core~:~1~GB~RAM}, which means that, if all 20 available cores are used, only 20 out of 51.2 GB RAM  can be used. It is favourable to have maximum sized \acp{VM} with respect to memory to give Hadoop the possibility make better use of it.
 Therefore the best allocation for the nodes is to use a m1.xlarge instance for the master node, a m1.xlarge for the secondary and a large instance for the slave node.
 This in sum gives 20 \acp{VCPU} and 20~\ac{GB} \ac{RAM} and no further cores are available to allocate more nodes.
 
@@ -127,7 +127,7 @@ The successful creation of each host is tested by accessing it via \ac{SSH} usin
 \subsubsection{Storage}
 
 In order for the Hadoop cluster to store \ac{HDFS} data it is necessary to split up the available 1000~\ac{GB} for storage into three volumes, one for each host.
-The disks are attached to the hosts and OpenStack reports the device that can be 
+The disks are attached to the hosts and OpenStack reports the device handle that can be 
 used within the hosts to access the volume.
 Before data can be stored on the volumes they each need to be partitioned into one partition using the program \texttt{fdisk}. The partitions are then formatted into ext4 file system format using the \texttt{mkfs.ext4} command.
 
@@ -142,41 +142,129 @@ This might indicate an general shortage of resources in the \ac{DHBW} OpenStack 
 
 \section{System Set-Up with Ansible}
 
-TODO ansible script already used in chapter 3 so now it is adapted to the new needs
+As laid out in the evaluation of Ambari in section \vref{sec:design:hdp_ambari_ansible} 
+and the execution plan, 
+an Ansible playbook that was developed for the evaluation is now adapted to perform the system setup of the cluster. 
+The next section will discuss the how this playbook is structured and what actions are performed to install the system.
+The full Ansible playbook including all roles and templates is stored on the authors \emph{GitHub repository} and can be accessed at 
+\urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible}.
+The important excerpts, which are the \emph{task definitions}, are also attached in the appendix \vref{app:ansible}.
 
 \subsection{Preparation}
 
-TODO
-TODO explain and maybe print this particular playbook yes yes print it with explainations
+TODO also install Ansible locally
+TODO explain and maybe print this particular playbook yes yes print it with explanations
 TODO maybe appendix
-TODO Ansible
 
+TODO describe all roles and task within those roles
 
-The full Ansible playbook including all roles and templates is stored on the authors \emph{GitHub repository} and can be accessed at 
-\urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible}.
+TODO \vref{lst:ansibleall}
 
-     
+\subsubsection{Common Set-Up Tasks}
+TODO \vref{lst:ansiblecommon}
 
+\begin{enumerate}
+    \item TODO set the hostname
+    \item TODO configure the host file for local resulution
+    \item TODO make sure the correct ssh keys can be used for access
+    \item TODO install common necessary packages (which? and why, see install manual aswell)
+    \item TODO install and activate ntp
+    \item TODO configure internal network, apply if necessary
+    \item TODO register the ambari repository list inluding keys and load their contents
+    \item TODO disblae the thp feature using a service
+    
+\end{enumerate}
+
+\subsubsection{Specific Tasks for Ambari Server}
+TODO \vref{lst:ansiblemaster}
+
+\begin{enumerate}
+    \item TODO install the ambari server package
+    \item TODO setup the ambari server
+    \item TODO activate the server service if not yet running
+\end{enumerate}
+
+\subsubsection{Specific Tasks for Ambari Client}
+TODO \vref{lst:ansibleslave}
+
+\begin{enumerate}
+    \item TODO mount the storage volume
+    \item TODO install ambari agent
+    \item TODO configure ambari agent to use masternode as master hostname
+    \item TODO restart or start the service if necessary
+\end{enumerate}
 
 \subsection{Execution}
 
+In order to configure the hosts with Ansible they must be accessible via \ac{SSH} by their \ac{FQDN}. 
+Since no \ac{DNS} system is employed, the \texttt{ssh\_config} file is used to provide a local resolution for \ac{SSH}. 
+Listing \ref{lst:sshconfig} describes how this configuration looks like.
 
-TODO prepare hosts by running setup script
-find and configure host specific variables
-TODO apply ansible playbook
-reboot for safty
+\lstset{language=sh}
+\begin{lstlisting}[caption={Local SSH configuration file used by Ansible}, label={lst:sshconfig}]
+Host hadoop-master-0.dhbw
+    Hostname 141.72.191.54
+    user ubuntu
+
+Host hadoop-sec-master-0.dhbw
+    Hostname 141.72.191.55
+    user ubuntu
+
+Host hadoop-slave-0.dhbw
+    Hostname 141.72.191.56
+    user ubuntu
+\end{lstlisting}
+
+Before a host can be used with Ansible, it needs to have \emph{Python 2} installed.
+Therefore a short script cat be run on each host, which updates the system, installs Python and reboots the system. This ensures all packages are up to date. The following bash script performs these tasks and also installs the \emph{python-apt} library which is necessary for Ansible to install more packages.
+
+\lstset{language=sh}
+\begin{lstlisting}[caption={Bash script for initial host preparation}, label={lst:hostsetup}]
+sudo apt-get update \&\& sudo apt-get -y upgrade
+sudo apt-get -y install python2.7 python-apt
+sudo reboot now
+\end{lstlisting}
+
+After this initial preparation of the hosts is done, 
+the Ansible inventory can is configured, 
+so that all the specific variables of the host are set. 
+These variables are the \ac{FQDN}, the internal \ac{IP} address, 
+the network interface that is connected to the internal network 
+and finally the \ac{UUID} of the partition that is used to store the \ac{HDFS} data.
+
+The \ac{FQDN} is again taken from the \texttt{ssh\_config} file. 
+The internal \ac{IP} address is taken from the OpenStack web interface.
+To find the values for the other variables each host is accessed.
+The internal network interface is the second Ethernet interface listed with the command \texttt{\$ ifconfig -a}. Typically it is called \texttt{ens4}, \texttt{ens6} or \texttt{ens7}.
+The \ac{UUID} of the storage volume is found by running \texttt{\$ sudo blkid}. 
+It reports the \ac{UUID} of all volumes. The one corresponding to the device that has been created in OpenStack can be found in the output. These variables are then entered into the \texttt{inventory.ini} file for Ansible. The master node is entered in the \texttt{master} section, the slave nodes in the \texttt{slave section respectively}.
+
+\lstset{language=sh}
+\begin{lstlisting}[caption={Exemplary inventory description in Ansible}, label={lst:inventory}]
+[master]
+hadoop-master-0.dhbw internal_ip=10.100.10.24 iface_internal=ens4 hadoop_vol_uuid=47103a5e-5c3f-40f3-a710-fcd86e23fc61
+
+[slave]
+hadoop-sec-master-0.dhbw internal_ip=10.100.10.25 iface_internal=ens4 hadoop_vol_uuid=54b1d167-9b88-45c1-b27f-6e441b765c66
+hadoop-slave-0.dhbw internal_ip=10.100.10.26 iface_internal=ens4 hadoop_vol_uuid=046a2bc2-df33-4640-becd-2c401076285f
+\end{lstlisting}
+
+Now all necessary variables are set and the Ansible playbook is be applied to the hosts.
+This is done using the command \texttt{\$ ansible-playbook all}.
+Ansible connects to each of the hosts and performs the necessary steps to get the system into the desired state.
 
 \subsection{Encountered Issues and Lessons Learned}
 
-TODO
-literary none?
+Ansible proved very capable to perform system administration tasks in a reproducible fashion. 
+It has extensive documentation that describe how a given configuration can be expressed in an Ansible playbook. 
+Therefore it is suited to describe \enquote{system configuration as code} in an complexity that can be handled with reasonable effort.
 
 \section{Hadoop Set-Up with Ambari}
 
 \subsection{Preparation}
 
 After the Ambari software is installed on each host by Ansible, it can be utilized to set-up the Hadoop cluster and install additional tools as well.
-To do so the Ambari web interface is used that can be accessed on the master node on port 8080. The complete Hadoop setup is performed using the cluster deployment dialogue that Ambari offers. This process follows the execution plan closesly.
+To do so the Ambari web interface is used that can be accessed on the master node on port 8080. The complete Hadoop setup is performed using the cluster deployment dialogue that Ambari offers. This process follows the execution plan closely.
 
 \emph{Jonas Balsfulland} proposes in his paper which additional tools should be running on the cluster. Especially \emph{Spark 2, Storm, Hive and Pig} should be deployed.
 Ambari offers the possibility to set up all of these services automatically if they are selected during the cluster setup.
@@ -189,29 +277,34 @@ The list of the \acp{FQDN} including the \emph{dhbw} domain of the three \acp{VM
 Ambari then checks the connectivity to each host and performs preliminary checks about the host that ensure the cluster can be deployed successfully.
 
 Next the services and additional tools are chosen which are installed on the cluster.
-For this setup \ac{HDFS}, \ac{YARN}, MapReduce2, Tez, Hive, Pig, ZooKeeper, Storm, SmartSense, Spark2, Slider and Ambari Metrics are selected. SmartSense, Slider, ZooKeeper and Ambari Metrics are enforced to be installed by Ambari.
+For this setup \ac{HDFS}, \ac{YARN}, MapReduce2, Tez, Hive, Pig, ZooKeeper, Storm, SmartSense, Spark2, Slider and Ambari Metrics are selected. SmartSense, Slider, ZooKeeper and Ambari Metrics are enforced to be installed by Ambari. 
+After this Ambari lets the user configure which master, slave and client components of each service are placed on each host.
+Obviously all master components are placed on the master host, while the slave components are installed on all all hosts.
+Finally each service is configured specifically. 
+Ambari provides preset for each service.
+Those presets provide a basic configuration that is sufficient for the purpose of this project. 
+The only preferences which are made are the passwords.
 
-
-TODO
-
-TODO In the end Ambari monitoring web interface used to inspect the cluster and the services
+In the end Ambari deploys the Hadoop cluster by installing the components in the requested 
+configuration. 
+This process is automatic and when it is finished Ambari tries to start up the cluster components. The user then is redirected to the Ambari service overview in the web interface where the status of each service is monitored and the services can be managed while the cluster is running. This includes starting and stopping the service, as well as re-configuring it.
 
 \subsection{Encountered Issues and Lessons Learned}
-TODO
 
-TODO as expected the larger root partition of 80 GB was enough for the selected services
+During the initial evaluation of Ambari in section \vref{sec:design:hdp_ambari_ansible} it was figured that 20~\ac{GB} of root storage for the installation of the cluster is not enough. This approach uses a reduced set of services that are installed which leads to less disk space needed. Therefore the 80~\ac{GB} root volume is sufficient on all nodes as expected previously.
 
-TODO memory on master node was exceeded even with not all services runnig (only)
+During the installation process in Ambari several issues regarding domain name resolution appeared.
+This is caused by the fact that no proper \ac{DNS} server is used to distribute the \acp{FQDN} 
+but rather the \texttt{hosts} file is altered in a way that the resolution works locally between all nodes. 
+This holds the possibility for configuration errors which lead which lead to the failure of the installation at first.
+The issues are fixed by adapting the \texttt{hosts} file to only perform name resolution for the selected \acp{FQDN} for the local, internal network. 
 
-TODO network DNS issues lead to failing installation, ha been re-done
-
-TODO services crash due to memory shortage, generel unstable
-
-TODO struggkes to get a stable cluster, but mostly works
-HDFS WORKS
-YARN is broken (sometimes)
-mapred is broken (sometimes)
-
+One major issue is encountered when Ambari tries to start all services: The main memory on the master node, which is limited to 8~\ac{GB} is not sufficient and the system is instable.
+When the master node runs out of memory the operating system can kill arbitrary services that are running
+Since this is happening on the master node, this leads to the service not being available at all and introduces the need for manual restarting of the service.
+In conclusion some services are turned of explicitly to improve stability. 
+In particular Hive, SmartSense and Spark2 are deactivated for the entire cluster. 
+This way the master node has enough memory to run the other services.
 
 \section{System Tests}
 
@@ -225,10 +318,14 @@ To test this step a new file is uploaded to the directory and its content is the
 As suggested in the execution plan the \emph{terasort} program implemented by \textcite{omally2008terasort}, which is included in the Hadoop installtion on each cluster node, is used to check the sanity of the \ac{YARN}, \ac{HDFS} and MapReduce2 Services.
 First \emph{teragen} generates a variable amount of random numbers and stores them on \ac{HDFS}. Then \emph{terasort} sorts the numbers using MapReduce and stores the result.
 Finally \emph{teravalidate} checks that the numbers are indeed sorted correctly.
-To run the test the follig commands are used to create 5~\ac{GB} fo data:\\
-\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teragen 5000000\\  /user/ubuntu/test/5gsort/input}\\ 
-\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar terasort\\ /user/ubuntu/test/5gsort/input\\ /user/ubuntu/test/5gsort/ouput}\\ 
-\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teravalidate\\  /user/ubuntu/test/5gsort/ouput}
+To run the test the follig commands are used to create 5~\ac{GB} fo data:
+
+\lstset{language=sh}
+\begin{lstlisting}[caption={Running Terasort as a test for YARN and HDFS}, label={lst:terasort}]
+hadoop jar hadoop-mapreduce-examples.jar teragen 5000000 /user/ubuntu/test/5gsort/input
+hadoop jar hadoop-mapreduce-examples.jar terasort /user/ubuntu/test/5gsort/input /user/ubuntu/test/5gsort/output
+hadoop jar hadoop-mapreduce-examples.jar teravalidate /user/ubuntu/test/5gsort/output
+\end{lstlisting}
 
 The test are done for 1~\ac{MB}, 1~\ac{GB} and 5~\ac{GB}.
 All test finish successfully, which means that MapReduce jobs can be successfully scheduled on the cluster and can interact with \ac{HDFS}.
@@ -249,20 +346,9 @@ However the general concept of using OpenStack to host the cluster and Ansible a
 During the project the \ac{DHBW} Cloud environment showed unreliabilities that influenced the progress of the implementation phase.
 The general process was errorsome and would be hard to reproduce for students or lecturers with little knowledge about system administration. It is therefore not recommended to pursue a installation of Hadoop within the context of a lecture. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+In future projects a master node with significantly more resources should be used 
+if the project uses the OpenStack environment at the \ac{DHBW}.
+This however requires new flavors for instance sizes which have more memory in respect to the processing cores.
+An alternative would be to use dedicated servers within the \ac{DHBW} or to 
+get a contract with a \emph{managed platform} vendor who provides Hadoop as a service.
 

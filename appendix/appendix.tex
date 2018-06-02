@@ -1,3 +1,174 @@
 % !TEX root = ../master.tex
 
-%\chapter{Appendix A}
+\chapter{Appendix -- Ansible Playbook Descriptions}
+\label{app:ansible}
+
+\lstset{language=sh}
+\begin{lstlisting}[caption={Ansible playbook that gets run to install the cluster system}, label={lst:ansibleall}]
+---
+# main playbook
+- hosts: master
+  roles:
+    - role: master
+      become: true
+    - role: slave
+      become: true
+
+- hosts: slave
+  roles:
+    - role: slave
+become: true
+\end{lstlisting}
+
+\lstset{language=sh}
+\begin{lstlisting}[caption={Common tasks in Ansible}, label={lst:ansiblecommon}]
+---
+# tasks file for common
+- name: Set hostname
+  hostname: name="{{ inventory_hostname }}"
+
+- name: Set /etc/hosts
+  template:
+    src: "{{ role_path }}/templates/hosts.j2"
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: Set authorized_keys for user ubuntu
+  copy:
+    src: "{{ role_path }}/files/authorized_keys"
+    dest: /home/ubuntu/.ssh/authorized_keys
+    owner: ubuntu
+    group: ubuntu
+    mode: 0600
+    backup: yes
+
+- name: Install common packages
+  apt: pkg="{{ item }}" state=installed update_cache=true
+  with_items:
+    - "{{ pkg_pycurl }}"
+    - "{{ pkg_curl }}"
+    - "{{ pkg_unzip }}"
+    - "{{ pkg_tar }}"
+    - "{{ pkg_wget }}"
+
+- name: Install ntp
+  apt: pkg={{ pkg_ntp }} state=installed update_cache=true
+
+- name: Activate ntp service
+  service:
+    name: ntp
+    enabled: yes
+    state: started
+
+- name: Set interfaces file to load all interfaces in interfaces.d
+  copy:
+    src: "{{ role_path }}/files/interfaces"
+    dest: /etc/network/interfaces
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: Set internal network config
+  template:
+    src: "{{ role_path }}/templates/60-internal.cfg.j2"
+    dest: /etc/network/interfaces.d/60-internal.cfg
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  register: if_internal_restart
+
+- name: Restart internal network interface
+  shell: "ifdown {{ iface_internal }} && ifup {{ iface_internal }}"
+  when: if_internal_restart | changed
+
+- name: Download Ambari repository list
+  get_url:
+    url: "{{ ambari_repo_list }}"
+    dest: /etc/apt/sources.list.d/ambari.list
+    mode: 0644
+    backup: yes
+
+- name: Add Ambari repository key
+  apt_key:
+    keyserver: "{{ ambari_repo_keyserver }}"
+    id: "{{ ambari_repo_keyid }}"
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Copy transparent-huge-pages service file
+  copy:
+    src: disable-transparent-hugepages
+    dest: "/etc/init.d/disable-transparent-hugepages"
+    mode: 0755
+
+- name: Run service to disable transparent hugepages
+  service:
+    name: disable-transparent-hugepages
+    state: started
+enabled: yes
+\end{lstlisting}
+
+
+\lstset{language=sh}
+\begin{lstlisting}[caption={Tasks for the master role in Ansible}, label={lst:ansiblemaster}]
+---
+# tasks file for master
+- name: Install ambari-server
+  apt: pkg=ambari-server state=installed update_cache=true
+  register: ambari_server_setup
+
+- name: Set up ambari-server
+  shell: "ambari-server setup --silent"
+  when: ambari_server_setup | changed
+
+- name: Activate ambari-server service
+  service:
+    name: ambari-server
+    enabled: yes
+    state: started
+ignore_errors: yes
+\end{lstlisting}
+
+\lstset{language=sh}
+\begin{lstlisting}[caption={Tasks for the slave role in Ansible}, label={lst:ansibleslave}]
+---
+# tasks file for slave
+- name: Mount Hadoop Data Volume
+  mount:
+    name: /hadoop
+    src: "UUID={{ hadoop_vol_uuid }}"
+    fstype: ext4
+    state: mounted
+    opts: rw,user,auto
+
+
+- name: Install ambari-agent
+  apt: pkg=ambari-agent state=installed update_cache=true
+
+- name: Set ambari-agent.ini
+  template:
+    src: "{{ role_path }}/templates/ambari-agent.ini.j2"
+    dest: /etc/ambari-agent/conf/ambari-agent.ini
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  vars:
+    master_hostname: "{{ hostvars[groups['master'][0]].inventory_hostname }}"
+  register: ambari_agent_restart
+
+- name: Restart ambari-agent service
+  shell: "ambari-agent restart"
+  when: ambari_agent_restart | changed
+
+- name: Start ambari-agent service
+  shell: "ambari-agent start"
+ignore_errors: yes
+\end{lstlisting}
