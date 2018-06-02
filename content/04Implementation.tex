@@ -142,19 +142,19 @@ This might indicate an general shortage of resources in the \ac{DHBW} OpenStack 
 
 \section{System Set-Up with Ansible}
 
-TODO ansible script already used in chapter 3 so now it is adapted to the new needs
+As laid out in the evaluation of Ambari in section \vref{sec:design:hdp_ambari_ansible} 
+and the execution plan, 
+an Ansible playbook that was developed for the evaluation is now adapted to perform the system setup of the cluster. 
+The next section will discuss the how this playbook is structured and what actions are performed to install the system.
+The full Ansible playbook including all roles and templates is stored on the authors \emph{GitHub repository} and can be accessed at 
+\urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible}.
+The important excerpts, which are the \emph{task definitions}, are also attached in the appendix \vref{app:ansible}.
 
 \subsection{Preparation}
 
-TODO
-TODO explain and maybe print this particular playbook yes yes print it with explainations
+TODO also install Ansible locally
+TODO explain and maybe print this particular playbook yes yes print it with explanations
 TODO maybe appendix
-TODO Ansible
-also install ansible localy
-
-
-The full Ansible playbook including all roles and templates is stored on the authors \emph{GitHub repository} and can be accessed at 
-\urlinline{https://github.com/XOSplicer/studienarbeit-hadoop-cluster-ansible}.
 
 TODO describe all roles and task within those roles
 
@@ -262,7 +262,7 @@ The only preferences which are made are the passwords.
 
 In the end Ambari deploys the Hadoop cluster by installing the components in the requested 
 configuration. 
-This process is automatic and when it is finished Ambari tries to start up the cluster components. The user then is redirected to the Ambari service overview in the web interface where the status of each service is monitored and the services can be managed while the cluster is running. This includes starting and stopping the service, as well as reconfiguring it.
+This process is automatic and when it is finished Ambari tries to start up the cluster components. The user then is redirected to the Ambari service overview in the web interface where the status of each service is monitored and the services can be managed while the cluster is running. This includes starting and stopping the service, as well as re-configuring it.
 
 \subsection{Encountered Issues and Lessons Learned}
 
@@ -326,22 +326,4 @@ if the project uses the OpenStack environment at the \ac{DHBW}.
 This however requires new flavors for instance sizes which have more memory in respect to the processing cores.
 An alternative would be to use dedicated servers within the \ac{DHBW} or to 
 get a contract with a \emph{managed platform} vendor who provides Hadoop as a service.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
