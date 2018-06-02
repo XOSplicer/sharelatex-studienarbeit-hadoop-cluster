@@ -167,6 +167,12 @@ TODO describe all roles and task within those roles
 
 \subsection{Execution}
 
+Before a host can be used with Ansible, it needs to have \emph{Python 2} installed.
+Therefore a short script cat be run on each host, which updates the system, installs Python and reboots the system. This ensures all packages are up to date. The following bash script performs these tasks and also installs the \emph{python-apt} library which is necessary for Ansible to install more packages.
+
+\texttt{sudo apt-get update \&\& sudo apt-get -y upgrade\\
+sudo apt-get -y install python2.7 python-apt\\
+sudo reboot now\\}
 
 
 TODO prepare hosts by running setup script
