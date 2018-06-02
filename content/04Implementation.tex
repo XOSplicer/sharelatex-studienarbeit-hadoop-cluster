@@ -210,9 +210,9 @@ As suggested in the execution plan the \emph{terasort} program implemented by \t
 First \emph{teragen} generates a variable amount of random numbers and stores them on \ac{HDFS}. Then \emph{terasort} sorts the numbers using MapReduce and stores the result.
 Finally \emph{teravalidate} checks that the numbers are indeed sorted correctly.
 To run the test the follig commands are used to create 5~\ac{GB} fo data:\\
-\footnotesize{\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teragen 5000000 /user/ubuntu/test/5gsort/input}\\
-\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar terasort /user/ubuntu/test/5gsort/input\\ /user/ubuntu/test/5gsort/ouput}\\
-\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teravalidate /user/ubuntu/test/5gsort/ouput}}\\
+\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teragen 5000000\\  /user/ubuntu/test/5gsort/input}\\ 
+\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar terasort\\ /user/ubuntu/test/5gsort/input\\ /user/ubuntu/test/5gsort/ouput}\\ 
+\texttt{\$ hadoop jar hadoop-mapreduce-examples.jar teravalidate\\  /user/ubuntu/test/5gsort/ouput}\\
 
 The test are done for 1~\ac{MB}, 1~\ac{GB} and 5~\ac{GB}.
 All test finish successfully, which means that MapReduce jobs can be successfully scheduled on the cluster and can interact with \ac{HDFS}.
@@ -226,20 +226,21 @@ The checks are therefore performed for \ac{HDFS}, \ac{YARN}, MapReduce2, ZooKeep
 
 \section{Conclusion}
 
-
-
-During the implementation of the prject the \ac{DHBW} Cloud environment showed unreliablities that influenced
-TODO dhbw cloud is unreliable af
-
-NOT STABLE for production
-
-TODO process is way too hard for and too long for students to do in a lecture without depper understanding of sysadmin  
-
 TODO NOT scuccessfull because of ??????????
-
+The produced cluster is therefore not ready for \emph{production use}.
 TODO Abweichen von architecture war dumm, da memory knapp durch zu viele prozesse
-
 TODO maintainability is fucked, just let professsionals do it
+
+During the project the \ac{DHBW} Cloud environment showed unreliabilities that influenced the progress of the implementation phase.
+The general process was errorsome and would be hard to reproduce for students or lecturers with little knowledge about system administration. It is therefore not recommended to pursue a installation of Hadoop within the context of a lecture. 
+
+
+
+
+
+
+
+
 
 
 
