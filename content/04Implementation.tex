@@ -191,27 +191,28 @@ TODO network DNS issues lead to failing installation, ha been re-done
 
 TODO services crash due to memory shortage, generel unstable
 
-
-\section{System Tests}
-
-TODO
-
-\subsubsection{Terasort}
-
-TODO and \autocite{omally2008terasort}
-TODO \urlinline{https://hadoop.apache.org/docs/r1.0.4/api/org/apache/hadoop/examples/terasort/TeraGen.html}\\urlinline{https://www.systutorials.com/3235/hadoop-terasort-benchmark/} (also mentioned in \autocite[][]{white2015hadoop})
-
-\subsubsection{Ambari Service Checks}
-
-Ambari offers the possibility to run \emph{service checks}, which run a small workload on one service and makes sure the 
-
-TODO
-
+TODO struggkes to get a stable cluster, but mostly works
 HDFS WORKS
 YARN is broken (sometimes)
 mapred is broken (sometimes)
 
-check successfull where service is up, not all services up. TODO which ones
+
+\section{System Tests}
+
+\subsubsection{Terasort}
+
+As suggested in the execution plan the \emph{terasort} program implemented by \text{omally2008terasort}, which is included in the Hadoop installtion on each cluster node, is used to check the sanity of the \ac{}
+
+
+TODO and 
+TODO \urlinline{https://hadoop.apache.org/docs/r1.0.4/api/org/apache/hadoop/examples/terasort/TeraGen.html}\\urlinline{https://www.systutorials.com/3235/hadoop-terasort-benchmark/} (also mentioned in \autocite[][]{white2015hadoop})
+
+\subsubsection{Ambari Service Checks}
+
+Ambari offers the possibility to run \emph{service checks}, which run a small workload on one service and makes sure the cluster behaves correctly.
+These checks are run in this project for all services that are active.
+The services that are inactive due to memory shortage can not be tested.
+The checks are therefore performed for \ac{HDFS}, \ac{YARN}, MapReduce2, ZooKeeper, Storm, and Ambari Metrics. All of the checks are giving successful results, which only means the service works as expected. It does not show that all nodes are participating in the cluster for this service. 
 
 \section{Conclusion}
 
