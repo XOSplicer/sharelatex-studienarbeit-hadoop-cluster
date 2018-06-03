@@ -3,9 +3,9 @@
 \label{chap:fund}
 This chapter will analyze the current the use and benefits of \ac{BIA} and \ac{BDA} in both industry and academia. Furthermore, an introduction into the Hadoop project as foundational platform is given. 
 
-section{\acl{BIA}}
+\section{\acl{BIA}}
 \label{sota-bia}
-Chen et.~al characterize \ac{BIA} as \blockcquote[p.~1166]{chen2012business}{the techniques, technologies, systems, practices, methodologies, and applications that analyze critical business data to help an enterprise better understand its business and market and make timely business decisions}. Its goals and methodology closely resembles that of the emerging field of \ac{BDA} \autocite[p.~1166]{chen2012business}.
+Chen et.~al characterize \ac{BIA} as \enquote{the techniques, technologies, systems, practices, methodologies, and applications that analyze critical business data to help an enterprise better understand its business and market and make timely business decisions}\autocite[][p.~1166]{chen2012business}. Its goals and methodology closely resembles that of the emerging field of \ac{BDA} \autocite[][p.~1166]{chen2012business}.
 According to Chen et.~al and their involvement in the \ac{BIA} space from the end of the last century to the 2010s three major evolutionary phases of the sector may be differentiated, with \ac{BDA} characterizing the evolution in the last stage \autocite[][p.~1168 \psqq]{chen2012business}. In order to provide an overview regarding the development of the context area, the different stages will be looked at and briefly characterized hereafter, based on the understanding developed by \textcite[p.~1166 \psqq]{chen2012business}:
 
 \paragraph{\ac{BIA} 1.0} In the first evolutionary phase, the desire for the storage and analysis of business data emerged. Companies started to utilize already existing \acp{RDBMS} to store mostly structured data collected from various legacy systems such as mainframes. This phase includes the usage of statistical methods to generate and validate new hypotheses regarding stored information, widely known as \ac{DM}. In this regard the main emphasis of \ac{BIA} departments was to design, deploy and maintain data warehouses with optimized \ac{ETL} cycles in order to regularly feed new data into the system using batch processing. The stored information may then be analyzed using \ac{OLAP} systems and are usually visualized with dashboards and graphs to enable better insights for the end-users.
@@ -14,7 +14,7 @@ Most of the currently deployed analytic platforms, including standard software b
 \paragraph{\ac{BIA} 2.0} As the Web 2.0 became popular in the early 2000s, a previously unknown variety of data sources emerged as well. The goal of the second phase ignited by these events is to harvest the new opportunities for analytical processing created by this additional data. The collection of statistics on an individual customer basis allowed to generate a better understanding of customer's needs and thus offer tailored goods and services to a company's clients.
 Moreover, the invention of social media platforms led to a massive influx of publicly available user-generated content. The analysis of such unstructured data posed the main challenge to traditional applications, focused on structured data with well-defined schemes. Although some techniques and opportunities addressed by \ac{BIA} 2.0 have been incorporated into commercial offerings, there still exists a large room for future growth. Especially the techniques of text mining, social network and spatial-temporal analysis are still under active academic investigation.
 
-\paragraph{\ac{BIA} 3.0} Finally, the most interesting phase in the context of \ac{BDA} is the third one. Sparked by an exponentially increasing volume of data due to mobile and \ac{IoT} devices, that \enquote{traditional} systems are not capable of dealing with, this term represents a new research area currently under development. The enormous desire of enterprises to gain meaningful insight from the \blockcquote[p.~1168]{chen2012business}{massive, location-aware, person-centered and context-relevant data} in a so-called Web 3.0 environment is leading both IT vendors and academia to develop tailor-fit solutions. However, as of today,  no comprehensive standard software is commercially available yet, and neither are academic courses that educate the workforce of tomorrow.
+\paragraph{\ac{BIA} 3.0} Finally, the most interesting phase in the context of \ac{BDA} is the third one. Sparked by an exponentially increasing volume of data due to mobile and \ac{IoT} devices, that \enquote{traditional} systems are not capable of dealing with, this term represents a new research area currently under development. The enormous desire of enterprises to gain meaningful insight from the \enquote{massive, location-aware, person-centered and context-relevant data}\autocite[][p.~1168]{chen2012business} in a so-called Web 3.0 environment is leading both IT vendors and academia to develop tailor-fit solutions. However, as of today,  no comprehensive standard software is commercially available yet, and neither are academic courses that educate the workforce of tomorrow.
 
 \section{\acl{BDA}}
 \label{sota-bda}
@@ -55,7 +55,7 @@ Furthermore, it is industrially accepted that the differences between the two da
 \subsection{Challenges}
 \label{sota-bda-challenges}
 
-Although \ac{BDA} promises to serve as a major accelerator to companies' businesses as discussed beforehand, it is not trivial to implement and has some inherent difficulties. Based upon the challenges categorized and summarized by \autocite[p.~406\psq]{katal2013bd}, a wrap-up of commonly recognized challenges for the implementation of \ac{BDA} projects in the industry is given as follows:
+Although \ac{BDA} promises to serve as a major accelerator to companies' businesses as discussed beforehand, it is not trivial to implement and has some inherent difficulties. Based upon the challenges categorized and summarized by \textcite[p.~406\psq]{katal2013bd}, a wrap-up of commonly recognized challenges for the implementation of \ac{BDA} projects in the industry is given as follows:
 
 \paragraph{Privacy and Security}
 Labelled by Katal et al. as the most important issue to be concerned with, privacy and security aspects may have an impact not only on the feasibility of a given analytics project, but also entail serious legal consequences. Depending on the customer base and the specific environment such as country or age group, major violations of these aspects might have a significant negative impact on the company's brand sympathy and trustworthiness as viewed by the public. The major problem identified is the possibility of analytics to generate insights about individuals they are not aware of or they do not want others to know. Basing business decisions, such as advertisement targeting or price adjustments on such insights draws attention to ethical questions\,--\,although technical implementation of a project might be feasible, an in-depth investigation of such concerns will be necessary before rolling it out. The specific privacy and security concerns, alongside relevant laws and regulations for this project work will be discussed thoroughly in \autoref{sota-pol-legal}.
@@ -70,7 +70,7 @@ Due to the high volume and variety of data involved in modern \ac{BDA} projects 
 The major analytical challenges companies are confronted with when dealing with Big Data are associated with the aspects of volume and variety as well. The business somehow has to decide which data qualifies to be stored and analyzed, but especially how it should be set into perspective later on. Due to the desire to generate new hypotheses based on large data volumes, it is usually not clear beforehand which data points have to be regarded in order to create the most value for the organization. Furthermore, the variety of data usually requires large and expensive harmonization efforts to make data comparable or to be able to analyze it in an automated way. 
 
 \paragraph{Skill Requirements}
-Another important aspect of the implementation and feasibility of Big Data projects is the ability to execute well, thus creating actual value and acquiring reliable insights. This requires a well-trained workforce with sophisticated skills and expertise not only in the technical process of development and application, but possibly even more so in the part of harvesting results, thus requiring interpretative, analytical and research capabilities. Finally, even creative skills are desired, considering e.g. data visualization or exploration efforts. This skill gap poses as initial motivation for this project work; the final artifact of a program structure will focus on incorporating all these desirable aspects.
+Another important aspect of the implementation and feasibility of Big Data projects is the ability to execute well, thus creating actual value and acquiring reliable insights. This requires a well-trained workforce with sophisticated skills and expertise not only in the technical process of development and application, but possibly even more so in the part of harvesting results, thus requiring interpretative, analytical and research capabilities. Finally, even creative skills are desired, considering e.g. data visualization or exploration efforts.
 
 \paragraph{Technical Challenges}
 The following four major categories of technical challenges have been identified to need serious consideration when preparing and performing \ac{BDA} projects:
@@ -79,7 +79,7 @@ The following four major categories of technical challenges have been identified
     \item \emph{Fault Tolerance} describes the ability of a system to be tolerant to defects or errors of its underlying components. In that sense, a analytics platform has to strive for a high level of fault tolerance, as perfect fault tolerance is generally not achievable. Fault tolerance is necessary to generate reliable and predictable results in the analysis process, without corrupting either the state of the system or its final results.
     \item With the enormous, ever-growing data sets to process, \emph{scalability} of the analytics platform is another major concern. Compute clusters have to adopt to varying degrees of use in order to maintain a sufficient performance level, while as storage clusters should be able to occupy the increasing data sets dumped into it. The usual procedure to achieve scalability is to join multiple smaller computing or storage nodes into a large cluster, together with some kind of cluster management that dispatches requests and orchestrates the underlying tasks. Such clusters are inherently hard to operate and especially data analysis algorithms that scale well while maintaining their descriptiveness and conciseness are hard to write.
     \item The \emph{quality of data} poses as a constraint for its derived insights. Although more data points will usually provide better insights in the case of decision making and predictive analysis, quantity generally does not compensate quality. As the time to process data is directly correlated to the size of the underlying data set, one should strive to analyze only the minimal data set necessary for the given problem.
-    \item Finally, the \emph{heterogeniety of data} is becoming increasingly important with Big Data (cmp. \autoref{sota-bia}), preventing the usage of traditional systems that rely on data harmonization and fixed schemes. Coming up with a way to deal with such heterogeneous data is another one of the major obstacles of \ac{BDA}.
+    \item Finally, the \emph{heterogeniety of data} is becoming increasingly important with Big Data, preventing the usage of traditional systems that rely on data harmonization and fixed schemes. Coming up with a way to deal with such heterogeneous data is another one of the major obstacles of \ac{BDA}.
 \end{enumerate}
 
 \subsection{Exemplary Case Studies}
@@ -87,7 +87,7 @@ The following four major categories of technical challenges have been identified
 
 to give a brief overview of how the concept of \ac{BDA} is employed in business, some exemplary case studies found in literature are summarized in this subsection.
 
-In \textcite{he2013social}, the authors describe the very prominent use case of social media analysis. The virtually unlimited data source of social media websites poses as the prime example of how mainly unstructured data may be aggregated in order to derive insights from it. In this case study, a competitive analysis of the three major American Pizza chains is performed, harvesting the \ac{BIA} 2.0 technique of text mining. This case study is particularly interesting as almost every company will need to address its customers in the public. Moreover, with social media the data source is not only nearly unlimited and updated in real-time but also publicly available, easing the cumbersome task of data acquisition. The real-time property of social media data allows businesses to react to sentiment changes of their customer base, e.g. following a new product announcement, in real-time.
+\textcite{he2013social} describe the very prominent use case of social media analysis. The virtually unlimited data source of social media websites poses as the prime example of how mainly unstructured data may be aggregated in order to derive insights from it. In this case study, a competitive analysis of the three major American Pizza chains is performed, harvesting the \ac{BIA} 2.0 technique of text mining. This case study is particularly interesting as almost every company will need to address its customers in the public. Moreover, with social media the data source is not only nearly unlimited and updated in real-time but also publicly available, easing the cumbersome task of data acquisition. The real-time property of social media data allows businesses to react to sentiment changes of their customer base, e.g. following a new product announcement, in real-time.
 
 Furthermore, a case study regarding the prediction of near-term trends is described by \textcite[p.~64]{mcafeebig}. Specifically, the researchers therein aimed to model the future movements of housing prices in the urban centers of the United States; as a sophisticated model of the \emph{National Association of Realtors} existed to serve as a benchmark, this case study allows to draw real conclusions regarding the possibility of \ac{BDA} to simplify businesses' research capabilities. In this case, the publicly available search data allowed to state more precise assumptions about future price movements than the results of the \enquote{professional} benchmark relying on extensive historical data and a quite complex model.
 
@@ -101,15 +101,15 @@ The \emph{Apache Hadoop Project} is a collection of tools that serves as a wides
 \label{hadoop-components}
 \label{sota-hadoop-components}
 
-Hadoop is mainly made up of two flexible and scalable core layers: \textbf{storage} and \textbf{processing}. This subsection iterates over these layers by showing the inspiration, supporting principles and derived advantages of their application.
+Hadoop is mainly made up of two flexible and scalable core layers: \emph{storage} and \emph{processing}. This subsection iterates over these layers by showing the inspiration, supporting principles and derived advantages of their application.
 
 \subsubsection{File System}
-The storage layer is formed by the so-called \acf{HDFS}, which serves as a distributed file system that may run on clusters of arbitrary sizes and is heavily inspired by Google's \ac{BFS} paper, \textcite{ghemawat2003gfs}.
+The storage layer is formed by the so-called \acf{HDFS}, which serves as a distributed file system that may run on clusters of arbitrary sizes and is heavily inspired by Google's \ac{BFS} paper by \textcite{ghemawat2003gfs}.
 
 The first advancement of \ac{BFS} in comparison to earlier distributed file systems is to expect failure of cluster nodes to be the norm rather than an exception: This becomes especially important when running the cluster on top of so-called \enquote{commodity hardware} \autocite[p.~1]{ghemawat2003gfs}, that means comparatively cheap consumer hardware rather than expensive enterprise server equipment. This drives down the costs of the cluster, as no premiums for high-availability features and expensive support contracts have to be paid, however to the expense of reduced availability of single nodes \autocite[p.~1]{ghemawat2003gfs}. As the file system is expecting such failure, data blocks are replicated across multiple nodes, leading to an availability guarantee approaching 100 per cent as the cluster grows \autocite[p.~2]{ghemawat2003gfs}. Secondly, rather than storing hundreds of thousands of small files as with traditional file systems, \ac{BFS} is designed to work with far fewer, yet larger files, often with sizes ranging from gigabytes to terabytes \autocite[p.~2]{ghemawat2003gfs}. Furthermore, rather than using random access, the file pointer is usually moved only linearly, resulting in an append-only mode for writing data as well as batch processing for reading data \autocite[p.~2]{ghemawat2003gfs}. Finally, the file system is custom-tailored for the applications running on top of it, rather than serving as general purpose implementation \autocite[p.~2]{ghemawat2003gfs}.
 
 Adapting these principles \ac{HDFS} was created as a seamlessly integrated, integral part of the Hadoop system. To implement the storage system, 
-Hadoop defines two services that form the infrastructure for \ac{HDFS} which runs on the nodes. Data in the file system is distributed among multiple \emph{datanodes} which store blocks of files. In the cluster there is exactly on \emph{namenode} service node which keeps track of where the blocks of each file are located and how they can be retrieved. Utilizing the principles of \emph{sharding} and \emph{replication} the files stored in \ac{HDFS} are split into blocks and saved on multiple \emph{datanodes}. There can be a \emph{secondary namenode} which  mirrors the primary and can be act as a fail-over instance. Figure \autoref{fig:hdfs_read} visualized this architecture and illustrates how a client reads data from \ac{HDFS} by first contacting the \emph{namenode} and requesting the block locations and subsequently contacting the \emph{datanodes} directly to read the actual data.
+Hadoop defines two services that form the infrastructure for \ac{HDFS} which runs on the nodes. Data in the file system is distributed among multiple \emph{datanodes} which store blocks of files. In the cluster there is exactly on \emph{namenode} service node which keeps track of where the blocks of each file are located and how they can be retrieved. Utilizing the principles of \emph{sharding} and \emph{replication} the files stored in \ac{HDFS} are split into blocks and saved on multiple \emph{datanodes}. There can be a \emph{secondary namenode} which  mirrors the primary and can be act as a fail-over instance. Figure \autoref{fig:hdfs_read} visualized this architecture and illustrates how a client reads data from \ac{HDFS} by first contacting the \emph{namenode}, requesting the block locations and subsequently contacting the \emph{datanodes} directly to read the actual data.
 
 \begin{figure}[htb]
      {\centering\includegraphics[width=0.75\textwidth]{img/hddg_0302.png}\par}
@@ -154,14 +154,14 @@ The most common issues faced by Hadoop, are caused by the limitations of the two
 MapReduce was originally developed to batch process data and is
 therefore not the optimal solution to perform different kinds of
 workloads that cannot be easily expressed in this
-way.\autocite{computers3040117}
+way \autocite{computers3040117}.
 To approach this problem tools have been crated that follow different methods, while still utilizing \ac{HDFS} and \ac{YARN}.
 
 In order to find an optimal solution for approaching different kinds of problems, various processing tasks usually found to be processed on Hadoop clusters may be grouped in the following ways \autocite{computers3040117}:
 
 \paragraph{Real-time Processing}
-Real-time Processing aims to reduce the response time of MapReduce jobs to allow them to be used for real-time queries and analysis. As \autocite{computers3040117} stated, one of the reasons for slow MapReduce response times is the \ac{HDFS}, which is \enquote{designed for high throughput data I/O rather than high performance I/O}.
-Therefore, while MapReduce may be a powerful tool to perform batch processing, its overhead is too high to be used in any kind of real-time setting.\autocite{computers3040117}
+Real-time Processing aims to reduce the response time of MapReduce jobs to allow them to be used for real-time queries and analysis. As \textcite{computers3040117} stated, one of the reasons for slow MapReduce response times is the \ac{HDFS}, which is \enquote{designed for high throughput data I/O rather than high performance I/O}.
+Therefore, while MapReduce may be a powerful tool to perform batch processing, its overhead is too high to be used in any kind of real-time setting \autocite{computers3040117}.
 
 \paragraph{Stream Processing}
 While real-time processing is something MapReduce can, albeit poorly, still do, its set of features does not allow for native stream processing. MapReduce is build to run on batches of data with a very fixed cycle of:
@@ -179,7 +179,7 @@ applications in industry and academia.
 As a general purpose computation framework Hadoop 
 can be used together with MapReduce to run calculations 
 on large graph datasets, 
-but it generally is not optimized for such workloads.\autocite[][]{Capota:2015:GBD:2764947.2764954} 
+but it generally is not optimized for such workloads \autocite[][]{Capota:2015:GBD:2764947.2764954}. 
 Tools optimized for graph-like data structures can utilize algorithms that are especially optimized for graphs, instead of the general purpose MapReduce.
 Examples for such tools are \emph{Apache GraphX} and \emph{Apache Giraph}.
 
@@ -233,7 +233,7 @@ This challenge area has arguably been the focus in the design and architecture o
 The analytical challenges can be mitigated by Hadoop only in a limited manner, as it mainly is a problem area to be addressed by business decisions (e.g. which data to upload or process). However, by offering data visualization and exploration capabilities through applications in its ecosystem as outlined in \autoref{sota-hadoop-ecosystem}, this task can be supported by Hadoop to some extent as well.
 
 \paragraph{Skill Requirements}
-Hadoop offers extensive documentation guiding users through the use of a cluster. Yet, the operation and setup of Hadoop clusters is a complex task. The automation of this is the goal of \emph{Felix Stegmaier}'s project work, leading up to quicker roll-outs of new clusters and/or their reproducible set up. Moreover, a substantive set of professional services firms exist on the market that may support an organization to execute well with their analytics efforts \autocite{hadoopconsulting}. Undoubtedly however, especially academic programs will need to catch up with the recent and future developments in order to satisfy the growing market's desire for talent supporting these efforts.
+Hadoop offers extensive documentation guiding users through the use of a cluster. Yet, the operation and setup of Hadoop clusters is a complex task. The automation of this is one the goals of the authors project work, leading up to quicker roll-outs of new clusters and/or their reproducible set up. Moreover, a substantive set of professional services firms exist on the market that may support an organization to execute well with their analytics efforts \autocite{hadoopconsulting}. Undoubtedly however, especially academic programs will need to catch up with the recent and future developments in order to satisfy the growing market's desire for talent supporting these efforts.
 
 \paragraph{Technical Challenges}
 The four categories of technical challenges are wrapped up in \autoref{fig-hadoop-technical-challenges}. It should be noted that Hadoop addresses most of the technical challenges in a fair way, especially offering great scalability and fault tolerance. The more \enquote{soft} characteristics of quality and heterogeniety mainly rely on the best effort of the organization as well as its employees to collect the right data and use the appropriate tools offered by the Hadoop ecosystem to solve their problems.
@@ -263,11 +263,10 @@ business partners in the technology industry the \ac{DHBW} has an interest to co
 Since Big Data is a currently emerging topic,
 the \ac{DHBW} Stuttgart currently offers multiple that lectures incorporate this topic.
 In the course of study in applied computer science within the faculty of engineering there are three courses that are integrated into the studies for the Bachelor of Science.
-The lecture \emph{Databases II} deals with concrete database implementations and current developments in databases as well as with Data Warehouse architectures and implementations.
-\autocite[][]{DHBW2017aidbii}
-The optional lecture \emph{Cloud-Applications, DevOps and Big Data} also covers the ecosystem for Big Data in cloud environments. \autocite[][]{DHBW2017aiwf}
+The lecture \emph{Databases II} deals with concrete database implementations and current developments in databases as well as with Data Warehouse architectures and implementations \autocite[][]{DHBW2017aidbii}.
+The optional lecture \emph{Cloud-Applications, DevOps and Big Data} also covers the ecosystem for Big Data in cloud environments \autocite[][]{DHBW2017aiwf}.
 Furthermore there is another optional course on \emph{Data Science} introduced in 2018 which covers the basics in algorithms, metrics and tools needed to perform data analysis and machine learning.
-These courses already include Hadoop in their lecture content.
+These courses already include Hadoop in their lecture content to varying degrees.
 
 Starting with the winter semester 2018 the \ac{DHBW} Mannheim will offer a new course of study in \emph{Data Science} for the Bachelor of Science at the faculty of business.
 It will focus on a datacentric view and addresses current developments in businesses that make Big data the foundation for decision making and income generation.
@@ -300,7 +299,7 @@ The \emph{European \ac{GDPR}} is largely based on the German regulation and intr
 Especially the \emph{right to be forgotten} is problematic in \ac{BDA} systems
 since data can be stored in an unstructured, immutable way. This restricts the possibility to keep track of which data entries are actually stored in the system. Deletion is therefore practically impossibly. To circumvent this restriction, extra caution is necessary to decide which data should be used on the platform. 
 
-The listed laws focus on personal data, but might also be applicable to anonymized data that is derived from personal data. Table \ref{fig-legal-data-kinds} describes which restrictions and/or regulations apply to which type of data from which source. An example for the kind of data is given. Note that open source personal data sets are fundamentally not available since public, unrestricted distribution of personal data contradicts with the \ac{GDPR} and no public initiative to collect such data is known to the author.
+The listed laws focus on personal data, but might also be applicable to anonymized data that is derived from personal data. Table \ref{fig-legal-data-kinds} describes which restrictions and/or regulations apply to which type of data from which source. An example for the kind of data is given. Note that open source personal data sets are fundamentally not available since public unrestricted distribution of personal data contradicts with the \ac{GDPR} and no public initiative to collect such data is known to the author.
 
 
 \newcommand{\myoldarraystretch}{\arraystretch}
@@ -308,7 +307,7 @@ The listed laws focus on personal data, but might also be applicable to anonymiz
 
 \begin{table}[hbt]
 \resizebox{\textwidth}{!}{%
-	\begin{tabular}{llll}
+	\begin{tabular}{l|lll}
 	  Kind of Data & Internal & Open Source & Closed Source \\[0.5em]
 	  \hline\\[-0.5em]
 	  Personal & \acs{GDPR} \& \acs{HSchulDSV} & N/A & \acs{GDPR} \& license \\

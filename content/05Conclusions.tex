@@ -2,16 +2,51 @@
 \chapter{Conclusions}
 \label{chap:conc}
 
-TODO
-
 \section{Summary}
 
-TODO
+In the course of this paper the possibilities of an automated deployment of an Hadoop cluster in the environment of the \ac{DHBW} cluster computer have been examined.
+The thematic setting of \ac{BIA} and \ac{BDA} within academia and business have been discussed to build a theoretical background for the paper. 
+It has been concluded that the field of study around Big Data is still under active investigation and is gaining growing importance for many businesses.
+Through its active engagement with many company partners in the \ac{IT} sector, the \ac{DHBW} Stuttgart has an active interest to incorporate these topics into their studies and lectures.
+
+To support this general direction of development, this student research project explored the possibilities of integrating Hadoop into to study programs at the \ac{DHBW} Stuttgart.
+Especially the capabilities to run an Hadoop cluster on the cluster computing environment at the \ac{DHBW} Mannheim have been evaluated.
+To do so different methods for deploying and running this cluster have been compared 
+by exemplary practical performance of such an installation. 
+By analyzing the susceptibility to errors caused by misconfiguration though the developer in the deployment process and by consulting the findings by Sicklinger et al. finally a method for an automatic deployment was derived that makes use of the \ac{DHBW} OpenStack environment, Ansible and \acf{HDP} including Ambari.
+An explicit cluster architecture and a tasks list has been given to implement the cluster which includes first the preparation of the cluster infrastructure in OpenStack, then the installation of \ac{HDP} using Ansible and finally the installation of Hadoop onto the cluster though Ambari.
+The deployment has been performed and verified by a short set of tests that concluded that the cluster is neither fully functional nor stable because resource sparseness and the restrictions set by the cluster computing environment for the project.
+However the general feasibility and effectiveness of the outlined approach are evident in that it proved possible by practical implementation to create an automated cluster deployment.
 
 \section{Discussion}
 
-TODO
+Sicklinger et al. have laid the foundation for this paper by giving the 
+recommendation to use Ambari as a cluster manager for Hadoop at the \ac{DHBW}.
+This decision can be reinforced by the practical evaluation in this project.
+However they struggled with \enquote{multiple unforeseen problems} (\enquote{mehrere unvorhergesehene
+Probleme}) \autocite[][p. 53]{wi2018managementsystems} with regard to the cluster computer in Mannheim.
+While they left the problems unspecified, this project finds that indeed the environment shows instabilities and possible resource problems, while being in general able to support workloads such as an Hadoop cluster.
+
+The findings in this paper have been deduced without a formal method of comparison but rather by practical testing, which is supposedly sufficient and sound for the matter of creating a automated deployment method.
+This however means that the considerations that lead to the proposed solution are limited 
+to the authors experiences and the findings of the previous project by Sicklinger et al.
+A broader view could have been achieved, if necessary, by consulting professionals in the field.
 
 \section{Further Work}
 
-TODO
+The intended use case of the created cluster has been active usage for data analysis in the context of lectures.
+While the outcome of this project was surely not the expected one, 
+it lays a foundation to be reiterated and improved.
+For the hands-on usage of the Hadoop cluster in lectures a more stable 
+solution is necessary as possible untrained students would access it.
+Therefore it is recommended that a follow-up project is commissioned to stabilize the solution and bring them into a state that is ready for \enquote{production}.
+
+Definitely the cloud computing environment needs to assign more resources to the project in the future if a more stable solution is required.
+In general switching to dedicated hardware is also possible but would introduce higher costs.
+Alternatives would be to reconsider the way the cluster is backed up by infrastructure.
+Maybe even switching to alternatives like managed cloud services which provide Hadoop as a service is more feasible even if this would hold costs for the University.
+However the long term goal to incorporate Hadoop into the lecture program at the \ac{DHBW} is still desirable and feasible, but must be supported by both administrative and \ac{IT} staff, as well as lecturers. 
+The project must be communicated to those responsible and the executors to raise awareness and stabilize its shape.
+
+
+

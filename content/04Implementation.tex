@@ -16,7 +16,7 @@ Suggestions for future projects how better results might be achieved is given in
 
 The foundation for the cluster architecture that has been illustrated in figure \vref{fig:architecture} are the host \acp{VM}, their storage and the network that connects them.
 In the course of this process some minor adaptions are made to the proposed architecture.
-Especially the \texttt{hadoop-master-0} node now also runs the \ac{HDFS} Datanode and YARN Nodemanager service and therefore has a storage volume attached to it.
+Especially the \texttt{hadoop-master-0} node now also runs the \ac{HDFS} DataNode and YARN NodeManager service and therefore has a storage volume attached to it.
 
 To set up the cluster the web interface of OpenStack can be used, which is accessible at
 \urlinline{https://controller.c4.dhbw-mannheim.de/} from within the \ac{DHBW} network.
@@ -29,7 +29,7 @@ Each operation on the infrastructure can be performed within this interface.
 The firewall in OpenStack can be configured by creating \emph{security groups}.
 These security groups describe rules for allowing and prohibit outgoing and incoming connections.
 For this project two security groups are created and assigned to each of the \acp{VM}.
-THe first group deals with \emph{default} settings. It allows all outgoing connections 
+The first group deals with \emph{default} settings. It allows all outgoing connections 
 and allows incoming connections on port 22, which is the port used for \ac{SSH} access, 
 as well as incoming ping packages in the Internet Control Message Protocol.
 The second group deals with Hadoop specific ports.
@@ -40,7 +40,7 @@ allow all incoming requests.
 \subsubsection{Network}
 
 To enable an interconnection between the nodes in the cluster it is useful to create a private network between them.
-The network uses the address space of 10.100.10.0/24 which is a subnet of the private address space defined in RFC~1918 by the the Internet Engineering Task Force \autocite[][]{ietf1996rfc1918}.
+The network uses the address space of 10.100.10.0/24 which is a sub-network of the private address space defined in RFC~1918 by the the Internet Engineering Task Force \autocite[][]{ietf1996rfc1918}.
 Figure \ref{fig:networks_subnets} lists all the networks that are available after the internal network is created. 
 The network named \emph{int-net-10} is the internal network which all nodes connect to. Furthermore all nodes need to connect to the \emph{ext-net-201} network which allows them to connect to the Internet and makes them accessible from within the \ac{DHBW} network.
 
@@ -120,7 +120,7 @@ Therefore the best allocation for the nodes is to use a m1.xlarge instance for t
 This in sum gives 20 \acp{VCPU} and 20~\ac{GB} \ac{RAM} and no further cores are available to allocate more nodes.
 
 
-Each instance is using the Ubuntu 16.04 operating system which is compatible with \ac{HDP}, Ambari and Hadoop. As discussed before the security groups for default access and hadoop specific access are assigned to the hosts, and they are connected to the internal and external network. An \ac{SSH} key is used for authentication.
+Each instance is using the Ubuntu 16.04 operating system which is compatible with \ac{HDP}, Ambari and Hadoop. As discussed before the security groups for default access and Hadoop specific access are assigned to the hosts, and they are connected to the internal and external network. An \ac{SSH} key is used for authentication.
 The successful creation of each host is tested by accessing it via \ac{SSH} using the specified key and the user \emph{ubuntu}.
 
 
@@ -315,10 +315,10 @@ To test this step a new file is uploaded to the directory and its content is the
 
 \subsubsection{Terasort}
 
-As suggested in the execution plan the \emph{terasort} program implemented by \textcite{omally2008terasort}, which is included in the Hadoop installtion on each cluster node, is used to check the sanity of the \ac{YARN}, \ac{HDFS} and MapReduce2 Services.
+As suggested in the execution plan the \emph{terasort} program implemented by \textcite{omally2008terasort}, which is included in the Hadoop installation on each cluster node, is used to check the sanity of the \ac{YARN}, \ac{HDFS} and MapReduce2 Services.
 First \emph{teragen} generates a variable amount of random numbers and stores them on \ac{HDFS}. Then \emph{terasort} sorts the numbers using MapReduce and stores the result.
 Finally \emph{teravalidate} checks that the numbers are indeed sorted correctly.
-To run the test the follig commands are used to create 5~\ac{GB} fo data:
+To run the test the following commands are used to create 5~\ac{GB} fo data:
 
 \lstset{language=sh}
 \begin{lstlisting}[caption={Running Terasort as a test for YARN and HDFS}, label={lst:terasort}]

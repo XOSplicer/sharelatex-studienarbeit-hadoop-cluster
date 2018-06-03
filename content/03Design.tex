@@ -4,8 +4,7 @@
 
 \section{Analysis of Cluster Environment}
 
-The Hadoop cluster will be installed on the cluster computer at the \ac{DHBW} Mannheim.
-This cluster utilizes \emph{OpenStack} to provide resources to its users. 
+The Hadoop cluster will be installed on the cluster computer at the \ac{DHBW} Mannheim which utilizes \emph{OpenStack} to provide resources to its users.
 OpenStack is an open source project to manage public and private cloud computing architectures \autocite[][]{openstack}. 
 It enables the compositions of compute elements (virtual machines), network elements (sub-nets and routers), 
 and storage elements (virtual disks) to form a virtual computing environment.
@@ -19,8 +18,8 @@ Only 20 virtual \ac{CPU} cores, 50~\ac{GB} \ac{RAM} and 1 \ac{TB} of storage are
 This resources can be used to allocate instances of \acp{VM} in pre-defined units and assign virtual disks to them.
 The \acp{VM} can be connected to the network of the \ac{DHBW} and can be interconnected using internal, virtual networks.
 Firewall restrictions can be set through group policies, which can be assigned to the \acp{VM}. 
-When creating a new \ac{VM} most of these settings must be supplied. 
-Furthermore the operating system flavour can be chosen and a \ac{SSH} login key can be provided.
+When creating a new \ac{VM}, most of these settings must be supplied. 
+Furthermore the operating system flavour can be chosen and a \ac{SSH} login key can be provided to access the instance later on.
 Among others \emph{Ubuntu Server 16.04 LTS} can be used which is compatible with Hadoop in general.
 
 The Hadoop cluster be deployed on multiple interconnected \acp{VM} in the OpenStack environment that can be accessed from the university network.
@@ -45,6 +44,7 @@ In his paper, \emph{Philipp Winter} discusses more possible use cases for the cl
 Main users are lecturers and students to perform analytics of various data on the cluster.
 
 Sicklinger et al. also did a requirements analysis for an Hadoop cluster at the \ac{DHBW}. 
+It yields the following findings \autocite[][p. 40ff]{wi2018managementsystems}:
 \begin{itemize}
     \item The cluster utilizes the OpenStack Environment in Mannheim.
     \item There should be only a low cost, at best no cost, associated with deploying and running the cluster.
@@ -53,8 +53,6 @@ Sicklinger et al. also did a requirements analysis for an Hadoop cluster at the 
     \item The it should support recent tools to be used alongside with Hadoop.
     \item The cluster should scale to the needs of the users.
 \end{itemize}
-\autocite[][p. 40ff]{wi2018managementsystems}
-
 
 All of the listed requirements imply that the cluster needs to be deployable without extended or expert knowledge about Hadoop itself.
 Automated deployment is therefore favourable to make the procedure reproducible. 
@@ -80,15 +78,16 @@ Not only \ac{HDFS} and \ac{YARN} can be deployed,
 but also additional tools can be integrated into the cluster this way.
 Usually the management system also provides an graphical user interface to perform those tasks.
 
-To provide the components the management system downloads them from a given binary distribution repository. The installation can be performed via remote access from the management server to the nodes. Monitoring gives valuable information to the cluster user, such as capacity an utilization of computational power and storage.
+To provide the components the management system downloads them from a given binary distribution repository. The installation can be performed via remote access from the management server to the nodes. 
+Additional monitoring tools give valuable information to the cluster user, such as capacity and utilization of computational power and storage.
 
 \subsubsection{Hadoop Distributions}
 Some vendors choose to bundle a management system 
 together with an specific version of Hadoop and additional Tools. They offer this bundle mostly as binary packages which are considered \emph{distributions} of Hadoop.
 For system maintainers this holds the benefit that no compilation from source is necessary and the versions of the tools are adjusted to work with each other. 
-Notable distributions are \emph{\acf{CDH}} and \emph{\acf{HDP}}. 
+Notable distributions are \emph{\acf{CDH}}, \emph{\acf{HDP}} and \emph{MapR}. 
 
-There are four ways to install Hadoop that are considered here:
+Summing up, there are five ways to install Hadoop that are considered here:
 
 \begin{itemize}
     \item A \emph{manual installation} of Hadoop 
@@ -112,7 +111,7 @@ It therefore does not qualify to be used permanently at the \ac{DHBW} for educat
 In the next sections the remaining three options, 
 \emph{manual installation, \ac{CDH} and \ac{HDP}}
 are tested and compared by performing a exemplary installation.
-Each of the evaluations considers the complexity and susceptibility to error of the installation process.
+Each of the evaluations considers the complexity and susceptibility to errors of the installation process.
 
 
 \subsubsection{Evaluation Environment}
@@ -120,7 +119,7 @@ In the coming sections each of those three resulting possibilities will be looke
 For each of the options an evaluation will be made on whether it is 
 feasible to deploy an Hadoop installation with the methods that they provide.
 Therefore a simple test installation in an OpenStack environment is made.
-For this purpose the OpenStack environment \emph{BWCloud} \urlinline{https://www.bw-cloud.org/de/projekt}
+For this purpose the OpenStack environment \emph{BWCloud} (accessible at \urlinline{https://www.bw-cloud.org/de/projekt})
 is used, an environment that is available for students at the \ac{DHBW} 
 and other universities in Baden-Württemberg for educational purposes. 
 It is generally an equivalent software to the actual cluster environment, 
@@ -131,14 +130,14 @@ which makes it more comfortable to work with while performing the tests.
 \label{sec:design:manualinstall}
 
 The first possibility to install Hadoop onto a number of hosts 
-is to use the installation package provided by Apache them self \urlinline{https://hadoop.apache.org/releases.html}.
+is to use the installation package provided by Apache them self.
 This represents the most basic procedure of installation.
-Tom White \autocite[][Appendix A]{white2015hadoop} describes how Hadoop can be manually installed on the machines in an cluster. 
+Tom White describes how Hadoop can be manually installed on the machines in an cluster \autocite[][Appendix A]{white2015hadoop}. 
 Manually here means without the help of automated installers for a single machine or the complete cluster. 
 Every aspect of the installation and configuration must be done \enquote{by hand}.
 White gives step by step instruction on the process.
 
-Since no step in this step is predetermined or automated, this method does not really install an "Hadoop distribution" on the cluster, but rather only \ac{YARN}, \ac{HDFS} and MapReduce.
+Since no step in this process is predetermined or automated, this method does not really install an "Hadoop distribution" on the cluster, but rather only \ac{YARN}, \ac{HDFS} and MapReduce.
 It does not provide a \emph{management system} for Hadoop.
 
 \subsubsection{System Setup}
@@ -153,7 +152,7 @@ The slaves runs only an \ac{HDFS} data node and an \ac{YARN} client node.
 First the system of the master is configured. Therefore the following steps are taken.
 
 \begin{enumerate}
-    \item The system is updated and OpenJDK 1.8 \urlinline{http://openjdk.java.net/}  is installed using \texttt{apt}. 
+    \item The system is updated and OpenJDK 1.8 is installed using \texttt{apt}. 
     \item A new user \emph{hadoop} is created which will be used to run every service on the machine concerning Hadoop.
     \item For this user a new \ac{SSH} key is created which enables password-less access to the two machines for the user \emph{hadoop} if its public key is later added to the \texttt{authorized\_key} file of the user on the hosts.
     \item The \texttt{/etc/hosts} file is adjusted, such that both hosts know how to reach each other on the local network by using their \acs{FQDN} which is resolved to an \ac{IP} address.
@@ -170,8 +169,8 @@ and mounted to store working data.
 After the base system is configured, Hadoop can be installed on both machines
 and can be configured to form a cluster.
 Again, first the master host is configured.
-Therefore the next steps describes in 
-\autocite[][Appendix A]{white2015hadoop}
+Therefore the next steps described by 
+\textcite[][Appendix A]{white2015hadoop}
 can be followed.
 
 \begin{enumerate}
@@ -216,7 +215,7 @@ as well as the DataNode and NodeManager on both the master and the slave.
 Now the cluster can be used to store data in \ac{HDFS} and run MapReduce jobs.
 
 \subsubsection{Tests}
-\autocite[][]{white2015hadoop} provides an online reference (http://hadoopbook.com/)
+\textcite[][]{white2015hadoop} provides an online reference (http://hadoopbook.com/)
 to test data and MapReduce programs 
 that can be used for demonstration purposes of the Hadoop cluster.
 The provided data includes weather data produced by the \ac{NCDC} and programs that can be run on Hadoop to analyze this data. 
@@ -231,16 +230,13 @@ and therefore rather error prone.
 Special attention to the usage of \acs{FQDN} must be given, 
 so that the names used in Hadoop and the hostnames match up.
 Those also need to be used in the \texttt{hosts} files on all hosts.
-
 Furthermore it is important to configure the firewalls of OpenStack correctly, 
 so that the nodes can be reached internally and externally.
-
 Errors in the configuration lead to nodes that are not recognized by Hadoop or jobs that do not succeed.
-It is rather frustrating to find and fix those issues for the person installing the cluster.
 
 \subsubsection{Conclusions}
 
-Due to the difficulties that the method of manually installing Hadoop on each host holds it is favorable to use a more streamlined 
+Due to the difficulties that the method of manually installing Hadoop on each host holds, it is favorable to use a more streamlined 
 and automated installation method as described in the next two sections.
 This way a lot of manual configuration can be avoided.
 Furthermore integrating tools such as Spark into the cluster 
@@ -249,14 +245,34 @@ will lead to even more complex installation and configuration processes which ag
 \subsection{\acl{HDP} with Ambari deployed with Ansible}
 \label{sec:design:hdp_ambari_ansible}
 
+ In this approach a first evaluation of a full cluster installation is performed.
+ It differs from the previous approaches in that a reproducible installation process is in mind right from the beginning and that a real cluster is installed, not only a demonstration platform.
+ \emph{Ansible} is used to pragmatically set-up the \acp{VM} that are used to host the cluster.
+ \emph{Ambari} is then used to install Hadoop onto it.
+
 \subsubsection{Ambari}
-TODO describe Ambari, eg \autocite[][]{hortonworks2018ambari}
+Apache Ambari is \enquote{a completely open source management platform for provisioning, managing, monitoring and securing Apache Hadoop clusters} \autocite[][]{hortonworks2018ambari}.
+It therefore is a cluster management system for Hadoop that mainly fulfills three purposes \autocite[][]{ambari2018ambari}:
+
+\begin{itemize}
+    \item Install and configure Hadoop and additional services on any number of hosts.
+    \item Provide a \enquote{central management for starting, stopping, and reconfiguring Hadoop services across the entire cluster} \autocite[][]{ambari2018ambari}.
+    \item Monitor the cluster nodes and services by reporting health metrics and alerting the user of possible hazards.
+\end{itemize}
+
+Ambari offers a graphical installation guide to support the user when deploying the cluster.
+This dialogue is used in the coming scenario to make the process repeatable.
 
 
 \subsubsection{\acl{HDP}}
-TODO describe HDP
 
-The tested version of \ac{HDP} is 2.6.3.0 includes Ambari version 2.6.0.
+\acf{HDP} is a open source Hadoop distribution by Hortonworks which is based on the Hadoop \ac{YARN} architecture and comes with many selected tools form the Hadoop ecosystem which integrate into the platform.
+Hortonworks advertises the solution as a open, centralized, cloud-compatible and enterprise-ready \autocite[][]{hortonworks2018hdp}. 
+While the usage of \ac{HDP} is free of charge, 
+Hortonworks business model is based on consulting services around \ac{HDP}.
+\ac{HDP} includes Ambari as the main tool for cluster management and deployment.
+The tested version of \ac{HDP} is 2.6.3.0 includes Ambari version 2.6.0 
+for which Hortonworks provides the binary packages in their distribution repositories.
   
 \subsubsection{Ansible}
 \emph{Ansible} is an agent-less configuration management tool.
@@ -283,7 +299,7 @@ Ansible avoids this and is therefore favourable for this test.
 As in the sections before the OpenStack BW-Cloud is used for a test deployment.
 Three \acs{VM} are started, each with 20~\ac{GB} disk space, Ubuntu 16.04 \ac{LTS}, an public \ac{IP} address. 
 The hosts are connected with an internal \ac{IP} network.
-One \ac{VM} are used as the Ambari and Hadoop master node, having 2 virtual \ac{CPU} cores and 4~\ac{GB} \ac{RAM}.
+One \ac{VM} is used as the Ambari and Hadoop master node, having 2 virtual \ac{CPU} cores and 4~\ac{GB} \ac{RAM}.
 Two \acs{VM} are used as slave nodes with 4 \acs{CPU} and 8~\ac{GB} \ac{RAM} as well as 2 \acs{CPU} and 4~\ac{GB} \ac{RAM} respectively.
 
 Ansible is used to perform all system configuration. 
@@ -294,7 +310,7 @@ to run Ambari when the installation is performed on a shell \autocite[][]{horton
 The configuration using Ansible  performs the following similar steps:
 \begin{enumerate}
     \item The internal network interfaces are configured 
-        and the \texttt{\/etc\/hosts} file is filled with the hostnames 
+        and the \texttt{hosts} file is filled with the hostnames 
         of all nodes and their integral \acs{IP}. 
         This prevents issues with the \ac{FQDN} resolution.
     \item The \ac{NTP} service is installed and started. 
@@ -303,7 +319,7 @@ The configuration using Ansible  performs the following similar steps:
         is disabled using a service script. 
         This is a requirement for Ambari, 
         as it would reduce database performance.
-        The script is based on \autocite{braun2017hugepages}.
+        The script is based on the solution by  \textcite{braun2017hugepages}.
     \item The Hortonworks Ambari repositories are added, so that the provided     binaries can be used.
     \item On the master \ac{VM} the Ambari server 
         and the Ambari agent is installed.
@@ -321,7 +337,7 @@ which needs to be accessible through the firewall of OpenStack.
 Ambari provides an assisted install dialogue for the cluster installation. 
 Here a new cluster deployment counting all three hosts is started.
 The node need to be registered manually, as no shared \ac{SSH} key is present, that allows root access to the machines. 
-(The web interface would require the used to upload the private key for root access, which is generally unsafe.)
+(The web interface would require the user to upload the private key for root access, which is generally unsafe.)
 The master node is configured to act as an Hadoop master and Hadoop salve. 
 It is also the master for all recommended services running alongside of Hadoop.
 The \emph{slaves} are salve machines for \ac{HDFS} and \ac{YARN}.
@@ -330,15 +346,15 @@ The cluster set-up dialogue then continues to install the cluster.
 
 \subsection{Errors and Lessons Learned}
 \label{sec:ambari:errors}
-Since a lot of services such as Spark are recommended to be installed, 
+Since a lot of services, such as Spark ,are recommended to be installed, 
 the 20~\ac{GB} disk of the master is filled completely and the installation of the cluster fails. At least 50~\ac{GB} are recommended for an correct installation.
-Therefore thee installation fails and the Hadoop deployment can not be functionally tested for now.
+Therefore the installation fails and the Hadoop deployment can not be functionally tested for now.
 
 Ambari needs to be provided with the \ac{FQDN} of an host 
 in all forms and configuration files. 
 Otherwise it can not detect the agents or server.
 The \acp{FQDN} must consist of at least to parts for Ambari to work with them. 
-\emph{hadoop-master-0.dhbw} is valid, while \emph{hadoop-master-0} is not.
+For example, \emph{hadoop-master-0.dhbw} is valid, while \emph{hadoop-master-0} is not.
 
 The Ambari clients need to be configured 
 to use the correct Ambari server host.
@@ -359,13 +375,13 @@ The Ambari Cluster Manager can then be used to install Hadoop and other services
 Cloudera distributes an Hadoop management system called \ac{CDH} which makes use of \emph{Cloudera Manager} to deploy clusters.
 \enquote{CDH is Cloudera’s 100\% open source platform distribution, including Apache Hadoop and built specifically to meet enterprise demands.}\autocite[][]{cloudera2018cdh}
 It includes Hadoop and tools such as \emph{Apache HBase, Apache Hive, Apache Impala, Apache Kafka and Apache Spark}.
-Cloudera provides an docker image which can be used to easily evaluate the usability of \ac{CDH}.
-It contains \enquote{a single-host deployment of the Cloudera open-source distribution, including CDH and Cloudera Manager.} \autocite[][]{cloudera2018docker}
-It does not provide a full cluster installation, but only a test environment to evaluate the platform that is contained inside the docker container.
+Cloudera provides an Docker image which can be used to easily evaluate the usability of \ac{CDH}.
+It contains \enquote{a single-host deployment of the Cloudera open-source distribution, including CDH and Cloudera Manager} \autocite[][]{cloudera2018docker}.
+It does not provide a full cluster installation, but only a test environment to evaluate the platform that is contained inside the Docker container.
+The tested version is \ac{CDH} 5.7.0, which can be obtained from \emph{DockerHub}, a repository for Docker container images.
 
 It is important to note that using all features of \emph{Cloudera Manager} requires a paid license when installed on a cluster system. A 60 day trail version can also be obtained, which  \textcite[][p.~39]{wi2018managementsystems} point out, might be sufficient for usage at the \ac{DHBW}.
 
-The tested version is \ac{CDH} 5.7.0 which can be obtained from \emph{DockerHub}, a repository for Docker container images.
 
 \subsubsection{System Setup}
 
@@ -404,8 +420,9 @@ who did research on the topic of the possible usage of Hadoop management systems
 Their findings suggest using Apache Ambari to deploy an Hadoop cluster at the \ac{DHBW}.
 According to them, installing Hadoop manually is ruled out due to the technical complexity.
 Apache Ambari and Cloudera are equally suitable for the usage at the \ac{DHBW}, 
-but Ambari should be favoured since it is free to use and crates no licensing costs.
-\autocite[][p. 53f]{wi2018managementsystems}
+but Ambari should be favoured since it is free to use and crates no licensing costs
+\autocite[][p. 53f]{wi2018managementsystems}.
+
 
 In combination with Ansible, Ambari ensures an reproducible cluster installation. 
 Therefore Ambari is the solution that will be used for this project and Ansible will be used to install the \ac{HDP} including Ambari.
@@ -444,10 +461,10 @@ The size of the used \acs{VM} should be the one with the most memory,
 as this is the resource where the overhead of having multiple \acs{VM} has the most impact.
 All nodes need access to the Internet to download software packages and should be accessible via \ac{SSH} through the OpenStack firewall.
 Furthermore the master node needs to be accessible via typical ports for the web interface of the deployed services and other ports which clients use to connect to the Hadoop cluster and issue jobs to it.
-Internally all nodes need to be connected via an private network with fixed \acs{IP}, where the mapping between hostnames and \acs{IP} is known for each host. Typically this can be done with \ac{DNS}, however it is out of scope for this project to setup an \ac{DNS} server. Filling the \texttt{\/etc\/hosts} file is sufficient.
+Internally all nodes need to be connected via an private network with fixed \acs{IP}, where the mapping between hostnames and \acs{IP} is known for each host. Typically this can be done with \ac{DNS}, however it is out of scope for this project to setup an \ac{DNS} server. Filling the \texttt{hosts} file is sufficient.
 The internal network should not be restricted by any firewall.
 
-Tom White recommends the following specification for a single node in a cluster, based on the needs of a full \ac{BDA} system in 2014:\\
+Tom White recommends the following specification for a single node in a cluster, based on the needs of a full \ac{BDA} system in 2014 \autocite{white2015hadoop}:
 
 \begin{itemize}
     \item Each node should run on dedicated, commodity hardware.
@@ -456,7 +473,6 @@ Tom White recommends the following specification for a single node in a cluster,
     \item Storage - 12 to 24 times 1 to 4 \ac{TB} disks
     \item Network - Gigabit Ethernet with link aggregation
 \end{itemize}
-\autocite{white2015hadoop}
 
 However the given OpenStack environment does not allow the allocation of such amounts of resources, and has no possibility to use dedicated hardware. 
 Therefore the maximum sized \acs{VM} should be used, and each be given an equal share of the available storage.
@@ -489,7 +505,6 @@ This scenario leads to the following steps regarding the deployment of the clust
     \item \textbf{System Set-Up with Ansible} 
     In section \vref{sec:design:hdp_ambari_ansible} it has been shown that Ansible can be used to deploy \ac{HDP}. The Ansible playbook developed for this purpose can be adapted and used in the next steps.
     \begin{enumerate}
-        %\item Configure the \texttt{ssh\_config} configuration file by supplying the \acp{FQDN} and the public \ac{IP} addresses of the nodes. 
         \item Configure the local \ac{SSH} client to use the \acp{FQDN} and the public \ac{IP} addresses of the nodes. 
         \item Check that all nodes can actually be accessed via \ac{SSH}
         \item Note down the name of the secondary (internal) Ethernet adapter of each node.
