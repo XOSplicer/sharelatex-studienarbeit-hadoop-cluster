@@ -166,12 +166,15 @@ TODO \vref{lst:ansibleall}
 TODO \vref{lst:ansiblecommon}
 
 \begin{enumerate}
-    \item TODO set the hostname
-    \item TODO configure the host file for local resulution
-    \item TODO make sure the correct ssh keys can be used for access
-    \item TODO install common necessary packages (which? and why, see install manual aswell)
-    \item TODO install and activate ntp
-    \item TODO configure internal network, apply if necessary
+    \item Set the hostname to the \ac{FQDN} of the host specified in the inventory
+    \item  Configure the \texttt{hosts} file to provide local name resolution for the internal network for all of the hosts. 
+    To do s a template is file is populated with all the entries of hostnames and \ac{IP} addresses of all the hosts.
+    \item Make sure the correct \ac{SSH} public keys are stored in the \ac{authorized\_keys} file for the user \emph{ubuntu}. This allows updating the access rights in case more developers need access to the server.
+    \item Install necessary common packages, that are needed for Ambari to be installed.
+    This includes \emph{curl, unzip, tar and wget}.
+    \item Install and activate the \ac{NTP} service to ensure a synchronized time between all hosts.
+    \item Configure the secondary network interface to be active and receive 
+    If this is performed the fist time the network interface needs to be restarted in order for the changes to take effect.
     \item TODO register the ambari repository list inluding keys and load their contents
     \item TODO disblae the thp feature using a service
     
