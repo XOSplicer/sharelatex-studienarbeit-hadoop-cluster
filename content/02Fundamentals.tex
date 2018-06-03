@@ -302,8 +302,8 @@ since data can be stored in an unstructured, immutable way. This restricts the p
 The listed laws focus on personal data, but might also be applicable to anonymized data that is derived from personal data. Table \ref{fig-legal-data-kinds} describes which restrictions and/or regulations apply to which type of data from which source. An example for the kind of data is given. Note that open source personal data sets are fundamentally not available since public unrestricted distribution of personal data contradicts with the \ac{GDPR} and no public initiative to collect such data is known to the author.
 
 
-\newcommand{\myoldarraystretch}{\arraystretch}
-\renewcommand{\arraystretch}{1}
+%\newcommand{\myoldarraystretch}{\arraystretch} % very bad idea
+%\renewcommand{\arraystretch}{1} % very bad idea
 
 \begin{table}[hbt]
 \resizebox{\textwidth}{!}{%
@@ -322,6 +322,6 @@ The listed laws focus on personal data, but might also be applicable to anonymiz
 	\label{fig-legal-data-kinds}
 \end{table}
 
-\renewcommand{\arraystretch}{\myoldarraystretch}
+% \renewcommand{\arraystretch}{\myoldarraystretch}% very bad idea
 
 When the Hadoop cluster is used at the \ac{DHBW}, it might by accessed by administrative staff, lecturers and students. However, as Hadoop had not been designed with advanced user access and the ability to delete single records in mind, care must be taken regarding the question which types of data from which data sources should be stored on the cluster. The least restrictive solution is to use a public, open source, non-personal data set, such as academic research data, while avoiding the storage of personal student data on the cluster.
