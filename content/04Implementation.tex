@@ -74,7 +74,7 @@ The OpenStack environment offers different \emph{flavors} of instance sized for 
 To create a node the developer can chose from the presets listed in table \ref{fig:instance_sizes}. The flavors differ in amount of \acp{VCPU}, \ac{RAM} and root storage.
 The set-up of the hosts is done for each node individually, 
 since the names and flavor configurations differ between them.
-The names are respective to proposed architecture but have a \emph{dhbw} domain ending 
+The names are respective to the proposed architecture but have a \emph{dhbw} domain ending 
 added to them, which is not officially registered but is necessary for Ambari to identify the hosts correctly.
 
 
@@ -154,7 +154,7 @@ The important excerpts, which are the \emph{task definitions}, are also attached
 
 Before Ansible can be used by the developer, it needs to be installed locally.
 This way Ansible can run on the development workstation and perform the system set-up remotely. 
-To specify which actions are needed for the system configuration, a playbook is created which is split into three roles: \emph{common, master} \emph{slave}.
+To specify which actions are needed for the system configuration, a playbook is created which is split into three roles: \emph{common, master} and \emph{slave}.
 The common role is applied to all hosts and prepares a general system configuration.
 The master role is only applied to the master node and installs the Ambari server.
 The slave role is applied to all hosts again and installs the Ambari agent on them.
@@ -168,6 +168,7 @@ The next sections describe the tasks in each of the three roles.
 
 This role prepares all hosts for the installation of Ambari server and Ambari agent in general. 
 The concrete Ansible definitions can be seen in listing \vref{lst:ansiblecommon}.
+It performs the following tasks:
 
 \begin{enumerate}
     \item Set the hostname to the \ac{FQDN} of the host specified in the inventory
@@ -187,6 +188,7 @@ The concrete Ansible definitions can be seen in listing \vref{lst:ansiblecommon}
 \subsubsection{Specific Tasks for Ambari Server}
 This role installs and configures the Ambari server on the master node.
 The concrete Ansible definitions can be seen in listing \vref{lst:ansiblemaster}.
+It performs the following tasks:
 
 \begin{enumerate}
     \item Install the \emph{ambari-server} package which contains all the binaries necessary to run Ambari server.
@@ -197,7 +199,8 @@ The concrete Ansible definitions can be seen in listing \vref{lst:ansiblemaster}
 
 \subsubsection{Specific Tasks for Ambari Agent}
 This role installs and configures the Ambari agent on all of the nodes.
-The concrete Ansible definitions can be seen in listing \vref{lst:ansibleslave}.
+The concrete Ansible definitions can be seen in listing \vref{lst:ansibleslave}. 
+It performs the following tasks:
 
 \begin{enumerate}
     \item Mount the storage volume whose \ac{UUID} has been specified in the inventory under \texttt{/hadoop} so that Ambari can use it to store \ac{HDFS} data on it.
