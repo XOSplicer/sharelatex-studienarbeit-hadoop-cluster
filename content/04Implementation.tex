@@ -126,7 +126,7 @@ The successful creation of each host is tested by accessing it via \ac{SSH} usin
 
 \subsubsection{Storage}
 
-In order for the Hadoop cluster to store \ac{HDFS} data it is necessary to split up the available 1000~\ac{GB} for storage into three volumes, one for each host.
+In order for the Hadoop cluster to store \ac{HDFS} data it is necessary to split up the available 1000~\ac{GB} for storage into three volumes of 330~\ac{GB}, one for each host.
 The disks are attached to the hosts and OpenStack reports the device handle that can be 
 used within the hosts to access the volume.
 Before data can be stored on the volumes they each need to be partitioned into one partition using the program \texttt{fdisk}. The partitions are then formatted into ext4 file system format using the \texttt{mkfs.ext4} command.
@@ -299,7 +299,7 @@ For this setup \ac{HDFS}, \ac{YARN}, MapReduce2, Tez, Hive, Pig, ZooKeeper, Stor
 After this Ambari lets the user configure which master, slave and client components of each service are placed on each host.
 Obviously all master components are placed on the master host, while the slave components are installed on all all hosts.
 Finally each service is configured specifically. 
-Ambari provides preset for each service.
+Ambari provides a default preset for each service.
 Those presets provide a basic configuration that is sufficient for the purpose of this project. 
 The only preferences which are made are the passwords.
 
@@ -314,11 +314,11 @@ During the initial evaluation of Ambari in section \vref{sec:design:hdp_ambari_a
 During the installation process in Ambari several issues regarding domain name resolution appeared.
 This is caused by the fact that no proper \ac{DNS} server is used to distribute the \acp{FQDN} 
 but rather the \texttt{hosts} file is altered in a way that the resolution works locally between all nodes. 
-This holds the possibility for configuration errors which lead which lead to the failure of the installation at first.
+This holds the possibility for configuration errors which lead to the failure of the installation at first.
 The issues are fixed by adapting the \texttt{hosts} file to only perform name resolution for the selected \acp{FQDN} for the local, internal network. 
 
 One major issue is encountered when Ambari tries to start all services: The main memory on the master node, which is limited to 8~\ac{GB} is not sufficient and the system is instable.
-When the master node runs out of memory the operating system can kill arbitrary services that are running
+When the master node runs out of memory the operating system can kill arbitrary services that are running.
 Since this is happening on the master node, this leads to the service not being available at all and introduces the need for manual restarting of the service.
 In conclusion some services are turned of explicitly to improve stability. 
 In particular Hive, SmartSense and Spark2 are deactivated for the entire cluster. 
@@ -336,7 +336,7 @@ To test this step a new file is uploaded to the directory and its content is the
 As suggested in the execution plan the \emph{terasort} program implemented by \textcite{omally2008terasort}, which is included in the Hadoop installation on each cluster node, is used to check the sanity of the \ac{YARN}, \ac{HDFS} and MapReduce2 Services.
 First \emph{teragen} generates a variable amount of random numbers and stores them on \ac{HDFS}. Then \emph{terasort} sorts the numbers using MapReduce and stores the result.
 Finally \emph{teravalidate} checks that the numbers are indeed sorted correctly.
-To run the test the following commands are used to create 5~\ac{GB} fo data:
+To run the test the following commands are used to create, sort and validate 5~\ac{GB} of data:
 
 \lstset{language=sh}
 \begin{lstlisting}[caption={Running Terasort as a test for YARN and HDFS}, label={lst:terasort}]
@@ -359,7 +359,7 @@ The checks are therefore performed  only for \ac{HDFS}, \ac{YARN}, MapReduce2, Z
 
 In general the cluster installation is only partially successful since the services are not running reliably and some even are not active at all due to memory limitations.
 The produced cluster is therefore not ready for \emph{production use}.
-However the general concept of using OpenStack to host the cluster and Ansible and Ambari to deploy the cluster software and manage Hadoop is possible and has clearly advantages above a manual cluster management.
+However the general concept of using OpenStack to host the cluster and Ansible and Ambari to deploy the cluster software and manage Hadoop is feasible and has clearly advantages above a manual cluster management.
 
 During the project the \ac{DHBW} Cloud environment showed unreliabilities that influenced the progress of the implementation phase.
 The general process was errorsome and would be hard to reproduce for students or lecturers with little knowledge about system administration. It is therefore not recommended to pursue a installation of Hadoop within the context of a lecture. 
