@@ -245,7 +245,8 @@ will lead to even more complex installation and configuration processes which ag
 \subsection{\acl{HDP} with Ambari deployed with Ansible}
 \label{sec:design:hdp_ambari_ansible}
 
-TODO intro to approach
+ In this approach a first evaluation to a full cluster installation is performed.
+ \emph{Ansible} is used to pragmatically set-up the \acp{VM} that are used in this 
 
 \subsubsection{Ambari}
 TODO describe Ambari, eg \autocite[][]{hortonworks2018ambari}
@@ -301,7 +302,7 @@ The configuration using Ansible  performs the following similar steps:
         is disabled using a service script. 
         This is a requirement for Ambari, 
         as it would reduce database performance.
-        The script is based on \autocite{braun2017hugepages}.
+        The script is based on the solution by  \textcite{braun2017hugepages}.
     \item The Hortonworks Ambari repositories are added, so that the provided     binaries can be used.
     \item On the master \ac{VM} the Ambari server 
         and the Ambari agent is installed.
@@ -319,7 +320,7 @@ which needs to be accessible through the firewall of OpenStack.
 Ambari provides an assisted install dialogue for the cluster installation. 
 Here a new cluster deployment counting all three hosts is started.
 The node need to be registered manually, as no shared \ac{SSH} key is present, that allows root access to the machines. 
-(The web interface would require the used to upload the private key for root access, which is generally unsafe.)
+(The web interface would require the user to upload the private key for root access, which is generally unsafe.)
 The master node is configured to act as an Hadoop master and Hadoop salve. 
 It is also the master for all recommended services running alongside of Hadoop.
 The \emph{slaves} are salve machines for \ac{HDFS} and \ac{YARN}.
@@ -328,15 +329,15 @@ The cluster set-up dialogue then continues to install the cluster.
 
 \subsection{Errors and Lessons Learned}
 \label{sec:ambari:errors}
-Since a lot of services such as Spark are recommended to be installed, 
+Since a lot of services, such as Spark ,are recommended to be installed, 
 the 20~\ac{GB} disk of the master is filled completely and the installation of the cluster fails. At least 50~\ac{GB} are recommended for an correct installation.
-Therefore thee installation fails and the Hadoop deployment can not be functionally tested for now.
+Therefore the installation fails and the Hadoop deployment can not be functionally tested for now.
 
 Ambari needs to be provided with the \ac{FQDN} of an host 
 in all forms and configuration files. 
 Otherwise it can not detect the agents or server.
 The \acp{FQDN} must consist of at least to parts for Ambari to work with them. 
-\emph{hadoop-master-0.dhbw} is valid, while \emph{hadoop-master-0} is not.
+For example, \emph{hadoop-master-0.dhbw} is valid, while \emph{hadoop-master-0} is not.
 
 The Ambari clients need to be configured 
 to use the correct Ambari server host.
@@ -357,13 +358,13 @@ The Ambari Cluster Manager can then be used to install Hadoop and other services
 Cloudera distributes an Hadoop management system called \ac{CDH} which makes use of \emph{Cloudera Manager} to deploy clusters.
 \enquote{CDH is Cloudera’s 100\% open source platform distribution, including Apache Hadoop and built specifically to meet enterprise demands.}\autocite[][]{cloudera2018cdh}
 It includes Hadoop and tools such as \emph{Apache HBase, Apache Hive, Apache Impala, Apache Kafka and Apache Spark}.
-Cloudera provides an docker image which can be used to easily evaluate the usability of \ac{CDH}.
-It contains \enquote{a single-host deployment of the Cloudera open-source distribution, including CDH and Cloudera Manager.} \autocite[][]{cloudera2018docker}
-It does not provide a full cluster installation, but only a test environment to evaluate the platform that is contained inside the docker container.
+Cloudera provides an Docker image which can be used to easily evaluate the usability of \ac{CDH}.
+It contains \enquote{a single-host deployment of the Cloudera open-source distribution, including CDH and Cloudera Manager} \autocite[][]{cloudera2018docker}.
+It does not provide a full cluster installation, but only a test environment to evaluate the platform that is contained inside the Docker container.
+The tested version is \ac{CDH} 5.7.0, which can be obtained from \emph{DockerHub}, a repository for Docker container images.
 
 It is important to note that using all features of \emph{Cloudera Manager} requires a paid license when installed on a cluster system. A 60 day trail version can also be obtained, which  \textcite[][p.~39]{wi2018managementsystems} point out, might be sufficient for usage at the \ac{DHBW}.
 
-The tested version is \ac{CDH} 5.7.0 which can be obtained from \emph{DockerHub}, a repository for Docker container images.
 
 \subsubsection{System Setup}
 
@@ -402,8 +403,9 @@ who did research on the topic of the possible usage of Hadoop management systems
 Their findings suggest using Apache Ambari to deploy an Hadoop cluster at the \ac{DHBW}.
 According to them, installing Hadoop manually is ruled out due to the technical complexity.
 Apache Ambari and Cloudera are equally suitable for the usage at the \ac{DHBW}, 
-but Ambari should be favoured since it is free to use and crates no licensing costs.
-\autocite[][p. 53f]{wi2018managementsystems}
+but Ambari should be favoured since it is free to use and crates no licensing costs
+\autocite[][p. 53f]{wi2018managementsystems}.
+
 
 In combination with Ansible, Ambari ensures an reproducible cluster installation. 
 Therefore Ambari is the solution that will be used for this project and Ansible will be used to install the \ac{HDP} including Ambari.
@@ -442,10 +444,10 @@ The size of the used \acs{VM} should be the one with the most memory,
 as this is the resource where the overhead of having multiple \acs{VM} has the most impact.
 All nodes need access to the Internet to download software packages and should be accessible via \ac{SSH} through the OpenStack firewall.
 Furthermore the master node needs to be accessible via typical ports for the web interface of the deployed services and other ports which clients use to connect to the Hadoop cluster and issue jobs to it.
-Internally all nodes need to be connected via an private network with fixed \acs{IP}, where the mapping between hostnames and \acs{IP} is known for each host. Typically this can be done with \ac{DNS}, however it is out of scope for this project to setup an \ac{DNS} server. Filling the \texttt{\/etc\/hosts} file is sufficient.
+Internally all nodes need to be connected via an private network with fixed \acs{IP}, where the mapping between hostnames and \acs{IP} is known for each host. Typically this can be done with \ac{DNS}, however it is out of scope for this project to setup an \ac{DNS} server. Filling the \texttt{hosts} file is sufficient.
 The internal network should not be restricted by any firewall.
 
-Tom White recommends the following specification for a single node in a cluster, based on the needs of a full \ac{BDA} system in 2014:\\
+Tom White recommends the following specification for a single node in a cluster, based on the needs of a full \ac{BDA} system in 2014 \autocite{white2015hadoop}:
 
 \begin{itemize}
     \item Each node should run on dedicated, commodity hardware.
@@ -454,7 +456,6 @@ Tom White recommends the following specification for a single node in a cluster,
     \item Storage - 12 to 24 times 1 to 4 \ac{TB} disks
     \item Network - Gigabit Ethernet with link aggregation
 \end{itemize}
-\autocite{white2015hadoop}
 
 However the given OpenStack environment does not allow the allocation of such amounts of resources, and has no possibility to use dedicated hardware. 
 Therefore the maximum sized \acs{VM} should be used, and each be given an equal share of the available storage.
@@ -487,7 +488,6 @@ This scenario leads to the following steps regarding the deployment of the clust
     \item \textbf{System Set-Up with Ansible} 
     In section \vref{sec:design:hdp_ambari_ansible} it has been shown that Ansible can be used to deploy \ac{HDP}. The Ansible playbook developed for this purpose can be adapted and used in the next steps.
     \begin{enumerate}
-        %\item Configure the \texttt{ssh\_config} configuration file by supplying the \acp{FQDN} and the public \ac{IP} addresses of the nodes. 
         \item Configure the local \ac{SSH} client to use the \acp{FQDN} and the public \ac{IP} addresses of the nodes. 
         \item Check that all nodes can actually be accessed via \ac{SSH}
         \item Note down the name of the secondary (internal) Ethernet adapter of each node.
