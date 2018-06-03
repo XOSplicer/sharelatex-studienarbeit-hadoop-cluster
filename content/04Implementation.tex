@@ -158,11 +158,16 @@ To specify which actions are needed for the system configuration, a playbook is 
 The common role is applied to all hosts and prepares a general system configuration.
 The master role is only applied to the master node and installs the Ambari server.
 The slave role is applied to all hosts again and installs the Ambari agent on them.
-The roles are assigned in the inventory description, where also host specific variables are configured.  Those variables are later determined, as shown in section \ref{sec:impl:ansible:exec}. The variables are used to fill so-called \emph{templates} which are files with placeholders, that are used throughout the system.
+The roles are assigned in the inventory description, where also host specific variables are configured.  
+Those variables are later determined as shown in section \ref{sec:impl:ansible:exec}.
+The variables are used to fill so-called \emph{templates} which are files with placeholders, that are used throughout the system.
 The assignment of the roles to the hosts can also be seen in listing \ref{lst:ansibleall} in the appendix.
+The next sections describe the tasks in each of the three roles.
 
 \subsubsection{Common Set-Up Tasks}
-TODO \vref{lst:ansiblecommon}
+
+This role prepares all hosts for the installation of Ambari server and Ambari agent in general. 
+The concrete Ansible definitions can be seen in listing \vref{lst:ansiblecommon}.
 
 \begin{enumerate}
     \item Set the hostname to the \ac{FQDN} of the host specified in the inventory
@@ -178,23 +183,21 @@ TODO \vref{lst:ansiblecommon}
     \item Create and start a service that disables \ac{THP} in the Linux kernel by running a script based the solution by \textcite{braun2017hugepages}.
 \end{enumerate}
 
-TODO
 
 \subsubsection{Specific Tasks for Ambari Server}
-TODO \vref{lst:ansiblemaster}
-on the master node
+This role installs and configures the Ambari server on the master node.
+The concrete Ansible definitions can be seen in listing \vref{lst:ansiblemaster}.
 
 \begin{enumerate}
-    \item Install the \emph{ambari-server} package wich contains all the binaries necessary to run Ambari server.
+    \item Install the \emph{ambari-server} package which contains all the binaries necessary to run Ambari server.
     \item If the server has been installed the first time it is necessary to run the server setup for Ambari. The used default configuration does not need any input, which is critical for automation. 
     \item If the Ambari server service is not yet running it needs to be started now.
 \end{enumerate}
 
-TODO
 
-\subsubsection{Specific Tasks for Ambari Client}
-TODO \vref{lst:ansibleslave}
-on all slave and master nodes
+\subsubsection{Specific Tasks for Ambari Agent}
+This role installs and configures the Ambari agent on all of the nodes.
+The concrete Ansible definitions can be seen in listing \vref{lst:ansibleslave}.
 
 \begin{enumerate}
     \item Mount the storage volume whose \ac{UUID} has been specified in the inventory under \texttt{/hadoop} so that Ambari can use it to store \ac{HDFS} data on it.
@@ -203,7 +206,7 @@ on all slave and master nodes
     \item Make sure the Ambari agent service is running. If its configuration has changed, it needs to be restarted.
 \end{enumerate}
 
-TODO
+After this Ansible playbook is created, it is applied to the host \acp{VM} in the next section.
 
 \subsection{Execution}
 \label{sec:impl:ansible:exec}
