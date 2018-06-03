@@ -153,16 +153,13 @@ The important excerpts, which are the \emph{task definitions}, are also attached
 \subsection{Preparation}
 
 Before Ansible can be used by the developer, it needs to be installed locally.
-
-TODO also install Ansible locally
-TODO explain and maybe print this particular playbook yes yes print it with explanations
-TODO maybe appendix
-
-TODO describe all roles and task within those roles
-
-TODO descibe all input variables, ref inventory, def templates(they use vars)
-
-TODO \vref{lst:ansibleall}
+This way Ansible can run on the development workstation and perform the system set-up remotely. 
+To specify which actions are needed for the system configuration, a playbook is created which is split into three roles: \emph{common, master} \emph{slave}.
+The common role is applied to all hosts and prepares a general system configuration.
+The master role is only applied to the master node and installs the Ambari server.
+The slave role is applied to all hosts again and installs the Ambari agent on them.
+The roles are assigned in the inventory description, where also host specific variables are configured.  Those variables are later determined, as shown in section \ref{sec:impl:ansible:exec}. The variables are used to fill so-called \emph{templates} which are files with placeholders, that are used throughout the system.
+The assignment of the roles to the hosts can also be seen in listing \ref{lst:ansibleall} in the appendix.
 
 \subsubsection{Common Set-Up Tasks}
 TODO \vref{lst:ansiblecommon}
@@ -209,6 +206,7 @@ on all slave and master nodes
 TODO
 
 \subsection{Execution}
+\label{sec:impl:ansible:exec}
 
 In order to configure the hosts with Ansible they must be accessible via \ac{SSH} by their \ac{FQDN}. 
 Since no \ac{DNS} system is employed, the \texttt{ssh\_config} file is used to provide a local resolution for \ac{SSH}. 
@@ -240,7 +238,7 @@ sudo reboot now
 \end{lstlisting}
 
 After this initial preparation of the hosts is done, 
-the Ansible inventory can is configured, 
+the Ansible inventory is configured, 
 so that all the specific variables of the host are set. 
 These variables are the \ac{FQDN}, the internal \ac{IP} address, 
 the network interface that is connected to the internal network 
