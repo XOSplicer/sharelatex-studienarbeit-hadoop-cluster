@@ -160,6 +160,8 @@ TODO maybe appendix
 
 TODO describe all roles and task within those roles
 
+TODO descibe all input variables, ref inventory, def templates(they use vars)
+
 TODO \vref{lst:ansibleall}
 
 \subsubsection{Common Set-Up Tasks}
@@ -198,10 +200,10 @@ TODO \vref{lst:ansibleslave}
 on all slave and master nodes
 
 \begin{enumerate}
-    \item  Mou
-    \item TODO install ambari agent
-    \item TODO configure ambari agent to use masternode as master hostname
-    \item TODO restart or start the service if necessary
+    \item Mount the storage volume whose \ac{UUID} has been specified in the inventory under \texttt{/hadoop} so that Ambari can use it to store \ac{HDFS} data on it.
+    \item Install the \emph{ambari-agent} package.
+    \item Configure the setting of the Ambari agent to contact the \ac{FQDN} of the master node as the Ambari server. This allows later for a manual registration for the agent on the server. To configure it a configuration template is filled with the hostname of the master.
+    \item Make sure the Ambari agent service is running. If its configuration has changed, it needs to be restarted.
 \end{enumerate}
 
 TODO
