@@ -245,8 +245,10 @@ will lead to even more complex installation and configuration processes which ag
 \subsection{\acl{HDP} with Ambari deployed with Ansible}
 \label{sec:design:hdp_ambari_ansible}
 
- In this approach a first evaluation to a full cluster installation is performed.
- \emph{Ansible} is used to pragmatically set-up the \acp{VM} that are used in this 
+ In this approach a first evaluation of a full cluster installation is performed.
+ It differs from the previous approaches in that a reproducible installation process is in mind right from the beginning and that a real cluster is installed, not only a demonstration platform.
+ \emph{Ansible} is used to pragmatically set-up the \acp{VM} that are used to host the cluster.
+ \emph{Ambari} is then used to install Hadoop onto it.
 
 \subsubsection{Ambari}
 TODO describe Ambari, eg \autocite[][]{hortonworks2018ambari}
