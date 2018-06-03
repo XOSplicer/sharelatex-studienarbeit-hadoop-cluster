@@ -17,7 +17,7 @@
 - hosts: slave
   roles:
     - role: slave
-become: true
+      become: true
 \end{lstlisting}
 
 \lstset{language=sh}
@@ -112,7 +112,7 @@ become: true
   service:
     name: disable-transparent-hugepages
     state: started
-enabled: yes
+    enabled: yes
 \end{lstlisting}
 
 
@@ -133,7 +133,7 @@ enabled: yes
     name: ambari-server
     enabled: yes
     state: started
-ignore_errors: yes
+  ignore_errors: yes
 \end{lstlisting}
 
 \lstset{language=sh}
@@ -170,5 +170,5 @@ ignore_errors: yes
 
 - name: Start ambari-agent service
   shell: "ambari-agent start"
-ignore_errors: yes
+  ignore_errors: yes
 \end{lstlisting}

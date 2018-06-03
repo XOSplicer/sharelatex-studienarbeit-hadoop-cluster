@@ -10,20 +10,13 @@ It has been concluded that the field of study around Big Data is still under act
 Through its active engagement with many company partners in the \ac{IT} sector, the \ac{DHBW} Stuttgart has an active interest to incorporate these topics into their studies and lectures.
 
 To support this general direction of development, this student research project explored the possibilities of integrating Hadoop into to study programs at the \ac{DHBW} Stuttgart.
-Especially the capabilities to run an Hadoop cluster on the cluster computing environment at the \ac{DHBW Mannheim} have been evaluated.
+Especially the capabilities to run an Hadoop cluster on the cluster computing environment at the \ac{DHBW} Mannheim have been evaluated.
 To do so different methods for deploying and running this cluster have been compared 
 by exemplary practical performance of such an installation. 
 By analyzing the susceptibility to errors caused by misconfiguration though the developer in the deployment process and by consulting the findings by Sicklinger et al. finally a method for an automatic deployment was derived that makes use of the \ac{DHBW} OpenStack environment, Ansible and \acf{HDP} including Ambari.
-An explicit cluster architecture and a tasks list has been given to implement the cluster which includes first the preparation of the cluster infrastructure in OpenStack, then the installation of \ac{HDP} using Ansible and finally the installatio of Hadoop onto the cluster though Ambari.
-T
-
-TODO
-
-- plan was executed by doing steps: openstack, ansible dev + rollout, amabri cluster install, verification by quick test
-- conclusion more or less functional because of resource sparseness and impractival allocations in openstack
-- approch is in general proven to work
-
--( fill each with concrete statements aswell)
+An explicit cluster architecture and a tasks list has been given to implement the cluster which includes first the preparation of the cluster infrastructure in OpenStack, then the installation of \ac{HDP} using Ansible and finally the installation of Hadoop onto the cluster though Ambari.
+The deployment has been performed and verified by a short set of tests that concluded that the cluster is not fully functional because resource sparseness and the restrictions set by the cluster computing environment for the project.
+However the general feasibility and effectiveness of the outlined approach are evident in that it proved possible by practical implementation to create an automated cluster deployment.
 
 \section{Discussion}
 
